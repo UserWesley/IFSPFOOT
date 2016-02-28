@@ -20,7 +20,7 @@
 	$dono = $prepraraDono->fetchColumn(0);
 	
 	//Consulta Tabela time para pegar último id do time cadastrado, campo de autoincremento
-	$consultaUltimoIdTime = 'SELECT id FROM Time ORDER BY id';
+	$consultaUltimoIdTime = 'SELECT id FROM Time ORDER BY id DESC';
 	$preparaIdTime = $conn->query($consultaUltimoIdTime);
 	$ultimoIdTime = $preparaIdTime->fetchColumn(0);
 	

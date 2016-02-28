@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+
+fieldset{
+	text-align: center;
+	size: pt15;
+}
+
+
+
+h3 {
+	size:pt12;
+	color: black;
+}

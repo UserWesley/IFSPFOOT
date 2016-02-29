@@ -4,9 +4,10 @@
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 	
 	//Variaveis da viewNovoJogo.php
-	$nome    = $_GET['textNomeTime'];
+	$nomeTime    = $_GET['textNomeTime'];
 	$mascote  = $_GET['textNomeMascote'];
 	$cor = $_GET['selectCor'];
+	$nomeEstadio = $_GET['textNomeEstadio'];
 	
 	//Inicio de Sessão para pegar usuario logado, usuário é único
 	session_start();
@@ -26,6 +27,11 @@
 	
 	//Pegando último time cadastrado para incrementar 1
     $idInseriTime = $ultimoIdTime + 1;
+    
+    //Regra do Jogo
+    $dinheiroInicial = "10,00";
+    $torcidaInicial = "10";
+    $capacidade = "10";
 	
 ?>
 
@@ -44,12 +50,17 @@
   
   	<?php
 
-  		$sql = "INSERT INTO Time VALUES ($idInseriTime,'$nome','$mascote','$cor','$dono')";
-  	
-  		$conn->exec($sql);
+  		//Inserção do um novo time
+  		$insercaoNovoTime = "INSERT INTO Time VALUES ($idInseriTime,'$nomeTime','$mascote','$cor','$dono','$dinheiroInicial','$torcidaInicial','$nomeEstadio','$capacidade')";
+  		$conn->exec($insercaoNovoTime);
+		
+  		session_start();
+		$_SESSION['idDono']= $dono;
   		
-  		header("LOCATION: ../_view/viewTelaTime.php");
+		header("LOCATION: ../_view/viewTelaTime.php");
 	
   	?>
+  
   </body>
+  
 </html>

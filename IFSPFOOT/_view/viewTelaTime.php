@@ -1,7 +1,10 @@
 <?php
 	
-	//Inclui cabeçalho na página
+	//Inclui cabeçalho na página e conexao com banco
 	include_once "viewCabecalho.php";
+	include_once '../_model/_bancodedados/modelBancodeDados.php';
+	
+	$donoTime = $_SESSION['idDono'];
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +21,22 @@
 
 <body>
 
+	<?php 
+		
+		$consultaTime = 'SELECT nome,mascote,cor, dinheiro,torcida FROM Time WHERE dono = ? ';
+		$preparaConsultaTime = $conn->prepare($consultaTime);
+		$preparaConsultaTime->bindValue(1, $donoTime);
+		$preparaConsultaTime->execute();
+	
+		$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+		while ($row = $preparaConsultaTime->fetch()) {
+			echo "Time : ". $row[0] . "\t Mascote : " . $row[1]  ;
+			echo "\t Cor : " . $row[2] . "\n Dinheiro : ". $row[3] . "\t Torcida : ". $row[4] . "\n";
+		}
+		
+	?>
+	
+	 
 	<nav>
 	
 		<ul>

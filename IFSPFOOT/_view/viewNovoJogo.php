@@ -22,33 +22,46 @@
 	
 	<section>
 	
-		<fieldset>
+		<form action="../_model/modelCadastrarTime.php">
+			<fieldset name = cadastroNovoJogo>
 	
-			<legend>Cadastro Inicial</legend>
-				<form action="../_model/modelCadastrarTime.php">
+				<legend>Cadastro Inicial</legend>
+					<fieldset name = cadastroTime>					
 			
-				<h3>Nome do Time :</h3> 
-				<input type = "text" placeholder="Digite o nome do Time" name = "textNomeTime" maxlength = "20">
+						<h3>Nome do Time :</h3> 
+						<input type = "text" placeholder="Digite o nome do Time" name = "textNomeTime" maxlength = "20" required>
 			
-				<br><h3>Mascote :</h3>
-				<input type = "text" placeholder="Digite o nome do seu time" name = "textNomeMascote" maxlength = "20">
+						<br><h3>Mascote :</h3>
+						<input type = "text" placeholder="Digite o nome do seu time" name = "textNomeMascote" maxlength = "20"required>
 			
-				<h3>
-				<label for="cor"><br> Cor :</label>
+						<h3>
+						<label for="cor"><br> Cor :</label>
    				
-   				<select name="selectCor" id="cor">
-   			    	<option value="yellow">Amarelo</option>
-	 				<option value="black">Preto</option>
-	 				<option value="white">Branco</option>
-	 				<option value="blue">Azul</option>    
-    			</select>
-				</h3>
+   						<select name="selectCor" id="cor">
+   			    			<option value="yellow">Amarelo</option>
+	 						<option value="black">Preto</option>
+	 						<option value="white">Branco</option>
+	 						<option value="blue">Azul</option>    
+    					</select>
+						</h3>
+					
+					</fieldset>
+					
+					<fieldset>
+						<legend>Cadastro Estádio</legend>
+						
+							<h3>Nome do Estádio :</h3> 
+						
+							<input type = "text" placeholder="Digite o nome do Estádio" name = "textNomeEstadio" maxlength = "20" required>			
+					
+					</fieldset>
+					
 				<input type= "submit" value = "Iniciar Jogo" />
 			
-			</form>
+			
 		
 		</fieldset>
-	
+	</form>
 	</section>
 	
 	<footer><?php include_once "viewRodape.php"?></footer>

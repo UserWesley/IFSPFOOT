@@ -53,11 +53,11 @@
   		//Inserção do um novo time
   		$insercaoNovoTime = "INSERT INTO Time VALUES ($idInseriTime,'$nomeTime','$mascote','$cor','$dono','$dinheiroInicial','$torcidaInicial','$nomeEstadio','$capacidade')";
   		$conn->exec($insercaoNovoTime);
-		
+
   		session_start();
 		$_SESSION['idDono']= $dono;
   		
-		header("LOCATION: ../_view/viewTelaTime.php");
+		header("LOCATION: ../_controller/controllerGerenciaInicio.php");
 	
   	?>
   

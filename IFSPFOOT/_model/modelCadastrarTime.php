@@ -44,6 +44,7 @@
   		$insercaoNovoTime = "INSERT INTO Time VALUES (1,'$nomeTime','$mascote','$cor','$dono','$dinheiroInicial','$torcidaInicial','$nomeEstadio','$capacidade')";
   		$conn->exec($insercaoNovoTime);
   		
+  		//Chama arquivo de controle
 		header("LOCATION: ../_controller/controllerGerenciaInicio.php");
 	
   	?>

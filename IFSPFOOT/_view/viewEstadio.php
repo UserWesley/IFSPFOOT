@@ -5,6 +5,7 @@
 	
 	session_start();
 	$donoTime = $_SESSION['idDono'];
+	
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +19,10 @@
 </head>
 
 <body>
+
 	<?php
-	 
+
+		//Consulta para visualizar dados do estádio
 		$consultaEstadio = 'SELECT nomeEstadio,capacidade FROM Time WHERE dono = ? ';
 		$preparaConsultaEstadio = $conn->prepare($consultaEstadio);
 		$preparaConsultaEstadio->bindValue(1, $donoTime);
@@ -27,8 +30,9 @@
 	
 		$result = $preparaConsultaEstadio->setFetchMode(PDO::FETCH_NUM);
 		while ($row = $preparaConsultaEstadio->fetch()) {
-			echo "Nome Estádio : ". $row[0] . "\t Capacidade : " . $row[1]  ;
+			echo "Nome Estádio : ". $row[0] . "<br> Capacidade : " . $row[1]  ;
 		}
+		
 	?>
 </body>
 

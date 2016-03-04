@@ -25,7 +25,7 @@
 				
 				<li><a href = "viewNovoJogo.php">Novo Jogo</a></li>
 				
-				<li><a href = "viewCarregarJogo.php">Carregar Jogo</a></li>
+				<li><a href = "viewTelaTime.php">Carregar Jogo</a></li>
 				
 				<li><a href = "viewEditarJogo.php">Editar Jogo</a></li>
 				

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Tempo de geração: 01/03/2016 às 01:20
+-- Tempo de geração: 05/03/2016 às 00:34
 -- Versão do servidor: 10.1.9-MariaDB
 -- Versão do PHP: 5.6.15
 
@@ -45,7 +45,8 @@ CREATE TABLE `Jogador` (
   `forca` int(11) NOT NULL,
   `idTime` int(11) NOT NULL,
   `estamina` int(11) NOT NULL,
-  `nivel` varchar(20) COLLATE utf32_bin NOT NULL
+  `nivel` varchar(20) COLLATE utf32_bin NOT NULL,
+  `gol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
 
 -- --------------------------------------------------------
@@ -63,6 +64,18 @@ CREATE TABLE `Jogo` (
   `data` date NOT NULL,
   `periodo` varchar(10) COLLATE utf32_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
+
+--
+-- Fazendo dump de dados para tabela `Jogo`
+--
+
+INSERT INTO `Jogo` (`id`, `timeCasa`, `golCasa`, `timeVisitante`, `golVisitante`, `data`, `periodo`) VALUES
+(1, 1, NULL, 2, NULL, '2015-01-01', 'tarde'),
+(2, 1, NULL, 3, NULL, '2015-01-01', 'tarde'),
+(3, 1, NULL, 4, NULL, '2015-01-01', 'tarde'),
+(4, 2, NULL, 3, NULL, '2015-01-01', 'tarde'),
+(5, 2, NULL, 4, NULL, '2015-01-01', 'tarde'),
+(6, 3, NULL, 4, NULL, '2015-01-01', 'tarde');
 
 -- --------------------------------------------------------
 
@@ -91,18 +104,6 @@ INSERT INTO `Login` (`id`, `usuario`, `senha`, `administrador`, `nome`, `sobreno
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Rodada`
---
-
-CREATE TABLE `Rodada` (
-  `id` int(11) NOT NULL,
-  `idJogo` int(11) NOT NULL,
-  `numeroRodada` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `Time`
 --
 
@@ -117,6 +118,16 @@ CREATE TABLE `Time` (
   `nomeEstadio` varchar(20) COLLATE utf32_bin NOT NULL,
   `capacidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin COMMENT='Time';
+
+--
+-- Fazendo dump de dados para tabela `Time`
+--
+
+INSERT INTO `Time` (`id`, `nome`, `mascote`, `cor`, `dono`, `dinheiro`, `torcida`, `nomeEstadio`, `capacidade`) VALUES
+(1, 'dsa', 'dsa', 'yellow', 1, 10, '10', 'dsada', 10),
+(2, 'Time2', 'mascote2', 'cor2', NULL, 10, '10', 'time2', 10),
+(3, 'Time3', 'mascote3', 'cor3', NULL, 10, '10', 'time3', 10),
+(4, 'Time4', 'mascote4', 'cor4', NULL, 10, '10', 'time4', 10);
 
 --
 -- Índices de tabelas apagadas
@@ -152,13 +163,6 @@ ALTER TABLE `Login`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Índices de tabela `Rodada`
---
-ALTER TABLE `Rodada`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_idJogo` (`idJogo`);
-
---
 -- Índices de tabela `Time`
 --
 ALTER TABLE `Time`
@@ -187,15 +191,10 @@ ALTER TABLE `Jogo`
 ALTER TABLE `Login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de tabela `Rodada`
---
-ALTER TABLE `Rodada`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de tabela `Time`
 --
 ALTER TABLE `Time`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- Restrições para dumps de tabelas
 --
@@ -212,12 +211,6 @@ ALTER TABLE `Jogador`
 ALTER TABLE `Jogo`
   ADD CONSTRAINT `fk_timeCasa` FOREIGN KEY (`timeCasa`) REFERENCES `Time` (`id`),
   ADD CONSTRAINT `fk_timeVisitante` FOREIGN KEY (`timeVisitante`) REFERENCES `Time` (`id`);
-
---
--- Restrições para tabelas `Rodada`
---
-ALTER TABLE `Rodada`
-  ADD CONSTRAINT `fk_idJogo` FOREIGN KEY (`idJogo`) REFERENCES `Jogo` (`id`);
 
 --
 -- Restrições para tabelas `Time`

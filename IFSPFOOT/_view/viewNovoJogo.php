@@ -21,7 +21,7 @@
 	<header></header>
 	
 	<section>
-	
+		
 		<form action="../_model/modelCadastrarTime.php">
 			<fieldset name = cadastroNovoJogo>
 	

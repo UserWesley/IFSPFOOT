@@ -16,6 +16,7 @@
 	<meta charset= "UTF-8"/>
 	<title>Gerenciamento Time</title>
 	<link rel="stylesheet" href="_css/cssViewMenu.css">
+	<link rel="stylesheet" href="_css/cssView.css">
 	
 </head>
 
@@ -46,6 +47,10 @@
 			<li><a href="viewEstadio.php" target="janela">Estádio</a></li>
 
 			<li><a href="viewJogador.php" target="janela">Jogadores</a></li>
+			
+			<li><a href="viewJogos.php" target="janela">Jogos</a></li>
+			
+			<li><a href="viewTabela.php" target="janela">Rodadas</a></li>
 						
 			<li><a href="viewTabela.php" target="janela">Tabela</a></li>
 		

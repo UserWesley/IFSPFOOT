@@ -14,25 +14,50 @@
 <head>
 
 	<title>Página Inicial</title>
-
+	<link rel="stylesheet" href="_css/cssView.css">
 </head>
 
 <body>
 
-	<?php
-		
-		$consultaJogador = 'SELECT * FROM Jogador WHERE idTime = ? ';
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Sobrenome</th>
+          <th>Idade</th>
+          <th>Forca</th>
+          <th>Estamina</th>
+          <th>Nivel</th>
+        </tr> 
+      </thead>
+      <tbody>
+      <?php
+      	
+      	//Listando Jogadores do time
+        $consultaJogador = 'SELECT id,nome ,sobrenome ,idade ,forca ,estamina ,nivel FROM Jogador WHERE idTime = ? ';
 		$preparaConsultaJogador = $conn->prepare($consultaJogador);
 		$preparaConsultaJogador->bindValue(1, $idTime);
 		$preparaConsultaJogador->execute();
 		
 		$result = $preparaConsultaJogador->setFetchMode(PDO::FETCH_NUM);
-		while ($row = $preparaConsultaJogador->fetch()) {
-			echo "id : ". $row[0] . "\t Nome : " . $row[1]  ;
-			echo "\t Sobrenome : " . $row[2] . "\n Idade : ". $row[3] . "\t Forca : ". $row[4] . "\n";
-		}
 		
-    ?>
+		while ($row = $preparaConsultaJogador->fetch()) {
+
+            echo '<tr>';
+            echo "<td>{$row[0]}</td>";            
+            echo "<td>{$row[1]}</td>";
+            echo "<td>{$row[2]}</td>";  
+            echo "<td>{$row[3]}</td>";
+            echo "<td>{$row[4]}</td>";
+            echo "<td>{$row[5]}</td>";
+            echo "<td>{$row[6]}</td>";
+
+            echo '</tr>';
+          }
+      ?>
+      </tbody>
+    </table>
 
 </body>
 

@@ -33,7 +33,7 @@
 	<?php
 	 	
 		//Lista Posições
-		$posicao =0;
+		$posicao =1;
 		
 		//Listando posições
 		$consultaTabela = 'SELECT nome,vitoria,derrota,empate,pontos FROM Time ORDER BY pontos DESC';

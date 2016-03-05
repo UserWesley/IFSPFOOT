@@ -1,6 +1,8 @@
 <?php
+
 	//Incluindo cabecalho na página
 	include_once "viewCabecalho.php";
+
 ?>
 
 <!DOCTYPE html>

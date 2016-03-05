@@ -20,7 +20,9 @@ li a {
     text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
+/* Ao passar o mouse altera cor */
 li a:hover {
     background-color: orange;
 }
+
+

@@ -21,9 +21,10 @@
 </head>
 
 <body>
-
+	<hr></hr>
 	<?php 
-		
+	
+		//Dados do time principal
 		$consultaTime = 'SELECT nome,mascote,cor, dinheiro,torcida FROM Time WHERE dono = ? ';
 		$preparaConsultaTime = $conn->prepare($consultaTime);
 		$preparaConsultaTime->bindValue(1, $donoTime);
@@ -31,12 +32,12 @@
 	
 		$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
 		while ($row = $preparaConsultaTime->fetch()) {
-			echo "Time : ". $row[0] . "\t Mascote : " . $row[1]  ;
-			echo "\t Cor : " . $row[2] . "\n Dinheiro : ". $row[3] . "\t Torcida : ". $row[4] . "\n";
+			echo "<span>Time : ". $row[0] . "\t\t Mascote : " . $row[1]  ;
+			echo "\t\t Cor : " . $row[2] . "\t\t Dinheiro : ". $row[3] . "\t\t Torcida : ". $row[4] . "</span>\n";
 		}
 		
 	?>
-	
+	<hr></hr>
 	 
 	<nav>
 	
@@ -53,18 +54,20 @@
 			<li><a href="viewTabela.php" target="janela">Rodadas</a></li>
 						
 			<li><a href="viewTabela.php" target="janela">Tabela</a></li>
+			
+		    <li><a href="viewTabela.php" target="janela">     !! Jogar !!</a></li>
 		
 		</ul>
 	
 	</nav>
-	
+	<hr></hr>
 	<section> 
 	
 		<iframe src="viewJogador.php" name="janela" id="framePrincipal"></iframe>		
 	
 	</section>
 	
-	
+	<hr></hr>
 	<footer><?php include_once "viewRodape.php"?></footer>	
 
 </body>

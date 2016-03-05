@@ -25,6 +25,9 @@
           <th>Código</th>
           <th>Nome</th>
           <th>Sobrenome</th>
+          <th>Posição</th>
+          <th>Nacionalidade</th>
+          <th>Habilidade</th>
           <th>Idade</th>
           <th>Forca</th>
           <th>Estamina</th>
@@ -36,7 +39,7 @@
       <?php
       	
       	//Listando Jogadores do time
-        $consultaJogador = 'SELECT id,nome ,sobrenome ,idade ,forca ,estamina ,nivel,gol FROM Jogador WHERE idTime = ? ';
+        $consultaJogador = 'SELECT id,nome ,sobrenome,posicao,nacionalidade,habilidade ,idade ,forca ,estamina ,nivel,gol FROM Jogador WHERE idTime = ? ';
 		$preparaConsultaJogador = $conn->prepare($consultaJogador);
 		$preparaConsultaJogador->bindValue(1, $idTime);
 		$preparaConsultaJogador->execute();
@@ -54,7 +57,9 @@
             echo "<td>{$row[5]}</td>";
             echo "<td>{$row[6]}</td>";
             echo "<td>{$row[7]}</td>";
-
+            echo "<td>{$row[8]}</td>";
+            echo "<td>{$row[9]}</td>";
+            echo "<td>{$row[10]}</td>";
             echo '</tr>';
           }
       ?>

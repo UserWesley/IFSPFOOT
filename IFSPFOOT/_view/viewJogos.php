@@ -12,23 +12,52 @@
 <head>
 
 	<title>Página Inicial</title>
+	<link rel="stylesheet" href="_css/cssView.css">
 
 </head>
 
 <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Time Casa</th>
+          <th>Gol</th>
+          <th></th>
+          <th>Gol</th>
+          <th>Time Visitante</th>
+          <th>Data</th>
+          <th>Hora</th>
+          <th>Período</th>
+        </tr> 
+      </thead>
+      <tbody>
 
 	<?php
 	 
 		//Consulta para visualizar jogos e seus atributos
-		$consultaRodada = 'SELECT * FROM Jogo';
-		$preparaConsultaRodada = $conn->query($consultaRodada);
-		$preparaConsultaRodada->execute();
+		$consultaJogo = 'SELECT Jogo.timeCasa, Jogo.golCasa, Jogo.golVisitante, Jogo.timeVisitante,
+						Rodada.data, Rodada.hora, Rodada.periodo FROM Jogo,Rodada WHERE Jogo.rodada = Rodada.numero ORDER BY Rodada.data';
+		$preparaConsultaJogo = $conn->query($consultaJogo);
+		$preparaConsultaJogo->execute();
 	
-		$result = $preparaConsultaRodada->setFetchMode(PDO::FETCH_NUM);
-		while ($row = $preparaConsultaRodada->fetch()) {
-			echo "\t". $row[0] . "\t" . $row[1]. "\t" . $row[2]. "\t" . $row[3]. "\t" . $row[4]. "\t" . $row[5]."<p>"  ;
-		}
+		$result = $preparaConsultaJogo->setFetchMode(PDO::FETCH_NUM);
+		while ($row = $preparaConsultaJogo->fetch()) {
+
+            echo '<tr>';
+            echo "<td>{$row[0]}</td>";            
+            echo "<td>{$row[1]}</td>";
+            echo "<td> X </td>";
+            echo "<td>{$row[2]}</td>";  
+            echo "<td>{$row[3]}</td>";
+            echo "<td>{$row[4]}</td>";
+            echo "<td>{$row[5]}</td>";
+            echo "<td>{$row[6]}</td>";
+            echo '</tr>';
+            
+          }
 	?>
+	</tbody>
+    </table>
 	
 </body>
 

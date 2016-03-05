@@ -39,10 +39,10 @@
 	
 		//recebe valor da rodada
 		if(!empty($_GET['rodada'])) {
-			$rodada = $_GET['rodada'];
+			echo "Rodada :".$rodada = $_GET['rodada'];
 		
 		}
-		else { $rodada = '1';}
+		else { echo "Rodada :".$rodada = '1';}
 		
 		//Consulta para visualizar jogos da rodada
 		$consultaRodada = 'SELECT Jogo.timeCasa, Jogo.golCasa, Jogo.golVisitante, Jogo.timeVisitante,

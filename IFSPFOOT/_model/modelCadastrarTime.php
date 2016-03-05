@@ -22,7 +22,11 @@
     $dinheiroInicial = "10,00";
     $torcidaInicial = "10";
     $capacidade = "10";
-	
+    $pontos = "0";
+    $vitoria="0";
+    $derrota="0";
+    $empate ="0";
+    
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +45,7 @@
   	<?php
 
   		//Inserção do um novo time
-  		$insercaoNovoTime = "INSERT INTO Time VALUES (1,'$nomeTime','$mascote','$cor','$dono','$dinheiroInicial','$torcidaInicial','$nomeEstadio','$capacidade')";
+  		$insercaoNovoTime = "INSERT INTO Time VALUES (1,'$nomeTime','$mascote','$cor','$dono','$dinheiroInicial','$torcidaInicial','$nomeEstadio','$capacidade','$vitoria','$derrota','$empate','$pontos')";
   		$conn->exec($insercaoNovoTime);
   		
   		//Chama arquivo de controle

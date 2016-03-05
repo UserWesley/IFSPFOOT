@@ -2,7 +2,7 @@
 
 	//Incluindo cabecalho na página
 	include_once "viewCabecalho.php";
-
+	echo "<hr></hr>";
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 	<meta charset= "UTF-8"/>
 	<title>Página Inicial</title>
 	<link rel="stylesheet" href="_css/cssViewMenu.css">
-
+	<link rel="stylesheet" href="_css/cssView.css">
 </head>
 
 <body>
@@ -36,7 +36,7 @@
 		</nav>
 		 
 	 </section>
-	 
+	 <hr></hr>
 	 <footer><?php include_once "viewRodape.php"?></footer>
 	
 </body>

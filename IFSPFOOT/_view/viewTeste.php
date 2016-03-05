@@ -82,6 +82,7 @@ $ultimoIdTime = $preparaIdTime->fetchColumn(0);
 //Pegando último time cadastrado para incrementar 1
 $idInseriTime = $ultimoIdTime + 1;
 */
+/*
 try{
 
 	$zerarTabelaJogador = "DELETE FROM Jogador;";
@@ -111,7 +112,10 @@ $cor="ds";
 
 $insercaoNovoTime = "INSERT INTO Time VALUES (1,'$nomeTime','$mascote','$cor','$dono','$dinheiroInicial','$torcidaInicial','$nomeEstadio','$capacidade')";
 $conn->exec($insercaoNovoTime);
+*/
 
+//ALTER TABLE Rodada ADD CONSTRAINT fk_idCampeonato FOREIGN KEY (campeonato) REFERENCES Campeonato (id);
+//ALTER TABLE Orders DROP FOREIGN KEY fk_PerOrders
 ?>
 
 

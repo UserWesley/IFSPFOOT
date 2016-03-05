@@ -11,6 +11,7 @@
 <head>
 
 	<title>Página Inicial</title>
+	<link rel="stylesheet" href="_css/cssView.css">
 
 </head>
 

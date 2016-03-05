@@ -13,7 +13,7 @@
 
 <body>
 
-	Desenvolvimento Web - Instituto Federal Campus Hortolândia
+	Desenvolvimento Web - Instituto Federal Câmpus Hortolândia
  	
 </body>
 

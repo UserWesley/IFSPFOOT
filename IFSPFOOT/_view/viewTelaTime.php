@@ -51,11 +51,11 @@
 			
 			<li><a href="viewJogos.php" target="janela">Jogos</a></li>
 			
-			<li><a href="viewTabela.php" target="janela">Rodadas</a></li>
+			<li><a href="viewRodada.php" target="janela">Rodadas</a></li>
 						
 			<li><a href="viewTabela.php" target="janela">Tabela</a></li>
 			
-		    <li><a href="viewTabela.php" target="janela">     !! Jogar !!</a></li>
+		    <li><a href="viewTabela.php" target="janela">     --- JOGAR ---</a></li>
 		
 		</ul>
 	

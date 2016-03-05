@@ -11,12 +11,12 @@
 	$senha = $_GET['passwordSenha'];
 	
 	//Consulta a Tabela Login, para autenticar usuário
-	$sql = 'SELECT id,usuario,senha FROM Login WHERE usuario = ? AND senha = ?';
-	$stm = $conn->prepare($sql);
-	$stm->bindValue(1, $usuario);
-	$stm->bindValue(2, $senha);
-	$stm->execute();
-	$dados = $stm->fetch(PDO::FETCH_OBJ);
+	$consultaLogin = 'SELECT id,usuario,senha FROM Login WHERE usuario = ? AND senha = ?';
+	$preparaConsultaLogin = $conn->prepare($consultaLogin);
+	$preparaConsultaLogin->bindValue(1, $usuario);
+	$preparaConsultaLogin->bindValue(2, $senha);
+	$preparaConsultaLogin->execute();
+	$dados = $preparaConsultaLogin->fetch(PDO::FETCH_OBJ);
 	
 
 	//Se o resultado da consulta for diferente de vazio, então registra sessão e chama o cabecalho

@@ -14,7 +14,7 @@
 	
 	//Inicio de Sessão para pegar usuario logado, usuário é único
 	session_start();
-	//$usuario = $_SESSION['usuario'];
+	$_SESSION['nomeTime'] = $nomeTime ;
 
 	$dono = $_SESSION['idDono'];
 		

@@ -6,19 +6,23 @@
 	//Usado delete porque o truncate não permite quando existe chave estrangeira
 	try{
 
-		//Instrução sql para deletar todos dados da tabela
+		//Instrução sql para deletar todos dados das tabelas
 		$zerarTabelaJogador = "DELETE FROM Jogador;";
 		$zerarTabelaJogo = "DELETE FROM Jogo ;";
 		$zerarTabelaTime = "DELETE FROM Time ;";
-		
+		$zerarTabelaRodada = "DELETE FROM Rodada ;";
+		$zerarTabelaCampeonato = "DELETE FROM Campeonato ;";
+			
 		//Desabilitar verificação de chave estrangeiras
 		$desabilitar="SET FOREIGN_KEY_CHECKS=0;";
 		
 		//Deletar todos dados da tabela
 		$conn->exec($desabilitar);
+		$conn->exec($zerarTabelaRodada);
 		$conn->exec($zerarTabelaJogo);
 		$conn->exec($zerarTabelaTime);
 		$conn->exec($zerarTabelaJogador);
+		$conn->exec($zerarTabelaCampeonato);
 	
 	}catch(PDOException $e){
 

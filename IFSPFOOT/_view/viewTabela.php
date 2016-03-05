@@ -12,22 +12,49 @@
 <head>
 
 	<title>Página Inicial</title>
+	<link rel="stylesheet" href="_css/cssView.css">
 
 </head>
 
 <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Posição</th>
+          <th>Nome</th>
+          <th>Vitorias</th>
+          <th>Derrotas</th>
+          <th>Empates</th>
+          <th>Pontos</th>
+        </tr> 
+      </thead>
+      <tbody>
 
 	<?php
-	 
-		$consultaRodada = 'SELECT * FROM Jogo';
-		$preparaConsultaRodada = $conn->query($consultaRodada);
-		$preparaConsultaRodada->execute();
+	 	
+		//Lista Posições
+		$posicao =0;
+		
+		//Listando posições
+		$consultaTabela = 'SELECT nome,vitoria,derrota,empate,pontos FROM Time ORDER BY pontos DESC';
+		$preparaConsultaTabela = $conn->query($consultaTabela);
+		$preparaConsultaTabela->execute();
 	
-		$result = $preparaConsultaRodada->setFetchMode(PDO::FETCH_NUM);
-		while ($row = $preparaConsultaRodada->fetch()) {
-			echo "\t". $row[0] . "\t" . $row[1]. "\t" . $row[2]. "\t" . $row[3]. "\t" . $row[4]. "\t" . $row[5]."<p>"  ;
+		$result = $preparaConsultaTabela->setFetchMode(PDO::FETCH_NUM);
+		while ($row = $preparaConsultaTabela->fetch()) {
+			echo '<tr>';
+			echo "<td>{$posicao}</td>";
+            echo "<td>{$row[0]}</td>";            
+            echo "<td>{$row[1]}</td>";
+            echo "<td>{$row[2]}</td>";  
+            echo "<td>{$row[3]}</td>";
+            echo "<td>{$row[4]}</td>";
+            echo '</tr>';
+            $posicao++;
 		}
 	?>
+	 </tbody>
+    </table>
 	
 </body>
 

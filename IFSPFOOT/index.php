@@ -27,7 +27,6 @@
 			<input type = "submit" value = "Entrar" />
 
 		</form>
-		<p>Teste Comit</p>
 	</fieldset>
 	
 </body>

@@ -48,11 +48,11 @@
 					</fieldset>
 					
 					<fieldset>
-						<legend>Cadastro Estádio</legend>
+						<legend>Cadastro Estadio</legend>
 						
-							<h3>Nome do Estádio :</h3> 
+							<h3>Nome do Estadio :</h3> 
 						
-							<input type = "text" placeholder="Digite o nome do Estádio" name = "textNomeEstadio" maxlength = "20" required>			
+							<input type = "text" placeholder="Digite o nome do Estadio" name = "textNomeEstadio" maxlength = "20" required>			
 					
 					</fieldset>
 					

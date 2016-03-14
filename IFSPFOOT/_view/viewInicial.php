@@ -14,6 +14,15 @@
 	<title>Página Inicial</title>
 	<link rel="stylesheet" href="_css/cssViewMenu.css">
 	<link rel="stylesheet" href="_css/cssView.css">
+	
+	<!-- Incluindo Bootstrap CSS -->
+	<link href="_view/_bootstrap-3.3.6-dist/_css/bootstrap.min.css" rel="stylesheet" media="screen">
+	
+	<!-- Incluindo Bootstrap JavaScript-->
+	<script src="_view/_bootstrap-3.3.6-dist/_js/bootstrap.min.js"></script>
+	
+	<!-- Incluindo jquery-->
+	<script src="_view/_jquery/jquery.js"></script>
 </head>
 
 <body>
@@ -32,7 +41,7 @@
 				<li><a href = "viewEditarJogo.php">Editar Jogo</a></li>
 				
 			</ul>
-		
+
 		</nav>
 		 
 	 </section>

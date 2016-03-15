@@ -73,7 +73,8 @@
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
-    background: rgba(255,255,255,0.2);
+    font-size:30px;
+    background: rgb(128,128,128);
 }
 
 .sidebar-nav li a:active,
@@ -83,7 +84,7 @@
 
 .sidebar-nav > .sidebar-brand {
     height: 65px;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 60px;
 }
 

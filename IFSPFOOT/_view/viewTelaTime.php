@@ -15,7 +15,6 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="_bootstrap-3.3.6-dist/_css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="_css/simple-sidebar.css" rel="stylesheet">
 	
@@ -30,9 +29,9 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
-                        IFSPFOOT
-                    </a>
+                   
+					<a href="../_view/viewInicial.php">IFSPFOOT</a>                         
+                    
                 </li>
 				
 				<li><a href="viewArtilharia.php" target="janela">Artilharia</a></li>
@@ -47,8 +46,8 @@
 						
 				<li><a href="viewTabela.php" target="janela">Tabela</a></li>
 			
-		    	<li><a href="viewTabela.php" target="janela">     --- JOGAR ---</a></li>
-            
+		    	<li><a href="viewTabela.php" target="janela">JOGAR</a></li>
+								
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

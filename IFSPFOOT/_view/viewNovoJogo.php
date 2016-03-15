@@ -23,8 +23,11 @@
 	<section>
 		
 		<form action="../_model/modelCadastrarTime.php">
-			<fieldset name = cadastroNovoJogo>
-	
+		
+			<fieldset name = cadastroNovoJogo>	
+			
+				<a href="../_view/viewInicial.php">IFSPFOOT</a>
+				
 				<legend>Cadastro Inicial</legend>
 					<fieldset name = cadastroTime>					
 			
@@ -56,8 +59,7 @@
 					
 					</fieldset>
 					
-				<input type= "submit" value = "Iniciar Jogo" />
-			
+				<input type= "submit" value = "Iniciar Jogo" />			
 			
 		
 		</fieldset>

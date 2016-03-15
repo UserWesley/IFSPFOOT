@@ -10,16 +10,31 @@
 <html>
 
 <head>
-
+	
+	<meta charset= "UTF-8"/>
 	<title>Página Inicial</title>
-	<link rel="stylesheet" href="_css/cssView.css">
+	
+	<!-- Visualização Mobile" -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Incluindo Bootstrap CSS -->
+	<link href="_bootstrap-3.3.6-dist/_css/bootstrap.min.css" rel="stylesheet" media="screen">
+	
+	<!-- Incluindo Bootstrap JavaScript-->
+	<script src="_bootstrap-3.3.6-dist/_js/bootstrap.min.js"></script>
+	
+	<!-- Incluindo jquery-->
+	<script src="_jquery/jquery.js"></script>
 
 </head>
 
 <body>
-    <table>
+	<h1 class="text-center">Jogos</h1>
+	
+	<div class="table-responsive">
+    <table class="table">
       <thead>
-        <tr>
+        <tr class = "info">
           <th>Time Casa</th>
           <th>Gol</th>
           <th></th>
@@ -43,7 +58,7 @@
 		$result = $preparaConsultaJogo->setFetchMode(PDO::FETCH_NUM);
 		while ($row = $preparaConsultaJogo->fetch()) {
 
-            echo '<tr>';
+            echo '<tr class = "active">';
             echo "<td>{$row[0]}</td>";            
             echo "<td>{$row[1]}</td>";
             echo "<td> X </td>";
@@ -58,7 +73,7 @@
 	?>
 	</tbody>
     </table>
-	
+	</div>
 </body>
 
 </html>

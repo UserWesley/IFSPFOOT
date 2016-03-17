@@ -13,7 +13,7 @@
   </head>
   <body>
   	<?php
-  		$sql = "INSERT INTO campeonato
+  		$sql = "INSERT INTO Campeonato
   		        VALUES ( null
 					   , '$nome'
   		               ,  $temporada

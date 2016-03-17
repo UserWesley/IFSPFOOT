@@ -16,7 +16,7 @@
   </head>
   <body>
   	<?php
-  		$sql = "INSERT INTO jogo
+  		$sql = "INSERT INTO Jogo
   		        VALUES ( null 
 					   , '$timeCasa'
   		               ,  $golCasa

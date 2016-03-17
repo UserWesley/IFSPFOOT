@@ -1,7 +1,7 @@
 <?php
 	require_once('../conexao.php');
 	$id = $_GET['id'];
-	$sql   = "DELETE FROM time WHERE id = $id";
+	$sql   = "DELETE FROM Time WHERE id = $id";
 	$total = $dbh->exec($sql);
 ?>
 <!DOCTYPE html>

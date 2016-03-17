@@ -23,7 +23,7 @@
   </head>
   <body>
   	<?php
-  		$sql = "INSERT INTO time
+  		$sql = "INSERT INTO Time
   		        VALUES ( null 
 					   , '$nome'
   		               , '$mascote'

@@ -13,7 +13,7 @@
 	$nivel = $_POST['nivel'];
 	$gol = $_POST['gol'];
 	
-  $sql = "UPDATE jogador 
+  $sql = "UPDATE Jogador 
           SET nome = '$nome'
             , sobrenome = '$sobrenome'
 			, posicao = '$posicao'

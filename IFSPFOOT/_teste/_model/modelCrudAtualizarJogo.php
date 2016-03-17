@@ -7,7 +7,7 @@
   $timeVisitante = $_POST['timeVisitante'];
   $rodada = $_POST['rodada'];
 	
-  $sql = "UPDATE jogo 
+  $sql = "UPDATE Jogo 
           SET timeCasa = '$timeCasa'
             , golCasa = $golCasa
 			, golVisitante = $golVisitante

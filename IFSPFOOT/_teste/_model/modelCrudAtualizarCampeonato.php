@@ -5,7 +5,7 @@
   $temporada = $_POST['temporada'];
   $vencedor = $_POST['vencedor'];
 	
-  $sql = "UPDATE campeonato 
+  $sql = "UPDATE Campeonato 
           SET nome  = '$nome'
             , temporada = $temporada
 			, vencedor = '$vencedor'

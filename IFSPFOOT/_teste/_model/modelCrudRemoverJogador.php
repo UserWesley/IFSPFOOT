@@ -1,7 +1,7 @@
 <?php
 	require_once('../conexao.php');
 	$id = $_GET['id'];
-	$sql   = "DELETE FROM jogador WHERE id = $id";
+	$sql   = "DELETE FROM Jogador WHERE id = $id";
 	$total = $dbh->exec($sql);
 ?>
 <!DOCTYPE html>

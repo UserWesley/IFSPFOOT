@@ -18,7 +18,7 @@
   </head>
   <body>
   	<?php
-  		$sql = "INSERT INTO rodada
+  		$sql = "INSERT INTO Rodada
   		        VALUES (  null
 					   ,  $numero
   		               , '$data'

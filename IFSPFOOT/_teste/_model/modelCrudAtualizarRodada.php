@@ -8,7 +8,7 @@
   $clima = $_POST['clima'];
   $campeonato = $_POST['campeonato'];	
 	
-  $sql = "UPDATE rodada 
+  $sql = "UPDATE Rodada 
           SET numero  = $numero
             , data = '$data'
 			, hora = '$hora'

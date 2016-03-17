@@ -22,7 +22,7 @@
   </head>
   <body>
   	<?php
-  		$sql = "INSERT INTO jogador
+  		$sql = "INSERT INTO Jogador
   		        VALUES ( null
 					   , '$nome'
   		               , '$sobrenome'

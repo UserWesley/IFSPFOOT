@@ -1,7 +1,7 @@
 <?php
 	require_once('../conexao.php');
 	$id = $_GET['id'];
-	$sql   = "DELETE FROM rodada WHERE id = $id";
+	$sql   = "DELETE FROM Rodada WHERE id = $id";
 	$total = $dbh->exec($sql);
 ?>
 <!DOCTYPE html>

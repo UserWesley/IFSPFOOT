@@ -14,7 +14,7 @@
   $empate = $_POST['empate'];
   $pontos = $_POST['pontos'];
 	
-  $sql = "UPDATE time 
+  $sql = "UPDATE Time 
           SET nome  = '$nome'
             , mascote = '$mascote'
 			, cor = '$cor'

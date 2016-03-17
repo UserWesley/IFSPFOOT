@@ -1,0 +1,32 @@
+<?php
+  require_once('../conexao.php');
+  $id = $_POST['id'];
+  $numero = $_POST['numero'];
+  $data = $_POST['data'];
+  $hora = $_POST['hora'];
+  $periodo = $_POST['periodo'];
+  $clima = $_POST['clima'];
+  $campeonato = $_POST['campeonato'];	
+	
+  $sql = "UPDATE rodada 
+          SET numero  = $numero
+            , data = '$data'
+			, hora = '$hora'
+			, periodo = '$periodo'
+			, clima = '$clima'
+			, campeonato = $campeonato		
+          WHERE id = $id";
+  $total = $dbh->exec($sql);
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+	  <title>Atualizar Rodada</title>
+	  <meta charset="utf-8">
+  </head>
+  <body>
+    <?php
+      echo "Total Atualizado: $total";
+    ?>
+  </body>
+</html>

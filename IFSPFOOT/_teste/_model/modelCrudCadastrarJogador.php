@@ -1,0 +1,43 @@
+<?php
+  require_once('../conexao.php');
+
+	$nome = $_POST['nome'];
+	$sobrenome = $_POST['sobrenome'];
+	$posicao = $_POST['posicao'];
+	$nacionalidade = $_POST['nacionalidade'];
+	$habilidade = $_POST['habilidade'];
+	$idade = $_POST['idade'];
+	$forca = $_POST['forca'];
+	$idTime = $_POST['idTime'];
+	$estamina = $_POST['estamina'];
+	$nivel = $_POST['nivel'];
+	$gol = $_POST['gol'];
+	
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+	  <title>Cadastrar Jogador</title>
+	  <meta charset="utf-8">
+  </head>
+  <body>
+  	<?php
+  		$sql = "INSERT INTO jogador
+  		        VALUES ( null
+					   , '$nome'
+  		               , '$sobrenome'
+  		               , '$posicao'
+					   , '$nacionalidade'
+  		               , '$habilidade'
+					   ,  $idade
+  		               ,  $forca
+					   ,  $idTime
+  		               ,  $estamina 
+					   , '$nivel'
+  		               ,  $gol					   
+					   )";
+
+			$dbh->exec($sql);
+  	?>
+  </body>
+</html>

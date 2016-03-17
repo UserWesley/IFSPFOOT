@@ -10,6 +10,7 @@
 <html lang="PT-BR">
 
 <head>
+
 	<meta charset= "UTF-8"/>
 	<title>Página Inicial</title>
 	<link rel="stylesheet" href="_css/cssViewMenu.css">
@@ -34,7 +35,7 @@
 		<nav>
 			<ul>
 				
-				<li><a href = "viewNovoJogo.php">Novo Jogo</a></li>
+				<li><a href = "../_controller/controllerGerenciaInicio.php">Novo Jogo</a></li>
 				
 				<li><a href = "viewTelaTime.php">Carregar Jogo</a></li>
 				

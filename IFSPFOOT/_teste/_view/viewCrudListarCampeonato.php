@@ -28,7 +28,7 @@
       </thead>
       <tbody>
         <?php
-          foreach($dbh->query('SELECT * FROM campeonato') as $linha){
+          foreach($dbh->query('SELECT * FROM Campeonato') as $linha){
             echo '<tr>';
             echo "<td>{$linha['id']}</td>";            
             echo "<td>{$linha['nome']}</td>";

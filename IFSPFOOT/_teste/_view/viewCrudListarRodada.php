@@ -31,7 +31,7 @@
       </thead>
       <tbody>
         <?php
-          foreach($dbh->query('SELECT * FROM rodada') as $linha){
+          foreach($dbh->query('SELECT * FROM Rodada') as $linha){
             echo '<tr>';
             echo "<td>{$linha['id']}</td>";            
             echo "<td>{$linha['numero']}</td>";

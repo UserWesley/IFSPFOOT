@@ -1,7 +1,7 @@
 <?php
   require_once('../conexao.php');
   $id = $_GET['id'];
-  $sql   = "SELECT * FROM jogador WHERE id = $id";
+  $sql   = "SELECT * FROM Jogador WHERE id = $id";
 ?>
 <!DOCTYPE html>
 <html>

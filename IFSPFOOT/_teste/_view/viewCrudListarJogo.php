@@ -30,7 +30,7 @@
       </thead>
       <tbody>
         <?php
-          foreach($dbh->query('SELECT * FROM jogo') as $linha){
+          foreach($dbh->query('SELECT * FROM Jogo') as $linha){
             echo '<tr>';
             echo "<td>{$linha['id']}</td>";            
             echo "<td>{$linha['timeCasa']}</td>";

@@ -37,7 +37,7 @@
       </thead>
       <tbody>
         <?php
-          foreach($dbh->query('SELECT * FROM time') as $linha){
+          foreach($dbh->query('SELECT * FROM Time') as $linha){
             echo '<tr>';
             echo "<td>{$linha['id']}</td>";            
             echo "<td>{$linha['nome']}</td>";

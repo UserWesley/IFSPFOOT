@@ -33,6 +33,15 @@
 
 <body>
 	<h1 class="text-center">Estádio</h1>
+	<div class="table-responsive">
+	<table class="table">
+	<thead>
+        	<tr class = "info">
+			    <th>Nome do Estádio</th>
+			   	<th>Capacidade</th> 
+      		</tr>
+      		</thead>
+      		<tbody>
 	<?php
 
 		//Consulta para visualizar dados do estádio
@@ -43,10 +52,15 @@
 	
 		$result = $preparaConsultaEstadio->setFetchMode(PDO::FETCH_NUM);
 		while ($row = $preparaConsultaEstadio->fetch()) {
-			echo "Nome Estádio : ". $row[0] . "<br> Capacidade : " . $row[1]  ;
+			echo '<tr  class = "active">';
+			echo "<td>{$row[0]}</td>";
+			echo "<td>{$row[1]}</td>";
+			echo "</tr>";
 		}
 		
 	?>
+	</table>
+	</div>
 </body>
 
 </html>

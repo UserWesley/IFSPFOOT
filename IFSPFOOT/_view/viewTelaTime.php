@@ -32,7 +32,7 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                    
-					<a href="../_view/viewInicial.php">IFSPFOOT</a>                         
+				<a href="viewEquipe.php" target="janela">IFSPFOOT</a>                         
                     
                 </li>
 				

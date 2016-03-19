@@ -1,5 +1,8 @@
 <?php
 	
+
+	//Zerar tabelas novo jogo
+	include_once '../_model/modelZerarTabela.php';
 	//Chama arquivo que irá cadastro Campeonato Automatico
 	include_once '../_model/modelCadastrarCampeonatoAutomatico.php';
 	//Chama arquivo que irá gerar times
@@ -12,6 +15,6 @@
 	include_once '../_model/modelCadastroAutomaticoJogos.php';
 	
 	
-	header("LOCATION: ../_view/viewTelaTime.php");	
+	header("LOCATION: ../_view/viewNovoJogo.php");	
 
 ?>

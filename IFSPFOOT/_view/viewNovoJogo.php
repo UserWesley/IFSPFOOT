@@ -41,21 +41,8 @@
                         IFSPFOOT
                     </a>
                 </li>
-                
-                
-                <?php
-                
-                	//Listar Times Disponivel
-        			$consultaTime = 'SELECT nome FROM Time';
-        			$preparaConsultaTime = $conn->query($consultaTime);
-					$preparaConsultaTime->execute();
-		
-					while ($row = $preparaConsultaTime->fetch()) {
-           
-            			echo "<li><a href=\"viewAmostraTime.php\" target=\"janela\">".$row[0]."</a></li>";
-            
-          			}
-      			?>
+                       
+            		<li><a href="viewMenuEscolhaTime.php" target="janela">Escolher Time</a></li>
         
            </ul>
         </div>
@@ -68,7 +55,7 @@
                 	<div class="row">
                     	<div class="col-lg-12">
    							<div class="embed-responsive embed-responsive-16by9">
-							<iframe class="embed-responsive-item" src="viewApresentacao.php" name="janela" id="framePrincipal"></iframe>	
+							<iframe class="embed-responsive-item" src="viewMenuEscolhaTime.php" name="janela" id="framePrincipal"></iframe>	
                         </div>
                     </div>
                 </div>

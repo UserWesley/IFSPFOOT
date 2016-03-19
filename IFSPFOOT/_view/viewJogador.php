@@ -32,7 +32,7 @@
 </head>
 
 <body>
-	<h1 class="text-center">Meus Jogadores</h1>
+	<h1 class="text-center">Jogadores do Time</h1>
 	
 	<div class="table-responsive">
     	<table class="table">

@@ -8,11 +8,11 @@
 	$nomeTime    = $_SESSION['nomeTime'];
 
 	//Cadastro de Jogos Automaticos
-	$insercaoNovoJogo = "INSERT INTO Jogo VALUES (1,'$nomeTime',NULL,NULL,'Time2','1')";
+	$insercaoNovoJogo = "INSERT INTO Jogo VALUES (1,'Time1',NULL,NULL,'Time2','1')";
 	$conn->exec($insercaoNovoJogo);
-	$insercaoNovoJogo = "INSERT INTO Jogo VALUES (2,'$nomeTime',NULL,NULL,'Time3','2')";
+	$insercaoNovoJogo = "INSERT INTO Jogo VALUES (2,'Time1',NULL,NULL,'Time3','2')";
 	$conn->exec($insercaoNovoJogo);
-	$insercaoNovoJogo = "INSERT INTO Jogo VALUES (3,'$nomeTime',NULL,NULL,'Time4','3')";
+	$insercaoNovoJogo = "INSERT INTO Jogo VALUES (3,'Time1',NULL,NULL,'Time4','3')";
 	$conn->exec($insercaoNovoJogo);
 	$insercaoNovoJogo = "INSERT INTO Jogo VALUES (4,'Time2',NULL,NULL,'Time3','3')";
 	$conn->exec($insercaoNovoJogo);

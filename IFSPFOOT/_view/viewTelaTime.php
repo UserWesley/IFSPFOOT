@@ -1,6 +1,8 @@
 <?php 
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
+	
 	session_start();
+	
 	$donoTime = $_SESSION['idDono'];
 ?>
 <!DOCTYPE html>
@@ -47,6 +49,8 @@
 				<li><a href="viewTabela.php" target="janela">Tabela</a></li>
 			
 		    	<li><a href="viewTabela.php" target="janela">JOGAR</a></li>
+		    	
+		    	<li><a href="../_controller/controllerLogout.php">Sair</a></li>
 								
             </ul>
         </div>

@@ -54,10 +54,21 @@
       		<tbody>
       <?php
       	
+      	$consultaTime = 'SELECT id FROM Time WHERE dono = ? ';
+      	$preparaConsultaTime = $conn->prepare($consultaTime);
+      	$preparaConsultaTime->bindValue(1,$idTime);
+      	$preparaConsultaTime->execute();
+      
+      	$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+      
+      	while ($row = $preparaConsultaTime->fetch()) { 
+      		$idTimeJogador = $row[0];     
+      		
+      	}
       	//Listando Jogadores do time
         $consultaJogador = 'SELECT id,nome ,sobrenome,posicao,nacionalidade,habilidade ,idade ,forca ,estamina ,nivel,gol FROM Jogador WHERE idTime = ? ';
 		$preparaConsultaJogador = $conn->prepare($consultaJogador);
-		$preparaConsultaJogador->bindValue(1, $idTime);
+		$preparaConsultaJogador->bindValue(1, $idTimeJogador);
 		$preparaConsultaJogador->execute();
 		
 		$result = $preparaConsultaJogador->setFetchMode(PDO::FETCH_NUM);

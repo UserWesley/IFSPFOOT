@@ -2,7 +2,7 @@
  
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
-	
+	session_start();
 ?>
 
 <!DOCTYPE html>
@@ -50,13 +50,15 @@
 				echo "<option value =".$row[0].">".$row[1]."</option>";
 		
 			}
-			
-			
+					
 			echo "</select>";
 			
 			if(empty($_POST['selectTime'])){
-				 
-				$_POST['selectTime'] = 1;
+				
+				$_SESSION['time'] = $_POST['selectTime'] = 1;
+			}
+			else {
+				$_SESSION['time'] = $_POST['selectTime'];
 			}
 			
 		?>

@@ -47,6 +47,8 @@
 				<li><a href="viewRodada.php" target="janela">Rodadas</a></li>
 						
 				<li><a href="viewTabela.php" target="janela">Tabela</a></li>
+				
+				<li><a href="viewTime.php" target="janela">Times</a></li>
 			
 		    	<li><a href="viewTabela.php" target="janela">JOGAR</a></li>
 		    	

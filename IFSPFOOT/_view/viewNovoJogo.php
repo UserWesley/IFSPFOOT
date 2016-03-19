@@ -1,7 +1,6 @@
 <?php
 	
 	//Inclui cabeçalho na página
-	include_once "viewCabecalho.php";
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 
 ?>

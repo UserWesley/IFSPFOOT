@@ -62,7 +62,7 @@
 			}
 			
 		?>
-		<input	type="submit" value="Visualizar">
+		<input	type="submit" value="Selecionar e Visualizar">
 		
 		</form>
 		</div>

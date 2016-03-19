@@ -36,7 +36,6 @@ include_once '../_model/_bancodedados/modelBancodeDados.php';
     	<table class="table">
       		<thead>
         		<tr class = "info">
-          			<th>Código</th>
 			          <th>Nome</th>
 			          <th>Mascote</th>
 			          <th>Cor</th>
@@ -51,7 +50,7 @@ include_once '../_model/_bancodedados/modelBancodeDados.php';
       <?php
 
       	//Listando Jogadores do time
-        $consultaTime = 'SELECT id,nome ,mascote,cor,dinheiro,torcida ,nomeEstadio ,capacidade FROM Time WHERE id = ? ';
+        $consultaTime = 'SELECT nome ,mascote,cor,dinheiro,torcida ,nomeEstadio ,capacidade FROM Time WHERE id = ? ';
 		$preparaConsultaTime = $conn->prepare($consultaTime);
 		$preparaConsultaTime->bindValue(1,$_POST['selectTime']);
 		$preparaConsultaTime->execute();
@@ -68,7 +67,6 @@ include_once '../_model/_bancodedados/modelBancodeDados.php';
             echo "<td>{$row[4]}</td>";
             echo "<td>{$row[5]}</td>";
             echo "<td>{$row[6]}</td>";
-            echo "<td>{$row[7]}</td>";
             echo '</tr>';
           }
 		

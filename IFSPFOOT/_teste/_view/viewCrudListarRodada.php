@@ -3,22 +3,19 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+	<head>
 	  <title>Rodadas Cadastradas</title>
-	  <meta charset="utf-8">
-    <style>
-      table, td, th{
-        border: 1px solid black;
-      }
-      table{
-        border-collapse: collapse;
-      }
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <link rel="stylesheet" href="../css/style.css" />
     </style>
-  </head>
-  <body>
-	<center>   
+	</head>
+	<body>
+	<center> 
+	<a href="../indexCrud.php">IFSPFOOT</a>
+	</p>	
     <table>
-      <thead>
+    <thead>
         <tr>
           <th>ID</th>
           <th>Numero</th>
@@ -26,10 +23,11 @@
           <th>Hora</th>
 		  <th>Periodo</th>
 		  <th>Clima</th>
-		  <th>Campeonato</th>			  
+		  <th>Campeonato</th>	
+		  <th colspan="2">Opcoes</th>
         </tr> 
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
         <?php
           foreach($dbh->query('SELECT * FROM Rodada') as $linha){
             echo '<tr>';
@@ -45,8 +43,8 @@
 			echo '</tr>';
           }
         ?>
-		</center>
-      </tbody>
+	</tbody>	  
     </table>
-  </body>
+	</center>  
+	</body>
 </html>

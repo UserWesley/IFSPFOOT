@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
+	<head>
 	  <title>Cadastrar Campeonato</title>
-	  <meta charset="utf-8">
-  </head>
-  <body>
-  <center>
-		<form action="../_model/modelCrudCadastrarCampeonato.php" method="post">
-			Nome: <input type="text" name="nome" />
-			<br />
-			<br />
-			Temporada: <input type="number" name="temporada" />
-			<br />
-			<br />
-			Vencedor: <input type="text" name="vencedor" />
-			<br />	
-			<br />			
-			<input type="submit" value="Cadastrar" />
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <link rel="stylesheet" href="../css/style.css" />
+	</head>
+	<body>
+	<div id="content">	
+	<fieldset>
+		<form action="../_model/modelCrudCadastrarCampeonato.php" method="post">	
+		<center>
+		<a href="../indexCrud.php">IFSPFOOT</a>		
+		<p/>
+		<h4>DADOS DO CAMPEONATO</h4>
+			Nome <input type="text" name="nome"/>				
+			Temporada <input type="number" name="temporada" />					
+			Vencedor <input type="text" name="vencedor" />	
+		<p/>				
+		<input type="submit" value="Cadastrar" />
+		</center>
 		</form>
-	</center>
-  </body>
+		<p/>	
+	</fieldset>	
+	</div>
+	</body>
 </html>

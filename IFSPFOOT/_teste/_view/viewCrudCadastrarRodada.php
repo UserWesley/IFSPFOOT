@@ -1,32 +1,41 @@
+<?php
+	require_once('../conexao.php');
+?>
 <!DOCTYPE html>
 <html>
-  <head>
+	<head>
 	  <title>Cadastrar Campeonato</title>
-	  <meta charset="utf-8">
-  </head>
-  <body>
-  <center>
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <link rel="stylesheet" href="../css/style.css" />
+	</head>
+	<body>
+	<div id="content">	
+	<fieldset>
 		<form action="../_model/modelCrudCadastrarRodada.php" method="post">
-			Numero: <input type="number" name="numero" />
-			<br />
-			<br />
-			Data: <input type="date" name="data" />
-			<br />
-			<br />
-			Hora: <input type="time" name="hora" />
-			<br />	
-			<br />	
-			Periodo: <input type="text" name="periodo" />
-			<br />	
-			<br />		
-			Clima: <input type="text" name="clima" />
-			<br />	
-			<br />	
-			Campeonato: <input type="number" name="campeonato" />
-			<br />	
-			<br />				
-			<input type="submit" value="Cadastrar" />
+		<center>
+		<a href="../indexCrud.php">IFSPFOOT</a>		
+		<p/>
+		<h4>CADASTRAR RODADA</h4>
+			Numero <input type="number" name="numero" />
+			Data <input type="date" name="data" />
+			Hora <input type="time" name="hora" />
+			Periodo <input type="text" name="periodo" />
+			Clima <input type="text" name="clima" />
+			Campeonato 
+			<select name="campeonato">
+				<?php
+					foreach($dbh->query('SELECT * FROM Campeonato') as $linha){
+						echo "<option>{$linha['id']}</option>";
+					}
+				?>
+			</select>
+		<p/>				
+		<input type="submit" value="Cadastrar" />
+		</center>
 		</form>
-	</center>
-  </body>
+		<p/>	
+	</fieldset>
+	</div>
+	</body>
 </html>

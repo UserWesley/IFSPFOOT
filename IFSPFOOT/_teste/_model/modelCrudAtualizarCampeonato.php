@@ -17,10 +17,10 @@
   <head>
 	  <title>Atualizar Campeonato</title>
 	  <meta charset="utf-8">
-  </head>
+  </head>   
   <body>
-    <?php
-      echo "Total Atualizado: $total";
+    <?php		
+    header("Location: ../_view/viewCrudListarCampeonato.php");
     ?>
   </body>
 </html>

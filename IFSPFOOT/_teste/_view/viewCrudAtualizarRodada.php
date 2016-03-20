@@ -5,57 +5,65 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+	<head>
 	  <title>Atualizar Rodada</title>
-	  <meta charset="utf-8">
-  </head>
-  <body>
-  	<center>  
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <link rel="stylesheet" href="../css/style.css" />
+	</head>
+	<body>
+	<div id="content">	
+	<fieldset> 
     <?php
     foreach($dbh->query($sql) as $linha):
     ?>
       <form action="../_model/modelCrudAtualizarRodada.php" method="post">
-	    ID: <input type="number"
+		<center>
+		<a href="../indexCrud.php">IFSPFOOT</a>		
+		<p/>
+		<h4>DADOS DA RODADA</h4>
+	    ID <input type="number"
                        name="id"
                        value="<?php echo $linha['id']?>" 
                        readonly="readonly" />
-        <br />
-		<br />
-        Numero: <input type="number"
+       
+        Numero <input type="number"
                        name="numero"
                        value="<?php echo $linha['numero']?>"/>                  
-        <br />
-		<br />
-        Data: <input type="date" 
+       
+        Data <input type="date" 
                      name="data"
                      value="<?php echo $linha['data']?>" />
-        <br />
-		<br />
-        Hora: <input type="time" 
+       
+        Hora <input type="time" 
                       name="hora"
                       value="<?php echo $linha['hora']?>" />
-        <br />   
-		<br />	
-		Periodo: <input type="text" 
+        	
+		Periodo <input type="text" 
                       name="periodo"
                       value="<?php echo $linha['periodo']?>" />
-        <br />   
-		<br />
-		Clima: <input type="text" 
+       
+		Clima <input type="text" 
                       name="clima"
                       value="<?php echo $linha['clima']?>" />
-        <br />   
-		<br />		
-		Campeonato: <input type="number" 
-                      name="campeonato"
-                      value="<?php echo $linha['campeonato']?>" />
-        <br />   
-		<br />			
-        <input type="submit" value="Alterar" />
+       	
+		Campeonato 
+			<select name="campeonato">
+				<?php
+					foreach($dbh->query('SELECT * FROM Campeonato') as $linha){
+						echo "<option>{$linha['id']}</option>";
+					}
+				?>
+			</select>  
+		</p>	
+        <input type="submit" value="Atualizar" />
+		</center>
+		</p>
       </form>
     <?php
     endforeach;
     ?>
-		</center>  
-  </body>
+	</fieldset>
+	</div>
+	</body>
 </html>

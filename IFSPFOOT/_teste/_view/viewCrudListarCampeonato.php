@@ -3,30 +3,27 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+	<head>
 	  <title>Campeonatos Cadastrados</title>
-	  <meta charset="utf-8">
-    <style>
-      table, td, th{
-        border: 1px solid black;
-      }
-      table{
-        border-collapse: collapse;
-      }
-    </style>
-  </head>
-  <body>
-	<center>   
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <link rel="stylesheet" href="../css/style.css" />
+	</head>
+	<body>
+	<center>  
+	<a href="../indexCrud.php">IFSPFOOT</a>
+	</p>	
     <table>
-      <thead>
+    <thead>
         <tr>
           <th>ID</th>
           <th>Nome</th>
           <th>Temporada</th>
           <th>Vencedor</th>
+		  <th colspan="2">Opcoes</th>
         </tr> 
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
         <?php
           foreach($dbh->query('SELECT * FROM Campeonato') as $linha){
             echo '<tr>';
@@ -39,8 +36,8 @@
             echo '</tr>';
           }
         ?>
-		</center>
-      </tbody>
+	</tbody>	  
     </table>
-  </body>
+	</center>  
+	</body>
 </html>

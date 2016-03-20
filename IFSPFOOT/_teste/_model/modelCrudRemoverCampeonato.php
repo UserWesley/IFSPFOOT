@@ -12,7 +12,7 @@
 </head>
 <body>
 	<?php
-		echo "Total de campeonatos removidos foi: $total";
+		header("Location: ../indexCrud.php");
 	?>
 </body>
 </html>

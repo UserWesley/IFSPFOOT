@@ -12,7 +12,7 @@
 </head>
 <body>
 	<?php
-		echo "Total de rodadas removidas foi: $total";
+		header("Location: ../indexCrud.php");
 	?>
 </body>
 </html>

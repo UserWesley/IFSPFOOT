@@ -38,7 +38,7 @@
   </head>
   <body>
     <?php
-      echo "Total Atualizado: $total";
+    header("Location: ../_view/viewCrudListarTime.php");
     ?>
   </body>
 </html>

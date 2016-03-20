@@ -24,7 +24,7 @@
   </head>
   <body>
     <?php
-      echo "Total Atualizado: $total";
+    header("Location: ../_view/viewCrudListarJogo.php");
     ?>
   </body>
 </html>

@@ -3,32 +3,29 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+	<head>
 	  <title>Jogos Cadastrados</title>
-	  <meta charset="utf-8">
-    <style>
-      table, td, th{
-        border: 1px solid black;
-      }
-      table{
-        border-collapse: collapse;
-      }
-    </style>
-  </head>
-  <body>
-	<center>   
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <link rel="stylesheet" href="../css/style.css" />
+	</head>
+	<body>
+	<center> 
+	<a href="../indexCrud.php">IFSPFOOT</a>
+	</p>	
     <table>
-      <thead>
+    <thead>
         <tr>
           <th>ID</th>
           <th>Time de Casa</th>
           <th>Gols em Casa</th>
           <th>Gols Visitante</th>
 		  <th>Time Visitante</th>
-		  <th>Rodadas</th>		  
+		  <th>Rodadas</th>	
+		  <th colspan="2">Opcoes</th>
         </tr> 
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
         <?php
           foreach($dbh->query('SELECT * FROM Jogo') as $linha){
             echo '<tr>';
@@ -43,8 +40,8 @@
 			echo '</tr>';
           }
         ?>
-		</center>
-      </tbody>
+	</tbody>	  
     </table>
-  </body>
+	</center>  
+	</body>
 </html>

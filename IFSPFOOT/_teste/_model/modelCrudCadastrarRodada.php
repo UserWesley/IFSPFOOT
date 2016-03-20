@@ -29,6 +29,9 @@
 					   )";
 
 			$dbh->exec($sql);
+		
+		header("Location: ../indexCrud.php");
+		
   	?>
   </body>
 </html>

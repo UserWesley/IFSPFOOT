@@ -5,42 +5,48 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
+	<head>
 	  <title>Atualizar Campeonato</title>
-	  <meta charset="utf-8">
-  </head>
-  <body>
-  	<center>  
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <link rel="stylesheet" href="../css/style.css" />
+	</head>
+	<body>
+	<div id="content">	
+	<fieldset>	
     <?php
     foreach($dbh->query($sql) as $linha):
     ?>
       <form action="../_model/modelCrudAtualizarCampeonato.php" method="post">
-	    ID: <input type="number"
+		<center>
+		<a href="../indexCrud.php">IFSPFOOT</a>		
+		<p/>
+		<h4>DADOS DO CAMPEONATO</h4>
+	    ID <input type="number"
                        name="id"
                        value="<?php echo $linha['id']?>" 
                        readonly="readonly" />
-        <br />
-		<br />
-        Nome: <input type="text"
+       
+        Nome <input type="text"
                        name="nome"
                        value="<?php echo $linha['nome']?>"/>                  
-        <br />
-		<br />
-        Temporada: <input type="number" 
+       
+        Temporada <input type="number" 
                      name="temporada"
                      value="<?php echo $linha['temporada']?>" />
-        <br />
-		<br />
-        Vencedor: <input type="text" 
+       
+        Vencedor <input type="text" 
                       name="vencedor"
-                      value="<?php echo $linha['vencedor']?>" />
-        <br />   
-		<br />		
-        <input type="submit" value="Alterar" />
+                      value="<?php echo $linha['vencedor']?>" />   
+		</p>	
+        <input type="submit" value="Atualizar" />
+		</center>
+		</p>
       </form>
     <?php
     endforeach;
     ?>
-		</center>  
-  </body>
+	</fieldset>
+	</div>	
+	</body>
 </html>

@@ -110,6 +110,34 @@
 			<td>IDE de desenvolvimento, também esta instalado Plugin EGIT - Controle de Versionamento</td>
 			<td></td>
 		</tr>
+		
+		<tr class="active">
+			<td>Notepad++ 5.9.0.0</td>
+			<td>Desenvolvimento</td>
+			<td>Editor de texto e de código fonte</td>
+			<td></td>
+		</tr>
+		
+		<tr class="active">
+			<td>GitHub v3.0.14</td>
+			<td>Versionamento de projetos</td>
+			<td>Controlar as mudanças em um projeto a partir de repositórios criados na Web</td>
+			<td></td>
+		</tr>
+	
+		<tr class="active">
+			<td>NetBeans 8.0.2</td>
+			<td>Desenvolvimento</td>
+			<td>IDE de desenvolvimento - Controle de Versionamento</td>
+			<td></td>
+		</tr>
+		
+		<tr class="active">
+			<td>Openproject 1.4</td>
+			<td>Gerenciamento de projetos</td>
+			<td>Planejamento de atividades a ser realizadas</td>
+			<td></td>
+		</tr>
 
 	</tbody>
 	</table>
@@ -125,10 +153,8 @@
           <th>Versão</th>
         </tr> 
       </thead>
-
 	
-      <tbody>
-      
+      <tbody>      
       	<tr class="active">
 			<td>Bootstrap</td>
 			<td>CSS, Javascript</td>

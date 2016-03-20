@@ -9,7 +9,7 @@
 <body>
 <h3>CRUD's</h3>
 <h1>IFSPFOOT</h1>
-<center>
+
 <table>
     <thead>
         <tr>
@@ -36,6 +36,6 @@
 	</tbody>
 </table>
 <script type="text/javascript" src="js/slideshow.js"></script>
-</center>
+
 </body>
 </html>

@@ -19,20 +19,24 @@
 	</thead>
     <tbody>		
 	<tr>
-	<td><a href="_view/viewCrudCadastrarCampeonato.php">CADASTRAR CAPEONATO</a></td>
-	<td><a href="_view/viewCrudListarCampeonato.php">CONSULTAR CAMPEONATOS</a></td>
+		<td><a href="_view/viewCrudCadastrarCampeonato.php">CADASTRAR CAPEONATO</a></td>
+		<td><a href="_view/viewCrudListarCampeonato.php">CONSULTAR CAMPEONATOS</a></td>
 	</tr>
-	<td><a href="_view/viewCrudCadastrarRodada.php">CADASTRAR RODADA</a></td>
-	<td><a href="_view/viewCrudListarRodada.php">CONSULTAR RODADAS</a></td>
+	<tr>
+		<td><a href="_view/viewCrudCadastrarRodada.php">CADASTRAR RODADA</a></td>
+		<td><a href="_view/viewCrudListarRodada.php">CONSULTAR RODADAS</a></td>
 	</tr>
-	<td><a href="_view/viewCrudCadastrarTime.php">CADASTRAR TIME</a></td>
-	<td><a href="_view/viewCrudListarTime.php">CONSULTAR TIMES</a></td>
-	</tr>		
-	<td><a href="_view/viewCrudCadastrarJogador.php">CADASTRAR JOGADOR</a></td>
-	<td><a href="_view/viewCrudListarJogador.php">CONSULTAR JOGADORES</a></td>	
-	</tr>	
-	<td><a href="_view/viewCrudCadastrarJogo.php">CADASTRAR JOGO</a></td>
-	<td><a href="_view/viewCrudListarJogo.php">CONSULTAR JOGOS</a></td>
+	<tr>
+		<td><a href="_view/viewCrudCadastrarTime.php">CADASTRAR TIME</a></td>
+		<td><a href="_view/viewCrudListarTime.php">CONSULTAR TIMES</a></td>
+	</tr>
+	<tr>		
+		<td><a href="_view/viewCrudCadastrarJogador.php">CADASTRAR JOGADOR</a></td>
+		<td><a href="_view/viewCrudListarJogador.php">CONSULTAR JOGADORES</a></td>	
+	</tr>
+	<tr>	
+		<td><a href="_view/viewCrudCadastrarJogo.php">CADASTRAR JOGO</a></td>
+		<td><a href="_view/viewCrudListarJogo.php">CONSULTAR JOGOS</a></td>
 	</tbody>
 </table>
 <script type="text/javascript" src="js/slideshow.js"></script>

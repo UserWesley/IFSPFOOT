@@ -15,7 +15,7 @@
 			<table>
 				<thead>
 				<tr>
-				th>ID</th>
+				<th>ID</th>
 				<th>Nome</th>
 				<th>Temporada</th>
 				<th>Vencedor</th>

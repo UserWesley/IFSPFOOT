@@ -1,6 +1,5 @@
 <?php
-  require_once('../conexao.php');
-
+	require_once('../conexao.php');
 	$nome = $_POST['nome'];
 	$sobrenome = $_POST['sobrenome'];
 	$posicao = $_POST['posicao'];
@@ -11,19 +10,18 @@
 	$idTime = $_POST['idTime'];
 	$estamina = $_POST['estamina'];
 	$nivel = $_POST['nivel'];
-	$gol = $_POST['gol'];
-	
+	$gol = $_POST['gol'];	
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-	  <title>Cadastrar Jogador</title>
-	  <meta charset="utf-8">
-  </head>
-  <body>
-  	<?php
-  		$sql = "INSERT INTO Jogador
-  		        VALUES ( null
+	<head>
+		<title>Cadastrar Jogador</title>
+			<meta charset="utf-8">
+	</head>
+	<body>
+		<?php
+			$sql = "INSERT INTO Jogador
+					VALUES ( null
 					   , '$nome'
   		               , '$sobrenome'
   		               , '$posicao'
@@ -39,8 +37,8 @@
 
 			$dbh->exec($sql);
 			
-		header("Location: ../indexCrud.php");
+			header("Location: ../indexCrud.php");
 		
-  	?>
-  </body>
+		?>
+	</body>
 </html>

@@ -13,7 +13,7 @@
 	$nivel = $_POST['nivel'];
 	$gol = $_POST['gol'];
 	
-  $sql = "UPDATE Jogador 
+	$sql = "UPDATE Jogador 
           SET nome = '$nome'
             , sobrenome = '$sobrenome'
 			, posicao = '$posicao'
@@ -27,17 +27,17 @@
 			, gol = $gol
 			
           WHERE id = $id";
-  $total = $dbh->exec($sql);
+	$total = $dbh->exec($sql);
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-	  <title>Atualizar Jogador</title>
-	  <meta charset="utf-8">
-  </head>
-  <body>
-    <?php
-    header("Location: ../_view/viewCrudListarJogador.php");
-    ?>
-  </body>
+	<head>
+		<title>Atualizar Jogador</title>
+			<meta charset="utf-8">
+	</head>
+	<body>
+		<?php
+			header("Location: ../_view/viewCrudListarJogador.php");
+		?>
+	</body>
 </html>

@@ -6,47 +6,44 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	  <title>Atualizar Campeonato</title>
-	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1" />
-	  <link rel="stylesheet" href="../css/style.css" />
+		<title>Atualizar Campeonato</title>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
+			<link rel="stylesheet" href="../css/style.css" />
 	</head>
-	<body>
-	<div id="content">	
-	<fieldset>	
-    <?php
-    foreach($dbh->query($sql) as $linha):
-    ?>
-      <form action="../_model/modelCrudAtualizarCampeonato.php" method="post">
-		<center>
-		<a href="../indexCrud.php">IFSPFOOT</a>		
-		<p/>
-		<h4>DADOS DO CAMPEONATO</h4>
-	    ID <input type="number"
-                       name="id"
-                       value="<?php echo $linha['id']?>" 
-                       readonly="readonly" />
+		<body>
+			<div id="content">	
+				<fieldset>	
+					<?php
+					foreach($dbh->query($sql) as $linha):
+					?>
+						<form action="../_model/modelCrudAtualizarCampeonato.php" method="post">
+						<a href="../indexCrud.php">IFSPFOOT</a>		
+						<p/>
+						<h4>DADOS DO CAMPEONATO</h4>
+						ID <input type="number"
+							name="id"
+							value="<?php echo $linha['id']?>" readonly="readonly" />
        
-        Nome <input type="text"
-                       name="nome"
-                       value="<?php echo $linha['nome']?>"/>                  
+						Nome <input type="text"
+							name="nome"
+							value="<?php echo $linha['nome']?>"/>                  
        
-        Temporada <input type="number" 
-                     name="temporada"
-                     value="<?php echo $linha['temporada']?>" />
+						Temporada <input type="number" 
+							name="temporada"
+							value="<?php echo $linha['temporada']?>" />
        
-        Vencedor <input type="text" 
-                      name="vencedor"
-                      value="<?php echo $linha['vencedor']?>" />   
-		</p>	
-        <input type="submit" value="Atualizar" />
-		</center>
-		</p>
-      </form>
-    <?php
-    endforeach;
-    ?>
-	</fieldset>
-	</div>	
-	</body>
+						Vencedor <input type="text" 
+							name="vencedor"
+							value="<?php echo $linha['vencedor']?>" />   
+						</p>	
+						<input type="submit" value="Atualizar" />
+						</form>
+						</p>						
+					<?php
+					endforeach;
+					?>
+				</fieldset>
+			</div>	
+		</body>
 </html>

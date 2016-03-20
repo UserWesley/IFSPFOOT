@@ -6,7 +6,7 @@
 		margin: 0 auto;
 	}	
 	
-	fieldset,table, td, tr
+	fieldset,table, td, tr, input, select
 	{
 		margin-right:auto; 
 		margin-left:auto;

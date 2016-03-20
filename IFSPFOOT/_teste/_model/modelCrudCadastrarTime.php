@@ -1,6 +1,5 @@
 <?php
-  require_once('../conexao.php');
-
+	require_once('../conexao.php');
 	$nome = $_POST['nome'];
 	$mascote = $_POST['mascote'];
 	$cor = $_POST['cor'];
@@ -12,19 +11,18 @@
 	$vitoria = $_POST['vitoria'];
 	$derrota = $_POST['derrota'];
 	$empate = $_POST['empate'];
-	$pontos = $_POST['pontos'];
-	
+	$pontos = $_POST['pontos'];	
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-	  <title>Cadastrar Time</title>
-	  <meta charset="utf-8">
-  </head>
-  <body>
-  	<?php
-  		$sql = "INSERT INTO Time
-  		        VALUES ( null 
+	<head>
+		<title>Cadastrar Time</title>
+			<meta charset="utf-8">
+	</head>
+	<body>
+		<?php
+			$sql = "INSERT INTO Time
+					VALUES ( null 
 					   , '$nome'
   		               , '$mascote'
   		               , '$cor'
@@ -41,8 +39,8 @@
 
 			$dbh->exec($sql);
 			
-		header("Location: ../indexCrud.php");
+			header("Location: ../indexCrud.php");
 		
-  	?>
-  </body>
+		?>
+	</body>
 </html>

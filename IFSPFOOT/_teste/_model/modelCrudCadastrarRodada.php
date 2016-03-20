@@ -1,14 +1,11 @@
 <?php
-  require_once('../conexao.php');
-
+	require_once('../conexao.php');
 	$numero = $_POST['numero'];
 	$data = $_POST['data'];
 	$hora = $_POST['hora'];
 	$periodo = $_POST['periodo'];
 	$clima = $_POST['clima'];
-	$campeonato = $_POST['campeonato'];
-	
-	
+	$campeonato = $_POST['campeonato'];	
 ?>
 <!DOCTYPE html>
 <html>

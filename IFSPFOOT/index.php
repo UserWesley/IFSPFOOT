@@ -38,6 +38,7 @@
 			<label for = "idSenha">Senha : </label>
 			<input class="text-capitalize" type="password" placeholder = "Senha" name="passwordSenha" id="idSenha" required >
 			<a href="_view/_doc/viewDocMenu.php">Documentação</a>
+			<a href="_teste/indexCrud.php">Teste</a>
 			<input type="submit" value="Entrar" />
 
 		</form>

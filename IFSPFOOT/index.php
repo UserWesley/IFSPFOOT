@@ -37,7 +37,7 @@
 			<input type ="text" placeholder = "Entre com seu login" name = "textUsuario" id = "idUsuario"  required>
 			<label for = "idSenha">Senha : </label>
 			<input class="text-capitalize" type="password" placeholder = "Senha" name="passwordSenha" id="idSenha" required >
-		
+			<a href="_view/_doc/viewDocMenu.php">Documentação</a>
 			<input type="submit" value="Entrar" />
 
 		</form>

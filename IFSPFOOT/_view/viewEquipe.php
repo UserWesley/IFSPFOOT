@@ -46,7 +46,7 @@
       	<tr class="active">
 			<td>Wesley Almeida da Silva</td>
 			<td>xxxxx</td>
-			<td>Gerente de Projeto, Programador Chefe, Teste</td>
+			<td>Gerente de Projeto, Programador Chefe, Teste, Designer, Documentação</td>
 			<td></td>
 		</tr>
 		

@@ -7,7 +7,9 @@
 	<link rel="stylesheet" href="css/style.css" /> 
 </head>
 <body>
+<a href="../index.php">Voltar ao jogo</a>
 <h3>CRUD's</h3>
+
 <h1>IFSPFOOT</h1>
 
 <table>

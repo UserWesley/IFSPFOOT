@@ -5,39 +5,47 @@
 ?>
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Atualizar Time</title>
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			<link rel="stylesheet" href="../css/style.css" />
+
+<head>
+
+	<title>Atualizar Time</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="../css/style.css" />
+
 	</head>
-		<body> 
-			<div id="content">	
-				<fieldset>
-					<?php
-					foreach($dbh->query($sql) as $linha):
-					?>
-						<form action="../_model/modelCrudAtualizarTime.php" method="post">	
-						<a href="../indexCrud.php">IFSPFOOT</a>		
-						<p/>
-						<h4>DADOS DO TIME</h4>
-						ID <input type="number"
-							name="id"
-							value="<?php echo $linha['id']?>" readonly="readonly" />
+
+<body> 
+
+	<div id="content">	
+		<fieldset>
+			
+			<?php
+				foreach($dbh->query($sql) as $linha):
+			?>
+						
+			<form action="../_model/modelCrudAtualizarTime.php" method="post">	
+				
+				<a href="../indexCrud.php">IFSPFOOT</a>		
+				<p>
+				<h4>DADOS DO TIME</h4>
+				ID <input type="number"
+						  name="id"
+						  value="<?php echo $linha['id']?>" readonly="readonly" />
 							
-						Nome <input type="text"
-							name="nome"
-							value="<?php echo $linha['nome']?>"/>                  
+				Nome <input type="text"
+						    name="nome"
+						    value="<?php echo $linha['nome']?>"/>                  
        
-						Mascote <input type="text" 
-							name="mascote"
-						value="<?php echo $linha['mascote']?>" />
+				Mascote <input type="text" 
+							   name="mascote"
+							   value="<?php echo $linha['mascote']?>" />
        
-						Cor <input type="text" 
-							name="cor"
-							value="<?php echo $linha['cor']?>" />
+				Cor <input type="text" 
+						   name="cor"
+						   value="<?php echo $linha['cor']?>" />
            
-						Dinheiro <input type="number" 
+				Dinheiro <input type="number" 
 						name="dinheiro"
 						value="<?php echo $linha['dinheiro']?>" />
         		
@@ -77,10 +85,10 @@
 							}
 						?>
 						</select>
-						</p>	
+						<p>	
 						<input type="submit" value="Atualizar" />
 						</form>
-						</p>
+						<p>
 					<?php
 					endforeach;
 					?>

@@ -19,7 +19,7 @@
 					?>
 						<form action="../_model/modelCrudAtualizarRodada.php" method="post">
 						<a href="../indexCrud.php">IFSPFOOT</a>		
-						<p/>
+						<p>
 						<h4>DADOS DA RODADA</h4>
 						ID <input type="number"
 							name="id"
@@ -54,10 +54,10 @@
 							}
 						?>
 						</select>  
-						</p>	
+						<p>	
 						<input type="submit" value="Atualizar" />
 						</form>
-						</p>
+						<p>
 					<?php
 					endforeach;
 					?>

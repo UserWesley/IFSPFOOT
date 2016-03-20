@@ -11,7 +11,7 @@
 	</head>
 		<body>
 			<a href="../indexCrud.php">IFSPFOOT</a>
-			</p>	
+			<p>	
 			<table>
 				<thead>
 				<tr>

@@ -36,10 +36,10 @@
 						Vencedor <input type="text" 
 							name="vencedor"
 							value="<?php echo $linha['vencedor']?>" />   
-						</p>	
+						<p>		
 						<input type="submit" value="Atualizar" />
 						</form>
-						</p>						
+						<p>						
 					<?php
 					endforeach;
 					?>

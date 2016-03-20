@@ -73,10 +73,10 @@
 							}					
 						?>
 						</select> 
-						</p>	
+						<p>	
 						<input type="submit" value="Atualizar" />
 						</form>
-						</p>
+						<p>
 					<?php
 					endforeach;
 					?>

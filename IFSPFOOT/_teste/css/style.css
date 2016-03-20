@@ -1,12 +1,15 @@
-	
+@CHARSET "UTF-8";
+
 	#content {
-	width: 35em;
-	height: 30em;
-	margin: 0 auto;
+		width: 35em;
+		height: 30em;
+		margin: 0 auto;
 	}	
 	
 	fieldset,table, td, tr
 	{
+		margin-right:auto; 
+		margin-left:auto;
 		text-align: center;
 		border: 2;
 		border-color: #FFFFFF;
@@ -19,7 +22,6 @@
 		border-radius: 0px;	   
     }
 	table tr.titulo td {
-		
 		 text-align: center;
 		 vertical-align: middle;
 	} 

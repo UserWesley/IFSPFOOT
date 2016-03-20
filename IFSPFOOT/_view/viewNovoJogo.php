@@ -36,7 +36,7 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="viewEquipe.html" target="janela">
+                    <a href="viewEquipe.php" target="janela">
                         IFSPFOOT
                     </a>
                 </li>

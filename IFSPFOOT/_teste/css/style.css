@@ -7,11 +7,10 @@
 	
 	fieldset,table, td, tr
 	{
+		text-align: center;
 		border: 2;
 		border-color: #FFFFFF;
-		padding: 0.5em;
-		
-			
+		padding: 0.5em;		
 		border-radius: 6px;
 		border: solid 1px rgba(255, 255, 255, 0.35);
     }
@@ -25,7 +24,7 @@
 		 vertical-align: middle;
 	} 
 	table tr.resultado td {
-		
+		text-align: center;
 		 font-size: 1.2em;
 		 color: #1cb495;
 	}
@@ -53,6 +52,7 @@
 
 	body {
 		-ms-overflow-style: scrollbar;
+		text-align:center;
 	}
 
 	@media screen and (max-width: 480px) {

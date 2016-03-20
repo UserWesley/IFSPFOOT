@@ -36,12 +36,12 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
+                    <a href="viewEquipe.html" target="janela">
                         IFSPFOOT
                     </a>
                 </li>
                        
-            		<li><a href="viewEquipe.html" target="janela">Escolher Time</a></li>
+            		<li><a href="viewMenuEscolhaTime.php" target="janela">Escolher Time</a></li>
             		
             		<li><a href="../_model/modelIniciarJogo.php">Iniciar</a></li>
         

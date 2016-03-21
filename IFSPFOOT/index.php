@@ -23,27 +23,46 @@
 	<!-- Incluindo jquery-->
 	<script src="_view/_jquery/jquery.js"></script>
 
+
 </head>
 
 <body>
+	<div class="panel panel-default">
 
-	<fieldset>
-
-		<legend>IFSPFOOT</legend>
-		
-		<form  action="_controller/controllerAutenticaLogin.php">
-		
-			<label for = "idUsuario">Usuário :</label>
-			<input type ="text" placeholder = "Entre com seu login" name = "textUsuario" id = "idUsuario"  required>
-			<label for = "idSenha">Senha : </label>
-			<input class="text-capitalize" type="password" placeholder = "Senha" name="passwordSenha" id="idSenha" required >
-			<a href="_view/_doc/viewDocMenu.php">Documentação</a>
-			<a href="_teste/indexCrud.php">Teste</a>
-			<input type="submit" value="Entrar" />
-
+		<div class="panel-heading">
+    		<h2 class="panel-title">IFSPFOOT</h2>
+  		</div>
+		<div class="panel-body">
+		<form  action="_controller/controllerAutenticaLogin.php" class="form-horizontal">
+			
+			<div class="form-group">
+				<div class="col-xs-10"> 
+					<input type ="text" placeholder = "Entre com seu login" name = "textUsuario" id = "idUsuario"  required>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-xs-10"> 
+					<input type="password" placeholder = "Senha" name="passwordSenha" id="idSenha" required >
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<input type="submit" value="Entrar" class="btn btn-default"/>
+			</div>
+			
+			<div class="form-group">
+				<a href="_view/_doc/viewDocMenu.php">Documentação</a>
+			</div>
+			
+			<div class="form-group">
+				<a href="_teste/indexCrud.php">Teste</a>
+			</div>
+			
 		</form>
-	</fieldset>
-	
+		</div>
+	</div>
+
 </body>
 
 </html>

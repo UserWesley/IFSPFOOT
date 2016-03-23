@@ -68,5 +68,6 @@
 					?>
 				</fieldset>
 			</div>
+			<script type="text/javascript" src="js/slideshow3.js"></script>
 		</body>
 </html>

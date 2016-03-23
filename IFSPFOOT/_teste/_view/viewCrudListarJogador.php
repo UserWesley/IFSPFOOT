@@ -52,6 +52,7 @@
 				}
 	        ?>
 			</tbody>	  
-			</table>	  
+			</table>	
+			<script type="text/javascript" src="js/slideshow2.js"></script>			
 		</body>
 </html>

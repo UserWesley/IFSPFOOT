@@ -53,7 +53,8 @@
 				echo '</tr>';
 				}
 	        ?>		
-			</tbody>	  
+			</tbody>	
+			<script type="text/javascript" src="js/slideshow5.js"></script>			
 			</table> 
 		</body>
 </html>

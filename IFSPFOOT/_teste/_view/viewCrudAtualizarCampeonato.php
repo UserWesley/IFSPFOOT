@@ -45,5 +45,6 @@
 					?>
 				</fieldset>
 			</div>	
+			<script type="text/javascript" src="js/slideshow1.js"></script>
 		</body>
 </html>

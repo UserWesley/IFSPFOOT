@@ -138,6 +138,13 @@
 			<td>Planejamento de atividades a ser realizadas</td>
 			<td></td>
 		</tr>
+		
+		<tr class="active">
+			<td>Dia 0.97.3</td>
+			<td>Diagramas</td>
+			<td>Diagrama de Caso de Uso e Modelagem Entidade Relacionamento</td>
+			<td></td>
+		</tr>
 
 	</tbody>
 	</table>
@@ -190,6 +197,26 @@
 					<td>AngularJS</td>
 					<td>Javascript,CSS</td>
 					<td>2.2.1</td>	
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+	
+	<h2 class="text-center">Repositório</h2>
+	<div class="table-responsive">
+		<table class="table">
+      		<thead>
+        		<tr class="info">
+         			<th>Nome</th>
+			    </tr> 
+			</thead>
+	
+      		<tbody>
+				
+				<tr class="active">
+					<td>https://github.com/UserWesley/IFSPFOOT.git</td>
+
 				</tr>
 				
 			</tbody>

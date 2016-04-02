@@ -2,7 +2,8 @@
  
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
-
+	session_start();
+	
 ?>
 
 <!DOCTYPE html>
@@ -27,13 +28,94 @@
 	<!-- Incluindo jquery-->
 	<script src="_jquery/jquery.js"></script>
 	
-	<!-- Incluindo JavaScript-->
-	<script src="_js/jsTelaJogo.js"></script>
+	<!-- Incluindo JavaScript
+	<script src="_js/jsTelaJogo.js"></script>-->
+	
+	<script>
+
+
+	        
+		function move() {
+            
+		    var elem = document.getElementById("myBar");
+		    var width = 1;
+		    var id = setInterval(frame, 100);
+		    var golCasa=0;
+		    var golVisitante=0;
+		    var placar = [0,0,0,0];
+		    
+		    function frame() {
+		    	document.getElementById("tempo").innerHTML = 1;	
+		        if (width >= 100) {
+		            clearInterval(id);
+		            document.getElementById("tempo").innerHTML = "Fim";
+
+		        } else {
+		            width++;
+		            var i;
+		          	for(i=0;i<=1;i++){
+			            var valor = Math.floor((Math.random() * 100) + 1);
+						if(valor<=25){
+								var chanceGol = Math.floor((Math.random() * 10) + 1);
+								if(chanceGol==5){
+									golCasa++;
+									document.getElementById("golCasa"+i).innerHTML = golCasa;
+									document.getElementById("lance"+i).innerHTML = "Gol do time Casa";
+									if(i==0){
+										placar[0] = golCasa;
+									}
+									else {
+										placar[2] = golCasa;
+									}
+								}
+							}
+						else if(valor<=50){
+								var chanceGol = Math.floor((Math.random() * 10) + 1);
+								if(chanceGol==5){
+									golVisitante++;
+									document.getElementById("golVisitante"+i).innerHTML = golVisitante;
+									document.getElementById("lance"+i).innerHTML = "Gol do time Visitante";
+									if(i==0){
+										placar[1] = golVisitante;
+									}
+									else {
+										placar[3] = golVisitante;
+									}
+								}
+						}
+						else{
+							
+							if(valor<=70){
+								document.getElementById("lance"+i).innerHTML = "Troca de Passes entre time da Casa";
+							}
+							else if(valor<=80){
+								document.getElementById("lance"+i).innerHTML = "Troca de Passes entre time VIsitante";
+							}
+							else if(valor<=90){
+								document.getElementById("lance"+i).innerHTML = "Lateral para time Casa";
+							}
+							else{
+								document.getElementById("lance"+i).innerHTML = "Lateral para time VIsitante";
+							}
+						}
+
+		          	}
+		            elem.style.width = width + '%';
+		            document.getElementById("label").innerHTML = width * 1;
+		            
+		            if(width > 45){
+		            	document.getElementById("tempo").innerHTML = 2;	
+		            }
+		        }
+		    }
+		}
+
+	</script>
 	
 	<!-- Incluindo  CSS -->
 	<link href="_css/cssTelaJogo.css" rel="stylesheet" media="screen">
 	
-
+	
 </head>
 
 <body>
@@ -53,11 +135,10 @@
 	<div id="myProgress">
     		<div id="myBar"></div>
     		
-		</div>
+	</div>
 	
-	<button onclick="move()">Iniciar</button> 
     <div class="table-responsive">
-    <table class="table">
+    <table class="table" id="idTabela">
       <thead>
         <tr class = "info">
           <th>Time Casa</th>
@@ -65,40 +146,44 @@
           <th></th>
           <th>Gol</th>
           <th>Time Visitante</th>
-          <th>Data</th>
-          <th>Hora</th>
-          <th>Período</th>
+          <th>Lance</th>
         </tr> 
       </thead>
-      <tbody>
       
-	<?php 
-	$rodada = 1;
-	$consultaRodada = 'SELECT Jogo.timeCasa, Jogo.golCasa, Jogo.golVisitante, Jogo.timeVisitante,
-	Rodada.data, Rodada.hora, Rodada.periodo FROM Jogo,Rodada WHERE Jogo.rodada = Rodada.numero and Rodada.numero = ?';
-	$preparaConsultaRodada = $conn->prepare($consultaRodada);
-	$preparaConsultaRodada->bindValue(1,$rodada);
-	$preparaConsultaRodada->execute();
-	
-	$result = $preparaConsultaRodada->setFetchMode(PDO::FETCH_NUM);
-	while ($row = $preparaConsultaRodada->fetch()) {
-			
-		echo '<tr class = "active">';
-		echo "<td>{$row[0]}</td>";
-		echo "<td>{$row[1]}</td>";
-		echo "<td> X </td>";
-		echo "<td>{$row[2]}</td>";
-		echo "<td>{$row[3]}</td>";
-		echo "<td>{$row[4]}</td>";
-		echo "<td>{$row[5]}</td>";
-		echo "<td>{$row[6]}</td>";
-		echo '</tr>';
-	}
-	?>
-	</tbody>
+      <tbody>
+       <?php 
+       $times = $_SESSION['times'];
+       reset($times);
+       $i=0;
+       while($i<2){
+       	echo"<div id=jogo".$i.">"; 
+		echo "<tr class=\"active\">";
+			if($i==0){
+				echo "<td>".current($times)."</td>";
+			}
+			else{
+				echo "<td>".next($times)."</td>";
+			} 
+			echo "<td id=\"golCasa".$i."\">0</td>";
+			echo "<td>X</td>";
+			echo "<td id=\"golVisitante".$i."\">0</td>";
+			echo "<td>".next($times)."</td>";
+			echo "<td id=\"lance".$i."\"></td>";
+		echo"</tr>";
+		echo "</div>";
+        $i++;
+       }
+       	
+		?>
+	  </tbody>
 	</table>
+	
+	
+	<button onclick="move()">Iniciar</button>
+	<!--  <button type="button"id="salvar">Salvar</button>-->
+	
 	</div>
-		
+	<p>
 </body>
 
 </html>

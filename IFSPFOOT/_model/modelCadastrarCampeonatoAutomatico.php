@@ -4,7 +4,7 @@
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 	
 	//Cadastro do campeonato inicial
-	$insercaoNovoCampeonato = "INSERT INTO Campeonato VALUES (1,'LIGA IFSP', '2016',NULL)";
+	$insercaoNovoCampeonato = "INSERT INTO Campeonato VALUES (1,'LIGA IFSP','1', '2016',NULL)";
 	$conn->exec($insercaoNovoCampeonato);
 	
 ?>

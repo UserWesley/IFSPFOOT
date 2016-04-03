@@ -119,8 +119,21 @@
 </head>
 
 <body>
+	
+	<?php 
 
-	<h1 class="text-center">Rodada 1</h1>
+		$consultaCampeonatoRodadaAtual = 'SELECT rodadaAtual FROM Campeonato;';
+		$preparaConsultaCampeonatoRodadaAtual = $conn->query($consultaCampeonatoRodadaAtual);
+		$preparaConsultaCampeonatoRodadaAtual->execute();
+		
+		$result = $preparaConsultaCampeonatoRodadaAtual->setFetchMode(PDO::FETCH_NUM);
+		while ($row = $preparaConsultaCampeonatoRodadaAtual->fetch()) {
+	
+			echo "<h1 class=\"text-center\">Rodada {$row[0]}</h1>";
+		
+		}
+	?>
+	 
 	<div >
 	<table class="table">
 		<tr> 

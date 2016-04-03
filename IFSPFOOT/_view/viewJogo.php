@@ -50,6 +50,8 @@
 		            clearInterval(id);
 		            document.getElementById("tempo").innerHTML = "Fim";
 
+		            location.href='../_controller/controllerGerenciaPosJogo.php';
+
 		        } else {
 		            width++;
 		            var i;

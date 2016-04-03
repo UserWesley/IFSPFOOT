@@ -36,7 +36,7 @@
 
 	        
 		function move() {
-            
+			document.getElementById("idBotaoIniciar").style.visibility= "hidden";
 		    var elem = document.getElementById("myBar");
 		    var width = 1;
 		    var id = setInterval(frame, 100);
@@ -49,9 +49,7 @@
 		        if (width >= 100) {
 		            clearInterval(id);
 		            document.getElementById("tempo").innerHTML = "Fim";
-
-		            location.href='../_controller/controllerGerenciaPosJogo.php';
-
+		            document.getElementById("idBotaoContinuar").style.visibility= "visible";
 		        } else {
 		            width++;
 		            var i;
@@ -193,10 +191,14 @@
 	  </tbody>
 	</table>
 	
-	
-	<button onclick="move()">Iniciar</button>
-	<!--  <button type="button"id="salvar">Salvar</button>-->
-	
+		<div id="idBotaoIniciar">
+			<button type="button" id="iniciar" class="btn btn-primary btn-block" onclick="move()">Iniciar</button>
+		</div>
+		
+		<div id="idBotaoContinuar" style="visibility:hidden" >
+			<button type="button" id="continuar" class="btn btn-success btn-block" onclick="javascript:location.href='../_controller/controllerGerenciaPosJogo.php';">Continuar</button>
+		</div>
+		
 	</div>
 	<p>
 </body>

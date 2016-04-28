@@ -1,5 +1,5 @@
 <?php 
-
+ session_start();
 ?>
 <!DOCTYPE html>
 
@@ -22,47 +22,86 @@
 	
 	<!-- Incluindo jquery-->
 	<script src="_view/_jquery/jquery.js"></script>
-
+	
+	<!-- Incluindo jquery backstretch-->
+	<script src="_view/_jquery/jquery.backstretch.min.js"></script>
+	
+	<!-- Incluindo js index-->
+	<script src="_view/_js/jsIndex.js"></script>
+	
+	<!-- Incluindo css dos elementos-->
+   	<link rel="stylesheet" href="_view/_css/form-elements.css">
+   	
+   	<!-- Incluindo css index-->
+    <link rel="stylesheet" href="_view/_css/style.css">
 
 </head>
 
 <body>
-	<div class="panel panel-default">
-
-		<div class="panel-heading">
-    		<h2 class="panel-title">IFSPFOOT</h2>
-  		</div>
-		<div class="panel-body">
-		<form  action="_controller/controllerAutenticaLogin.php" class="form-horizontal">
-			
-			<div class="form-group">
-				<div class="col-xs-10"> 
-					<input type ="text" placeholder = "Entre com seu login" name = "textUsuario" id = "idUsuario"  required>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<div class="col-xs-10"> 
-					<input type="password" placeholder = "Senha" name="passwordSenha" id="idSenha" required >
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<input type="submit" value="Entrar" class="btn btn-default"/>
-			</div>
-			
-			<div class="form-group">
-				<a href="_view/_doc/viewDocMenu.php">Documentação</a>
-			</div>
-			
-			<div class="form-group">
-				<a href="_teste/indexCrud.php">Teste</a>
-			</div>
-			
-		</form>
-		</div>
+	<!-- Top content -->
+	<div class="top-content">
+		
+	    <div class="inner-bg"style="margin-bottom: 0px; padding-bottom:0px;">
+	        <div class="container">
+	            
+	            <div class="row" >
+	                <div class="col-sm-6 col-sm-offset-3 form-box">
+	                	<div class="form-top" style="margin-top:-100px;">
+	                		<div class="form-top-left">
+	                			<h1 class="text-center" >IFSPFOOT</h1>
+	                    		<p>Efetue o login com seu usuário e senha :</p>
+	                		</div>
+	                		<div class="form-top-right" >
+	                			<i class="fa fa-key"></i>
+	                		</div>
+	                    </div>
+	                    <div class="form-bottom" >
+		                    <form role="form" action="_controller/controllerAutenticaLogin.php" method="POST" class="login-form">
+		                    	<div class="form-group">
+		                    		<label class="sr-only" for="form-username">Usuário</label>
+		                        	<input type="text" name="form-username" placeholder="Usuário" class="form-username form-control" id="form-username">
+		                        </div>
+		                        <div class="form-group">
+		                        	<label class="sr-only" for="form-password">Senha</label>
+		                        	<input type="password" name="form-password" placeholder="Senha" class="form-password form-control" id="form-password">
+		                        </div>
+		                        <button type="submit" class="btn">Entrar</button>
+		                    </form>
+		                	
+		                    <div class="social-login-buttons" style="margin-bottom: 0px; padding-bottom:0px;">
+			                    <div class="form-group" >
+			                		<?php 	
+			                				
+			                				if(!isset($_SESSION['logado'])){
+			                					echo "";
+			                				}
+			                				else if($_SESSION['logado'] == false){
+			                					echo "Usuário ou senha inválido";
+			                				}
+			                		?>
+		                    	</div>
+		                		
+		                    	<div class="form-group" >
+			                		<a class="btn btn-info btn-block" href="_view/_doc/viewDocMenu.php">
+			                    		 Documentação
+			                    	</a>
+		                    	</div>
+		                    	
+		                    	<div class="form-group">
+			                    	<a class="btn btn-warning btn-block" href="_teste/indexCrud.php">
+			                    		 Teste
+			                    	</a>
+			                    </div>
+			                    
+	                    	</div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    
 	</div>
-
+	
 </body>
 
 </html>

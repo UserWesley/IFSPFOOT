@@ -5,27 +5,35 @@
 	session_start();
 	$rodadaAtual = $_SESSION['rodadaAtual'];
 	
+	//Obtendo os dados enviados pelo ajax
 	$placar = $_REQUEST['content'];
 	
+	//explodindo os dados em array para obter os placares e os nomes dos times
 	$placar = explode(",", $placar);
 	
-	echo "TimeCasaJogo1 :".$placar[0]."<br>";
-	echo "TimeCasaPlacarJogo1 :".$placar[1]."<br>";
+	//Variaveis com os placares
+	$timeCasa = $placar[0];
 	$golCasa = $placar[1];
 	
-	echo "TimeVisitantePlacarJogo1 :".$placar[3]."<br>";
 	$golVisitante =$placar[3];
-	echo "TimeVisitanteJogo1 :".$placar[4]."<br>";
+	$timeVisitante = $placar[4];
 	
-	echo "TimeCasaJogo2 :".$placar[6]."<br>";
-	echo "TimeCasaPlacarJogo2 :".$placar[7]."<br>";
+	$timeCasa1 = $placar[6];
 	$golCasa1 = $placar[7];
 	
-	echo "TimeVisitantePlacarJogo2 :".$placar[9]."<br>";
 	$golVisitante1 = $placar[9];
-	echo "TimeVisitanteJogo2 :".$placar[10]."<br>";
+	$timeVisitante1 = $placar[10];
 	
-
+	//Debug placar
+	echo "Dados Rodada gol da rodada";
+	
+	echo $timeCasa." : ".$golCasa;
+	echo $timeVisitante." : ".$golVisitante;
+	echo "  |  ".$timeCasa1." : ".$golCasa1;
+	echo $timeVisitante1." : ".$golVisitante1;
+	echo "///////////////////////";
+	
+	//identificando a rodada e atribundo os valores para percorrer jogos da rodada
 	switch($rodadaAtual){
 		case 1: $inicioJogo = 1;
 				$fimJogo = 2;
@@ -39,7 +47,7 @@
 			$fimJogo = 6;
 			break;
 	}
-	
+	//Percorrendo jogo a jogo da rodada
 	for($i=$inicioJogo;$i<=$fimJogo;$i++){
 	
 		if($i==$inicioJogo){
@@ -49,8 +57,9 @@
 		else{
 			$golCasa =$placar[7] ;
 			$golVisitante = $placar[9];
-		}			
-			
+		}
+					
+		//Atualizando placar do jogo no banco dados	
 		$atualizaPlacarJogo = 'UPDATE Jogo SET golCasa = ?, golVisitante = ? WHERE id = ? and rodada = ?';
 		$preparaAtualizaPlacarJogo = $conn->prepare($atualizaPlacarJogo);
 		$preparaAtualizaPlacarJogo->bindValue(1,$golCasa);
@@ -59,6 +68,7 @@
 		$preparaAtualizaPlacarJogo->bindValue(4,$rodadaAtual);
 		$preparaAtualizaPlacarJogo->execute();
 		
+		//Consultando o nome os times do jogo
 		$consultaJogo = 'SELECT timeCasa, timeVisitante FROM Jogo WHERE id = ? ';	
 		$preparaConsultaJogo = $conn->prepare($consultaJogo);
 		$preparaConsultaJogo->bindValue(1, $i);
@@ -71,7 +81,8 @@
 			$timeVisitante = $row[1];
 			
 		}
-
+		
+		//Obtendo dados do time da casa
 		$consultaTimeCasa = 'SELECT vitoria,derrota,empate,pontos FROM Time WHERE nome = ?';
 		$preparaConsultaTimeCasa = $conn->prepare($consultaTimeCasa);
 		$preparaConsultaTimeCasa->bindValue(1, $timeCasa);
@@ -87,6 +98,7 @@
 				
 		}
 		
+		//Obtendo dados do time visitante
 		$consultaTimeVisitante = 'SELECT vitoria,derrota,empate,pontos FROM Time WHERE nome = ?';
 		$preparaConsultaTimeVisitante = $conn->prepare($consultaTimeVisitante);
 		$preparaConsultaTimeVisitante->bindValue(1, $timeVisitante);
@@ -102,22 +114,19 @@
 		
 		}
 		
-		/*
-		echo "vitorias time casa".$vitoriaTimeCasa."--------";
-		echo "derrotas time casa".$derrotaTimeCasa."---------------";
-		echo "empate time casa".$empateTimeCasa."---------------";
-		echo "Pontos time casa".$pontosTimeCasa."---------------";
+		echo "//////////////////";
+		echo "Antes do jogo";
+		echo "Time : ".$timeCasa;
+		echo "Vitorias : ".$vitoriaTimeCasa."Derrotas : ".$derrotaTimeCasa."Empates : ".$empateTimeCasa."Pontos : ".$pontosTimeCasa;
+		echo "||| time : ".$timeVisitante;
+		echo "Vitorias : ".$vitoriaTimeVisitante."Derrotas : ".$derrotaTimeVisitante."Empates : ".$empateTimeVisitante."Pontos : ".$pontosTimeVisitante;
 		
-		echo "vitorias time Visitante".$vitoriaTimeVisitante."--------";
-		echo "derrotas time Visitante".$empateTimeVisitante."--------";
-		echo "empate time Visitante".$derrotaTimeVisitante."--------";
-		echo "Pontos time Visitante".$pontosTimeVisitante."--------";
-		*/
+		//Verifica quem ganhou e efetua a eventuais atualizações de valores como empate, ponto e derrota
 		if($golCasa > $golVisitante){
 			
 			$vitoriaTimeCasa++;
 			$pontosTimeCasa = $pontosTimeCasa+3;
-			$derrotaTimeCasa++;
+			$derrotaTimeVisitante++;
 			
 			$atualizaTimeCasa1 = 'UPDATE Time SET  vitoria = ?, pontos = ? WHERE nome = ?';
 			$preparaAtualizaTimeCasaTabela1 = $conn->prepare($atualizaTimeCasa1);
@@ -128,12 +137,12 @@
 			
 			$atualizaTime1 = 'UPDATE Time SET  derrota = ? WHERE nome = ?';
 			$preparaAtualizaTimeVisitanteTabela1 = $conn->prepare($atualizaTime1);
-			$preparaAtualizaTimeVisitanteTabela1 ->bindValue(1,$derrotaTimeCasa);
+			$preparaAtualizaTimeVisitanteTabela1 ->bindValue(1,$derrotaTimeVisitante);
 			$preparaAtualizaTimeVisitanteTabela1 ->bindValue(2,$timeVisitante);
 			$preparaAtualizaTimeVisitanteTabela1 ->execute();
 			
 		}
-		else if ($golVisitante > $golCasa){
+	    else if ($golVisitante > $golCasa){
 			
 			$vitoriaTimeVisitante++;
 			$pontosTimeVisitante= $pontosTimeVisitante+3;
@@ -154,7 +163,7 @@
 				
 			
 		}
-		else if($golCasa == $golVisitante) {
+		else{
 			$empateTimeCasa++;
 			$empateTimeVisitante++;
 			
@@ -170,6 +179,12 @@
 			$preparaAtualizaTimeVisitanteTabela3 ->bindValue(2,$timeVisitante);
 			$preparaAtualizaTimeVisitanteTabela3 ->execute();
 		}
+		echo "//////////////////";
+		echo "Depois do jogo";
+		echo "Time : ".$timeCasa;
+		echo "Vitorias : ".$vitoriaTimeCasa."Derrotas : ".$derrotaTimeCasa."Empates : ".$empateTimeCasa."Pontos : ".$pontosTimeCasa;
+		echo "||| time : ".$timeVisitante;
+		echo "Vitorias : ".$vitoriaTimeVisitante."Derrotas : ".$derrotaTimeVisitante."Empates : ".$empateTimeVisitante."Pontos : ".$pontosTimeVisitante;
 		
 			
 	}

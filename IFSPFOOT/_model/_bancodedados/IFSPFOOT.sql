@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Tempo de geração: 23/03/2016 às 21:59
+-- Tempo de geração: 08/05/2016 às 17:41
 -- Versão do servidor: 10.1.9-MariaDB
 -- Versão do PHP: 5.6.15
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `Campeonato` (
   `id` int(11) NOT NULL,
   `nome` varchar(20) COLLATE utf32_bin NOT NULL,
+  `rodadaAtual` int(11) NOT NULL,
   `temporada` int(11) NOT NULL,
   `vencedor` varchar(20) COLLATE utf32_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
@@ -41,6 +42,7 @@ CREATE TABLE `Campeonato` (
 
 CREATE TABLE `Jogador` (
   `id` int(11) NOT NULL,
+  `titular` varchar(1) COLLATE utf32_bin NOT NULL,
   `nome` varchar(20) COLLATE utf32_bin NOT NULL,
   `sobrenome` varchar(40) COLLATE utf32_bin NOT NULL,
   `posicao` varchar(20) COLLATE utf32_bin NOT NULL,
@@ -84,6 +86,13 @@ CREATE TABLE `Login` (
   `sobrenome` varchar(40) COLLATE utf32_bin NOT NULL,
   `email` varchar(40) COLLATE utf32_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin COMMENT='Login de Autenticação a aplicação';
+
+--
+-- Fazendo dump de dados para tabela `Login`
+--
+
+INSERT INTO `Login` (`id`, `usuario`, `senha`, `administrador`, `nome`, `sobrenome`, `email`) VALUES
+(1, 'a', 'a', 1, 'asda', 'asdsada', 'sadsadsa');
 
 -- --------------------------------------------------------
 
@@ -191,17 +200,17 @@ ALTER TABLE `Jogador`
 -- AUTO_INCREMENT de tabela `Jogo`
 --
 ALTER TABLE `Jogo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de tabela `Login`
 --
 ALTER TABLE `Login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de tabela `Rodada`
 --
 ALTER TABLE `Rodada`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de tabela `Time`
 --

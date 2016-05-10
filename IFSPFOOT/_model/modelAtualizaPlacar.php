@@ -43,8 +43,20 @@
 			$fimJogo = 4;
 			break;
 			
-		case 3:$inicioJogo = 5;
+		case 3: $inicioJogo = 5;
 			$fimJogo = 6;
+			break;
+
+		case 4: $inicioJogo = 7;
+			$fimJogo = 8;
+			break;
+			
+		case 5: $inicioJogo = 9;
+			$fimJogo = 10;
+			break;
+			
+		case 6: $inicioJogo = 11;
+			$fimJogo = 12;
 			break;
 	}
 	//Percorrendo jogo a jogo da rodada
@@ -164,19 +176,24 @@
 			
 		}
 		else{
+			
 			$empateTimeCasa++;
 			$empateTimeVisitante++;
+			$pontosTimeCasa++;
+			$pontosTimeVisitante++;
 			
-			$atualizaTimeCasa3 = 'UPDATE Time SET  empate = ? WHERE nome = ?';
+			$atualizaTimeCasa3 = 'UPDATE Time SET  empate = ?, pontos=? WHERE nome = ?';
 			$preparaAtualizaTimeCasaTabela3 = $conn->prepare($atualizaTimeCasa3);
 			$preparaAtualizaTimeCasaTabela3->bindValue(1,$empateTimeCasa);
-			$preparaAtualizaTimeCasaTabela3->bindValue(2,$timeCasa);
+			$preparaAtualizaTimeCasaTabela3->bindValue(2,$pontosTimeCasa);
+			$preparaAtualizaTimeCasaTabela3->bindValue(3,$timeCasa);
 			$preparaAtualizaTimeCasaTabela3->execute();
 			
-			$atualizaTimeVisitante3 = 'UPDATE Time SET  empate = ? WHERE nome = ?';
+			$atualizaTimeVisitante3 = 'UPDATE Time SET  empate = ?, pontos=? WHERE nome = ?';
 			$preparaAtualizaTimeVisitanteTabela3 = $conn->prepare($atualizaTimeVisitante3);
 			$preparaAtualizaTimeVisitanteTabela3 ->bindValue(1,$empateTimeVisitante);
-			$preparaAtualizaTimeVisitanteTabela3 ->bindValue(2,$timeVisitante);
+			$preparaAtualizaTimeVisitanteTabela3 ->bindValue(2,$pontosTimeVisitante);
+			$preparaAtualizaTimeVisitanteTabela3 ->bindValue(3,$timeVisitante);
 			$preparaAtualizaTimeVisitanteTabela3 ->execute();
 		}
 		echo "//////////////////";

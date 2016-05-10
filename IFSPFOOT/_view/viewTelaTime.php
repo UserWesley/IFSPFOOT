@@ -39,6 +39,8 @@
 				<li><a href="viewArtilharia.php" target="janela">Artilharia</a></li>
 			
 				<li><a href="viewEstadio.php" target="janela">Estádio</a></li>
+				
+				<li><a href="viewEstrategia.php" target="janela">Estratégia</a></li>
 
 				<li><a href="viewJogador.php" target="janela">Jogadores</a></li>
 			
@@ -50,7 +52,7 @@
 				
 				<li><a href="viewTime.php" target="janela">Times</a></li>
 			
-		    	<li><a href="viewJogo.php" >JOGAR</a></li>
+		    	<li><a href="../_controller/controllerPreparaJogo.php" >JOGAR</a></li>
 		    	
 		    	<li><a href="../_controller/controllerLogout.php">Sair</a></li>
 								

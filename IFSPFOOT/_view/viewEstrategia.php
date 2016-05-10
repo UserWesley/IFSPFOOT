@@ -7,12 +7,12 @@
 	$idTime = $_SESSION['idDono'];
 	
 ?>
+
 <!DOCTYPE html>
 
 <html>
 
 <head>
-
 	<meta charset= "UTF-8"/>
 	
 	<title>Página Inicial</title>
@@ -28,12 +28,35 @@
 	
 	<!-- Incluindo jquery-->
 	<script src="_jquery/jquery.js"></script>
-	
+
 </head>
 
 <body>
-	<h1 class="text-center">Jogadores do Time</h1>
+
+	<form>
 	
+		<h1 class="text-center">Estratégia</h1>
+		
+		<h3 class="text-center">Formação</h3>
+		<select id="idFormacao"> 
+			<option value="1">5-4-1</option>
+			<option value="2">4-5-1</option>
+			<option value="3">4-4-2</option>
+			<option value="4">4-4-3</option>
+			<option value="5">3-5-2</option>
+		</select>
+		
+		<h3 class="text-center">Estilo de jogo</h3>
+		<select id="idEstiloJogo"> 
+			<option value="1">Ataque Total</option>
+			<option value="2">Jogo Equilibrado</option>
+			<option value="3">Contra-ataque</option>
+			<option value="4">Defesa Total</option>
+		</select>
+	
+	</form>
+	<!-- 
+	<h3 class="text-center">Selecionar Titulares</h3>
 	<div class="table-responsive">
     	<table class="table">
       		<thead>
@@ -90,9 +113,11 @@
             echo '</tr>';
           }
       ?>
-      </tbody>
-    </table>
+      
+        </tbody>
+      </table>
 	</div>
+	 -->
 </body>
 
 </html>

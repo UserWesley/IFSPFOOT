@@ -18,11 +18,12 @@
 		
 		//Deletar todos dados da tabela
 		$conn->exec($desabilitar);
+		$conn->exec($zerarTabelaCampeonato);
 		$conn->exec($zerarTabelaRodada);
 		$conn->exec($zerarTabelaJogo);
 		$conn->exec($zerarTabelaTime);
 		$conn->exec($zerarTabelaJogador);
-		$conn->exec($zerarTabelaCampeonato);
+		
 	
 	}catch(PDOException $e){
 

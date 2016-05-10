@@ -10,11 +10,11 @@
 	$conn->exec($insercaoNovaRodada);
 	$insercaoNovaRodada = "INSERT INTO Rodada VALUES (3,'3','2016-05-10','09:00','Manhã','Sol','1')";
 	$conn->exec($insercaoNovaRodada);
-	//$insercaoNovaRodada = "INSERT INTO Time VALUES (4,'4','2016-06-10','16:00','Tarde','Nublado',1)";
-	//$conn->exec($insercaoNovaRodada);
-	//$insercaoNovaRodada = "INSERT INTO Time VALUES (5,'5','2016-07-10','20:00','Noite','Chuva Fina',1)";
-	//$conn->exec($insercaoNovaRodada);
-	//$insercaoNovaRodada = "INSERT INTO Time VALUES (6,'6','2016-08-10','09:00','Manhã','Nublado',1)";
-	//$conn->exec($insercaoNovaRodada);
+	$insercaoNovaRodada = "INSERT INTO Rodada VALUES (4,'4','2016-06-10','16:00','Tarde','Nublado',1)";
+	$conn->exec($insercaoNovaRodada);
+	$insercaoNovaRodada = "INSERT INTO Rodada VALUES (5,'5','2016-07-10','20:00','Noite','Chuva Fina',1)";
+	$conn->exec($insercaoNovaRodada);
+	$insercaoNovaRodada = "INSERT INTO Rodada VALUES (6,'6','2016-08-10','09:00','Manhã','Nublado',1)";
+	$conn->exec($insercaoNovaRodada);
 	
 ?>

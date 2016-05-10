@@ -16,7 +16,6 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gerenciamento do Time</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="_bootstrap-3.3.6-dist/_css/bootstrap.min.css" rel="stylesheet">

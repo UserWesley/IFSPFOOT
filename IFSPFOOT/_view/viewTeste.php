@@ -116,6 +116,22 @@ $conn->exec($insercaoNovoTime);
 
 //ALTER TABLE Rodada ADD CONSTRAINT fk_idCampeonato FOREIGN KEY (campeonato) REFERENCES Campeonato (id);
 //ALTER TABLE Orders DROP FOREIGN KEY fk_PerOrders
+
+session_start();
+echo $_SESSION['golCasa'];
+
+/*
+<script type="text/javascript">
+var valor = window.innerWidth;
+document.location.href = 'utiliza_numerojs.php?valor=' + valor;
+</script>*/
+/*
+$.post('modelCadastrarPlacar.php',{
+	gols : placar;
+},function(){
+	// ação quando for concluída a solicitação
+})
+*/
 ?>
 
 

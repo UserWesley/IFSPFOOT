@@ -33,13 +33,31 @@
 	
 	<script>
 
-
+		function obterDadosTabela(){
+			var dataArr = [];
+		    $("td").each(function(){
+		        dataArr.push($(this).html());
+		    });
+		    
+		        $.ajax({
+		              type : "POST",
+		              url : '../_model/modelAtualizaPlacar.php',
+		              data : "content="+dataArr,
+		              success: function(data) {
+		                  alert(data);// alert the data from the server
+		                  location.href='../_controller/controllerGerenciaPosJogo.php';
+		              },
+		              error : function() {
+		              }
+		       
+		    });
+		}
 	        
 		function move() {
 			document.getElementById("idBotaoIniciar").style.visibility= "hidden";
 		    var elem = document.getElementById("myBar");
 		    var width = 1;
-		    var id = setInterval(frame, 100);
+		    var id = setInterval(frame, 10);
 		    var golCasa=0;
 		    var golVisitante=0;
 		    var placar = [0,0,0,0];
@@ -49,7 +67,8 @@
 		        if (width >= 100) {
 		            clearInterval(id);
 		            document.getElementById("tempo").innerHTML = "Fim";
-		            document.getElementById("idBotaoContinuar").style.visibility= "visible";
+		            document.getElementById("idBotaoContinuar").style.visibility= "visible";	
+		            
 		        } else {
 		            width++;
 		            var i;
@@ -129,6 +148,7 @@
 		$result = $preparaConsultaCampeonatoRodadaAtual->setFetchMode(PDO::FETCH_NUM);
 		while ($row = $preparaConsultaCampeonatoRodadaAtual->fetch()) {
 	
+			$_SESSION['rodadaAtual'] = $row[0];
 			echo "<h1 class=\"text-center\">Rodada {$row[0]}</h1>";
 		
 		}
@@ -146,8 +166,7 @@
 	</div>
 	
 	<div id="myProgress">
-    		<div id="myBar"></div>
-    		
+    	<div id="myBar"></div>	
 	</div>
 	
     <div class="table-responsive">
@@ -196,7 +215,8 @@
 		</div>
 		
 		<div id="idBotaoContinuar" style="visibility:hidden" >
-			<button type="button" id="continuar" class="btn btn-success btn-block" onclick="javascript:location.href='../_controller/controllerGerenciaPosJogo.php';">Continuar</button>
+			<!-- <button type="button" id="continuar" class="btn btn-success btn-block" onclick="javascript:location.href='../_controller/controllerGerenciaPosJogo.php';">Continuar</button>--> 
+			<button type="button" id="continuar" class="btn btn-success btn-block" onclick="obterDadosTabela()">Continuar</button> 
 		</div>
 		
 	</div>

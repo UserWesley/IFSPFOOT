@@ -69,7 +69,7 @@
             echo "<td>{$row[6]}</td>";
             echo '</tr>';
             
-          }
+        }
 	?>
 	</tbody>
     </table>

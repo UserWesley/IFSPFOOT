@@ -12,7 +12,13 @@ function move() {
         } else {
             width++;
             elem.style.width = width + '%';
+            function chama{
+            	<?php
+            			echo 'gol';
+            	?>
+            }
             document.getElementById("label").innerHTML = width * 1;
+            
             
             if(width > 45){
             	document.getElementById("tempo").innerHTML = 2;	

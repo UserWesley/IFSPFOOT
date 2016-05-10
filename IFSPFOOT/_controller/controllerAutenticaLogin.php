@@ -7,8 +7,8 @@
 	session_start();
 	
 	//Variaveis do index.php
-	$usuario = $_GET['textUsuario'];
-	$senha = $_GET['passwordSenha'];
+	$usuario = $_POST['form-username'];
+	$senha = $_POST['form-password'];
 	
 	//Consulta a Tabela Login, para autenticar usuário
 	$consultaLogin = 'SELECT id,usuario,senha FROM Login WHERE usuario = ? AND senha = ?';
@@ -31,14 +31,15 @@
 	
 		$_SESSION['usuario']= $usuario;
 		$_SESSION['senha']= $senha;
+		$_SESSION['logado']= true;
 		$_SESSION['idDono']= $idDono;
 		
 		header("Location: ../_view/viewInicial.php");
 	 
 	}
 	else {
-
-		echo "Usuário ou Senha inexistentes !";
+		$_SESSION['logado']= false;
+		header("Location: ../index.php");
 
 	}
 	

@@ -21,7 +21,7 @@
 	</thead>
     <tbody>		
 	<tr>
-		<td><a href="_view/viewCrudCadastrarCampeonato.php">CADASTRAR CAPEONATO</a></td>
+		<td><a href="_view/viewCrudCadastrarCampeonato.php">CADASTRAR CAMPEONATO</a></td>
 		<td><a href="_view/viewCrudListarCampeonato.php">CONSULTAR CAMPEONATOS</a></td>
 	</tr>
 	<tr>

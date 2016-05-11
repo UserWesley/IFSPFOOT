@@ -1,5 +1,6 @@
 <?php
 	require_once('../conexao.php');
+	$titular= $_POST['titular'];
 	$nome = $_POST['nome'];
 	$sobrenome = $_POST['sobrenome'];
 	$posicao = $_POST['posicao'];
@@ -22,6 +23,7 @@
 		<?php
 			$sql = "INSERT INTO Jogador
 					VALUES ( null
+					   , '$titular'
 					   , '$nome'
   		               , '$sobrenome'
   		               , '$posicao'

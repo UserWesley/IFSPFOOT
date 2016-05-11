@@ -16,6 +16,7 @@
 				<thead>
 				<tr>
 				<th>ID</th>
+				<th>Titular</th>
 				<th>Nome</th>
 				<th>Sobrenome</th>
 				<th>Posicao</th>
@@ -34,7 +35,8 @@
 	        <?php
 				foreach($dbh->query('SELECT * FROM Jogador') as $linha){
 				echo '<tr>';
-				echo "<td>{$linha['id']}</td>";            
+				echo "<td>{$linha['id']}</td>"; 
+				echo "<td>{$linha['titular']}</td>";
 				echo "<td>{$linha['nome']}</td>";
 	            echo "<td>{$linha['sobrenome']}</td>";  
 				echo "<td>{$linha['posicao']}</td>";      

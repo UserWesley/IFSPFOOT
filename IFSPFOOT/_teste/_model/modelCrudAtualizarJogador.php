@@ -1,6 +1,7 @@
 <?php
 	require_once('../conexao.php');
 	$id = $_POST['id'];
+	$titular = $_POST['titular'];
 	$nome = $_POST['nome'];
 	$sobrenome = $_POST['sobrenome'];
 	$posicao = $_POST['posicao'];
@@ -14,7 +15,8 @@
 	$gol = $_POST['gol'];
 	
 	$sql = "UPDATE Jogador 
-          SET nome = '$nome'
+          SET titular = '$titular' 
+            , nome = '$nome'
             , sobrenome = '$sobrenome'
 			, posicao = '$posicao'
 			, nacionalidade = '$nacionalidade'

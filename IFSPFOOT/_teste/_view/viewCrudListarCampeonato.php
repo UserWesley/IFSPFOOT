@@ -17,6 +17,7 @@
 				<tr>
 				<th>ID</th>
 				<th>Nome</th>
+				<th>Rodada Atual</th>
 				<th>Temporada</th>
 				<th>Vencedor</th>
 				<th colspan="2">Opcoes</th>
@@ -28,6 +29,7 @@
 				echo '<tr>';
 				echo "<td>{$linha['id']}</td>";            
 				echo "<td>{$linha['nome']}</td>";
+				echo "<td>{$linha['rodadaAtual']}</td>";
 				echo "<td>{$linha['temporada']}</td>";  
 				echo "<td>{$linha['vencedor']}</td>";  
 				echo "<td><a href=\"../_model/modelCrudRemoverCampeonato.php?id={$linha['id']}\">Remover Campeonato</a></td>";

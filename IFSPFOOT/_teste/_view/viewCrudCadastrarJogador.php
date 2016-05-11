@@ -16,6 +16,7 @@
 					<a href="../indexCrud.php">IFSPFOOT</a>		
 					<p/>
 					<h4>CADASTRAR JOGADOR</h4>
+					Titular <input type="text" name="titular" />
 					Nome <input type="text" name="nome" />			
 					Sobrenome <input type="text" name="sobrenome" />			
 					Posicao <input type="text" name="posicao" />			

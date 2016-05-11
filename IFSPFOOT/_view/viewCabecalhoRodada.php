@@ -18,7 +18,10 @@
 
 			<option value="1"selected>Rodada 1</option>
     		<option value="2">Rodada 2</option>
-    		<option value="3">Rodada 3</option>   
+    		<option value="3">Rodada 3</option>
+    		<option value="4">Rodada 4</option>   
+    		<option value="5">Rodada 5</option>   
+    		<option value="6">Rodada 6</option>      
   		
   		</select>
   

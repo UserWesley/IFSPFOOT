@@ -24,6 +24,10 @@
 						ID <input type="number"
 							name="id"
 							value="<?php echo $linha['id']?>" readonly="readonly" />
+							
+						Titular <input type="text"
+							name="titular"
+							value="<?php echo $linha['titular']?>"/>   
         
 						Nome <input type="text"
 							name="nome"

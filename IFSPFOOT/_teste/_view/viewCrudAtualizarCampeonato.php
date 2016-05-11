@@ -27,7 +27,11 @@
        
 						Nome <input type="text"
 							name="nome"
-							value="<?php echo $linha['nome']?>"/>                  
+							value="<?php echo $linha['nome']?>"/>
+							
+						Rodada Atual <input type="number" 
+							name="rodadaAtual"
+							value="<?php echo $linha['rodadaAtual']?>" />                  
        
 						Temporada <input type="number" 
 							name="temporada"

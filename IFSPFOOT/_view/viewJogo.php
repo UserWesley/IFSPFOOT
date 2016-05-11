@@ -57,7 +57,7 @@
 			document.getElementById("idBotaoIniciar").style.visibility= "hidden";
 		    var elem = document.getElementById("myBar");
 		    var width = 1;
-		    var id = setInterval(frame, 10);
+		    var id = setInterval(frame, 150);
 		    var golCasa=0;
 		    var golVisitante=0;
 		    var placar = [0,0,0,0];

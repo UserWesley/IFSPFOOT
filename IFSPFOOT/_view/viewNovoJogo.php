@@ -56,7 +56,7 @@
                 	<div class="row">
                     	<div class="col-lg-12">
    							<div class="embed-responsive embed-responsive-16by9">
-							<iframe class="embed-responsive-item" src="viewMenuEscolhaTime.php" name="janela" id="framePrincipal"></iframe>	
+							<iframe class="embed-responsive-item" src="viewMenuEscolhaTime.php" name="janela" id="framePrincipal"></iframe>
                         </div>
                     </div>
                 </div>

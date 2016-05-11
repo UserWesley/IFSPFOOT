@@ -12,7 +12,7 @@ $barraGol1 = 10;
 $barraGol2 = 10;
 
 
-$torcidaTime1 = $_POST['numberTorcidaTime1'];
+/*$torcidaTime1 = $_POST['numberTorcidaTime1'];
 $torcidaTime2 = $_POST['numberTorcidaTime2'];
 $estiloTime1= $_POST['selectEstiloTime1'];
 $estiloTime2= $_POST['selectEstiloTime2'];
@@ -39,7 +39,7 @@ else {
 	$barraGol2 --;
 	
 }
-
+*/
 $forcaTime1 = $_POST['numberForcaTime1'];
 $forcaTime2 = $_POST['numberForcaTime2'];
 $numeroExecucoes = $_POST['numberExecucao'];
@@ -56,9 +56,9 @@ echo "<p>Possibilidade Time 1 :  0 a ".$forcaTime1;
 echo "<br>Possibilidade Empate :  ".$forcaTime1." a ".$empate;
 echo "<br>Possibilidade Time 2 :  ".$empate." a ".$forcaMaxima;
 
-echo "<br>Torcidade Time 1 : ".$torcidaTime1;
-echo "<br>Torcidade Time 2 : ".$torcidaTime2;
-echo "<br>Casa : ".$jogoCasa;
+//echo "<br>Torcidade Time 1 : ".$torcidaTime1;
+//echo "<br>Torcidade Time 2 : ".$torcidaTime2;
+//echo "<br>Casa : ".$jogoCasa;
 echo "<br>Barra Gol 1 : ".$barraGol1;
 echo "<br>Barra Gol 2 : ".$barraGol2;
 echo "<p><hr></hr>";

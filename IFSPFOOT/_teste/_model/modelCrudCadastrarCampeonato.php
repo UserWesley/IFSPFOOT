@@ -1,6 +1,7 @@
 <?php
 	require_once('../conexao.php');
 	$nome = $_POST['nome'];
+	$rodadaAtual = $_POST['rodadaAtual'];
 	$temporada = $_POST['temporada'];
 	$vencedor = $_POST['vencedor'];	
 ?>
@@ -15,6 +16,7 @@
 			$sql = "INSERT INTO Campeonato
 					VALUES ( null
 					   , '$nome'
+					   ,  $rodadaAtual
   		               ,  $temporada
   		               , '$vencedor'					   				   
 					   )";

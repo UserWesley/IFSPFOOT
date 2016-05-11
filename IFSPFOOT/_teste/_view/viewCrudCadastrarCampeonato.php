@@ -13,7 +13,8 @@
 				<a href="../indexCrud.php">IFSPFOOT</a>		
 				<p/>
 				<h4>DADOS DO CAMPEONATO</h4>
-				Nome <input type="text" name="nome"/>				
+				Nome <input type="text" name="nome"/>
+				Rodada Atual <input type="number" name="rodadaAtual"/>				
 				Temporada <input type="number" name="temporada" />					
 				Vencedor <input type="text" name="vencedor" />	
 				<p/>				

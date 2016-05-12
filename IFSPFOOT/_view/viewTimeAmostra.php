@@ -30,10 +30,30 @@ include_once '../_model/_bancodedados/modelBancodeDados.php';
 
 <body>
 
-		<p>
-		<h2 class="text-center">Dados do Time</h2>
-		<div class="table-responsive">
-    	<table class="table">
+   <p>
+   
+   <?php
+
+      	//Listando Jogadores do time
+        $consultaTime = 'SELECT nome FROM Time WHERE id = ? ';
+		$preparaConsultaTime = $conn->prepare($consultaTime);
+		$preparaConsultaTime->bindValue(1,$_POST['selectTime']);
+		$preparaConsultaTime->execute();
+		
+		$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+		
+		while ($row = $preparaConsultaTime->fetch()) {
+
+            echo "<h1 class=\"text-center\"> Time :";            
+            echo $row[0]."</h1>";
+            
+		}
+     ?>
+   
+   
+   <h2 class="text-center">Dados do Time</h2>
+   <div class="table-responsive">
+      <table class="table">
       		<thead>
         		<tr class = "info">
 			          <th>Nome</th>
@@ -73,7 +93,7 @@ include_once '../_model/_bancodedados/modelBancodeDados.php';
       ?>
       </tbody>
     </table>
-	</div>
+  </div>
 
 
 </body>

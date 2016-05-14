@@ -1,4 +1,6 @@
 <?php 
+	
+	/*Informações sobre o projeto*/
 
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
@@ -180,29 +182,6 @@
 		</table>
 	</div>
 	
-	<h2 class="text-center">Framework</h2>
-	<div class="table-responsive">
-		<table class="table">
-      		<thead>
-        		<tr class="info">
-         			<th>Nome</th>
-			        <th>Linguagem</th>
-			        <th>Versão</th>
-			    </tr> 
-			</thead>
-	
-      		<tbody>
-				
-				<tr class="active">
-					<td>AngularJS</td>
-					<td>Javascript,CSS</td>
-					<td>2.2.1</td>	
-				</tr>
-				
-			</tbody>
-		</table>
-	</div>
-	
 	<h2 class="text-center">Repositório</h2>
 	<div class="table-responsive">
 		<table class="table">
@@ -222,7 +201,6 @@
 			</tbody>
 		</table>
 	</div>
-	
 	
 </body>
 

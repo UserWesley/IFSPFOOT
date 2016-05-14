@@ -1,8 +1,14 @@
 <?php
 	
+	/*Este arquivo será encarregado de realizar as atualizações no banco como salvar placares dos jogos
+	 aplica alterações na tabela do campeonato e atualizar artilharia  || Preciso REFATORAR URGENTE
+	 */
+
+	session_start();
+
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
-	session_start();
+	
 	$rodadaAtual = $_SESSION['rodadaAtual'];
 	
 	//Obtendo os dados enviados pelo ajax

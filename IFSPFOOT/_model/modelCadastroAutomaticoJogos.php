@@ -1,12 +1,10 @@
 <?php
 
+	/*Este arquivo será responsável por realizar o cadastramento automático dos jogos*/	
+
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 	
-	//Passsando nome do time para cadastrarTime
-	session_start();
-	$nomeTime    = $_SESSION['nomeTime'];
-
 	//Cadastro de Jogos Automaticos
 	$insercaoNovoJogo = "INSERT INTO Jogo VALUES (1,'Time1',NULL,NULL,'Time2','1')";
 	$conn->exec($insercaoNovoJogo);

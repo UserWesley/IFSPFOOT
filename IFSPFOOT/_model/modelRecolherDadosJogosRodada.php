@@ -1,8 +1,14 @@
 <?php
- 
+
+ 	/*Este arquivo será responsável por pegar os nomes dos times da rodada atual, após
+ 	 repassar por array de sessão, onde será preenchidos os campos da viewJogo
+ 	 */
+
+	session_start();
+
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
-	session_start();
+
 	
 	//Array com os times
 	$times = array();

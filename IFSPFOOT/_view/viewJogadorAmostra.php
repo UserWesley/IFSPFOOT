@@ -1,7 +1,10 @@
 <?php
 
-//Inclusão do arquivo para conexão com o banco de dados PDO
-include_once '../_model/_bancodedados/modelBancodeDados.php';
+	/*Este arquivo pegará o id do time, passado pelo formulário do arquivo viewMenuArquivo.php, feito isso
+	passará como parametro para filtrar os jogadores do respectivoTime*/
+
+	//Inclusão do arquivo para conexão com o banco de dados PDO
+	include_once '../_model/_bancodedados/modelBancodeDados.php';
 
 ?>
 
@@ -29,7 +32,7 @@ include_once '../_model/_bancodedados/modelBancodeDados.php';
 </head>
 
 <body>
-
+		<!--  Cabeçalho da tabela jogador com seus atributos -->
 		<p>
 		<h2 class="text-center">Jogadores</h2>
 		<div class="table-responsive">

@@ -1,9 +1,12 @@
 <?php 
-
+	
+	/*Arquivo será responsável por salvo no banco as informações de estratégia*/
+	
+	session_start();
+	
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 	
-	session_start();
 	$idTime = $_SESSION['idDono'];
 	
 ?>

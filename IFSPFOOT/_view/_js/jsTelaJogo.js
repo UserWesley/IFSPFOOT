@@ -1,3 +1,5 @@
+/*Este arquivo será responsável pelo avanço do progress bar, assim como atualizações na tabela*/
+
 function move() {
 	
 	document.getElementById("idBotaoIniciar").style.visibility= "hidden";

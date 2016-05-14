@@ -1,7 +1,9 @@
 <?php
 
-//Inclusão do arquivo para conexão com o banco de dados PDO
-include_once '../_model/_bancodedados/modelBancodeDados.php';
+	/* Arquivo mostra todos os times disponiveis para seleção do usuário */
+	
+	//Inclusão do arquivo para conexão com o banco de dados PDO
+	include_once '../_model/_bancodedados/modelBancodeDados.php';
 
 ?>
 
@@ -34,7 +36,7 @@ include_once '../_model/_bancodedados/modelBancodeDados.php';
    
    <?php
 
-      	//Listando Jogadores do time
+      	//Mostrando o nome do time selecionado
         $consultaTime = 'SELECT nome FROM Time WHERE id = ? ';
 		$preparaConsultaTime = $conn->prepare($consultaTime);
 		$preparaConsultaTime->bindValue(1,$_POST['selectTime']);
@@ -94,7 +96,6 @@ include_once '../_model/_bancodedados/modelBancodeDados.php';
       </tbody>
     </table>
   </div>
-
 
 </body>
 

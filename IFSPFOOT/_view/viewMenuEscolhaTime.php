@@ -1,8 +1,13 @@
 <?php
- 
+	
+	/*Este arquivo serve como um cabeçalho para utilizar o select e verificar
+ 	os time possiveis de selecionar para iniciar o jogo */
+	
+	session_start();
+	
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
-	session_start();
+	
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +42,7 @@
 		
 		<?php 
 			
-			//Consulta para visualizar dados do estádio
+			//Consulta para resgatar no banco o id e nome do time, assim disponibilizando seus nomes no select
 			$consultaTime = 'SELECT id,nome FROM Time';
 			$preparaConsultaTime = $conn->query($consultaTime);
 			$preparaConsultaTime->execute();
@@ -53,23 +58,33 @@
 					
 			echo "</select>";
 			
+			// Caso a variavel esteja vazia, define o time fixo na visualização
 			if(empty($_POST['selectTime'])){
 				
 				$_SESSION['time'] = $_POST['selectTime'] = 1;
+				
 			}
 			else {
+				
 				$_SESSION['time'] = $_POST['selectTime'];
+				
 			}
 			
 		?>
+		
 		<input	type="submit" value="Selecionar e Visualizar">
 		
 		</form>
-		</div>
 		
-		<?php include_once('viewTimeAmostra.php');?> 
+	</div>
 		
-		<?php include_once('viewJogadorAmostra.php');?>  	
+	<!-- Reaproveitamento do arquivo, ele é utilizado pelos arquivo (viewTime.php e viewMenuEscolheTime.php) |
+	Chama o arquivo abaixo passando o id do time por _POST e retorna dados do time -->
+	<?php include_once('viewTimeAmostra.php');?> 
+		
+	<!-- Reaproveitamento do arquivo, ele é utilizado pelos arquivo (viewTime.php e viewMenuEscolheTime.php) | 
+	Chama o arquivo abaixo passando o id do time por _POST e retorna jogadores do time-->
+	<?php include_once('viewJogadorAmostra.php');?>  	
 		
 
 </html>

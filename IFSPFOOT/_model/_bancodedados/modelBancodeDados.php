@@ -1,7 +1,10 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
+	
+	/*Este arquivo será responsável por realizar a conexão com o banco de dados*/
+
+	$servername = "localhost";
+	$username = "root";
+	$password = "";
 
 	try {
 		

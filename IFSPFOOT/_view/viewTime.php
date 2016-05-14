@@ -1,10 +1,15 @@
 <?php
+	
+	/*Este arquivo serve como um cabeçalho para utilizar o select e verificar 
+	 como esta o time selecionado no decorrer do campeonato campeonato */
+	
+	session_start();
 
-//Inclusão do arquivo para conexão com o banco de dados PDO
-include_once '../_model/_bancodedados/modelBancodeDados.php';
+	//Inclusão do arquivo para conexão com o banco de dados PDO
+	include_once '../_model/_bancodedados/modelBancodeDados.php';
 
-session_start();
-$donoTime = $_SESSION['idDono'];
+	
+	$donoTime = $_SESSION['idDono'];
 
 ?>
 
@@ -40,7 +45,7 @@ $donoTime = $_SESSION['idDono'];
 		
 		<?php 
 			
-			//Consulta para visualizar dados do estádio
+			//Consulta para resgatar no banco o id e nome do time, assim disponibilizando seus nomes no select
 			$consultaTime = 'SELECT id,nome FROM Time';
 			$preparaConsultaTime = $conn->query($consultaTime);
 			$preparaConsultaTime->execute();
@@ -56,6 +61,7 @@ $donoTime = $_SESSION['idDono'];
 					
 			echo "</select>";
 			
+			// Caso a variável esteja vazia, define o time fixo na visualização 
 			if(empty($_POST['selectTime'])){
 				
 				$_SESSION['time'] = $_POST['selectTime'] = 1;
@@ -70,6 +76,10 @@ $donoTime = $_SESSION['idDono'];
 		</form>
 		</div>
 		
-		<?php include_once('viewTimeAmostra.php');?> 
-		
+		<!-- Reaproveitamento do arquivo, ele é utilizado pelos arquivo (viewTime.php e viewMenuEscolheTime.php) |
+		 Chama o arquivo abaixo passando o id do time por _POST e retorna dados do time -->
+		<?php include_once('viewTimeAmostra.php');?>
+		 
+		<!-- Reaproveitamento do arquivo, ele é utilizado pelos arquivo (viewTime.php e viewMenuEscolheTime.php) | 
+		Chama o arquivo abaixo passando o id do time por _POST e retorna jogadores do time-->
 		<?php include_once('viewJogadorAmostra.php');?>

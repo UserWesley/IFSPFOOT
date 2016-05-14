@@ -1,5 +1,8 @@
 <?php
-session_start();
+
+	/*Este arquivo é a página inicial do projeto, ele permite o usuário logar, navegar na documentação e ir em teste.*/
+	session_start();
+	
 ?>
 <!DOCTYPE html>
 
@@ -71,7 +74,7 @@ session_start();
 		                    <div class="social-login-buttons" style="margin-bottom: 0px; padding-bottom:0px;">
 			                    <div class="form-group" >
 			                		<?php 	
-			                				
+			                				//Informa o usuário que o nome ou senha estão errados
 			                				if(!isset($_SESSION['logado'])){
 			                					echo "";
 			                				}

@@ -1,5 +1,8 @@
 <?php
 	
+	/*Este arquivo lhe mostra as opções disponíveis na lateral esquida do arquivo e a abri
+	 em um iframe no mesma tela*/
+	
 	//Inclui cabeçalho na página
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 
@@ -20,10 +23,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="_bootstrap-3.3.6-dist/_css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="_css/simple-sidebar.css" rel="stylesheet">
-	
-	
+    <!-- Arquivo de configuração do side-bar (Lateral Esquerda) -->
+    <link href="_css/simple-sidebar.css" rel="stylesheet">	
 	
 </head>
 
@@ -56,6 +57,8 @@
                 	<div class="row">
                     	<div class="col-lg-12">
    							<div class="embed-responsive embed-responsive-16by9">
+   							
+   							<!--  Iframe responsável por mostrar o conteúdo do arquivo selecionado -->
 							<iframe class="embed-responsive-item" src="viewMenuEscolhaTime.php" name="janela" id="framePrincipal"></iframe>
                         </div>
                     </div>
@@ -73,7 +76,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="_bootstrap-3.3.6-dist/_js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
+    <!-- Menu Toggle (Exibi ou some com o menu) -->
     <script>
     
     	$("#menu-toggle").click(function(e) {

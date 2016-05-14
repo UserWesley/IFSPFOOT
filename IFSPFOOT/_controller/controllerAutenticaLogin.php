@@ -1,5 +1,10 @@
 <?php
 
+	/* Este arquivo receberá os dados encaminhados pelo index, e consultará o banco 
+	 caso o usuário esteja cadastrado e com a senha correta será encaminhado ao menu inicial,
+	 se não, será informado no index "Usuário ou senha inexistentes no banco
+	 */
+
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 	
@@ -19,7 +24,7 @@
 	$dados = $preparaConsultaLogin->fetch(PDO::FETCH_OBJ);
 	
 
-	//Se o resultado da consulta for diferente de vazio, então registra sessão e chama o cabecalho
+	//Se o resultado da consulta for diferente de vazio, então registra sessão e chama a view Inicial
 	if(!empty($dados)){
 		
 		//Registra na sessão id do usuario

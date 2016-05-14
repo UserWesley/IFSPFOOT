@@ -1,5 +1,7 @@
 <?php
-session_start();
+
+	/*Após logar, esta tela lhe dará as opções de iniciar um novo jogo ou carregar um jogo salvo.*/
+	
 ?>
 <!DOCTYPE html>
 

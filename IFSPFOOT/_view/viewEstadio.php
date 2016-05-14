@@ -1,9 +1,12 @@
 <?php 
+	
+	/*Este arquivo mostrar informações básica sobre seu estádio*/
 
+	session_start();
+	
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 	
-	session_start();
 	$donoTime = $_SESSION['idDono'];
 	
 ?>
@@ -13,6 +16,7 @@
 <html>
 
 <head>
+
 	<meta charset= "UTF-8"/>
 	
 	<title>Página Inicial</title>
@@ -32,35 +36,40 @@
 </head>
 
 <body>
+	
 	<h1 class="text-center">Estádio</h1>
 	<div class="table-responsive">
-	<table class="table">
-	<thead>
-        	<tr class = "info">
-			    <th>Nome do Estádio</th>
-			   	<th>Capacidade</th> 
-      		</tr>
+		<table class="table">
+			<thead>
+	        	<tr class = "info">
+				    <th>Nome do Estádio</th>
+				   	<th>Capacidade</th> 
+	      		</tr>
       		</thead>
       		<tbody>
-	<?php
-
-		//Consulta para visualizar dados do estádio
-		$consultaEstadio = 'SELECT nomeEstadio,capacidade FROM Time WHERE dono = ? ';
-		$preparaConsultaEstadio = $conn->prepare($consultaEstadio);
-		$preparaConsultaEstadio->bindValue(1, $donoTime);
-		$preparaConsultaEstadio->execute();
-	
-		$result = $preparaConsultaEstadio->setFetchMode(PDO::FETCH_NUM);
-		while ($row = $preparaConsultaEstadio->fetch()) {
-			echo '<tr  class = "active">';
-			echo "<td>{$row[0]}</td>";
-			echo "<td>{$row[1]}</td>";
-			echo "</tr>";
-		}
-		
-	?>
-	</table>
+      		
+				<?php
+			
+					//Consulta para visualizar estádio do time do usuário
+					$consultaEstadio = 'SELECT nomeEstadio,capacidade FROM Time WHERE dono = ? ';
+					$preparaConsultaEstadio = $conn->prepare($consultaEstadio);
+					$preparaConsultaEstadio->bindValue(1, $donoTime);
+					$preparaConsultaEstadio->execute();
+				
+					$result = $preparaConsultaEstadio->setFetchMode(PDO::FETCH_NUM);
+					while ($row = $preparaConsultaEstadio->fetch()) {
+						echo '<tr  class = "active">';
+						echo "<td>{$row[0]}</td>";
+						echo "<td>{$row[1]}</td>";
+						echo "</tr>";
+					}
+					
+				?>
+				
+			</tbody>	
+		</table>	
 	</div>
+
 </body>
 
 </html>

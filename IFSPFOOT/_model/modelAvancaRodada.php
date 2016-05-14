@@ -1,5 +1,8 @@
 <?php
- 
+
+ 	/* Este arquivo será responsável por avançar a rodada atual do campeonato se encontra
+ 	 */
+
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 	

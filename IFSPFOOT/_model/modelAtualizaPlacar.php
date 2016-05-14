@@ -94,36 +94,38 @@
 			
 		}
 		
-		//Obtendo dados do time da casa
-		$consultaTimeCasa = 'SELECT vitoria,derrota,empate,pontos FROM Time WHERE nome = ?';
+		//Obtendo dados do time da casa || Acertar o id para primeiro item
+		$consultaTimeCasa = 'SELECT id,vitoria,derrota,empate,pontos FROM Time WHERE nome = ?';
 		$preparaConsultaTimeCasa = $conn->prepare($consultaTimeCasa);
 		$preparaConsultaTimeCasa->bindValue(1, $timeCasa);
 		$preparaConsultaTimeCasa->execute();
 		
 		$result = $preparaConsultaTimeCasa->setFetchMode(PDO::FETCH_NUM);
 		while ($row = $preparaConsultaTimeCasa->fetch()) {
-				
-			$vitoriaTimeCasa = $row[0];
-			$derrotaTimeCasa = $row[1];
-			$empateTimeCasa = $row[2];
-			$pontosTimeCasa = $row[3];
-				
+
+			$idTimeCasa = $row[0];
+			$vitoriaTimeCasa = $row[1];
+			$derrotaTimeCasa = $row[2];
+			$empateTimeCasa = $row[3];
+			$pontosTimeCasa = $row[4];
+			
 		}
 		
-		//Obtendo dados do time visitante
-		$consultaTimeVisitante = 'SELECT vitoria,derrota,empate,pontos FROM Time WHERE nome = ?';
+		//Obtendo dados do time visitante|| Acertar o id para primeiro item
+		$consultaTimeVisitante = 'SELECT id,vitoria,derrota,empate,pontos FROM Time WHERE nome = ?';
 		$preparaConsultaTimeVisitante = $conn->prepare($consultaTimeVisitante);
 		$preparaConsultaTimeVisitante->bindValue(1, $timeVisitante);
 		$preparaConsultaTimeVisitante->execute();
 		
 		$result = $preparaConsultaTimeVisitante->setFetchMode(PDO::FETCH_NUM);
 		while ($row = $preparaConsultaTimeVisitante->fetch()) {
-		
-			$vitoriaTimeVisitante = $row[0];
-			$derrotaTimeVisitante = $row[1];
-			$empateTimeVisitante = $row[2];
-			$pontosTimeVisitante = $row[3];
-		
+			
+			$idTimeVisitante= $row[0];
+			$vitoriaTimeVisitante = $row[1];
+			$derrotaTimeVisitante = $row[2];
+			$empateTimeVisitante = $row[3];
+			$pontosTimeVisitante = $row[4];
+			
 		}
 		
 		echo "//////////////////";
@@ -203,7 +205,112 @@
 		echo "||| time : ".$timeVisitante;
 		echo "Vitorias : ".$vitoriaTimeVisitante."Derrotas : ".$derrotaTimeVisitante."Empates : ".$empateTimeVisitante."Pontos : ".$pontosTimeVisitante;
 		
+		
+		$jogadoresTimeCasa = array();
+		$jogadoresTimeVisitante = array();
+		
+		//Obtendo jogadores do time da casa
+		$consultaJogadoresTimeCasa = 'SELECT id FROM Jogador WHERE idTime = ?';
+		$preparaConsultaJogadoresTimeCasa = $conn->prepare($consultaJogadoresTimeCasa);
+		$preparaConsultaJogadoresTimeCasa->bindValue(1, $idTimeCasa);
+		$preparaConsultaJogadoresTimeCasa->execute();
+		
+		$result = $preparaConsultaJogadoresTimeCasa->setFetchMode(PDO::FETCH_NUM);
+		while ($row = $preparaConsultaJogadoresTimeCasa->fetch()) {
 			
+			$jogadoresTimeCasa[] = $row[0];
+		
+		}
+		
+		//Obtendo jogadores do time visitante
+		$consultaJogadoresTimeVisitante = 'SELECT id FROM Jogador WHERE idTime = ?';
+		$preparaConsultaJogadoresTimeVisitante = $conn->prepare($consultaJogadoresTimeVisitante);
+		$preparaConsultaJogadoresTimeVisitante->bindValue(1, $idTimeVisitante);
+		$preparaConsultaJogadoresTimeVisitante->execute();
+		
+		$result = $preparaConsultaJogadoresTimeVisitante->setFetchMode(PDO::FETCH_NUM);
+		while ($row = $preparaConsultaJogadoresTimeVisitante->fetch()) {
+			
+			$jogadoresTimeVisitante[] = $row[0];
+		
+		}
+		
+		//Id dos ultimos times
+		
+		echo "ID time casa : ".$idTimeCasa;
+		echo "ID time visitante : ".$idTimeVisitante;
+		foreach ($jogadoresTimeCasa as &$value) {
+			echo $value;
+		}
+		foreach ($jogadoresTimeVisitante as &$value) {
+			echo $value;
+		}
+		
+		$inicioGolCasa=0;
+		$inicioGolVisitante=0;
+		
+		//Atualizando artilharia do time casa
+		while($inicioGolCasa < $golCasa ) {
+			$quantidadeGolJogadorTimeCasa = 0;
+			
+			$recebeIndexArrayJogadorTimeCasa = array_rand($jogadoresTimeCasa, 1);
+			$quemFezGolTimeCasa = $jogadoresTimeCasa[$recebeIndexArrayJogadorTimeCasa];
+			
+			//Obtendo jogadores do time casa
+			$consultaGolJogadoresTimeCasa = 'SELECT gol FROM Jogador WHERE id = ?';
+			$preparaConsultaGolJogadoresTimeCasa = $conn->prepare($consultaGolJogadoresTimeCasa);
+			$preparaConsultaGolJogadoresTimeCasa->bindValue(1, $quemFezGolTimeCasa);
+			$preparaConsultaGolJogadoresTimeCasa->execute();
+			
+			$result = $preparaConsultaGolJogadoresTimeCasa->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaGolJogadoresTimeCasa->fetch()) {
+					
+				$quantidadeGolJogadorTimeCasa = $row[0];
+			
+			}
+			$quantidadeGolJogadorTimeCasa++;
+			
+			$atualizaGolJogadoresTimeCasa = 'UPDATE Jogador SET  gol=? WHERE id = ?';
+			$preparaAtualizaGolJogadoresTimeCasa = $conn->prepare($atualizaGolJogadoresTimeCasa);
+			$preparaAtualizaGolJogadoresTimeCasa ->bindValue(1,$quantidadeGolJogadorTimeCasa);
+			$preparaAtualizaGolJogadoresTimeCasa ->bindValue(2,$quemFezGolTimeCasa);
+			$preparaAtualizaGolJogadoresTimeCasa ->execute();
+			
+			$inicioGolCasa++;
+		}
+		unset($jogadoresTimeCasa);
+		
+		//Atualizando artilharia do time visitante
+		while($inicioGolVisitante < $golVisitante ) {
+			$quantidadeGolJogadorTimeVisitante = 0;
+				
+			$recebeIndexArrayJogadorTimeVisitante = array_rand($jogadoresTimeVisitante, 1);
+			$quemFezGolTimeVisitante = $jogadoresTimeVisitante[$recebeIndexArrayJogadorTimeVisitante];
+				
+			//Obtendo jogadores do time casa
+			$consultaGolJogadoresTimeVisitante = 'SELECT gol FROM Jogador WHERE id = ?';
+			$preparaConsultaGolJogadoresTimeVisitante = $conn->prepare($consultaGolJogadoresTimeVisitante);
+			$preparaConsultaGolJogadoresTimeVisitante->bindValue(1, $quemFezGolTimeVisitante);
+			$preparaConsultaGolJogadoresTimeVisitante->execute();
+				
+			$result = $preparaConsultaGolJogadoresTimeVisitante->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaGolJogadoresTimeVisitante->fetch()) {
+					
+				$quantidadeGolJogadorTimeVisitante = $row[0];
+					
+			}
+			$quantidadeGolJogadorTimeVisitante++;
+				
+			$atualizaGolJogadoresTimeVisitante = 'UPDATE Jogador SET  gol=? WHERE id = ?';
+			$preparaAtualizaGolJogadoresTimeVisitante = $conn->prepare($atualizaGolJogadoresTimeVisitante);
+			$preparaAtualizaGolJogadoresTimeVisitante ->bindValue(1,$quantidadeGolJogadorTimeVisitante);
+			$preparaAtualizaGolJogadoresTimeVisitante ->bindValue(2,$quemFezGolTimeVisitante);
+			$preparaAtualizaGolJogadoresTimeVisitante ->execute();
+				
+			$inicioGolVisitante++;
+		}
+		unset($jogadoresTimeVisitante);
+		
 	}
 	
 ?>

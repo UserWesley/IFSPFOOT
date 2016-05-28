@@ -74,6 +74,7 @@
 			$conn = Database::conexao();
 
 			$dados = null;
+			
 			$consultaLogin = 'SELECT id FROM Usuario WHERE login = ? AND senha = ?';
 			$preparaConsultaLogin = $conn->prepare($consultaLogin);
 			$preparaConsultaLogin->bindValue(1, $this->getLogin());

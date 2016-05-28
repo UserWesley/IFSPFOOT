@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Tempo de geração: 08/05/2016 às 17:41
+-- Tempo de geração: 28/05/2016 às 14:30
 -- Versão do servidor: 10.1.9-MariaDB
 -- Versão do PHP: 5.6.15
 
@@ -31,7 +31,8 @@ CREATE TABLE `Campeonato` (
   `nome` varchar(20) COLLATE utf32_bin NOT NULL,
   `rodadaAtual` int(11) NOT NULL,
   `temporada` int(11) NOT NULL,
-  `vencedor` varchar(20) COLLATE utf32_bin DEFAULT NULL
+  `vencedor` varchar(20) COLLATE utf32_bin DEFAULT NULL,
+  `Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
 
 -- --------------------------------------------------------
@@ -68,31 +69,11 @@ CREATE TABLE `Jogo` (
   `golCasa` int(11) DEFAULT NULL,
   `golVisitante` int(11) DEFAULT NULL,
   `timeVisitante` varchar(20) COLLATE utf32_bin NOT NULL,
-  `rodada` int(11) NOT NULL
+  `rodada` int(11) NOT NULL,
+  `data` date NOT NULL,
+  `hora` varchar(20) COLLATE utf32_bin NOT NULL,
+  `clima` varchar(20) COLLATE utf32_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `Login`
---
-
-CREATE TABLE `Login` (
-  `id` int(11) NOT NULL,
-  `usuario` varchar(10) COLLATE utf32_bin NOT NULL,
-  `senha` varchar(32) COLLATE utf32_bin NOT NULL,
-  `administrador` tinyint(1) NOT NULL,
-  `nome` varchar(30) COLLATE utf32_bin NOT NULL,
-  `sobrenome` varchar(40) COLLATE utf32_bin NOT NULL,
-  `email` varchar(40) COLLATE utf32_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin COMMENT='Login de Autenticação a aplicação';
-
---
--- Fazendo dump de dados para tabela `Login`
---
-
-INSERT INTO `Login` (`id`, `usuario`, `senha`, `administrador`, `nome`, `sobrenome`, `email`) VALUES
-(1, 'a', 'a', 1, 'asda', 'asdsada', 'sadsadsa');
 
 -- --------------------------------------------------------
 
@@ -103,10 +84,6 @@ INSERT INTO `Login` (`id`, `usuario`, `senha`, `administrador`, `nome`, `sobreno
 CREATE TABLE `Rodada` (
   `id` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
-  `data` date NOT NULL,
-  `hora` varchar(10) COLLATE utf32_bin NOT NULL,
-  `periodo` varchar(10) COLLATE utf32_bin NOT NULL,
-  `clima` varchar(20) COLLATE utf32_bin NOT NULL,
   `campeonato` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
 
@@ -131,6 +108,29 @@ CREATE TABLE `Time` (
   `empate` int(11) NOT NULL,
   `pontos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin COMMENT='Time';
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `Usuario`
+--
+
+CREATE TABLE `Usuario` (
+  `id` int(11) NOT NULL,
+  `login` varchar(10) COLLATE utf32_bin NOT NULL,
+  `senha` varchar(32) COLLATE utf32_bin NOT NULL,
+  `nome` varchar(30) COLLATE utf32_bin NOT NULL,
+  `sobrenome` varchar(40) COLLATE utf32_bin NOT NULL,
+  `email` varchar(40) COLLATE utf32_bin NOT NULL,
+  `celular` varchar(20) COLLATE utf32_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin COMMENT='Login de Autenticação a aplicação';
+
+--
+-- Fazendo dump de dados para tabela `Usuario`
+--
+
+INSERT INTO `Usuario` (`id`, `login`, `senha`, `nome`, `sobrenome`, `email`, `celular`) VALUES
+(1, 'a', 'a', 'asda', 'asdsada', 'sadsadsa', '');
 
 --
 -- Índices de tabelas apagadas
@@ -159,14 +159,6 @@ ALTER TABLE `Jogo`
   ADD KEY `fk_timeCasa1` (`timeCasa`);
 
 --
--- Índices de tabela `Login`
---
-ALTER TABLE `Login`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `usuario` (`usuario`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
 -- Índices de tabela `Rodada`
 --
 ALTER TABLE `Rodada`
@@ -183,6 +175,14 @@ ALTER TABLE `Time`
   ADD KEY `fk_dono` (`dono`);
 
 --
+-- Índices de tabela `Usuario`
+--
+ALTER TABLE `Usuario`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `usuario` (`login`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- AUTO_INCREMENT de tabelas apagadas
 --
 
@@ -195,17 +195,12 @@ ALTER TABLE `Campeonato`
 -- AUTO_INCREMENT de tabela `Jogador`
 --
 ALTER TABLE `Jogador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de tabela `Jogo`
 --
 ALTER TABLE `Jogo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT de tabela `Login`
---
-ALTER TABLE `Login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de tabela `Rodada`
 --
@@ -216,6 +211,11 @@ ALTER TABLE `Rodada`
 --
 ALTER TABLE `Time`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de tabela `Usuario`
+--
+ALTER TABLE `Usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Restrições para dumps de tabelas
 --
@@ -245,7 +245,7 @@ ALTER TABLE `Rodada`
 -- Restrições para tabelas `Time`
 --
 ALTER TABLE `Time`
-  ADD CONSTRAINT `fk_dono` FOREIGN KEY (`dono`) REFERENCES `Login` (`id`);
+  ADD CONSTRAINT `fk_dono` FOREIGN KEY (`dono`) REFERENCES `Usuario` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

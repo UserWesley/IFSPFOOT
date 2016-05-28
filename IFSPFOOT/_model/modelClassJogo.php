@@ -100,15 +100,16 @@
 			
 		}
 		
-		public function atualizaPlacar(){
+		public function atualizaPlacar($jogo){
 			
 			$conn = Database::conexao();
+			
 			$atualizaPlacarJogo = 'UPDATE Jogo SET golCasa = ?, golVisitante = ? WHERE timeCasa = ? and timeVisitante= ? ';
 			$preparaAtualizaPlacarJogo = $conn->prepare($atualizaPlacarJogo);
-			$preparaAtualizaPlacarJogo->bindValue(1,$this->getGolCasa());
-			$preparaAtualizaPlacarJogo->bindValue(2,$this->getGolVisitante());
-			$preparaAtualizaPlacarJogo->bindValue(3,$this->getTimeCasa());
-			$preparaAtualizaPlacarJogo->bindValue(4,$this->getTimeVisitante());
+			$preparaAtualizaPlacarJogo->bindValue(1,$jogo->getGolCasa());
+			$preparaAtualizaPlacarJogo->bindValue(2,$jogo->getGolVisitante());
+			$preparaAtualizaPlacarJogo->bindValue(3,$jogo->getTimeCasa());
+			$preparaAtualizaPlacarJogo->bindValue(4,$jogo->getTimeVisitante());
 			$preparaAtualizaPlacarJogo->execute();
 			
 	   }
@@ -130,9 +131,6 @@
 	   		echo $timeCasa = $this->getTimeCasa();
 	   		echo $timeVisitante = $this->getTimeVisitante();
 	   		echo $rodada = $this->getRodada();
-	   		//$data = $this->getData();
-	   		//$hora = $this->getHora();
-	   		//$clima = $this->getClima();
 	   		
 	   		//Cadastro do campeonato inicial
 	   		$insercaoNovoCampeonato = "INSERT INTO Jogo VALUES ('$id','$timeCasa',NULL,NULL,'$timeVisitante',
@@ -144,8 +142,7 @@
 	   public function consultaJogoRodada($rodadaAtual){
 
 	   		$conn = Database::conexao();
-	   		
-	   		
+	   			
 	   		$times = array();
 	   	
 		   	$consultaRodada = 'SELECT timeCasa, timeVisitante FROM Jogo WHERE rodada = ?';
@@ -160,9 +157,54 @@
 		   		$times[]= $row[1];
 		   	
 		   	}
-		   	
 		   	return $times;
+	   }
+	   
+	   public function verificaPlacar($golCasa,$golVisitante){
+	   		
+		   	if($golCasa > $golVisitante){
+		   	
+		   		return 1;  
+		   				   	
+		   	}
+		   	
+		   	elseif ($golVisitante > $golCasa){
+		   			
+		   		return 2;
+		   			
+		   	}
+		   	
+		   	else{
+		   		
+		   		return 3;
+		   	}
+	   }
+ 
+	   public function consultaJogos(){
+
+	   		$conn = Database::conexao();
+	   		
+	   		$jogos = array();
+	   		
+	   		$consultaJogo = 'SELECT timeCasa, golCasa, golVisitante, timeVisitante,
+								 data, hora, clima FROM Jogo';
+			$preparaConsultaJogo = $conn->query($consultaJogo);
+			$preparaConsultaJogo->execute();
+			
+			$result = $preparaConsultaJogo->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaJogo->fetch()) {
+		
+				$jogos[] = $row[0];	
+				$jogos[] = $row[1];
+				$jogos[] = $row[2];
+				$jogos[] = $row[3];
+				$jogos[] = $row[4];
+				$jogos[] = $row[5];
+				$jogos[] = $row[6];
+
+			}
 	   	
+			return $jogos;
 	   }
 	   
 	}

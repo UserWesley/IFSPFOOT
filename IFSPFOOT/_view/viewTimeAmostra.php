@@ -2,8 +2,7 @@
 
 	/* Arquivo mostra todos os times disponiveis para seleção do usuário */
 	
-	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
+	include_once ('../_controller/controllerMenu.php');
 
 ?>
 
@@ -37,19 +36,14 @@
    <?php
 
       	//Mostrando o nome do time selecionado
-        $consultaTime = 'SELECT nome FROM Time WHERE id = ? ';
-		$preparaConsultaTime = $conn->prepare($consultaTime);
-		$preparaConsultaTime->bindValue(1,$_POST['selectTime']);
-		$preparaConsultaTime->execute();
-		
-		$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
-		
-		while ($row = $preparaConsultaTime->fetch()) {
-
-            echo "<h1 class=\"text-center\"> Time :";            
-            echo $row[0]."</h1>";
-            
-		}
+      	$time = new controllerMenu();
+      	$idTime = $_POST['selectTime'];
+      	
+      	$timeEscolhido = $time->buscarTime($idTime);
+      	
+      	echo "<h1 class=\"text-center\"> Time :";
+      	echo $timeEscolhido;
+      	
      ?>
    
    
@@ -69,30 +63,21 @@
       		</thead>
       		<tbody>
       		
-      <?php
+		      <?php
 
-      	//Listando Jogadores do time
-        $consultaTime = 'SELECT nome ,mascote,cor,dinheiro,torcida ,nomeEstadio ,capacidade FROM Time WHERE id = ? ';
-		$preparaConsultaTime = $conn->prepare($consultaTime);
-		$preparaConsultaTime->bindValue(1,$_POST['selectTime']);
-		$preparaConsultaTime->execute();
-		
-		$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
-		
-		while ($row = $preparaConsultaTime->fetch()) {
-
-            echo '<tr  class = "active">';
-            echo "<td>{$row[0]}</td>";            
-            echo "<td>{$row[1]}</td>";
-            echo "<td>{$row[2]}</td>";  
-            echo "<td>{$row[3]}</td>";
-            echo "<td>{$row[4]}</td>";
-            echo "<td>{$row[5]}</td>";
-            echo "<td>{$row[6]}</td>";
-            echo '</tr>';
-          }
-		
-      ?>
+		      	$timeDados = array();	
+				$timeDados = $time->buscarDadoTime($idTime);
+				print_r($timeDados);
+				$colunas = 6;
+				
+		      	//Listando Jogadores do time
+		      	for($i=0; $i < count($timeDados); $i++) {
+		      		echo "<td>".$timeDados[$i]."</td>";
+		      		if((($i+1) % $colunas) == 0 )
+		      			echo "</tr><tr>";
+		      	}
+				
+		      ?>
       </tbody>
     </table>
   </div>

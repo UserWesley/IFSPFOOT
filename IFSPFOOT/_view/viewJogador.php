@@ -1,14 +1,10 @@
 <?php 
 	
 	/*Este arquivo mostrará todos os dados dos jogadores do time do usuário*/
-	
-	session_start();
 
-	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
-	
-	$idTime = $_SESSION['idDono'];
-	
+	session_start();
+	include_once '../_controller/controllerMenu.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -59,44 +55,21 @@
       		<tbody>
 		    
 		      <?php
-		      
-		      	//Consulta na tabela time, para recolher o id do time
-		      	$consultaTime = 'SELECT id FROM Time WHERE dono = ? ';
-		      	$preparaConsultaTime = $conn->prepare($consultaTime);
-		      	$preparaConsultaTime->bindValue(1,$idTime);
-		      	$preparaConsultaTime->execute();
-		      
-		      	$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
-		      
-		      	while ($row = $preparaConsultaTime->fetch()) { 
-		      		$idTimeJogador = $row[0];     
-		      		
+		      	
+		      	$jogador = new controllerMenu();
+		      	
+		      	$idDono = $_SESSION['idDono'];
+		      	
+		      	$jogadores = $jogador->buscaJogador($idDono);
+		      		      	
+		      	$colunas = 11;
+		      	
+		      	for($i=0; $i < count($jogadores); $i++) {
+		      		echo "<td>".$jogadores[$i]."</td>";
+		      		if((($i+1) % $colunas) == 0 )
+		      			echo "</tr><tr>";
 		      	}
 		      	
-		      	//Listando Jogadores do time do usuário, assim como seus dados
-		        $consultaJogador = 'SELECT titular,nome ,sobrenome,posicao,nacionalidade,habilidade ,idade ,forca ,estamina ,nivel,gol FROM Jogador WHERE idTime = ? ';
-				$preparaConsultaJogador = $conn->prepare($consultaJogador);
-				$preparaConsultaJogador->bindValue(1, $idTimeJogador);
-				$preparaConsultaJogador->execute();
-				
-				$result = $preparaConsultaJogador->setFetchMode(PDO::FETCH_NUM);
-				
-				while ($row = $preparaConsultaJogador->fetch()) {
-		
-		            echo '<tr  class = "active">';
-		            echo "<td>{$row[0]}</td>";            
-		            echo "<td>{$row[1]}</td>";
-		            echo "<td>{$row[2]}</td>";  
-		            echo "<td>{$row[3]}</td>";
-		            echo "<td>{$row[4]}</td>";
-		            echo "<td>{$row[5]}</td>";
-		            echo "<td>{$row[6]}</td>";
-		            echo "<td>{$row[7]}</td>";
-		            echo "<td>{$row[8]}</td>";
-		            echo "<td>{$row[9]}</td>";
-		            echo "<td>{$row[10]}</td>";
-		            echo '</tr>';
-		          }
 		      ?>
 		      
       		</tbody>

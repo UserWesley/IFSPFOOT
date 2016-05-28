@@ -149,6 +149,125 @@
 			$conn->exec($insercaoNovoJogador);
 			
 		}
+		
+		
+		public function consultaJogador($idTime){
+
+			$jogadoresTime = array();
+			
+			$conn = Database::conexao();
+			
+			$consultaJogador = 'SELECT id FROM Jogador WHERE idTime = ?';
+			$preparaConsultaJogador = $conn->prepare($consultaJogador);
+			$preparaConsultaJogador->bindValue(1, $idTime);
+			$preparaConsultaJogador->execute();
+			
+			$result = $preparaConsultaJogador->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaJogador->fetch()) {
+					
+				$jogadoresTime[] = $row[0];
+			
+			}
+			
+			return $jogadoresTime;
+			
+		}
+		
+		public function sorteiaJogador($jogadores){
+			
+			$recebeIndexArrayJogadorTime = array_rand($jogadores, 1);
+			$quemFezGolTime = $jogadores[$recebeIndexArrayJogadorTime];
+
+			return $quemFezGolTime;
+			
+		}
+		public function consultaGol($jogador){
+			
+			$conn = Database::conexao();
+			
+			$consultaGolJogador = 'SELECT gol FROM Jogador WHERE id = ?';
+			$preparaConsultaGolJogador = $conn->prepare($consultaGolJogador);
+			$preparaConsultaGolJogador->bindValue(1, $jogador);
+			$preparaConsultaGolJogador->execute();
+			
+			$result = $preparaConsultaGolJogador->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaGolJogador->fetch()) {
+					
+				$quantidadeGolJogador = $row[0];
+					
+			}
+			
+			return $quantidadeGolJogador;
+			
+		}
+		
+		public function inseriGol($quantidadeGolJogador,$jogadorTime){
+			
+			$quantidadeGolJogador++;
+			
+			$conn = Database::conexao();
+			
+			$atualizaGolJogador = 'UPDATE Jogador SET gol= ? WHERE id = ?';
+			$preparaAtualizaGolJogador = $conn->prepare($atualizaGolJogador);
+			$preparaAtualizaGolJogador->bindValue(1,$quantidadeGolJogador);
+			$preparaAtualizaGolJogador->bindValue(2,$jogadorTime);
+			$preparaAtualizaGolJogador->execute();
+			
+		}
+		
+		public function consultaArtilheiria(){
+			
+			$jogadoresArtilharia = array();
+			
+			$conn = Database::conexao();
+			
+			$consultaJogador = 'SELECT Jogador.nome, Jogador.sobrenome,Time.nome,Jogador.gol FROM Jogador,Time WHERE Jogador.idTime = Time.id ORDER BY Jogador.gol DESC';
+			$preparaConsultaJogador = $conn->query($consultaJogador);
+			$preparaConsultaJogador->execute();	
+				
+			while ($row = $preparaConsultaJogador->fetch()) {
+					
+				$jogadoresArtilharia[] = $row[0];
+				$jogadoresArtilharia[] = $row[1];
+				$jogadoresArtilharia[] = $row[2];
+				$jogadoresArtilharia[] = $row[3];
+			}
+				
+			return $jogadoresArtilharia;
+				
+		}
+		
+		public function consultaJogadorTime($idTime){
+			
+			$jogadorTime = array();
+			
+			$conn = Database::conexao();
+			
+			$consultaJogador = 'SELECT titular,nome ,sobrenome,posicao,nacionalidade,habilidade ,idade ,forca ,estamina ,nivel,gol FROM Jogador WHERE idTime = ? ';
+			$preparaConsultaJogador = $conn->prepare($consultaJogador);
+			$preparaConsultaJogador->bindValue(1, $idTime);
+			$preparaConsultaJogador->execute();
+			
+			$result = $preparaConsultaJogador->setFetchMode(PDO::FETCH_NUM);
+			
+			while ($row = $preparaConsultaJogador->fetch()) {
+				
+				$jogadorTime[] = $row[0];
+				$jogadorTime[] = $row[1];
+				$jogadorTime[] = $row[2];
+				$jogadorTime[] = $row[3];
+				$jogadorTime[] = $row[4];
+				$jogadorTime[] = $row[5];
+				$jogadorTime[] = $row[6];
+				$jogadorTime[] = $row[7];
+				$jogadorTime[] = $row[8];
+				$jogadorTime[] = $row[9];
+				$jogadorTime[] = $row[10];
+				
+			}
+			
+			return $jogadorTime;
+		}
 	}
 
 ?>

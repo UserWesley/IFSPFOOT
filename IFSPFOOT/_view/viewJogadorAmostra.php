@@ -3,8 +3,7 @@
 	/*Este arquivo pegará o id do time, passado pelo formulário do arquivo viewMenuArquivo.php, feito isso
 	passará como parametro para filtrar os jogadores do respectivoTime*/
 
-	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
+	include_once '../_controller/controllerVerificaTime.php';
 
 ?>
 
@@ -39,6 +38,7 @@
     	<table class="table">
       		<thead>
         		<tr class = "info">
+        			  <th>Titular</th>
 			          <th>Nome</th>
 			          <th>Sobrenome</th>
 			          <th>Posição</th>
@@ -53,35 +53,26 @@
       		</thead>
       		<tbody>
       		
-      <?php
+		      <?php
+				
+		      	$jogador = new controllerVerificaTime();
+		      	
+		      	$jogadores = array();
 
-      	//Listando Jogadores do time
-        $consultaJogador = 'SELECT nome ,sobrenome,posicao,nacionalidade,habilidade ,idade ,forca ,estamina ,nivel,gol FROM Jogador WHERE idTime = ? ';
-		$preparaConsultaJogador = $conn->prepare($consultaJogador);
-		$preparaConsultaJogador->bindValue(1,$_POST['selectTime']);
-		$preparaConsultaJogador->execute();
-		
-		$result = $preparaConsultaJogador->setFetchMode(PDO::FETCH_NUM);
-		
-		while ($row = $preparaConsultaJogador->fetch()) {
-
-            echo '<tr  class = "active">';
-            echo "<td>{$row[0]}</td>";            
-            echo "<td>{$row[1]}</td>";
-            echo "<td>{$row[2]}</td>";  
-            echo "<td>{$row[3]}</td>";
-            echo "<td>{$row[4]}</td>";
-            echo "<td>{$row[5]}</td>";
-            echo "<td>{$row[6]}</td>";
-            echo "<td>{$row[7]}</td>";
-            echo "<td>{$row[8]}</td>";
-            echo "<td>{$row[9]}</td>";
-            echo '</tr>';
-          }
-		
-      ?>
-      </tbody>
-    </table>
+		      	$jogadores = $jogador->consultaJogador($_POST['selectTime']);
+		      	
+		      	$colunas = 11;
+		      	
+		      	for($i=0; $i < count($jogadores); $i++) {
+		      		echo "<td>".$jogadores[$i]."</td>";
+		      		if((($i+1) % $colunas) == 0 )
+		      			echo "</tr><tr>";
+		      	}
+		      	
+		      ?>
+		      
+      		</tbody>
+    	</table>
 	</div>
 
 

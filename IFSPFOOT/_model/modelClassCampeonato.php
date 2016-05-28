@@ -81,6 +81,7 @@
 		public function rodadaAtual(){
 			
 			$conn = Database::conexao();
+			
 			$consultaCampeonatoRodadaAtual = 'SELECT rodadaAtual FROM Campeonato;';
 			$preparaConsultaCampeonatoRodadaAtual = $conn->query($consultaCampeonatoRodadaAtual);
 			$preparaConsultaCampeonatoRodadaAtual->execute();

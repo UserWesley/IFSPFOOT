@@ -4,7 +4,11 @@
 	 */
 
 	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
+	//include_once '../_model/_bancodedados/modelBancodeDados.php';
+	//Inclusão do arquivo para conexão com o banco de dados PDO
+	include_once '../_model/_bancodedados/modelBancodeDados1.php';
+	
+	include_once '../_controller/controllerMenu.php';
 
 ?>
 
@@ -46,22 +50,22 @@
         </tr> 
       </thead>
       <tbody>
+      
 		<?php 
-		
-			//Listando alguns dados dos jogadores e ordena de forma decrescente
-	        $consultaJogador = 'SELECT Jogador.nome, Jogador.sobrenome,Time.nome,Jogador.gol FROM Jogador,Time WHERE Jogador.idTime = Time.id ORDER BY Jogador.gol DESC';
-			$preparaConsultaJogador = $conn->query($consultaJogador);
-			$preparaConsultaJogador->execute();	
 			
-			while ($row = $preparaConsultaJogador->fetch()) {
+			$artilharia = new controllerMenu();
 			
-				echo '<tr class="active">';
-				echo "<td>{$row[0]}</td>";
-				echo "<td>{$row[1]}</td>";
-				echo "<td>{$row[2]}</td>";
-				echo "<td>{$row[3]}</td>";
-				echo '</tr>';
+			$artilheiros = array();
+			
+			$artilheiros = $artilharia->buscaArtilharia();
+			
+			$colunas = 4;	
+			for($i=0; $i < count($artilheiros); $i++) {
+				echo "<td>".$artilheiros[$i]."</td>";
+				if((($i+1) % $colunas) == 0 )
+				echo "</tr><tr>";
 			}
+		
 		?>
 		
 	  </tbody>

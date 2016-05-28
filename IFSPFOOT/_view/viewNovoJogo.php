@@ -43,7 +43,7 @@
                        
             		<li><a href="viewMenuEscolhaTime.php" target="janela">Escolher Time</a></li>
             		
-            		<li><a href="../_model/modelIniciarJogo.php">Iniciar</a></li>
+            		<li><a href="../_controller/controllerSelecionarTime.php">Iniciar</a></li>
         
         			<li><a href="../_controller/controllerLogout.php">Sair</a></li>
            </ul>

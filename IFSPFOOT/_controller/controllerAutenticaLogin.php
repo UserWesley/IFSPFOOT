@@ -23,44 +23,23 @@
 		function __destruct(){
 			
 		}
-		
-		public function getLogin(){
-			return $this->login;
-		}
-		
-		public function setLogin($login){
-			$this->login = $login;
-		}
-		
-		public function getSenha(){
-			return $this->senha;
-		}
-		
-		public function setSenha($senha){
-			$this->senha = $senha;
-		}
-		
+
 		function consultaAcesso(){
 			
 			//Variaveis do index.php
-			$this->setLogin($_POST['form-username']);
-			$this->setSenha($_POST['form-password']);
-			
 			$usuario = new modelClassUsuario();
 			
-			$usuario->setLogin($this->getLogin());
-			$usuario->setSenha($this->getSenha());
+			$usuario->setLogin($_POST['form-username']);
+			$usuario->setSenha($_POST['form-password']);
 			
 			$dados = $usuario->consultaUsuario($usuario);
 			
 		 	//Se o resultado da consulta for diferente de vazio, então registra sessão e chama a view Inicial
 			if(!empty($dados)){
-
-				//$idDono = $usuario->autenticaUsuario();
 				
 				$_SESSION['usuario']= $usuario;
 				$_SESSION['logado']= true;
-				$_SESSION['idDono']= $idDono;
+				$_SESSION['idDono']= $dados;
 				
 				header("Location: ../_view/viewInicial.php");
 			 

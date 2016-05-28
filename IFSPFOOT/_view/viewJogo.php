@@ -9,7 +9,6 @@
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
 
-	
 ?>
 
 <!DOCTYPE html>
@@ -48,11 +47,11 @@
 		    
 		        $.ajax({
 		              type : "POST",
-		              url : '../_model/modelAtualizaPlacar.php',
+		              url : '../_controller/controllerGerenciaPosJogo.php',
 		              data : "content="+dataArr,
 		              success: function(data) {
 		                  alert(data);// alert the data from the server
-		                  location.href='../_controller/controllerGerenciaPosJogo.php';
+		                  location.href='viewTelaTime.php';
 		              },
 		              error : function() {
 		              }

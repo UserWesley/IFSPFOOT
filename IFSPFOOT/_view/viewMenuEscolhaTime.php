@@ -7,6 +7,7 @@
 	
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDados.php';
+	include_once '../_controller/controllerVerificaTime.php';
 	
 ?>
 
@@ -37,42 +38,59 @@
 	<h1 class="text-center">Selecione seu Time</h1>
 
 	<div class="form-group"> <p>
+		
 		<form action= "#" method="POST">
-		<label for="idSelectTime">Times Disponiveis</label>
-		
-		<?php 
 			
-			//Consulta para resgatar no banco o id e nome do time, assim disponibilizando seus nomes no select
-			$consultaTime = 'SELECT id,nome FROM Time';
-			$preparaConsultaTime = $conn->query($consultaTime);
-			$preparaConsultaTime->execute();
+			<label for="idSelectTime">Times Disponiveis</label>
 		
-			echo "<select id = \"idSelectTime\" name = \"selectTime\">";
-		
-			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
-			while ($row = $preparaConsultaTime->fetch()) {
-	
-				echo "<option value =".$row[0].">".$row[1]."</option>";
-		
-			}
+				<?php 
+				
+					$time = new controllerVerificaTime();
 					
-			echo "</select>";
+					$times = array();
+					$times = $time->visualizaTime();
+					
+					echo "<select id = \"idSelectTime\" name = \"selectTime\">";
+					
+					foreach ($times as $row) {
+					
+						echo "<option value =".$row.">".$row."</option>";
+					
+					}
+						
+					echo "</select>";
+				
+					//Consulta para resgatar no banco o id e nome do time, assim disponibilizando seus nomes no select
+					/*$consultaTime = 'SELECT id,nome FROM Time';
+					$preparaConsultaTime = $conn->query($consultaTime);
+					$preparaConsultaTime->execute();
+				
+					echo "<select id = \"idSelectTime\" name = \"selectTime\">";
+				
+					$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+					while ($row = $preparaConsultaTime->fetch()) {
 			
-			// Caso a variavel esteja vazia, define o time fixo na visualização
-			if(empty($_POST['selectTime'])){
+						echo "<option value =".$row[0].">".$row[1]."</option>";
 				
-				$_SESSION['time'] = $_POST['selectTime'] = 1;
+					}
+							
+					echo "</select>";
+					*/
+					// Caso a variavel esteja vazia, define o time fixo na visualização
+					if(empty($_POST['selectTime'])){
+						
+						$_SESSION['time'] = $_POST['selectTime'] = 1;
+						
+					}
+					else {
+						
+						$_SESSION['time'] = $_POST['selectTime'];
+						
+					}
+					
+				?>
 				
-			}
-			else {
-				
-				$_SESSION['time'] = $_POST['selectTime'];
-				
-			}
-			
-		?>
-		
-		<input	type="submit" value="Selecionar e Visualizar">
+			<input	type="submit" value="Selecionar e Visualizar">
 		
 		</form>
 		

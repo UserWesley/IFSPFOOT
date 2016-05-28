@@ -146,6 +146,208 @@
 			
 		}
 		
+		public function consultaTabela($nomeTime){
+			
+			$timeTabela = array();
+			
+			$conn = Database::conexao();
+			
+			$consultaTime = 'SELECT id,vitoria,derrota,empate,pontos FROM Time WHERE nome = ?';
+			$preparaConsultaTime = $conn->prepare($consultaTime);
+			$preparaConsultaTime->bindValue(1, $nomeTime);
+			$preparaConsultaTime->execute();
+			
+			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaTime->fetch()) {
+					
+				$timeTabela[] = $row[0];
+				$timeTabela[] = $row[1];
+				$timeTabela[] = $row[2];
+				$timeTabela[] = $row[3];
+				$timeTabela[] = $row[4];
+					
+			}
+			
+			return $timeTabela;
+			
+		}
+		
+		public function atualizaTimeVencedorTabela($time){
+			
+			$id = $time[0];
+			$vitoria = $time[1] + 1;
+			$pontos = $time[4]+3;
+			
+			$conn = Database::conexao();
+			
+			$atualizaTimeVencedor = 'UPDATE Time SET  vitoria = ?, pontos = ? WHERE id = ?';
+			$preparaAtualizaTimeVencedor = $conn->prepare($atualizaTimeVencedor);
+			$preparaAtualizaTimeVencedor->bindValue(1,$vitoria);
+			$preparaAtualizaTimeVencedor->bindValue(2,$pontos);
+			$preparaAtualizaTimeVencedor->bindValue(3,$id);
+			$preparaAtualizaTimeVencedor->execute();
+				
+		}
+		
+		public function atualizaTimePerdedorTabela($time){
+
+			$id = $time[0];
+			$derrota = $time[2]+1;
+			
+			$conn = Database::conexao();
+			
+			$atualizaTimePerdedor = 'UPDATE Time SET  derrota = ? WHERE id = ?';
+			$preparaAtualizaTimePerdedor = $conn->prepare($atualizaTimePerdedor);
+			$preparaAtualizaTimePerdedor->bindValue(1,$derrota);
+			$preparaAtualizaTimePerdedor->bindValue(2,$id);
+			$preparaAtualizaTimePerdedor->execute();
+
+		}
+		
+		public function empateTabela($time){
+			
+			$empate = $time[3]+1;
+			$pontos = $time[4]+1;
+			$id = $time[0];
+			
+			$conn = Database::conexao();
+
+			$atualizaTimeEmpate = 'UPDATE Time SET  empate = ?, pontos = ? WHERE id = ?';
+			$preparaAtualizaTimeEmpate = $conn->prepare($atualizaTimeEmpate);
+			$preparaAtualizaTimeEmpate->bindValue(1,$empate);
+			$preparaAtualizaTimeEmpate->bindValue(2,$pontos);
+			$preparaAtualizaTimeEmpate->bindValue(3,$id);
+			$preparaAtualizaTimeEmpate->execute();
+			
+		}
+		
+		public function consultaId($nomeTime){
+				
+			$conn = Database::conexao();
+				
+			$consultaTime = 'SELECT id FROM Time WHERE nome = ?';
+			$preparaConsultaTime = $conn->prepare($consultaTime);
+			$preparaConsultaTime->bindValue(1, $nomeTime);
+			$preparaConsultaTime->execute();
+				
+			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaTime->fetch()) {
+					
+				$id = $row[0];
+					
+			}
+				
+			return $id;
+				
+		}
+		
+		public function consultaIdTime($id){
+			
+			$this->setId($id);
+			$idTime = $this->getId();
+			
+			$conn = Database::conexao();
+			
+			$consultaTime = 'SELECT id FROM Time WHERE dono = ?';
+			$preparaConsultaTime = $conn->prepare($consultaTime);
+			$preparaConsultaTime->bindValue(1, $idTime);
+			$preparaConsultaTime->execute();
+			
+			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaTime->fetch()) {
+					
+				$id = $row[0];
+					
+			}
+			
+			return $id;
+		}
+		
+		public function selecionarTime($time){
+			
+			$conn = Database::conexao();
+			
+			$idTime = $time->getId();
+			$idDono = $time->getDono();
+			
+			$atualizaDefinirseuTime = 'UPDATE Time SET dono = ? WHERE id = ?';
+			$preparaAtualizaDefinirseuTime = $conn->prepare($atualizaDefinirseuTime);
+			$preparaAtualizaDefinirseuTime->bindValue(1,$idDono);
+			$preparaAtualizaDefinirseuTime->bindValue(2,$idTime);
+			$preparaAtualizaDefinirseuTime->execute();
+			
+		}
+		
+		public function consultaTodosTime(){
+			
+			$times = array();
+			
+			$conn = Database::conexao();
+			
+			$consultaTime = 'SELECT id,nome FROM Time';
+			$preparaConsultaTime = $conn->query($consultaTime);
+			$preparaConsultaTime->execute();
+			
+			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+			
+			while ($row = $preparaConsultaTime->fetch()) {
+			
+				$times[] = $row[0];
+				$times[] = $row[1];
+			
+			}
+			
+			return $times;
+		}
+		
+		public function consultaNomeTime($id){
+			
+			$conn = Database::conexao();
+			
+			$consultaTime = 'SELECT nome FROM Time WHERE id = ? ';
+			$preparaConsultaTime = $conn->prepare($consultaTime);
+			$preparaConsultaTime->bindValue(1,$id);
+			$preparaConsultaTime->execute();
+			
+			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+			
+			while ($row = $preparaConsultaTime->fetch()) {
+			
+				$nome = $row[0];
+			
+			}
+			
+			return $nome;
+		}
+		
+		public function consultaDadoTime($id){
+			
+			$timeEscolhido= array();
+			
+			$conn = Database::conexao();
+			
+			$consultaTimeDado = 'SELECT nome ,mascote,cor,dinheiro,torcida ,nomeEstadio ,capacidade FROM Time WHERE id = ? ';
+			$preparaConsultaDadoTime = $conn->prepare($consultaTimeDado);
+			$preparaConsultaDadoTime->bindValue(1,$id);
+			$preparaConsultaDadoTime->execute();
+			
+			$result = $preparaConsultaDadoTime->setFetchMode(PDO::FETCH_NUM);
+			
+			while ($row = $preparaConsultaDadoTime->fetch()) {
+			
+				$timeEscolhido = $row[0];				
+				$timeEscolhido = $row[1];
+				$timeEscolhido = $row[2];
+				$timeEscolhido = $row[3];
+				$timeEscolhido = $row[4];
+				$timeEscolhido = $row[5];
+				$timeEscolhido = $row[6];
+				
+			}
+			
+			return $timeEscolhido;
+			
+		}
 	}
 
 ?>

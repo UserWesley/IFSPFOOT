@@ -2,13 +2,8 @@
 	
 	/* Este arquivo mostra a artilharia do campeonato e ordena por número de gols 
 	 */
-
-	//Inclusão do arquivo para conexão com o banco de dados PDO
-	//include_once '../_model/_bancodedados/modelBancodeDados.php';
-	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados1.php';
 	
-	include_once '../_controller/controllerMenu.php';
+	include_once '../_controller/controllerClassMenu.php';
 
 ?>
 
@@ -53,18 +48,8 @@
       
 		<?php 
 			
-			$artilharia = new controllerMenu();
-			
-			$artilheiros = array();
-			
-			$artilheiros = $artilharia->buscaArtilharia();
-			
-			$colunas = 4;	
-			for($i=0; $i < count($artilheiros); $i++) {
-				echo "<td>".$artilheiros[$i]."</td>";
-				if((($i+1) % $colunas) == 0 )
-				echo "</tr><tr>";
-			}
+			$artilharia = new controllerClassMenu();
+			$artilharia->buscaArtilharia();
 		
 		?>
 		

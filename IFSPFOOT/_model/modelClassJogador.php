@@ -173,6 +173,17 @@
 			
 		}
 		
+		public function visualizaJogador($jogadores){
+			
+			$colunas = 11;
+			 
+			for($i=0; $i < count($jogadores); $i++) {
+				echo "<td>".$jogadores[$i]."</td>";
+				if((($i+1) % $colunas) == 0 )
+					echo "</tr><tr>";
+			}
+		}
+		
 		public function sorteiaJogador($jogadores){
 			
 			$recebeIndexArrayJogadorTime = array_rand($jogadores, 1);
@@ -237,6 +248,17 @@
 				
 		}
 		
+		public function visualizaArtilharia($jogadoresArtilharia){
+			
+			$colunas = 4;
+			
+			for($i=0; $i < count($jogadoresArtilharia); $i++) {
+				echo "<td>".$jogadoresArtilharia[$i]."</td>";
+				if((($i+1) % $colunas) == 0 )
+					echo "</tr><tr>";
+			}
+		}
+		
 		public function consultaJogadorTime($idTime){
 			
 			$jogadorTime = array();
@@ -267,6 +289,17 @@
 			}
 			
 			return $jogadorTime;
+		}
+		
+		public function visualizaJogadorTime($jogadoresTime){
+			
+			$colunas = 11;
+			 
+			for($i=0; $i < count($jogadoresTime); $i++) {
+				echo "<td>".$jogadoresTime[$i]."</td>";
+				if((($i+1) % $colunas) == 0 )
+					echo "</tr><tr>";
+			}
 		}
 	}
 

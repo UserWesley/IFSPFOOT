@@ -3,7 +3,7 @@
 	/*Este arquivo mostrará todos os dados dos jogadores do time do usuário*/
 
 	session_start();
-	include_once '../_controller/controllerMenu.php';
+	include_once '../_controller/controllerClassMenu.php';
 
 ?>
 
@@ -56,19 +56,9 @@
 		    
 		      <?php
 		      	
-		      	$jogador = new controllerMenu();
-		      	
+		      	$jogador = new controllerClassMenu();   	
 		      	$idDono = $_SESSION['idDono'];
-		      	
-		      	$jogadores = $jogador->buscaJogador($idDono);
-		      		      	
-		      	$colunas = 11;
-		      	
-		      	for($i=0; $i < count($jogadores); $i++) {
-		      		echo "<td>".$jogadores[$i]."</td>";
-		      		if((($i+1) % $colunas) == 0 )
-		      			echo "</tr><tr>";
-		      	}
+		      	$jogador->buscaJogador($idDono);
 		      	
 		      ?>
 		      

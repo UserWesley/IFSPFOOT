@@ -47,7 +47,7 @@
 		    
 		        $.ajax({
 		              type : "POST",
-		              url : '../_controller/controllerGerenciaPosJogo.php',
+		              url : '../_controller/controllerClassGerenciaPosJogo.php',
 		              data : "content="+dataArr,
 		              success: function(data) {
 		                  alert(data);// alert the data from the server

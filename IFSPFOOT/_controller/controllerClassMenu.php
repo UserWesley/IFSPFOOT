@@ -23,22 +23,22 @@
 			
 			$jogosCampeonato = $jogo->consultaJogos();
 			
-			return $jogosCampeonato;
+			return $jogo->visualizaJogos($jogosCampeonato);
+			
 		}
 		
 		public function buscaJogador($idDono){
 			
 			$jogador = new modelClassJogador();
-			
 			$time = new modelClassTime();
 			
-			$jogadorTime = array();
+			$jogadoresTime = array();
 			
 			$idTime = $time->consultaIdTime($idDono);
 			
-			$jogadorTime = $jogador->consultaJogadorTime($idTime);
+			$jogadoresTime = $jogador->consultaJogadorTime($idTime);
 			
-			return $jogadorTime;
+			return $jogador->visualizaJogadorTime($jogadoresTime);
 		}
 		
 		public function buscarTime($id){
@@ -65,7 +65,20 @@
 			
 			$timeEscolhido = $time->consultaDadoTime($idTime);
 			
-			return $timeEscolhido;
+			return $time->visualizaDadoTime($timeEscolhido);
+			
+		}
+		
+		public function buscarTabela(){
+			
+			$time = new modelClassTime();
+			
+			$tabela = array();
+			
+			$tabela = $time->consultaTabelaCampeonato();
+			
+			return $time->visualizaTabelaCampeonato($tabela);
+			
 		}
 		
 	}

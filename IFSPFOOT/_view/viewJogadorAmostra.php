@@ -3,7 +3,7 @@
 	/*Este arquivo pegará o id do time, passado pelo formulário do arquivo viewMenuArquivo.php, feito isso
 	passará como parametro para filtrar os jogadores do respectivoTime*/
 
-	include_once '../_controller/controllerVerificaTime.php';
+	include_once '../_controller/controllerClassVerificaTime.php';
 
 ?>
 
@@ -55,19 +55,10 @@
       		
 		      <?php
 				
-		      	$jogador = new controllerVerificaTime();
-		      	
-		      	$jogadores = array();
+		      	$jogador = new controllerClassVerificaTime();
+		      	$idTime = $_POST['selectTime'];
 
-		      	$jogadores = $jogador->consultaJogador($_POST['selectTime']);
-		      	
-		      	$colunas = 11;
-		      	
-		      	for($i=0; $i < count($jogadores); $i++) {
-		      		echo "<td>".$jogadores[$i]."</td>";
-		      		if((($i+1) % $colunas) == 0 )
-		      			echo "</tr><tr>";
-		      	}
+		      	$jogador->consultaJogador($idTime);     	
 		      	
 		      ?>
 		      

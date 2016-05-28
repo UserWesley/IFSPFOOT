@@ -62,7 +62,7 @@
 		                    <div class="social-login-buttons" style="margin-bottom: 0px; padding-bottom:0px;">
 		                		
 		                    	<div class="form-group" >
-			                		<a class="btn btn-info btn-block" href="../_controller/controllerGerenciaInicio.php">
+			                		<a class="btn btn-info btn-block" href="../_controller/controllerClassGerenciaInicio.php">
 			                    		 Novo Jogo
 			                    	</a>
 		                    	</div>

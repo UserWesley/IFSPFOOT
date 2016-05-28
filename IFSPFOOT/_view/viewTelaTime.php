@@ -55,7 +55,7 @@
 				
 				<li><a href="viewTime.php" target="janela">Times</a></li>
 			
-		    	<li><a href="../_controller/controllerPreparaJogo.php" >JOGAR</a></li>
+		    	<li><a href="../_controller/controllerClassPreparaJogo.php" >JOGAR</a></li>
 		    	
 		    	<li><a href="../_controller/controllerLogout.php">Sair</a></li>
 								

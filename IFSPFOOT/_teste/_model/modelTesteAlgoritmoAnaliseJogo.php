@@ -1,6 +1,7 @@
 <?php 
 
 //Definição e atribuição de variaveis
+
 $golTime1 = 0;
 $golTime2 = 0;
 $oportunidadeTime1 = 0;

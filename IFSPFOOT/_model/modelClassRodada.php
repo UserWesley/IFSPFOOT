@@ -45,6 +45,7 @@
 			$insercaoNovaRodada = "INSERT INTO Rodada VALUES ('$id','$numero','$campeonato')";
 			$conn->exec($insercaoNovaRodada);
 		}
+		
 	}
 	
 ?>

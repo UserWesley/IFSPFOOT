@@ -4,10 +4,8 @@
  	os time possiveis de selecionar para iniciar o jogo */
 	
 	session_start();
-	
-	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
-	include_once '../_controller/controllerVerificaTime.php';
+
+	include_once '../_controller/controllerClassVerificaTime.php';
 	
 ?>
 
@@ -45,37 +43,21 @@
 		
 				<?php 
 				
-					$time = new controllerVerificaTime();
+					$time = new controllerClassVerificaTime();
 					
 					$times = array();
 					$times = $time->visualizaTime();
 					
 					echo "<select id = \"idSelectTime\" name = \"selectTime\">";
 					
-					foreach ($times as $row) {
-					
-						echo "<option value =".$row.">".$row."</option>";
-					
-					}
+					for($i=0; $i < 4; $i++) {
 						
-					echo "</select>";
-				
-					//Consulta para resgatar no banco o id e nome do time, assim disponibilizando seus nomes no select
-					/*$consultaTime = 'SELECT id,nome FROM Time';
-					$preparaConsultaTime = $conn->query($consultaTime);
-					$preparaConsultaTime->execute();
-				
-					echo "<select id = \"idSelectTime\" name = \"selectTime\">";
-				
-					$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
-					while ($row = $preparaConsultaTime->fetch()) {
-			
-						echo "<option value =".$row[0].">".$row[1]."</option>";
-				
+						echo "<option value = ".current($times).">".next($times)."</option>";
+						next($times);
 					}
-							
+					
 					echo "</select>";
-					*/
+
 					// Caso a variavel esteja vazia, define o time fixo na visualização
 					if(empty($_POST['selectTime'])){
 						

@@ -2,9 +2,6 @@
 	
 	/*Este arquivo lhe mostra as opções disponíveis na lateral esquida do arquivo e a abri
 	 em um iframe no mesma tela*/
-	
-	//Inclui cabeçalho na página
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
 
 ?>
 
@@ -43,7 +40,7 @@
                        
             		<li><a href="viewMenuEscolhaTime.php" target="janela">Escolher Time</a></li>
             		
-            		<li><a href="../_controller/controllerSelecionarTime.php">Iniciar</a></li>
+            		<li><a href="../_controller/controllerClassSelecionarTime.php">Iniciar</a></li>
         
         			<li><a href="../_controller/controllerLogout.php">Sair</a></li>
            </ul>

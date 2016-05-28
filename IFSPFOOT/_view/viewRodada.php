@@ -44,12 +44,11 @@
 	        <tr class = "info">
 	          <th>Time Casa</th>
 	          <th>Gol</th>
-	          <th></th>
 	          <th>Gol</th>
 	          <th>Time Visitante</th>
 	          <th>Data</th>
 	          <th>Hora</th>
-	          <th>Período</th>
+	          <th>Clima</th>
 	        </tr> 
 	      </thead>
 	
@@ -66,7 +65,7 @@
 				
 				//Consulta para visualizar jogos da rodada assim como o placar
 				$consultaRodada = 'SELECT Jogo.timeCasa, Jogo.golCasa, Jogo.golVisitante, Jogo.timeVisitante,
-								Rodada.data, Rodada.hora, Rodada.periodo FROM Jogo,Rodada WHERE Jogo.rodada = Rodada.numero and Rodada.numero = ?';
+								Jogo.data, Jogo.hora, Jogo.clima FROM Jogo,Rodada WHERE Jogo.rodada = Rodada.numero and Rodada.numero = ?';
 				$preparaConsultaRodada = $conn->prepare($consultaRodada);
 				$preparaConsultaRodada->bindValue(1,$rodada);
 				$preparaConsultaRodada->execute();
@@ -77,7 +76,7 @@
 					echo '<tr class = "active">';
 		            echo "<td>{$row[0]}</td>";            
 		            echo "<td>{$row[1]}</td>";
-		            echo "<td> X </td>";
+		            
 		            echo "<td>{$row[2]}</td>";  
 		            echo "<td>{$row[3]}</td>";
 		            echo "<td>{$row[4]}</td>";

@@ -3,7 +3,7 @@
 	include_once '../_model/modelClassTime.php';
 	include_once '../_model/modelClassJogador.php';
 
-	Class controllerVerificaTime{
+	Class controllerClassVerificaTime{
 		
 		public function visualizaTime(){
 				
@@ -24,8 +24,8 @@
 			$jogadores = array();
 			
 			$jogadores = $jogador->consultaJogadorTime($idTime);
-			
-			return $jogadores;
+
+			return $jogador->visualizaJogador($jogadores);
 		}
 		
 	}

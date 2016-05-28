@@ -2,7 +2,7 @@
 
 	/* Arquivo mostra todos os times disponiveis para seleção do usuário */
 	
-	include_once ('../_controller/controllerMenu.php');
+	include_once ('../_controller/controllerClassMenu.php');
 
 ?>
 
@@ -36,7 +36,7 @@
    <?php
 
       	//Mostrando o nome do time selecionado
-      	$time = new controllerMenu();
+      	$time = new controllerClassMenu();
       	$idTime = $_POST['selectTime'];
       	
       	$timeEscolhido = $time->buscarTime($idTime);
@@ -67,15 +67,6 @@
 
 		      	$timeDados = array();	
 				$timeDados = $time->buscarDadoTime($idTime);
-				print_r($timeDados);
-				$colunas = 6;
-				
-		      	//Listando Jogadores do time
-		      	for($i=0; $i < count($timeDados); $i++) {
-		      		echo "<td>".$timeDados[$i]."</td>";
-		      		if((($i+1) % $colunas) == 0 )
-		      			echo "</tr><tr>";
-		      	}
 				
 		      ?>
       </tbody>

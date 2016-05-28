@@ -59,7 +59,7 @@
 	                		</div>
 	                    </div>
 	                    <div class="form-bottom" >
-		                    <form role="form" action="_controller/controllerAutenticaLogin.php" method="POST" class="login-form">
+		                    <form role="form" action="_controller/controllerClassAutenticaLogin.php" method="POST" class="login-form">
 		                    	<div class="form-group">
 		                    		<label class="sr-only" for="form-username">Usuário</label>
 		                        	<input type="text" name="form-username" placeholder="Usuário" class="form-username form-control" id="form-username">

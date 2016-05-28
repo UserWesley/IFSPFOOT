@@ -207,17 +207,16 @@
 			return $jogos;
 	   }
 	   
+	   public function visualizaJogos($jogos){
+	   	
+	   		$colunas = 7;
+	   		for($i=0; $i < count($jogos); $i++) {
+	   			
+	   		echo "<td>".$jogos[$i]."</td>";
+	   		if((($i+1) % $colunas) == 0 )
+	   			echo "</tr><tr>";
+	   		}
+	   }
+	   
 	}
-	/* Teste
-	$j = new modelClassJogo();
-	
-	
-	$j->setGolCasa("1");
-	$j->setGolVisitante("1");
-	$j->setTimeCasa("Time1");
-	$j->setTimeVisitante("Time3");
-	$j->atualizaPlacar();
-	$j->mostraPlacar();
-	*/
-	
 ?>

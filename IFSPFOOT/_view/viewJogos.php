@@ -3,7 +3,7 @@
 	/*Este arquivo mostrará todos jogos do Campeonato e seus atributos
 	 */
 
-	include_once '../_controller/controllerMenu.php';
+	include_once '../_controller/controllerClassMenu.php';
 	
 ?>
 
@@ -51,19 +51,8 @@
 
 			<?php
 			 
-				$jogo = new controllerMenu();
-				
-				$jogos = array();
-				
+				$jogo = new controllerClassMenu();
 				$jogos = $jogo->buscaJogos();
-				
-				$colunas = 7;	
-				for($i=0; $i < count($jogos); $i++) {
-					
-					echo "<td>".$jogos[$i]."</td>";
-					if((($i+1) % $colunas) == 0 )
-					echo "</tr><tr>";
-				}
 		
 			?>
 			

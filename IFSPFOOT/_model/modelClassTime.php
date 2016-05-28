@@ -335,17 +335,66 @@
 			
 			while ($row = $preparaConsultaDadoTime->fetch()) {
 			
-				$timeEscolhido = $row[0];				
-				$timeEscolhido = $row[1];
-				$timeEscolhido = $row[2];
-				$timeEscolhido = $row[3];
-				$timeEscolhido = $row[4];
-				$timeEscolhido = $row[5];
-				$timeEscolhido = $row[6];
+				$timeEscolhido[] = $row[0];				
+				$timeEscolhido[] = $row[1];
+				$timeEscolhido[] = $row[2];
+				$timeEscolhido[] = $row[3];
+				$timeEscolhido[] = $row[4];
+				$timeEscolhido[] = $row[5];
+				$timeEscolhido[] = $row[6];
 				
 			}
 			
 			return $timeEscolhido;
+			
+		}
+		
+		public function visualizaDadoTime($time){
+			
+			$colunas = 7;
+			
+			//Listando Jogadores do time
+			for($i=0; $i < count($time); $i++) {
+				echo "<td>".$time[$i]."</td>";
+				if((($i+1) % $colunas) == 0 )
+					
+					echo "</tr><tr>";
+			}
+		}
+		
+		public function consultaTabelaCampeonato(){
+			
+			$tabelaCampeonato = array();
+			
+			//Listando times ordenado por número de pontos
+			$conn = Database::conexao();
+			
+			$consultaTabela = 'SELECT nome, vitoria, derrota, empate, pontos FROM Time ORDER BY pontos DESC';
+			$preparaConsultaTabela = $conn->query($consultaTabela);
+			$preparaConsultaTabela->execute();
+			
+			$result = $preparaConsultaTabela->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaTabela->fetch()) {
+
+				$tabelaCampeonato[] = $row[0];
+				$tabelaCampeonato[] = $row[1];
+				$tabelaCampeonato[] = $row[2];
+				$tabelaCampeonato[] = $row[3];
+				$tabelaCampeonato[] = $row[4];
+			}
+
+			return $tabelaCampeonato;
+		}
+		
+		public function visualizaTabelaCampeonato($tabela){
+			
+			$colunas = 5;
+			
+			for($i=0; $i < count($tabela); $i++) {
+				echo "<td>".$tabela[$i]."</td>";
+				if((($i+1) % $colunas) == 0 )
+					echo "</tr><tr>";
+			}
 			
 		}
 	}

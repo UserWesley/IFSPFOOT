@@ -1,252 +1,304 @@
--- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Tempo de geração: 28/05/2016 às 14:30
--- Versão do servidor: 10.1.9-MariaDB
--- Versão do PHP: 5.6.15
+--Explicações
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+--Efetuado a troca do banco, devido a empresa ORACLE privada e concorrente ter comprado Mysql, com isso a taxa de melhorias neste SGBD caiu consideralvemente. Estava com medo de trocar o SGBD por causa de perder a facilidades de uso e a equipe pode se perder, já que nas aulas utilizamos o XAMPP um ambiente integrado, no entanto, para garantir um futuro a esta aplicação decidi efetuar a troca, ESTAMOS NA CHUVA PARA SE MOLHAR (Também efetuei algumas alterações no schema)
+
+--Apagando as tabelas se já existirem
+
+DROP TABLE IF EXISTS Usuario CASCADE;
+DROP TABLE IF EXISTS Campeonato CASCADE;
+DROP TABLE IF EXISTS Estadio CASCADE;
+DROP TABLE IF EXISTS Formacao CASCADE;
+DROP TABLE IF EXISTS Estrategia CASCADE;
+DROP TABLE IF EXISTS Agressividade CASCADE;
+DROP TABLE IF EXISTS Tabela CASCADE;
+DROP TABLE IF EXISTS Time CASCADE;
+DROP TABLE IF EXISTS Rodada CASCADE;
+DROP TABLE IF EXISTS Clima CASCADE;
+DROP TABLE IF EXISTS Jogo CASCADE;
+DROP TABLE IF EXISTS Posicao CASCADE;
+DROP TABLE IF EXISTS Habilidade CASCADE;
+DROP TABLE IF EXISTS Temperamento CASCADE;
+DROP TABLE IF EXISTS Estilo CASCADE;
+DROP TABLE IF EXISTS Jogador CASCADE;
+
+-- Tabelas do Banco de dados
+
+--Tabela com os dados dos usuários da aplicação
+CREATE TABLE Usuario(
+
+	id SERIAL,
+	login VARCHAR(12) UNIQUE,
+	senha VARCHAR(32) NOT NULL,
+	nome VARCHAR(30) NOT NULL,
+	sobrenome VARCHAR(60) NOT NULL,
+	email VARCHAR(40) UNIQUE,
+	celular VARCHAR(11) NOT NULL,
+
+	PRIMARY KEY(id)
+
+);
+
+--T
+CREATE TABLE Campeonato (
+	
+	id SERIAL,
+	nome VARCHAR(20) NOT NULL,
+	rodadaAtual INT NOT NULL,
+	temporada INT NOT NULL,
+	nomeCarregamento VARCHAR(20) UNIQUE,
+	usuario INT,
+	
+	FOREIGN KEY (usuario) REFERENCES Usuario (id),
+	PRIMARY KEY (id)
+	
+);
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+CREATE TABLE Estadio(
 
---
--- Banco de dados: `IFSPFOOT`
---
+	id SERIAL,
+	nome VARCHAR(20) NOT NULL,
+	capacidade INT NOT NULL,
 
--- --------------------------------------------------------
+	PRIMARY KEY(id)	
 
---
--- Estrutura para tabela `Campeonato`
---
+);
 
-CREATE TABLE `Campeonato` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(20) COLLATE utf32_bin NOT NULL,
-  `rodadaAtual` int(11) NOT NULL,
-  `temporada` int(11) NOT NULL,
-  `vencedor` varchar(20) COLLATE utf32_bin DEFAULT NULL,
-  `Usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
+CREATE TABLE Tabela(
+	
+	id SERIAL,
+	vitoria INT NOT NULL,
+	empate INT NOT NULL,
+	derrota INT NOT NULL,
+	
+	PRIMARY KEY(id)
+);
 
--- --------------------------------------------------------
+CREATE TABLE Formacao (
+	
+	id SERIAL,
+	nome VARCHAR(20) NOT NULL,
+ 
+	PRIMARY KEY(id)
 
---
--- Estrutura para tabela `Jogador`
---
+);
 
-CREATE TABLE `Jogador` (
-  `id` int(11) NOT NULL,
-  `titular` varchar(1) COLLATE utf32_bin NOT NULL,
-  `nome` varchar(20) COLLATE utf32_bin NOT NULL,
-  `sobrenome` varchar(40) COLLATE utf32_bin NOT NULL,
-  `posicao` varchar(20) COLLATE utf32_bin NOT NULL,
-  `nacionalidade` varchar(20) COLLATE utf32_bin NOT NULL,
-  `habilidade` varchar(20) COLLATE utf32_bin NOT NULL,
-  `idade` int(11) NOT NULL,
-  `forca` int(11) NOT NULL,
-  `idTime` int(11) NOT NULL,
-  `estamina` int(11) NOT NULL,
-  `nivel` varchar(20) COLLATE utf32_bin NOT NULL,
-  `gol` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
 
--- --------------------------------------------------------
+CREATE TABLE Estrategia (
+	
+	id SERIAL,
+	nome VARCHAR(20) NOT NULL,
+ 
+	PRIMARY KEY(id)
 
---
--- Estrutura para tabela `Jogo`
---
+);
 
-CREATE TABLE `Jogo` (
-  `id` int(11) NOT NULL,
-  `timeCasa` varchar(20) COLLATE utf32_bin NOT NULL,
-  `golCasa` int(11) DEFAULT NULL,
-  `golVisitante` int(11) DEFAULT NULL,
-  `timeVisitante` varchar(20) COLLATE utf32_bin NOT NULL,
-  `rodada` int(11) NOT NULL,
-  `data` date NOT NULL,
-  `hora` varchar(20) COLLATE utf32_bin NOT NULL,
-  `clima` varchar(20) COLLATE utf32_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
 
--- --------------------------------------------------------
+CREATE TABLE Agressividade (
+	
+	id SERIAL,
+	nome VARCHAR(20) NOT NULL,
+ 
+	PRIMARY KEY(id)
 
---
--- Estrutura para tabela `Rodada`
---
+);
 
-CREATE TABLE `Rodada` (
-  `id` int(11) NOT NULL,
-  `numero` int(11) NOT NULL,
-  `campeonato` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
 
--- --------------------------------------------------------
 
---
--- Estrutura para tabela `Time`
---
+CREATE TABLE Time (
+	
+	id SERIAL,
+	nome VARCHAR(30) UNIQUE,
+	mascote VARCHAR(20) NOT NULL,
+	cor VARCHAR(20) NOT NULL,
+	dinheiro VARCHAR(20) NOT NULL,
+	torcida INT NOT NULL,
+	dono INT,
+	campeonato INT,	
+	estadio INT,		
+	formacao INT,
+	estrategia INT,
+	agressividade INT,
+	tabela INT,
+	
 
-CREATE TABLE `Time` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(20) COLLATE utf32_bin NOT NULL,
-  `mascote` varchar(20) COLLATE utf32_bin NOT NULL,
-  `cor` varchar(20) COLLATE utf32_bin NOT NULL,
-  `dono` int(11) DEFAULT NULL,
-  `dinheiro` float NOT NULL,
-  `torcida` varchar(20) COLLATE utf32_bin NOT NULL,
-  `nomeEstadio` varchar(20) COLLATE utf32_bin NOT NULL,
-  `capacidade` int(11) NOT NULL,
-  `vitoria` int(11) NOT NULL,
-  `derrota` int(11) NOT NULL,
-  `empate` int(11) NOT NULL,
-  `pontos` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin COMMENT='Time';
+	FOREIGN KEY (dono) REFERENCES Usuario (id),	
+	FOREIGN KEY (campeonato) REFERENCES Campeonato (id),
+	FOREIGN KEY (estadio) REFERENCES Estadio (id),
+	FOREIGN KEY (formacao) REFERENCES Formacao (id),	
+	FOREIGN KEY (estrategia) REFERENCES Estrategia (id),	
+	FOREIGN KEY (agressividade) REFERENCES Agressividade(id),				
+	FOREIGN KEY (tabela) REFERENCES Tabela (id),
+	
+	PRIMARY KEY(id)
 
--- --------------------------------------------------------
+);
 
---
--- Estrutura para tabela `Usuario`
---
+CREATE TABLE Rodada(
+	
+	id SERIAL,
+	numero INT NOT NULL,
+	campeonato INT,
+	
+	FOREIGN KEY (campeonato) REFERENCES Campeonato(id),
+	PRIMARY KEY(id) 
+);
 
-CREATE TABLE `Usuario` (
-  `id` int(11) NOT NULL,
-  `login` varchar(10) COLLATE utf32_bin NOT NULL,
-  `senha` varchar(32) COLLATE utf32_bin NOT NULL,
-  `nome` varchar(30) COLLATE utf32_bin NOT NULL,
-  `sobrenome` varchar(40) COLLATE utf32_bin NOT NULL,
-  `email` varchar(40) COLLATE utf32_bin NOT NULL,
-  `celular` varchar(20) COLLATE utf32_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_bin COMMENT='Login de Autenticação a aplicação';
+CREATE TABLE Clima (
+	
+	id SERIAL,
+	nome VARCHAR(20),
 
---
--- Fazendo dump de dados para tabela `Usuario`
---
+	PRIMARY KEY(id)
+);
 
-INSERT INTO `Usuario` (`id`, `login`, `senha`, `nome`, `sobrenome`, `email`, `celular`) VALUES
-(1, 'a', 'a', 'asda', 'asdsada', 'sadsadsa', '');
+CREATE TABLE Jogo (
+	
+	id SERIAL,
+	placarCasa int NOT NULL,
+	placarVisitante int NOT NULL,
+	data timestamp NOT NULL,	
+	campeonato INT,
+	rodada INT,	
+	timeCasa INT,
+	timeVisitante INT,
+	clima INT,
 
---
--- Índices de tabelas apagadas
---
+	FOREIGN KEY (campeonato) REFERENCES Campeonato(id),
+	FOREIGN KEY (rodada) REFERENCES Rodada(id),
+	FOREIGN KEY (timeCasa) REFERENCES Time(id),
+	FOREIGN KEY (timeVisitante) REFERENCES Time(id),
+	FOREIGN KEY (clima) REFERENCES Clima(id),			
+	PRIMARY KEY(id)
+	
+);
 
---
--- Índices de tabela `Campeonato`
---
-ALTER TABLE `Campeonato`
-  ADD PRIMARY KEY (`id`);
+CREATE TABLE Posicao(
 
---
--- Índices de tabela `Jogador`
---
-ALTER TABLE `Jogador`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_idTime` (`idTime`);
+	id SERIAL,
+	nome VARCHAR(20),
+	
+	PRIMARY KEY (id)
+);
 
---
--- Índices de tabela `Jogo`
---
-ALTER TABLE `Jogo`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_idRodada` (`rodada`),
-  ADD KEY `fk_timeVisitante` (`timeVisitante`),
-  ADD KEY `fk_timeCasa1` (`timeCasa`);
 
---
--- Índices de tabela `Rodada`
---
-ALTER TABLE `Rodada`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_idCampeonato` (`campeonato`);
+CREATE TABLE Habilidade (
 
---
--- Índices de tabela `Time`
---
-ALTER TABLE `Time`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nome` (`nome`),
-  ADD UNIQUE KEY `mascote` (`mascote`),
-  ADD KEY `fk_dono` (`dono`);
+	id SERIAL,
+	ataque INT NOT NULL,
+	chute INT NOT NULL,
+	defesa INT NOT NULL,	
+	forca INT NOT NULL,
+	habilidade INT NOT NULL,	
+	passe INT NOT NULL,
+	resistencia INT NOT NULL,
 
---
--- Índices de tabela `Usuario`
---
-ALTER TABLE `Usuario`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `usuario` (`login`),
-  ADD UNIQUE KEY `email` (`email`);
+	PRIMARY KEY (id)
+		
+);
 
---
--- AUTO_INCREMENT de tabelas apagadas
---
+CREATE TABLE Temperamento (
+	
+	id SERIAL,
+	nome VARCHAR(20) NOT NULL,
 
---
--- AUTO_INCREMENT de tabela `Campeonato`
---
-ALTER TABLE `Campeonato`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de tabela `Jogador`
---
-ALTER TABLE `Jogador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
---
--- AUTO_INCREMENT de tabela `Jogo`
---
-ALTER TABLE `Jogo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT de tabela `Rodada`
---
-ALTER TABLE `Rodada`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT de tabela `Time`
---
-ALTER TABLE `Time`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de tabela `Usuario`
---
-ALTER TABLE `Usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- Restrições para dumps de tabelas
---
+	PRIMARY KEY(id)
 
---
--- Restrições para tabelas `Jogador`
---
-ALTER TABLE `Jogador`
-  ADD CONSTRAINT `fk_idTime` FOREIGN KEY (`idTime`) REFERENCES `Time` (`id`);
+);
 
---
--- Restrições para tabelas `Jogo`
---
-ALTER TABLE `Jogo`
-  ADD CONSTRAINT `fk_idRodada` FOREIGN KEY (`rodada`) REFERENCES `Rodada` (`id`),
-  ADD CONSTRAINT `fk_timeCasa` FOREIGN KEY (`timeCasa`) REFERENCES `Time` (`nome`),
-  ADD CONSTRAINT `fk_timeCasa1` FOREIGN KEY (`timeCasa`) REFERENCES `Time` (`nome`),
-  ADD CONSTRAINT `fk_timeVisitante` FOREIGN KEY (`timeVisitante`) REFERENCES `Time` (`nome`);
+CREATE TABLE Estilo(
+	
+	id SERIAL,
+	nome VARCHAR(20) NOT NULL,
 
---
--- Restrições para tabelas `Rodada`
---
-ALTER TABLE `Rodada`
-  ADD CONSTRAINT `fk_idCampeonato` FOREIGN KEY (`campeonato`) REFERENCES `Campeonato` (`id`);
+	PRIMARY KEY(id)
+);
 
---
--- Restrições para tabelas `Time`
---
-ALTER TABLE `Time`
-  ADD CONSTRAINT `fk_dono` FOREIGN KEY (`dono`) REFERENCES `Usuario` (`id`);
+CREATE TABLE Jogador (
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+	id SERIAL,
+	titular BOOLEAN,
+	nome VARCHAR(20) NOT NULL,
+	sobrenome VARCHAR(60) NOT NULL,
+	nacionalidade VARCHAR(40) NOT NULL,
+	idade INT NOT NULL,
+	estamina INT NOT NULL,
+ 	nivel VARCHAR NOT NULL,
+	gol INT NOT NULL,
+	passe VARCHAR(20) NOT NULL,
+	idTime INT,
+	posicao INT,
+	habilidade INT,
+	temperamento INT,
+	estilo INT,	
+
+	FOREIGN KEY (idTime) REFERENCES Time (id),
+	FOREIGN KEY (posicao) REFERENCES Posicao (id),
+	FOREIGN KEY (habilidade) REFERENCES Habilidade (id), 
+	FOREIGN KEY (temperamento) REFERENCES Temperamento (id),
+	FOREIGN KEY (estilo) REFERENCES estilo (id),	
+	PRIMARY KEY (id)
+	
+);
+
+-- Inserções do banco de dados
+
+--Inserção das Formações
+INSERT INTO Formacao VALUES(DEFAULT, '5-4-1');
+INSERT INTO Formacao VALUES(DEFAULT, '4-5-1');
+INSERT INTO Formacao VALUES(DEFAULT, '4-4-2');
+INSERT INTO Formacao VALUES(DEFAULT, '4-3-3');
+INSERT INTO Formacao VALUES(DEFAULT, '3-5-2');
+	
+--Inserção das Estratégias
+INSERT INTO Estrategia VALUES(DEFAULT, 'Contra-Ataque');
+INSERT INTO Estrategia VALUES(DEFAULT, 'Defesa Total');
+INSERT INTO Estrategia VALUES(DEFAULT, 'Ataque Total');
+INSERT INTO Estrategia VALUES(DEFAULT, 'Equilibrado');
+
+--Inserção das Agressividades
+INSERT INTO Agressividade VALUES(DEFAULT,'Marcação Leve');
+INSERT INTO Agressividade VALUES(DEFAULT,'Marcação Normal');
+INSERT INTO Agressividade VALUES(DEFAULT,'Marcação Pesada');
+
+--Inserção dos Climas
+INSERT INTO Clima VALUES (DEFAULT, 'Chuva');
+INSERT INTO Clima VALUES (DEFAULT, 'Nublado');
+INSERT INTO Clima VALUES (DEFAULT, 'Sol');
+INSERT INTO Clima VALUES (DEFAULT, 'Chuva-Sol');
+INSERT INTO Clima VALUES (DEFAULT, 'Sol-Chuva');
+INSERT INTO Clima VALUES (DEFAULT, 'Nublado-Sol');
+INSERT INTO Clima VALUES (DEFAULT, 'Sol-Nublado');
+INSERT INTO Clima VALUES (DEFAULT, 'Nublado-Chuva');
+INSERT INTO Clima VALUES (DEFAULT, 'Chuva-Nublado');
+ 
+--Inserção das Posições
+INSERT INTO Posicao VALUES (DEFAULT, 'Goleiro');
+INSERT INTO Posicao VALUES (DEFAULT, 'Zagueiro Central');
+INSERT INTO Posicao VALUES (DEFAULT, 'Zagueiro Direito');
+INSERT INTO Posicao VALUES (DEFAULT, 'Zagueiro Esquerdo');
+INSERT INTO Posicao VALUES (DEFAULT, 'Lateral Direito');
+INSERT INTO Posicao VALUES (DEFAULT, 'Lateral Esquerdo');
+INSERT INTO Posicao VALUES (DEFAULT, 'Volante Central');
+INSERT INTO Posicao VALUES (DEFAULT, 'Volante Direito');
+INSERT INTO Posicao VALUES (DEFAULT, 'Volante Esquerdo');
+INSERT INTO Posicao VALUES (DEFAULT, 'Ala Direita');
+INSERT INTO Posicao VALUES (DEFAULT, 'Ala Esquerdo');
+INSERT INTO Posicao VALUES (DEFAULT, 'Meia Campo Central');
+INSERT INTO Posicao VALUES (DEFAULT, 'Meia Campo Direito');
+INSERT INTO Posicao VALUES (DEFAULT, 'Meia Campo Esquerdo');
+INSERT INTO Posicao VALUES (DEFAULT, 'Atacante Central');
+INSERT INTO Posicao VALUES (DEFAULT, 'Atacante Direito');
+INSERT INTO Posicao VALUES (DEFAULT, 'Atacante Esquerdo');
+
+--Inserção do Temperamento
+
+INSERT INTO Temperamento VALUES (DEFAULT, 'Calmo');
+INSERT INTO Temperamento VALUES (DEFAULT, 'Nervoso');
+INSERT INTO Temperamento VALUES (DEFAULT, 'Calmo-Nervoso');
+
+-- Inserção de Estilo
+
+INSERT INTO Estilo VALUES (DEFAULT,'Esforçado');
+INSERT INTO Estilo VALUES (DEFAULT,'Preguiçoso');
+

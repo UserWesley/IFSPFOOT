@@ -61,7 +61,8 @@
 	                			<i class="fa fa-key"></i>
 	                		</div>
 	                    </div>
-	                    <div class="form-bottom" >
+	                    <div class="form-bottom">
+	                    	<!-- Formulário encaminha dados para a Classe controller de autenticação com o metodo post -->
 		                    <form role="form" action="_controller/controllerClassAutenticaLogin.php" method="POST" class="login-form">
 		                    	<div class="form-group">
 		                    		<label class="sr-only" for="form-username">Usuário</label>
@@ -71,7 +72,9 @@
 		                        	<label class="sr-only" for="form-password">Senha</label>
 		                        	<input type="password" name="form-password" placeholder="Senha" class="form-password form-control" id="form-password">
 		                        </div>
+		                        
 		                        <button type="submit" class="btn">Entrar</button>
+		                     	
 		                    </form>
 		                	
 		                    <div class="social-login-buttons" style="margin-bottom: 0px; padding-bottom:0px;">
@@ -86,6 +89,12 @@
 			                				}
 			                		?>
 		                    	</div>
+		                    	
+		                		<div class="form-group">
+		                			<!-- Link para página de cadastro -->
+		                        	<a class="btn btn-link btn-block" href="_view/viewCadastroNovoUsuario.php">
+			                    		 Cadastrar Novo Usuário
+			                    	</a></div>
 		                		
 		                    	<div class="form-group" >
 		                    		<!-- Link para página de documentação -->
@@ -96,7 +105,7 @@
 		                    	
 		                    	<div class="form-group">
 			                    	<!-- Link para página de testes -->
-			                    	<a class="btn btn-warning btn-block" href="_teste/indexCrud.php">
+			                    	<a class="btn btn-danger btn-block" href="_teste/indexCrud.php">
 			                    		 Teste
 			                    	</a>
 			                    </div>

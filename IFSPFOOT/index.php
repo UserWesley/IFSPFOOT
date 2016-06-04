@@ -1,6 +1,8 @@
 <?php
 
 	/*Este arquivo é a página inicial do projeto, ele permite o usuário logar, navegar na documentação e ir em teste.*/
+	
+	//A sessão esta sendo iniciada, no caso de erro de usuario,senha ou ambos retorna uma mensagem de erro nesta tela
 	session_start();
 	
 ?>
@@ -41,6 +43,7 @@
 </head>
 
 <body>
+
 	<!-- Top content -->
 	<div class="top-content">
 		
@@ -74,7 +77,7 @@
 		                    <div class="social-login-buttons" style="margin-bottom: 0px; padding-bottom:0px;">
 			                    <div class="form-group" >
 			                		<?php 	
-			                				//Informa o usuário que o nome ou senha estão errados
+			                				//Informa o usuário que o nome,senha ou ambos estão errados, caso a variveis não exista ele exibi uma mensagem vazia, ou seja nada
 			                				if(!isset($_SESSION['logado'])){
 			                					echo "";
 			                				}
@@ -85,12 +88,14 @@
 		                    	</div>
 		                		
 		                    	<div class="form-group" >
+		                    		<!-- Link para página de documentação -->
 			                		<a class="btn btn-info btn-block" href="_view/_doc/viewDocMenu.php">
 			                    		 Documentação
 			                    	</a>
 		                    	</div>
 		                    	
 		                    	<div class="form-group">
+			                    	<!-- Link para página de testes -->
 			                    	<a class="btn btn-warning btn-block" href="_teste/indexCrud.php">
 			                    		 Teste
 			                    	</a>

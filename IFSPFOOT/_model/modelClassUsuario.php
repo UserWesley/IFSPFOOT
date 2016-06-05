@@ -1,7 +1,7 @@
 <?php 
 	
 	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados1.php';
+	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
 	
 	Class modelClassUsuario{
 		
@@ -50,7 +50,7 @@
 		}
 		
 		public function setSenha($senha){
-			$this->senha = $senha;
+			$this->senha = md5($senha);
 		}
 		
 		public function getEmail(){
@@ -87,6 +87,56 @@
 			
 			return $dados;
 
+		}
+		
+		public function cadastraUsuario($usuario){
+			
+			$conn = Database::conexao();
+			
+			$login = $this->getLogin();
+			$senha = $this->getSenha();
+			$nome = $this->getNome();
+			$sobrenome = $this->getSobrenome();
+			$email = $this->getEmail();
+			$celular = $this->getCelular();
+			
+			$insercaoNovoUsuario = "INSERT INTO Usuario VALUES (DEFAULT,'$login','$senha','$nome','$sobrenome','$email'
+			,'$celular')";
+			$conn->exec($insercaoNovoUsuario);
+			
+		}
+		
+		public function verificaSenha($senha,$confirmaSenha){
+			
+			if($senha != $confirmaSenha){
+				return false;
+			}
+			else {
+				return true;
+			}
+			
+		}
+		
+		public function verificaLogin($login){
+			
+			$conn = Database::conexao();
+			
+			$resultado = NULL;
+			
+			$consultaLogin = 'SELECT login FROM Usuario WHERE login = ? ';
+			$preparaConsultaLogin = $conn->prepare($consultaLogin);
+			$preparaConsultaLogin->bindValue(1, $login);
+			$preparaConsultaLogin->execute();
+				
+			$result = $preparaConsultaLogin->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaLogin->fetch()) {
+					
+				$resultado = $row[0];
+					
+			}
+				
+			return $resultado;
+			
 		}
 		
 		

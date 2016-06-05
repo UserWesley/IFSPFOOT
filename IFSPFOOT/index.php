@@ -84,7 +84,7 @@
 			                				if(!isset($_SESSION['logado'])){
 			                					echo "";
 			                				}
-			                				else if($_SESSION['logado'] == false){
+			                				else {
 			                					echo "Usuário ou senha inválido";
 			                				}
 			                		?>

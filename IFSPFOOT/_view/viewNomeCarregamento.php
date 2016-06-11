@@ -55,7 +55,7 @@
 	                	<div class="form-top" style="margin-top:-100px;">
 	                		<div class="form-top-left">
 	                			<h1 class="text-center" >IFSPFOOT</h1>
-	                    		<p>Efetue o login com seu usuário e senha :</p>
+	                    		<p>Digite um nome para seu jogo :</p>
 	                		</div>
 	                		<div class="form-top-right" >
 	                			<i class="fa fa-key"></i>

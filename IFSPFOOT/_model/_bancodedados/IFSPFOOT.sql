@@ -232,13 +232,15 @@ CREATE TABLE Jogador (
 	posicao INT,
 	habilidade INT,
 	temperamento INT,
-	estilo INT,	
+	estilo INT,
+	campeonato INT,	
 
 	FOREIGN KEY (idTime) REFERENCES Time (id),
 	FOREIGN KEY (posicao) REFERENCES Posicao (id),
 	FOREIGN KEY (habilidade) REFERENCES Habilidade (id), 
 	FOREIGN KEY (temperamento) REFERENCES Temperamento (id),
-	FOREIGN KEY (estilo) REFERENCES estilo (id),	
+	FOREIGN KEY (estilo) REFERENCES Estilo (id),
+	FOREIGN KEY (campeonato) REFERENCES Campeonato (id),	
 	PRIMARY KEY (id)
 	
 );

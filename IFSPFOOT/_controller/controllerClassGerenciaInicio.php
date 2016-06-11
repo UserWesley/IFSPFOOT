@@ -53,7 +53,6 @@
 			
 			$campeonato = new modelClassCampeonato();
 			//Chama aqui Verificar nome do jogo
-			$campeonato->consultaNomeCarregamento();
 			$campeonato->setNome("IFSPFOOT");
 			$campeonato->setRodadaAtual(1);
 			$campeonato->setTemporada(2016);
@@ -111,7 +110,10 @@
 		}
 		
 		public function cadastroJogador($idTime){
-				
+
+			$campeonato = new modelClassCampeonato();
+			$idCampeonato = $campeonato->recolherUltimoIdCampeonato();
+			
 			for($i=1;$i<=22;$i++){
 		
 				$jogador = new modelClassJogador();
@@ -132,6 +134,7 @@
 				$jogador->setHabilidade($ultimoIdHabilidade);
 				$jogador->setTemperamento(1);
 				$jogador->setEstilo(1);
+				$jogador->setCampeonato($idCampeonato);
 								
 				$jogador->cadastrarJogador($jogador);
 					

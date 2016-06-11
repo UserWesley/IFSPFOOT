@@ -2,7 +2,7 @@
 
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
-
+	
 	Class modelClassJogador{
 		
 		private $id;
@@ -21,6 +21,7 @@
 		private $habilidade;
 		private $temperamento;
 		private $estilo;
+		private $campeonato;
 		
 		
 		public function __destruct(){
@@ -154,6 +155,14 @@
 			$this->estilo = $estilo;
 		}
 		
+		public function getCampeonato(){
+			return $this->campeonato;
+		}
+		
+		public function setCampeonato($campeonato){
+			$this->campeonato = $campeonato;
+		}
+		
 		public function cadastrarJogador($jogador){
 			
 			$titular = $this->getTitular();
@@ -171,11 +180,12 @@
 			$habilidade = $this->getHabilidade();
 			$temperamento = $this->getTemperamento();
 			$estilo = $this->getEstilo();
-
+			$campeonato = $this->getCampeonato();
+			
 			$conn = Database::conexao();
 			
 			$insercaoNovoJogador = "INSERT INTO Jogador VALUES (DEFAULT,'$titular','$nome','$sobrenome','$nacionalidade',
-			'$idade','$estamina','$nivel','$gol','$passe','$salario','$idTime','$posicao','$habilidade','$temperamento','$estilo');";
+			'$idade','$estamina','$nivel','$gol','$passe','$salario','$idTime','$posicao','$habilidade','$temperamento','$estilo','$campeonato');";
 			
 			$conn->exec($insercaoNovoJogador);
 			
@@ -183,7 +193,6 @@
 		
 		
 		public function consultaJogador($idTime){
-
 			$jogadoresTime = array();
 			
 			$conn = Database::conexao();
@@ -219,7 +228,6 @@
 			
 			$recebeIndexArrayJogadorTime = array_rand($jogadores, 1);
 			$quemFezGolTime = $jogadores[$recebeIndexArrayJogadorTime];
-
 			return $quemFezGolTime;
 			
 		}
@@ -333,5 +341,4 @@
 			}
 		}
 	}
-
 ?>

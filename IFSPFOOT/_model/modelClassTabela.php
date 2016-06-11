@@ -11,6 +11,7 @@
 		private $empate;
 		private $derrota;
 		private $ponto;
+		private $campeonato;
 		
 		//Getters e Setters
 		public function getId(){
@@ -53,6 +54,14 @@
 			$this->ponto = $ponto;
 		}
 		
+		public function getCampeonato(){
+			return $this->campeonato;
+		}
+		
+		public function setCampeonato($campeonato){
+			$this->campeonato = $campeonato;
+		}
+		
 		public function cadastrarTabela($tabela){
 		
 			$conn = Database::conexao();
@@ -61,8 +70,9 @@
 			$empate = $this->getEmpate();
 			$derrota = $this->getDerrota();
 			$ponto = $this->getPonto();
+			$campeonato = $this->getCampeonato();
 		
-			$insercaoNovaTabela = "INSERT INTO Tabela VALUES (DEFAULT,'$vitoria','$empate','$derrota','$ponto');";
+			$insercaoNovaTabela = "INSERT INTO Tabela VALUES (DEFAULT,'$vitoria','$empate','$derrota','$ponto','$campeonato');";
 			$conn->exec($insercaoNovaTabela);
 			
 		

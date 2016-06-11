@@ -84,6 +84,7 @@
 			$tabela->setEmpate(0);
 			$tabela->setDerrota(0);
 			$tabela->setPonto(0);
+			$tabela->setCampeonato($_SESSION['IdCampeonato']);
 			$tabela->cadastrarTabela($tabela);
 			
 			$ultimoIdTabela = $tabela->recolherUltimoIdTabela();

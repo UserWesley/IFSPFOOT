@@ -1,7 +1,7 @@
 <?php
 
 	/*Após logar, esta tela lhe dará as opções de iniciar um novo jogo ou carregar um jogo salvo.*/
-	
+	include_once '../_controller/controllerClassCarregamento.php';
 ?>
 
 <!DOCTYPE html>
@@ -51,31 +51,59 @@
 	                <div class="col-sm-6 col-sm-offset-3 form-box">
 	                	<div class="form-top" style="margin-top:-100px;">
 	                		<div class="form-top-left">
-	                			<h1 class="text-center" >MENU</h1>
-	                    		<h3 class="text-center">Selecione sua opção</h3>
+	                			<h1 class="text-center" >Jogos Salvos</h1>
+	                    		<h3 class="text-center">Selecione seu jogo salvo</h3>
 	                		</div>
 	                		<div class="form-top-right" >
 	                			<i class="fa fa-key"></i>
 	                		</div>
 	                    </div>
-	                    <div class="form-bottom" >
+	                  	<div class="form-bottom" >
 		                	
 		                    <div class="social-login-buttons" style="margin-bottom: 0px; padding-bottom:0px;">
 		                		
 		                    	<div class="form-group" >
-			                		<a class="btn btn-info btn-block" href="../_view/viewNomeCarregamento.php">
-			                    		 Novo Jogo
-			                    	</a>
-		                    	</div>
+
+		                    	<?php
+					                 
+
+									$gerenciaCampeonato = new controllerClassCarregamento();
+							
+									$campeonatos = array();
+									
+									$campeonatos = $gerenciaCampeonato->carregamentoJogo();
+									
+									if($campeonatos == NULL){
+										echo "Você não tem nenhum jogo !";	
+									}
+									else {
+										echo "<form action=\"viewTelaTime.php\" method=POST>";
+											echo "<select id = \"idSelectTime\" name = \"selectTime\">";
+											
+											foreach($campeonatos as $key => $value):
+												echo '<option value="'.$key.'">'.$value.'</option>'; 
+											endforeach;
+									
+											echo "</select>";
+											
+											echo "<input type=\"submit\" value=\"Selecionar\">";
+											
+										echo "</form>";
+									}										
+								?>
+									
+				                </div>
+		                	
 		                    	
 		                    	<div class="form-group">
-			                    	<a class="btn btn-warning btn-block" href="../_view/viewCarregamentoCampeonato.php">
-			                    		 Carregar Jogo
+			                    	<a class="btn btn-warning btn-block" href="viewInicial.php">
+			                    		 Voltar Jogo
 			                    	</a>
 			                    </div>
 			                    
-	                    	</div>
 	                    </div>
+	                    </div>
+
 	                </div>
 	            </div>
 	        </div>

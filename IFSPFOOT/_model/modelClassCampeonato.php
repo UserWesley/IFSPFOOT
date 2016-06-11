@@ -80,14 +80,15 @@
 		}
 		
 		//O certo era recolher pelo pg_lastid, ou na sequence ou retorno
-		public function recolherUltimoIdCampeonato(){
+		public function recolherUltimoIdCampeonato($campeonato){
 			
-			$usuario = $_SESSION['idDono'];
-			
+			$usuario = $this->getUsuario();
+		
 			$conn = Database::conexao();
 			
-			$consultaUltimoId = 'SELECT MAX(id) FROM Campeonato';
-			$preparaConsultaUltimoId = $conn->query($consultaUltimoId);
+			$consultaUltimoId = ("SELECT MAX(id) FROM Campeonato WHERE usuario = ?;");
+			$preparaConsultaUltimoId = $conn->prepare($consultaUltimoId);
+			$preparaConsultaUltimoId->bindValue(1, $usuario);
 			$preparaConsultaUltimoId->execute();
 			
 			$result = $preparaConsultaUltimoId->setFetchMode(PDO::FETCH_NUM);
@@ -97,7 +98,7 @@
 			}
 			
 			return $id;
-			
+
 		}
 		
 		public function rodadaAtual(){
@@ -152,28 +153,25 @@
 				
 		}
 		
-		public function consultaTodosNomeCarregamento(){
-				
+		public function consultaTodosNomeCarregamento($usuario){
+			
 			$conn = Database::conexao();
-		
-			$resultado = NULL;
-		
-			$consultaTodosNomesCarregamento = 'SELECT nomeCarregamento FROM Campeonato WHERE usuario = ?';
-			$preparaConsultaTodosNomesCarregamento = $conn->prepare($consultaNomeCarregamento);
-			$preparaConsultaTodosNomesCarregamento->bindValue(1, $usuario);
-			$preparaConsultaTodosNomesCarregamento->execute();
+			
+			$resultado = array();
+			
+			$consultaNomeCarregamento = 'SELECT nomeCarregamento FROM Campeonato WHERE usuario = ? ';
+			$preparaConsultaNomeCarregamento = $conn->prepare($consultaNomeCarregamento);
+			$preparaConsultaNomeCarregamento->bindValue(1, $usuario);
+			$preparaConsultaNomeCarregamento->execute();
 				
 			$result = $preparaConsultaNomeCarregamento->setFetchMode(PDO::FETCH_NUM);
 			while ($row = $preparaConsultaNomeCarregamento->fetch()) {
 					
-				$resultado = $row[0];
+				$resultado[] = $row[0];
 					
 			}
 			//Retorna null caso seja válido, e retorno o nomeCarregamento caso já tenha
 			return $resultado;
-		
+			
 		}
-		
 	}
-	
-?>

@@ -59,6 +59,8 @@
 			$campeonato->setNomeCarregamento($_POST['nomeCarregamento']);
 			$campeonato->setUsuario($_SESSION['idDono']);
 		    $campeonato->cadastrarCampeonato($campeonato);
+		    
+		    $_SESSION['IdCampeonato']= $campeonato->recolherUltimoIdCampeonato($campeonato);
 
 		}
 		
@@ -110,9 +112,6 @@
 		}
 		
 		public function cadastroJogador($idTime){
-
-			$campeonato = new modelClassCampeonato();
-			$idCampeonato = $campeonato->recolherUltimoIdCampeonato();
 			
 			for($i=1;$i<=22;$i++){
 		
@@ -134,7 +133,7 @@
 				$jogador->setHabilidade($ultimoIdHabilidade);
 				$jogador->setTemperamento(1);
 				$jogador->setEstilo(1);
-				$jogador->setCampeonato($idCampeonato);
+				$jogador->setCampeonato($_SESSION['IdCampeonato']);
 								
 				$jogador->cadastrarJogador($jogador);
 					
@@ -143,9 +142,6 @@
 		}
 		
 		public function cadastroTime(){
-			
-			$campeonato = new modelClassCampeonato();
-			$idCampeonato = $campeonato->recolherUltimoIdCampeonato();
 			
 			for($i=1;$i<=8;$i++){
 				
@@ -187,7 +183,7 @@
 				$time->setDinheiro(100);
 				$time->setTorcida(100);
 				//Dono será cadastro como nulo
-				$time->setCampeonato($idCampeonato);
+				$time->setCampeonato($_SESSION['IdCampeonato']);
 				$time->setEstadio($ultimoIdEstadio);
 				$time->setFormacao(1);
 				$time->setEstrategia(1);
@@ -203,16 +199,13 @@
 		
 		public function cadastroRodada(){
 			
-			$campeonato = new modelClassCampeonato();
-			$ultimoIdCampeonato = $campeonato->recolherUltimoIdCampeonato();
-			
 			$time = new modelClassTime();
 			$quantidadeTimesCampeonato = $time->recolheNumerodeTimesCampeonato($ultimoIdCampeonato);
 			 
 			
 			$rodada = new modelClassRodada();			
 			$rodada->setNumero(1);
-			$rodada->setCampeonato($ultimoIdCampeonato);
+			$rodada->setCampeonato($_SESSION['IdCampeonato']);
 			$rodada->cadastrarRodada($rodada,$quantidadeTimesCampeonato);				
 				
 		}
@@ -224,9 +217,6 @@
 			
 			$clima = new modelClassClima();
 			$arrayClimas = $clima->recolheClimas();
-			
-			$campeonato = new modelClassCampeonato();
-			$ultimoIdCampeonato = $campeonato->recolherUltimoIdCampeonato();
 			
 			$time = new modelClassTime();
 			$quantidadeTimesCampeonato = $time->recolheNumerodeTimesCampeonato($ultimoIdCampeonato);
@@ -254,7 +244,7 @@
 					
 					$jogo->setData('2014-01-01');
 					
-					$jogo->setCampeonato($ultimoIdCampeonato);
+					$jogo->setCampeonato($_SESSION['IdCampeonato']);
 					$jogo->setRodada($i);	
 					$jogo->setTimeCasa(1);
 					$jogo->setTimeVisitante(2);
@@ -268,6 +258,8 @@
 
 			}
 		}
+		
+
 	}
 	
 	$gerenciaInicio = new controllerGerenciaInicio();

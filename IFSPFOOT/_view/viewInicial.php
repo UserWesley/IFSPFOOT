@@ -3,6 +3,7 @@
 	/*Após logar, esta tela lhe dará as opções de iniciar um novo jogo ou carregar um jogo salvo.*/
 	
 ?>
+
 <!DOCTYPE html>
 
 <html lang="PT-BR">
@@ -62,7 +63,7 @@
 		                    <div class="social-login-buttons" style="margin-bottom: 0px; padding-bottom:0px;">
 		                		
 		                    	<div class="form-group" >
-			                		<a class="btn btn-info btn-block" href="../_controller/controllerClassGerenciaInicio.php">
+			                		<a class="btn btn-info btn-block" href="../_view/viewNomeCarregamento.php">
 			                    		 Novo Jogo
 			                    	</a>
 		                    	</div>

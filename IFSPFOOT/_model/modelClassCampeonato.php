@@ -152,6 +152,27 @@
 				
 		}
 		
+		public function consultaTodosNomeCarregamento(){
+				
+			$conn = Database::conexao();
+		
+			$resultado = NULL;
+		
+			$consultaTodosNomesCarregamento = 'SELECT nomeCarregamento FROM Campeonato WHERE usuario = ?';
+			$preparaConsultaTodosNomesCarregamento = $conn->prepare($consultaNomeCarregamento);
+			$preparaConsultaTodosNomesCarregamento->bindValue(1, $usuario);
+			$preparaConsultaTodosNomesCarregamento->execute();
+				
+			$result = $preparaConsultaNomeCarregamento->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaNomeCarregamento->fetch()) {
+					
+				$resultado = $row[0];
+					
+			}
+			//Retorna null caso seja válido, e retorno o nomeCarregamento caso já tenha
+			return $resultado;
+		
+		}
 		
 	}
 	

@@ -28,18 +28,36 @@
 			//$this->cadastroJogo();
 		}
 		
-		function __destruct(){
+		public function verificaDados(){
+				
+			$campeonato = new modelClassCampeonato();
 			
+			$nomeCampeonato = $_POST['nomeCarregamento']; 
+				
+			$verificaCampeonato = $campeonato->consultaNomeCarregamento($nomeCampeonato);
+				
+			if($verificaCampeonato != NULL){
+		
+				header("Location: ../_view/viewNomeCarregamento.php");
+		
+			}else{
+				
+				$_SESSION['cadastroNomeCarregamento'] = "Login Sendo Utilizado !";
+				
+			}
+			
+
 		}
 		
 		public function cadastroCampeonato(){
 			
 			$campeonato = new modelClassCampeonato();
 			//Chama aqui Verificar nome do jogo
+			$campeonato->consultaNomeCarregamento();
 			$campeonato->setNome("IFSPFOOT");
 			$campeonato->setRodadaAtual(1);
 			$campeonato->setTemporada(2016);
-			$campeonato->setNomeCarregamento(123);
+			$campeonato->setNomeCarregamento($_POST['nomeCarregamento']);
 			$campeonato->setUsuario($_SESSION['idDono']);
 		    $campeonato->cadastrarCampeonato($campeonato);
 
@@ -250,6 +268,7 @@
 	}
 	
 	$gerenciaInicio = new controllerGerenciaInicio();
+	$gerenciaInicio->verificaDados();
 	$gerenciaInicio->cadastroCampeonato();
 	$gerenciaInicio->cadastroTime();
 	$gerenciaInicio->cadastroRodada();

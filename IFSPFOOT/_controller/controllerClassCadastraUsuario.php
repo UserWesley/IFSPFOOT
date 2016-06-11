@@ -1,17 +1,21 @@
 <?php 
 
-	
+	//Inclusão da classe ModelUsuário
 	include_once '../_model/modelClassUsuario.php';
+	
 	session_start();
 	
 	class controllerClassCadastraUsuario{
 		
+		//Método construtor
 		public function __construct(){
 			
 			$this->verificaDados();
 			$this->cadastrarUsuario();
+			$this->direcionaUsuario();
 		}
 		
+		//Função que controla os dados encaminhados pelo usuário
 		public function verificaDados(){
 			
 			$usuario = new modelClassUsuario();
@@ -32,6 +36,8 @@
 				header("Location: ../_view/viewCadastroNovoUsuario.php");
 			}
 		}
+		
+		//Função que controla o cadastro de novos usuários
 		public function cadastrarUsuario(){
 			
 			$usuario = new modelClassUsuario();
@@ -43,8 +49,11 @@
 			$usuario->setEmail($_POST['form-email']);
 			$usuario->setCelular($_POST['form-celular']);
 			$usuario->cadastraUsuario($usuario);
-			
-				
+						
+		}
+		
+		public function direcionaUsuario(){
+			header("Location: ../index.php");
 		}
 	}
 	

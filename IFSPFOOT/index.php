@@ -81,10 +81,10 @@
 			                    <div class="form-group" >
 			                		<?php 	
 			                				//Informa o usuário que o nome,senha ou ambos estão errados, caso a variveis não exista ele exibi uma mensagem vazia, ou seja nada
-			                				if(!isset($_SESSION['logado'])){
+			                				if (!isset($_SESSION['logado'])){
 			                					echo "";
 			                				}
-			                				else {
+			                				elseif ($_SESSION['logado'] == false){
 			                					echo "Usuário ou senha inválido";
 			                				}
 			                		?>

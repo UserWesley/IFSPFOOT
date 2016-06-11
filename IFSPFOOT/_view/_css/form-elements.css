@@ -1,5 +1,6 @@
-
-input[type="text"], 
+input[type="text"],
+input[type="email"],
+input[type="tel"], 
 input[type="password"], 
 textarea, 
 textarea.form-control {
@@ -26,12 +27,14 @@ textarea.form-control {
 	line-height: 30px;
 }
 
-input[type="text"]:focus, 
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus, 
 input[type="password"]:focus, 
 textarea:focus, 
 textarea.form-control:focus {
 	outline: 0;
-	background: #fff;
+	background: #add8e6;
     border: 3px solid #ccc;
     -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
 }
@@ -44,8 +47,6 @@ textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { co
 
 input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder, 
 textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #888; }
-
-
 
 button.btn {
 	height: 50px;

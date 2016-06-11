@@ -1,17 +1,19 @@
 <?php 
 
 	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados1.php';
-
+	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
+	
 	Class modelClassCampeonato{
 		
+		//Variáveis
 		private $id;
 		private $nome;
 		private $rodadaAtual;
 		private $temporada;
-		private $vencedor;
+		private $nomeCarregamento;
 		private $usuario;
-	
+		
+		//Getters e setters
 		public function getId(){
 			return $this->id;
 		}
@@ -44,12 +46,12 @@
 			$this->temporada = $temporada;
 		}
 		
-		public function getVencedor(){
-			return $this->vencedor;
+		public function getNomeCarregamento(){
+			return $this->nomeCarregamento;
 		}
 		
-		public function setVencedor($vencedor){
-			$this->vencedor = $vencedor;
+		public function setNomeCarregamento($nomeCarregamento){
+			$this->nomeCarregamento = $nomeCarregamento;
 		}
 		
 		public function getUsuario(){
@@ -64,18 +66,38 @@
 			
 			$conn = Database::conexao();
 			
-			$id = $this->getId();
 			$nome= $this->getNome();
 			$rodadaAtual = $this->getRodadaAtual();
 			$temporada = $this->getTemporada();
-			$vencedor= $this->getVencedor();
+			$nomeCarregamento= $this->getNomeCarregamento();
 			$usuario= $this->getUsuario();
 			
 			//Cadastro do campeonato inicial
-			$insercaoNovoCampeonato = "INSERT INTO Campeonato VALUES ('$id','$nome','$rodadaAtual'
-			, '$temporada','$vencedor','$usuario')";
+			$insercaoNovoCampeonato = "INSERT INTO Campeonato VALUES (DEFAULT,'$nome','$rodadaAtual'
+			, '$temporada','$nomeCarregamento','$usuario')";
 			$conn->exec($insercaoNovoCampeonato);
+			
+		}
 		
+		//O certo era recolher pelo pg_lastid, ou na sequence ou retorno
+		public function recolherUltimoIdCampeonato(){
+			
+			$usuario = $_SESSION['idDono'];
+			
+			$conn = Database::conexao();
+			
+			$consultaUltimoId = 'SELECT MAX(id) FROM Campeonato';
+			$preparaConsultaUltimoId = $conn->query($consultaUltimoId);
+			$preparaConsultaUltimoId->execute();
+			
+			$result = $preparaConsultaUltimoId->setFetchMode(PDO::FETCH_NUM);
+				
+			while ($row = $preparaConsultaUltimoId->fetch()) {
+				$id = $row[0];
+			}
+			
+			return $id;
+			
 		}
 		
 		public function rodadaAtual(){
@@ -107,6 +129,29 @@
 			$preparaAtualizaCampeonatoRodadaAtual->execute();
 			
 		}
+		
+		public function consultaNomeCarregamento($nomeCarregamento){
+			
+			$conn = Database::conexao();
+				
+			$resultado = NULL;
+				
+			$consultaNomeCarregamento = 'SELECT nomeCarregamento FROM Campeonato WHERE nomeCarregamento = ? ';
+			$preparaConsultaNomeCarregamento = $conn->prepare($consultaNomeCarregamento);
+			$preparaConsultaNomeCarregamento->bindValue(1, $nomeCarregamento);
+			$preparaConsultaNomeCarregamento->execute();
+			
+			$result = $preparaConsultaNomeCarregamento->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaNomeCarregamento->fetch()) {
+					
+				$resultado = $row[0];
+					
+			}
+			//Retorna null caso seja válido, e retorno o nomeCarregamento caso já tenha
+			return $resultado;
+				
+		}
+		
 		
 	}
 	

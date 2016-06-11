@@ -1,7 +1,7 @@
 <?php 
 
 	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados1.php';
+	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
 
 	Class modelClassTime {
 
@@ -9,15 +9,15 @@
 		private $nome;
 		private $mascote;
 		private $cor;
-		private $dono;
 		private $dinheiro;
 		private $torcida;
-		private $nomeEstadio;
-		private $capacidade;
-		private $vitoria;
-		private $derrota;
-		private $empate;
-		private $ponto;
+		private $dono;
+		private $campeonato;
+		private $estadio;
+		private $formacao;
+		private $estrategia;
+		private $agressividade;
+		private $tabela;
 		
 		public function getId(){
 			return $this->id;
@@ -51,14 +51,6 @@
 			$this->cor = $cor;
 		}
 		
-		public function getDono(){
-			return $this->dono;
-		}
-		
-		public function setDono($dono){
-			$this->dono = $dono;
-		}
-		
 		public function getDinheiro(){
 			return $this->dinheiro;
 		}
@@ -75,73 +67,81 @@
 			$this->torcida = $torcida;
 		}
 		
-		public function getNomeEstadio(){
-			return $this->nomeEstadio;
+		public function getDono(){
+			return $this->dono;
 		}
 		
-		public function setNomeEstadio($nomeEstadio){
-			$this->nomeEstadio = $nomeEstadio;
+		public function setDono($dono){
+			$this->dono = $dono;
 		}
 		
-		public function getCapacidade(){
-			return $this->capacidade;
+		public function getCampeonato(){
+			return $this->campeonato;
 		}
 		
-		public function setCapacidade($capacidade){
-			$this->capacidade = $capacidade;
+		public function setCampeonato($campeonato){
+			$this->campeonato = $campeonato;
 		}
 		
-		public function getVitoria(){
-			return $this->vitoria;
+		public function getEstadio(){
+			return $this->estadio;
 		}
 		
-		public function setVitoria($vitoria){
-			$this->vitoria = $vitoria;
+		public function setEstadio($estadio){
+			$this->estadio = $estadio;
 		}
 		
-		public function getDerrota(){
-			return $this->derrota;
+		public function getFormacao(){
+			return $this->formacao;
 		}
 		
-		public function setDerrota($derrota){
-			$this->derrota = $derrota;
+		public function setFormacao($formacao){
+			$this->formacao = $formacao;
 		}
 		
-		public function getEmpate(){
-			return $this->empate;
+		public function getEstrategia(){
+			return $this->estrategia;
 		}
 		
-		public function setEmpate($empate){
-			$this->empate = $empate;
+		public function setEstrategia($estrategia){
+			$this->estrategia = $estrategia;
 		}
 		
-		public function getPonto(){
-			return $this->ponto;
+		public function getAgressividade(){
+			return $this->agressividade;
 		}
 		
-		public function setPonto($ponto){
-			$this->ponto = $ponto;
+		public function setAgressividade($agressividade){
+			$this->agressividade = $agressividade;
+		}
+		
+		public function getTabela(){
+			return $this->tabela;
+		}
+		
+		public function setTabela($tabela){
+			$this->tabela = $tabela;
 		}
 		
 		public function cadastrarTime($time){
 			
 			$conn = Database::conexao();
 			
-			$id = $this->getId();
 			$nome = $this->getNome();
 			$mascote = $this->getMascote();
 			$cor = $this->getCor();
 			$dinheiro = $this->getDinheiro();
 			$torcida = $this->getTorcida();
-			$nomeEstadio = $this->getNomeEstadio();
- 			$capacidade = $this->getCapacidade();
-			$vitoria = $this->getVitoria();
-			$derrota = $this->getDerrota();
-			$empate = $this->getEmpate();
-			$ponto = $this->getPonto();
+			$campeonato = $this->getCampeonato();
+			$estadio = $this->getEstadio();
+			$estrategia = $this->getEstrategia();
+			$formacao = $this->getFormacao();
+			$agressividade = $this->getAgressividade();
+			$tabela = $this->getTabela();
+
 			
-			$insercaoNovoTime = "INSERT INTO Time VALUES ('$id','$nome','$mascote','$cor',NULL,'$dinheiro'
-			,'$torcida','$nomeEstadio','$capacidade','$vitoria','$derrota','$empate','$ponto')";
+			$insercaoNovoTime = "INSERT INTO Time VALUES (DEFAULT,'$nome','$mascote','$cor','$dinheiro'
+			,'$torcida',NULL,'$campeonato','$estadio','$estrategia','$formacao','$agressividade','$tabela')";
 			$conn->exec($insercaoNovoTime);
 			
 		}
@@ -187,6 +187,14 @@
 			$preparaAtualizaTimeVencedor->bindValue(3,$id);
 			$preparaAtualizaTimeVencedor->execute();
 				
+		}
+		
+		public function removerTimeArray(){
+			
+			$key = array_search($timesCampeonato[$time], $timesCampeonato);
+			if($key!==false){
+				unset($timesCampeonato[$key]);
+			}
 		}
 		
 		public function atualizaTimePerdedorTabela($time){
@@ -283,9 +291,10 @@
 			$times = array();
 			
 			$conn = Database::conexao();
-			
-			$consultaTime = 'SELECT id,nome FROM Time';
-			$preparaConsultaTime = $conn->query($consultaTime);
+			$campeonato= 1;
+			$consultaTime = 'SELECT id,nome FROM Time WHERE campeonato = ?';
+			$preparaConsultaTime = $conn->prepare($consultaTime);
+			$preparaConsultaTime->bindValue(1,$campeonato);
 			$preparaConsultaTime->execute();
 			
 			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
@@ -397,6 +406,61 @@
 			}
 			
 		}
+		
+		public function recolheUltimoIdTime(){
+					
+			$conn = Database::conexao();
+			
+			$consultaUltimoId = 'SELECT MAX(id) FROM Time;';
+			$preparaConsultaUltimoId = $conn->query($consultaUltimoId);
+			$preparaConsultaUltimoId->execute();
+			$result = $preparaConsultaUltimoId->setFetchMode(PDO::FETCH_NUM);
+				
+			while ($row = $preparaConsultaUltimoId->fetch()) {
+				$id = $row[0];
+			}
+			
+			return $id;
+							
+		}
+		
+		public function recolheNumerodeTimesCampeonato($idCampeonato){
+			
+			$conn = Database::conexao();
+				
+			$consultaQuantidadeTimes = 'SELECT COUNT(id) FROM Time WHERE campeonato = ?';
+			$preparaConsultaQuantidadeTimes = $conn->prepare($consultaQuantidadeTimes);
+			$preparaConsultaQuantidadeTimes->bindValue(1, $idCampeonato);
+			$preparaConsultaQuantidadeTimes->execute();
+			$result = $preparaConsultaQuantidadeTimes->setFetchMode(PDO::FETCH_NUM);
+			
+			while ($row = $preparaConsultaQuantidadeTimes->fetch()) {
+				$quantidadeTimesCampeonato = $row[0];
+			}
+				
+			return $quantidadeTimesCampeonato;
+		}
+		
+		public function recolheTimesCampeonato($idCampeonato){
+			
+			$timesCampeonato = array();
+			
+			$conn = Database::conexao();
+			
+			$consultaTimesCampeonato = 'SELECT id FROM Time WHERE campeonato = ?';
+			$preparaConsultaTimesCampeonato = $conn->prepare($consultaTimesCampeonato);
+			$preparaConsultaTimesCampeonato->bindValue(1, $idCampeonato);
+			$preparaConsultaTimesCampeonato->execute();
+			$result = $preparaConsultaTimesCampeonato->setFetchMode(PDO::FETCH_NUM);
+				
+			while ($row = $preparaConsultaTimesCampeonato->fetch()) {
+				$timesCampeonato[] = $row[0];
+			}
+			
+			return $timesCampeonato;
+		}
+		
+	
 	}
 
 ?>

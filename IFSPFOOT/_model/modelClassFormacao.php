@@ -1,9 +1,9 @@
 <?php 
-
+	
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
 
-	Class modelClassEstrategia{
+	Class modelClassFormacao {
 		
 		private $id;
 		private $nome;
@@ -25,17 +25,16 @@
 			$this->nome = $nome;
 		}
 		
-		public function cadastrarEstrategia($estrategia){
-				
+		public function cadastrarFormacao($formacao){
+		
 			$conn = Database::conexao();
-				
+		
 			$nome = $this->getNome();
-
-			$insercaoNovaEstrategia = "INSERT INTO Estrategia VALUES (DEFAULT,'$nome')";
-			$conn->exec($insercaoNovaEstrategia);
-				
+		
+			$insercaoNovaFormacao = "INSERT INTO Formacao VALUES (DEFAULT,'$nome')";
+			$conn->exec($insercaoNovaFormacao);
+		
 		}
-
 	}
 
 ?>

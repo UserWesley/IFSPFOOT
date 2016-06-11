@@ -2,25 +2,30 @@
 	
 	/* Este arquivo chamará os arquivos responsáveis por iniciar um novo jogo*/
 	
+	//Inclusão dos arquivos model
 	include_once '../_model/modelClassCampeonato.php';
 	include_once '../_model/modelClassTime.php';
+	include_once '../_model/modelClassEstadio.php';
+	include_once '../_model/modelClassTabela.php';
+	include_once '../_model/modelClassHabilidade.php';
 	include_once '../_model/modelClassJogador.php';
 	include_once '../_model/modelClassRodada.php';
 	include_once '../_model/modelClassJogo.php';
+	include_once '../_model/modelClassClima.php';
 	
 	//Zerar tabelas novo jogo
-	include_once '../_model/modelZerarTabela.php';
-	
+	//include_once '../_model/modelZerarTabela.php';
+	session_start();
 	
 	Class controllerGerenciaInicio{
 		
 		function __construct(){
 			
-			$this->cadastroCampeonato();
-			$this->cadastroTime();
-			$this->cadastroJogador();
-			$this->cadastroRodada();
-			$this->cadastroJogo();
+			//$this->cadastroCampeonato();
+			//$this->cadastroTime();
+			//$this->cadastroJogador();
+			//$this->cadastroRodada();
+			//$this->cadastroJogo();
 		}
 		
 		function __destruct(){
@@ -30,193 +35,225 @@
 		public function cadastroCampeonato(){
 			
 			$campeonato = new modelClassCampeonato();
-			$campeonato->setId(1);
+			//Chama aqui Verificar nome do jogo
 			$campeonato->setNome("IFSPFOOT");
 			$campeonato->setRodadaAtual(1);
 			$campeonato->setTemporada(2016);
-			$campeonato->setVencedor("null");
-			$campeonato->setUsuario(1);
-			$campeonato->cadastrarCampeonato($campeonato);
+			$campeonato->setNomeCarregamento(123);
+			$campeonato->setUsuario($_SESSION['idDono']);
+		    $campeonato->cadastrarCampeonato($campeonato);
+
+		}
 		
+		public function cadastroEstadio(){
+			
+			$estadio = new modelClassEstadio();
+			$estadio->setNome("estadio");
+			$estadio->setCapacidade(10);
+			$estadio->cadastrarEstadio($estadio);
+			
+			$ultimoIdEstadio = $estadio->recolheUltimoIdEstadio();
+			
+			return $ultimoIdEstadio;
+
+		}
+		
+		public function cadastroTabela(){
+			
+			$tabela = new modelClassTabela();
+			$tabela->setVitoria(0);
+			$tabela->setEmpate(0);
+			$tabela->setDerrota(0);
+			$tabela->setPonto(0);
+			$tabela->cadastrarTabela($tabela);
+			
+			$ultimoIdTabela = $tabela->recolherUltimoIdTabela();
+			
+			return $ultimoIdTabela;
+		}
+		
+		public function cadastroHabilidade(){
+				
+			$habilidade = new modelClassHabilidade();
+			
+			$habilidade->setAgilidade(10);
+			$habilidade->setAtaque(10);
+			$habilidade->setChute(10);
+			$habilidade->setDefesa(10);
+			$habilidade->setForca(10);
+			$habilidade->setPasse(10);
+			$habilidade->setResistencia(10);
+			
+			$habilidade->cadastrarHabilidade();
+			
+			$ultimoIdHabilidade = $habilidade->recolheUltimoIdHabilidade();
+			
+			return $ultimoIdHabilidade;
+			
+		}
+		
+		public function cadastroJogador($idTime){
+				
+			for($i=1;$i<=22;$i++){
+		
+				$jogador = new modelClassJogador();
+		
+				$jogador->setTitular(TRUE);
+				$jogador->setNome("Nome");
+				$jogador->setSobrenome("Sobrenome");
+				$jogador->setNacionalidade("Nacionalidade");
+				$jogador->setIdade(20);
+				$jogador->setEstamina(100);
+				$jogador->setNivel("Nivel");
+				$jogador->setGol(0);
+				$jogador->setPasse(10);
+				$jogador->setSalario(10);
+				$ultimoIdHabilidade = $this->cadastroHabilidade();
+				$jogador->setIdtime($idTime);
+				$jogador->setPosicao(1);
+				$jogador->setHabilidade($ultimoIdHabilidade);
+				$jogador->setTemperamento(1);
+				$jogador->setEstilo(1);
+								
+				$jogador->cadastrarJogador($jogador);
+					
+			}
+				
 		}
 		
 		public function cadastroTime(){
 			
-			for($i=1;$i<=4;$i++){
+			$campeonato = new modelClassCampeonato();
+			$idCampeonato = $campeonato->recolherUltimoIdCampeonato();
+			
+			for($i=1;$i<=8;$i++){
 				
 				switch ($i){
+					
 					case 1 : $timeTeste = "Time1";
 						break;
+					
 					case 2 : $timeTeste = "Time2";
 						break;
-					case 3 : $timeTeste = "Time3";
+
+					case 3 : $timeTeste = "Time3";	
 						break;
+					
 					case 4 : $timeTeste = "Time4";
+						break;
+					
+					case 5 : $timeTeste = "Time5";
+						break;
+							
+					case 6 : $timeTeste = "Time6";
+						break;
+						
+					case 7 : $timeTeste = "Time7";
+						break;
+							
+					case 8 : $timeTeste = "Time8";
 						break;
 				}
 				
+				$ultimoIdEstadio = $this->cadastroEstadio();
+				$ultimoIdTabela = $this->cadastroTabela();
+				
 				$time = new modelClassTime();
 				
-				$time->setId($i);
 				$time->setNome($timeTeste);
 				$time->setMascote($timeTeste);
 				$time->setCor($timeTeste);
 				$time->setDinheiro(100);
 				$time->setTorcida(100);
-				$time->setNomeEstadio($timeTeste);
-				$time->setCapacidade(100);
-				$time->setVitoria(0);
-				$time->setDerrota(0);
-				$time->setEmpate(0);
-				$time->setPonto(0);
+				//Dono será cadastro como nulo
+				$time->setCampeonato($idCampeonato);
+				$time->setEstadio($ultimoIdEstadio);
+				$time->setFormacao(1);
+				$time->setEstrategia(1);
+				$time->setAgressividade(1);
+				$time->setTabela($ultimoIdTabela);
 				$time->cadastrarTime($time);
+				
+				$ultimoIdTime = $time->recolheUltimoIdTime();
+				$this->cadastroJogador($ultimoIdTime);
 				
 			}						
 		}
 		
-		public function cadastroJogador(){
-			$i;
-			
-			for($i=1;$i<=16;$i++){
-				
-				if($i <= 4){	
-					$idTime = 1;
-				}
-				elseif (($i>4) && ($i <= 8)) {
-					$idTime = 2;
-				}
-						
-				elseif (($i >8) && ($i <=12)){
-					$idTime = 3;
-				}
-				
-				else {	
-					$idTime = 4;
-				}
-				
-				$jogador = new modelClassJogador();
-				$jogador->setId($i);
-				$jogador->setTitular("T");
-				$jogador->setNome("Nome");
-				$jogador->setSobrenome("Sobrenome");
-				$jogador->setPosicao("Posição");
-				$jogador->setNacionalidade("Nacionalidade");
-				$jogador->setHabilidade("Habilidade");
-				$jogador->setIdade(20);
-				$jogador->setForca(100);
-				$jogador->setIdtime($idTime);
-				$jogador->setEstamina(100);
-				$jogador->setNivel("Nivel");
-				$jogador->setGol(0);
-				$jogador->cadastrarJogador($jogador);
-				
-			}
-			
-		}
-		
 		public function cadastroRodada(){
 			
-			$rodada = new modelClassRodada();
+			$campeonato = new modelClassCampeonato();
+			$ultimoIdCampeonato = $campeonato->recolherUltimoIdCampeonato();
 			
-			for($i=1;$i<=6;$i++){
-				
-				$rodada->setId($i);		
-				$rodada->setNumero($i);
-				$rodada->setCampeonato(1);
-				$rodada->cadastrarRodada($rodada);
-				
-			}
+			$time = new modelClassTime();
+			$quantidadeTimesCampeonato = $time->recolheNumerodeTimesCampeonato($ultimoIdCampeonato);
+			 
 			
+			$rodada = new modelClassRodada();			
+			$rodada->setNumero(1);
+			$rodada->setCampeonato($ultimoIdCampeonato);
+			$rodada->cadastrarRodada($rodada,$quantidadeTimesCampeonato);				
+				
 		}
+		
 		public function cadastroJogo(){
 			
-			$jogo = new modelClassJogo();
-					
-			$jogo->setId(1);
-			$jogo->setTimeCasa("Time1");
-			$jogo->setTimeVisitante("Time2");
-			$jogo->setRodada(1);
-			$jogo->cadastrarJogo($jogo);
-
-			$jogo->setId(2);
-			$jogo->setTimeCasa("Time3");
-			$jogo->setTimeVisitante("Time4");
-			$jogo->setRodada(1);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(3);
-			$jogo->setTimeCasa("Time1");
-			$jogo->setTimeVisitante("Time3");
-			$jogo->setRodada(2);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(4);
-			$jogo->setTimeCasa("Time2");
-			$jogo->setTimeVisitante("Time4");
-			$jogo->setRodada(2);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(5);
-			$jogo->setTimeCasa("Time1");
-			$jogo->setTimeVisitante("Time4");
-			$jogo->setRodada(3);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(6);
-			$jogo->setTimeCasa("Time2");
-			$jogo->setTimeVisitante("Time3");
-			$jogo->setRodada(3);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(7);
-			$jogo->setTimeCasa("Time2");
-			$jogo->setTimeVisitante("Time1");
-			$jogo->setRodada(4);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(8);
-			$jogo->setTimeCasa("Time4");
-			$jogo->setTimeVisitante("Time3");
-			$jogo->setRodada(4);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(9);
-			$jogo->setTimeCasa("Time3");
-			$jogo->setTimeVisitante("Time1");
-			$jogo->setRodada(5);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(10);
-			$jogo->setTimeCasa("Time4");
-			$jogo->setTimeVisitante("Time2");
-			$jogo->setRodada(5);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(11);
-			$jogo->setTimeCasa("Time4");
-			$jogo->setTimeVisitante("Time1");
-			$jogo->setRodada(6);
-			$jogo->cadastrarJogo($jogo);
-				
-			$jogo->setId(12);
-			$jogo->setTimeCasa("Time3");
-			$jogo->setTimeVisitante("Time2");
-			$jogo->setRodada(6);
-			$jogo->cadastrarJogo($jogo);		
+			$arrayTimesCampeonato = array();
+			$arrayClimas = array();
 			
+			$clima = new modelClassClima();
+			$arrayClimas = $clima->recolheClimas();
+			
+			$campeonato = new modelClassCampeonato();
+			$ultimoIdCampeonato = $campeonato->recolherUltimoIdCampeonato();
+			
+			$time = new modelClassTime();
+			$quantidadeTimesCampeonato = $time->recolheNumerodeTimesCampeonato($ultimoIdCampeonato);
+			$jogosRodada = $quantidadeTimesCampeonato /2;
+			
+			$rodada = new modelClassRodada();
+			$numeroRodada = $rodada->recolheNumeroRodada($ultimoIdCampeonato);
+			
+			$i = 1;
+			
+			for($i=1; $i<=$numeroRodada;$i++){
+				
+				$quantidadeTimesCampeonatoContador = $quantidadeTimesCampeonato;
+				
+				//$arrayTimesCampeonato = $time->recolheTimesCampeonato();
+					
+				while($quantidadeTimesCampeonatoContador != $jogosRodada){
+					
+					$jogo = new modelClassJogo();
+		
+					//$timeCasa = $jogo->sorteiaJogo($arrayTimesCampeonato);
+					//$jogo->removerTimeArray($arrayTimesCampeonato[$timeCasa]);
+					//$timeVisitante = $jogo->sorteiaJogo($arrayTimesCampeonato);
+					//$jogo->removerTimeArray($arrayTimesCampeonato[$timeVistante]);
+					
+					$jogo->setData('2014-01-01');
+					
+					$jogo->setCampeonato($ultimoIdCampeonato);
+					$jogo->setRodada($i);	
+					$jogo->setTimeCasa(1);
+					$jogo->setTimeVisitante(2);
+					$climaJogo = $clima->sorteioClima($arrayClimas);
+					$jogo->setClima($climaJogo);
+					$jogo->cadastrarJogo($jogo);
+					
+					$quantidadeTimesCampeonatoContador--;
+		
+				}
+
+			}
 		}
 	}
 	
 	$gerenciaInicio = new controllerGerenciaInicio();
-
-	//Chama arquivo que irá gerar times
-	//include_once '../_model/modelCadastrarTimesAutomatico.php';
-	//Chama arquivo que irá gerar jogadores
-	//include_once '../_model/modelCadastrarJogadoresAutomatico.php';
-	//Chama arquivo que irá gerar Rodadas
-	//include_once '../_model/modelCadastrarRodadasAutomaticas.php';
-	//Chama arquivo que irá gerar jogos
-	//include_once '../_model/modelCadastroAutomaticoJogos.php';
+	$gerenciaInicio->cadastroCampeonato();
+	$gerenciaInicio->cadastroTime();
+	$gerenciaInicio->cadastroRodada();
+	$gerenciaInicio->cadastroJogo();
 	
 	//Chamando o arquivo para iniciar um jogo
 	header("LOCATION: ../_view/viewNovoJogo.php");	

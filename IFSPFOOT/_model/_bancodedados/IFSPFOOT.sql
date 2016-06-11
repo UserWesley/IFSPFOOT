@@ -1,4 +1,4 @@
---Explicações
+	--Explicações
 
 --Efetuado a troca do banco, devido a empresa ORACLE privada e concorrente ter comprado Mysql, com isso a taxa de melhorias neste SGBD caiu consideralvemente. Estava com medo de trocar o SGBD por causa de perder a facilidades de uso e a equipe pode se perder, já que nas aulas utilizamos o XAMPP um ambiente integrado, no entanto, para garantir um futuro a esta aplicação decidi efetuar a troca, ESTAMOS NA CHUVA PARA SE MOLHAR (Também efetuei algumas alterações no schema)
 
@@ -70,6 +70,7 @@ CREATE TABLE Tabela(
 	vitoria INT NOT NULL,
 	empate INT NOT NULL,
 	derrota INT NOT NULL,
+	pontos INT NOT NULL,
 	
 	PRIMARY KEY(id)
 );
@@ -108,7 +109,7 @@ CREATE TABLE Agressividade (
 CREATE TABLE Time (
 	
 	id SERIAL,
-	nome VARCHAR(30) UNIQUE,
+	nome VARCHAR(30) NOT NULL,
 	mascote VARCHAR(20) NOT NULL,
 	cor VARCHAR(20) NOT NULL,
 	dinheiro VARCHAR(20) NOT NULL,
@@ -155,14 +156,14 @@ CREATE TABLE Clima (
 CREATE TABLE Jogo (
 	
 	id SERIAL,
-	placarCasa int NOT NULL,
-	placarVisitante int NOT NULL,
-	data timestamp NOT NULL,	
-	campeonato INT,
-	rodada INT,	
-	timeCasa INT,
-	timeVisitante INT,
-	clima INT,
+	placarCasa int,
+	placarVisitante int,
+	data DATE NOT NULL,	
+	campeonato INT NOT NULL,
+	rodada INT NOT NULL,	
+	timeCasa INT NOT NULL,
+	timeVisitante INT  NOT NULL,
+	clima INT  NOT NULL,
 
 	FOREIGN KEY (campeonato) REFERENCES Campeonato(id),
 	FOREIGN KEY (rodada) REFERENCES Rodada(id),
@@ -185,14 +186,14 @@ CREATE TABLE Posicao(
 CREATE TABLE Habilidade (
 
 	id SERIAL,
+	agilidade INT NOT NULL,	
 	ataque INT NOT NULL,
 	chute INT NOT NULL,
 	defesa INT NOT NULL,	
 	forca INT NOT NULL,
-	habilidade INT NOT NULL,	
 	passe INT NOT NULL,
 	resistencia INT NOT NULL,
-
+	
 	PRIMARY KEY (id)
 		
 );
@@ -226,6 +227,7 @@ CREATE TABLE Jogador (
  	nivel VARCHAR NOT NULL,
 	gol INT NOT NULL,
 	passe VARCHAR(20) NOT NULL,
+	salario VARCHAR(20) NOT NULL,
 	idTime INT,
 	posicao INT,
 	habilidade INT,
@@ -292,13 +294,11 @@ INSERT INTO Posicao VALUES (DEFAULT, 'Atacante Direito');
 INSERT INTO Posicao VALUES (DEFAULT, 'Atacante Esquerdo');
 
 --Inserção do Temperamento
-
 INSERT INTO Temperamento VALUES (DEFAULT, 'Calmo');
 INSERT INTO Temperamento VALUES (DEFAULT, 'Nervoso');
 INSERT INTO Temperamento VALUES (DEFAULT, 'Calmo-Nervoso');
 
 -- Inserção de Estilo
-
 INSERT INTO Estilo VALUES (DEFAULT,'Esforçado');
 INSERT INTO Estilo VALUES (DEFAULT,'Preguiçoso');
 

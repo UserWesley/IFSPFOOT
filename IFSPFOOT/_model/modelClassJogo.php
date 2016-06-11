@@ -1,18 +1,18 @@
 <?php
  
 	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados1.php';
+	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
 	
 	class modelClassJogo{
 
 		private $id;
-		private $timeCasa;
-		private $timeVisitante;
 		private $golCasa;
 		private $golVisitante;
-		private $rodada;
 		private $data;
-		private $hora;
+		private $campeonato;
+		private $rodada;
+		private $timeCasa;
+		private $timeVisitante;	
 		private $clima;
         
 		//Getter e setters
@@ -77,12 +77,11 @@
 			$this->data = $data;
 		}
 		
-		public function getHora(){
-			return $this->hora;
+		public function getCampeonato(){
+			return $this->campeonato;
 		}
-		
-		public function setHora($hora){
-			$this->hora = $hora;
+		public function setCampeonato($campeonato){
+			$this->campeonato = $campeonato;
 		}
 		
 		public function getClima(){
@@ -127,15 +126,17 @@
 	   	
 	   		$conn = Database::conexao();
 	   		
-	   		echo $id = $this->getId();
+	   		echo $data = $this->getData();
 	   		echo $timeCasa = $this->getTimeCasa();
 	   		echo $timeVisitante = $this->getTimeVisitante();
+	   		echo $campeonato = $this->getCampeonato();
 	   		echo $rodada = $this->getRodada();
-	   		
+	   		echo $clima = $this->getClima();
+	   
 	   		//Cadastro do campeonato inicial
-	   		$insercaoNovoCampeonato = "INSERT INTO Jogo VALUES ('$id','$timeCasa',NULL,NULL,'$timeVisitante',
-	   	   '$rodada','01/01/01','18:00','nublado')";
-	   		$conn->exec($insercaoNovoCampeonato);
+	   		$insercaoNovoJogo = "INSERT INTO Jogo VALUES (DEFAULT,NULL,NULL,'$data',
+	   		'$campeonato','$rodada','$timeCasa','$timeVisitante','$clima')";
+	   		$conn->exec($insercaoNovoJogo);
 	   	
 	   }
 	   

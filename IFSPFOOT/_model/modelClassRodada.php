@@ -34,17 +34,42 @@
 			$this->campeonato = $campeonato;
 		}
 		
-		public function cadastrarRodada($rodada){
+		public function cadastrarRodada($rodada,$quantidadeTimesCampeonato){
 			
 			$conn = Database::conexao();
 			
-			$id = $this->getId();
 			$numero = $this->getNumero();
 			$campeonato = $this->getCampeonato();
 			
-			$insercaoNovaRodada = "INSERT INTO Rodada VALUES ('$id','$numero','$campeonato')";
-			$conn->exec($insercaoNovaRodada);
+			$quantidadeRodadasCampeonato = ($quantidadeTimesCampeonato * 2) - 2;
+			
+			for($i=1; $i <= $quantidadeRodadasCampeonato; $i++){
+
+				$insercaoNovaRodada = "INSERT INTO Rodada VALUES (DEFAULT,'$numero','$campeonato');";
+				$conn->exec($insercaoNovaRodada);
+			
+			}
 		}
+		
+		public function recolheNumeroRodada($idCampeonato){
+				
+			$conn = Database::conexao();
+				
+			$consultaNumeroRodada = 'SELECT COUNT(id) FROM Rodada WHERE campeonato = ?';
+			$preparaConsultaNumeroRodada = $conn->prepare($consultaNumeroRodada);
+			$preparaConsultaNumeroRodada->bindValue(1,$idCampeonato);
+			$preparaConsultaNumeroRodada->execute();
+				
+			$result = $preparaConsultaNumeroRodada->setFetchMode(PDO::FETCH_NUM);
+			
+			while ($row = $preparaConsultaNumeroRodada->fetch()) {
+				$numeroRodada = $row[0];
+			}
+				
+			return $numeroRodada;
+			
+		}
+		
 		
 	}
 	

@@ -3,7 +3,7 @@
 	//Inclusão do arquivo para conexão com o banco de dados PDO
 	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
 
-	Class modelClassEstrategia{
+	Class modelClassAgressividade {
 		
 		private $id;
 		private $nome;
@@ -25,17 +25,18 @@
 			$this->nome = $nome;
 		}
 		
-		public function cadastrarEstrategia($estrategia){
-				
+		public function cadastrarAgressividade($agressividade){
+		
 			$conn = Database::conexao();
-				
+		
 			$nome = $this->getNome();
-
-			$insercaoNovaEstrategia = "INSERT INTO Estrategia VALUES (DEFAULT,'$nome')";
-			$conn->exec($insercaoNovaEstrategia);
-				
+		
+			$insercaoNovaAgressividade = "INSERT INTO Agressevidade VALUES (DEFAULT,'$nome')";
+			$conn->exec($insercaoNovaAgressividade);
+		
 		}
-
+		
 	}
+
 
 ?>

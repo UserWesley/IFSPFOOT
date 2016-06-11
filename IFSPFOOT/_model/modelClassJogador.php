@@ -1,25 +1,31 @@
 <?php 
 
+	//Inclusão do arquivo para conexão com o banco de dados PDO
+	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
+
 	Class modelClassJogador{
 		
 		private $id;
 		private $titular;
 		private $nome;
 		private $sobrenome;
-		private $posicao;
 		private $nacionalidade;
-		private $habilidade;
 		private $idade;
-		private $forca;
-		private $idTime;
 		private $estamina;
 		private $nivel;
 		private $gol;
+		private $passe;
+		private $salario;
+		private $idTime;
+		private $posicao;
+		private $habilidade;
+		private $temperamento;
+		private $estilo;
+		
 		
 		public function __destruct(){
 			
 		}
-		
 		public function getId(){
 			return $this->id;
 		}
@@ -52,29 +58,12 @@
 			$this->sobrenome = $sobrenome;
 		}
 		
-		public function getPosicao(){
-			return $this->posicao;
-		}
-		
-		public function setPosicao($posicao){
-			$this->posicao = $posicao;
-		}
-		
 		public function getNacionalidade(){
 			return $this->nacionalidade;
 		}
 		
 		public function setNacionalidade($nacionalidade){
 			$this->nacionalidade = $nacionalidade;
-		}
-		
-		public function getHabilidade(){
-			return $this->habilidade;
-			
-		}
-		
-		public function setHabilidade($habilidade){
-			$this->habilidade = $habilidade;
 		}
 		
 		public function getIdade(){
@@ -85,28 +74,12 @@
 			$this->idade = $idade;
 		}
 		
-		public function getForca(){
-			return $this->forca;
-		}
-		
-		public function setForca($forca){
-			$this->forca = $forca;
-		}
-		
-		public function getIdtime(){
-			return $this->idTime;
-		}
-		
-		public function setIdtime($idTime){
-			$this->idTime = $idTime;
-		}
-
 		public function getEstamina(){
 			return $this->estamina;
 		}
 		
 		public function setEstamina($estamina){
-			$this->estamina = $estamina;	
+			$this->estamina = $estamina;
 		}
 		
 		public function getNivel(){
@@ -125,26 +98,84 @@
 			$this->gol = $gol;
 		}
 		
+		public function getPasse(){
+			return $this->passe;
+		}
+		
+		public function setPasse($passe){
+			$this->passe = $passe;
+		}
+		
+		public function getSalario(){
+			return $this->salario;
+		}
+		
+		public function setSalario($salario){
+			$this->salario = $salario;
+		}
+		
+		public function getIdTime(){
+			return $this->idTime;
+		}
+		
+		public function setIdTime($idTime){
+			$this->idTime = $idTime;
+		}
+		
+		public function getPosicao(){
+			return $this->posicao;
+		}
+		
+		public function setPosicao($posicao){
+			$this->posicao = $posicao;
+		}
+		
+		public function getHabilidade(){
+			return $this->habilidade;
+		}
+		
+		public function setHabilidade($habilidade){
+			$this->habilidade = $habilidade;
+		}
+		
+		public function getTemperamento(){
+			return $this->temperamento;
+		}
+		
+		public function setTemperamento($temperamento){
+			$this->temperamento = $temperamento;
+		}
+		
+		public function getEstilo(){
+			return $this->estilo;
+		}
+		
+		public function setEstilo($estilo){
+			$this->estilo = $estilo;
+		}
+		
 		public function cadastrarJogador($jogador){
 			
-			$id = $this->getId();
 			$titular = $this->getTitular();
 			$nome = $this->getNome();
 			$sobrenome = $this->getSobrenome();
-		    $posicao = $this->getPosicao();
 			$nacionalidade = $this->getNacionalidade();
-			$habilidade = $this->getHabilidade();
 			$idade = $this->getIdade();
-			$forca = $this->getForca();
-			$idTime = $this->getIdtime();
 			$estamina = $this->getEstamina();
 			$nivel = $this->getNivel();
 			$gol = $this->getGol();
-			
+			$passe = $this->getPasse();
+			$salario = $this->getSalario();
+			$idTime = $this->getIdTime();
+			$posicao = $this->getPosicao();
+			$habilidade = $this->getHabilidade();
+			$temperamento = $this->getTemperamento();
+			$estilo = $this->getEstilo();
+
 			$conn = Database::conexao();
 			
-			$insercaoNovoJogador = "INSERT INTO Jogador VALUES ('$id','$titular','$nome','$sobrenome','$posicao',
-			'$nacionalidade','$habilidade','$idade','$forca','$idTime','$estamina','$nivel','$gol')";
+			$insercaoNovoJogador = "INSERT INTO Jogador VALUES (DEFAULT,'$titular','$nome','$sobrenome','$nacionalidade',
+			'$idade','$estamina','$nivel','$gol','$passe','$salario','$idTime','$posicao','$habilidade','$temperamento','$estilo');";
 			
 			$conn->exec($insercaoNovoJogador);
 			

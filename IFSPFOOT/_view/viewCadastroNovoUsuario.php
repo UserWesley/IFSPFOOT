@@ -92,7 +92,7 @@
 		                        
 		                        <?php 	
 
-		                            //Informa o usuário que o nome,senha ou ambos estão errados, caso a variveis não exista ele exibi uma mensagem vazia, ou seja nada
+		                            //Informa se o login já existe
 			                		if(!isset($_SESSION['cadastroLogin'])){
 			                			echo "";
 			                		}

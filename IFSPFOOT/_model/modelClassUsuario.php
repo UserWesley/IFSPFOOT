@@ -5,6 +5,7 @@
 	
 	Class modelClassUsuario{
 		
+		//Váriaveis
 		private $id;
 		private $nome;
 		private $sobrenome;
@@ -13,6 +14,7 @@
 		private $email;
 		private $celular;		
 		
+		//Getters e Setters
 		public function getId(){
 			return $this->id;
 		}
@@ -49,6 +51,7 @@
 			return $this->senha;
 		}
 		
+		//Criptografa a senha com MD5
 		public function setSenha($senha){
 			$this->senha = md5($senha);
 		}
@@ -69,6 +72,7 @@
 			$this->celular = $celular;
 		}
 		
+		//Consulta o banco de dados com o login e senha na tabela usuário e verifica se esta cadastrado no sistema
 		public function consultaUsuario($usuario){
 			
 			$conn = Database::conexao();
@@ -84,11 +88,12 @@
 			while($row = $preparaConsultaLogin->fetch(PDO::FETCH_OBJ)){
 				$dados = $row->id;
 			}
-			
+			//Caso esteja cadastrado retorna o Id do usuario para passar por sessão, caso não esteja retorna NULL
 			return $dados;
 
 		}
 		
+		//Função para cadastrar novo usuário
 		public function cadastraUsuario($usuario){
 			
 			$conn = Database::conexao();
@@ -106,6 +111,7 @@
 			
 		}
 		
+		//Função que verifica se as senhas batem e retorna verdadeiro caso sim, e falso caso sejam diferentes
 		public function verificaSenha($senha,$confirmaSenha){
 			
 			if($senha != $confirmaSenha){
@@ -117,6 +123,7 @@
 			
 		}
 		
+		//Função que verifica se o login ja é existe, poís ele tem que ser único
 		public function verificaLogin($login){
 			
 			$conn = Database::conexao();
@@ -134,7 +141,7 @@
 				$resultado = $row[0];
 					
 			}
-				
+			//Retorna null caso seja válido, e retorno o login caso já tenha	
 			return $resultado;
 			
 		}

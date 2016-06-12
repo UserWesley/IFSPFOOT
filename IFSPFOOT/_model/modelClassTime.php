@@ -323,14 +323,15 @@
 				
 			return $nome;
 		}
-	
+		
+		//Esta função irá consultar os dados do time selecionado e retorna em array
 		public function consultaDadoTime($id){
 				
 			$timeEscolhido= array();
 				
 			$conn = Database::conexao();
 				
-			$consultaTimeDado = 'SELECT nome ,mascote,cor,dinheiro,torcida ,nomeEstadio ,capacidade FROM Time WHERE id = ? ';
+			$consultaTimeDado = 'SELECT nome, mascote ,cor ,dinheiro ,torcida ,estadio FROM Time WHERE id = ? ';
 			$preparaConsultaDadoTime = $conn->prepare($consultaTimeDado);
 			$preparaConsultaDadoTime->bindValue(1,$id);
 			$preparaConsultaDadoTime->execute();
@@ -345,7 +346,6 @@
 				$timeEscolhido[] = $row[3];
 				$timeEscolhido[] = $row[4];
 				$timeEscolhido[] = $row[5];
-				$timeEscolhido[] = $row[6];
 	
 			}
 				

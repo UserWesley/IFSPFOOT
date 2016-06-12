@@ -74,6 +74,12 @@
 			                    	</a>
 			                    </div>
 			                    
+			                    <div class="form-group">
+			                    	<a class="btn btn-danger btn-block" href="../_controller/controllerLogout.php">
+			                    		 Sair
+			                    	</a>
+			                    </div>
+			                    
 	                    	</div>
 	                    </div>
 	                </div>

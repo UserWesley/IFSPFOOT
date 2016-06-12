@@ -41,14 +41,14 @@
         			  <th>Titular</th>
 			          <th>Nome</th>
 			          <th>Sobrenome</th>
-			          <th>Posição</th>
 			          <th>Nacionalidade</th>
-			          <th>Habilidade</th>
 			          <th>Idade</th>
-			          <th>Forca</th>
 			          <th>Estamina</th>
 		          	  <th>Nivel</th>
 		          	  <th>Gol</th>
+		          	  <th>Passe</th>
+		          	  <th>Salário</th>
+		          	  <th>Posição</th>
         		</tr> 
       		</thead>
       		<tbody>

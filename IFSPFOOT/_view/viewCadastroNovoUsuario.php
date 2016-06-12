@@ -136,7 +136,7 @@
 	                    	</div>
 	                    	
 	                    	<div class="form-group">
-			                    <a class="btn btn-danger btn-block" href="index.php">
+			                    <a class="btn btn-danger btn-block" href="../index.php">
 			                    		 Sair
 			                    </a>
 			                </div>

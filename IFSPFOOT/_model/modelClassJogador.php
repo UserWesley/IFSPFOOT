@@ -23,10 +23,6 @@
 		private $estilo;
 		private $campeonato;
 		
-		
-		public function __destruct(){
-			
-		}
 		public function getId(){
 			return $this->id;
 		}
@@ -298,13 +294,15 @@
 			}
 		}
 		
+		//Esta função consulta jogadores do time selecionado e retorna em forma array
 		public function consultaJogadorTime($idTime){
 			
 			$jogadorTime = array();
 			
 			$conn = Database::conexao();
 			
-			$consultaJogador = 'SELECT titular,nome ,sobrenome,posicao,nacionalidade,habilidade ,idade ,forca ,estamina ,nivel,gol FROM Jogador WHERE idTime = ? ';
+			$consultaJogador = 'SELECT Jogador.titular, Jogador.nome, Jogador.sobrenome, Jogador.nacionalidade, Jogador.idade,
+			 Jogador.estamina, Jogador.nivel, Jogador.gol, Jogador.passe, Jogador.salario, posicao.nome FROM Jogador,posicao WHERE idTime = ? and  jogador.posicao = posicao.id ';
 			$preparaConsultaJogador = $conn->prepare($consultaJogador);
 			$preparaConsultaJogador->bindValue(1, $idTime);
 			$preparaConsultaJogador->execute();

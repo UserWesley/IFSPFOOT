@@ -130,10 +130,16 @@
 		                	
 		                    <div class="social-login-buttons" style="margin-bottom: 0px; padding-bottom:0px;">
 			                    <div class="form-group" >
-
+							
 		                    	</div>
 			                    
 	                    	</div>
+	                    	
+	                    	<div class="form-group">
+			                    <a class="btn btn-danger btn-block" href="index.php">
+			                    		 Sair
+			                    </a>
+			                </div>
 	                    </div>
 	                </div>
 	            </div>

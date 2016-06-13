@@ -78,7 +78,7 @@
 									}
 									else {
 										echo "<form action=\"viewTelaTime.php\" method=POST>";
-											echo "<select id = \"idSelectTime\" name = \"selectTime\">";
+											echo "<select id = \"idSelectCarregamento\" name = \"selectCarregamento\">";
 											
 											foreach($campeonatos as $key => $value):
 												echo '<option value="'.$key.'">'.$value.'</option>'; 

@@ -79,7 +79,7 @@
 			                			
 			                		}
 			                		elseif ($_SESSION['cadastroNomeCarregamento']){
-			                			echo $_SESSION['cadastroNomeCarregamento'];
+			                			echo "Nome ja esta sendo utilizado";
 			                		}
 			                		
 			                	?>	                     
@@ -89,9 +89,13 @@
 		                    </form>
 		                	
 		                    <div class="social-login-buttons" style="margin-bottom: 0px; padding-bottom:0px;">
-			                    <div class="form-group" >
-
-		                    	</div>
+			                    
+			                    <div class="form-group">
+			                    	<a class="btn btn-warning btn-block" href="viewInicial.php">
+			                    		 Voltar Jogo
+			                    	</a>
+			                    </div>
+			                    
 			                    
 	                    	</div>
 	                    </div>

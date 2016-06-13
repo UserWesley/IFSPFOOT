@@ -126,12 +126,12 @@
 	   	
 	   		$conn = Database::conexao();
 	   		
-	   		echo $data = $this->getData();
-	   		echo $timeCasa = $this->getTimeCasa();
-	   		echo $timeVisitante = $this->getTimeVisitante();
-	   		echo $campeonato = $this->getCampeonato();
-	   		echo $rodada = $this->getRodada();
-	   		echo $clima = $this->getClima();
+	   	    $data = $this->getData();
+	   		$timeCasa = $this->getTimeCasa();
+	   		$timeVisitante = $this->getTimeVisitante();
+	   		$campeonato = $this->getCampeonato();
+	   		$rodada = $this->getRodada();
+	   		$clima = $this->getClima();
 	   
 	   		//Cadastro do campeonato inicial
 	   		$insercaoNovoJogo = "INSERT INTO Jogo VALUES (DEFAULT,NULL,NULL,'$data',

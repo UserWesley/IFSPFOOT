@@ -52,13 +52,13 @@
       <table class="table">
       		<thead>
         		<tr class = "info">
-			          <th>Nome</th>
-			          <th>Mascote</th>
-			          <th>Cor</th>
-			          <th>Dinheiro</th>
-			          <th>Torcida</th>
-			          <th>Nome Estádio</th>
-			          <th>Capacidade</th>
+			    	<th>Nome</th>
+			        <th>Mascote</th>
+			        <th>Cor</th>
+			        <th>Dinheiro</th>
+			        <th>Torcida</th>
+			        <th>Nome Estádio</th>
+			        <th>Capacidade</th>
         		</tr> 
       		</thead>
       		<tbody>
@@ -69,9 +69,9 @@
 				$timeDados = $time->buscarDadoTime($idTime);
 				
 		      ?>
-      </tbody>
-    </table>
-  </div>
+      		</tbody>
+    	</table>
+  	</div>
 
 </body>
 

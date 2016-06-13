@@ -27,23 +27,29 @@
 			//$this->cadastroRodada();
 			//$this->cadastroJogo();
 		}
+		public function direcionaTela(){
+			//Chamando o arquivo para iniciar um jogo
+			header("LOCATION: ../_view/viewTelaTime.php");
+		}
 		
 		public function verificaDados(){
 				
 			$campeonato = new modelClassCampeonato();
 			
-			$nomeCampeonato = $_POST['nomeCarregamento']; 
+			$nomeCampeonato = $_POST['nomeCarregamento'];
+			$idUsuario = $_SESSION['idDono']; 
 				
-			$verificaCampeonato = $campeonato->consultaNomeCarregamento($nomeCampeonato);
+			$verificaCampeonato = $campeonato->consultaNomeCarregamento($nomeCampeonato,$idUsuario);
 				
-			if($verificaCampeonato != NULL){
-		
-				header("Location: ../_view/viewNomeCarregamento.php");
+			if($verificaCampeonato == NULL){
+				
+				$_SESSION['cadastroNomeCarregamento'] = "Login Sendo Utilizado !";
+					
 		
 			}else{
 				
-				$_SESSION['cadastroNomeCarregamento'] = "Login Sendo Utilizado !";
 				
+				header("Location: ../_view/viewNomeCarregamento.php");
 			}
 			
 
@@ -144,7 +150,7 @@
 		
 		public function cadastroTime(){
 			
-			for($i=1;$i<=8;$i++){
+			for($i=1;$i<=20;$i++){
 				
 				switch ($i){
 					
@@ -171,6 +177,43 @@
 							
 					case 8 : $timeTeste = "Time8";
 						break;
+						
+					case 9 : $timeTeste = "Time9";
+						break;
+							
+					case 10 : $timeTeste = "Time10";
+						break;
+						
+					case 11 : $timeTeste = "Time11";
+						break;
+							
+					case 12 : $timeTeste = "Time12";
+						break;
+							
+					case 13 : $timeTeste = "Time13";
+						break;
+							
+					case 14 : $timeTeste = "Time14";
+						break;
+						
+					case 15 : $timeTeste = "Time15";
+						break;
+							
+					case 16 : $timeTeste = "Time16";
+						break;
+
+					case 17 : $timeTeste = "Time17";
+						break;
+							
+					case 18 : $timeTeste = "Time18";
+						break;
+							
+					case 19 : $timeTeste = "Time19";
+						break;
+						
+					case 20 : $timeTeste = "Time20";
+						break;
+						
 				}
 				
 				$ultimoIdEstadio = $this->cadastroEstadio();
@@ -201,56 +244,121 @@
 		public function cadastroRodada(){
 			
 			$time = new modelClassTime();
-			$quantidadeTimesCampeonato = $time->recolheNumerodeTimesCampeonato($ultimoIdCampeonato);
+			$quantidadeTimesCampeonato = $time->recolheNumerodeTimesCampeonato($_SESSION['IdCampeonato']);
 			 
-			
 			$rodada = new modelClassRodada();			
-			$rodada->setNumero(1);
-			$rodada->setCampeonato($_SESSION['IdCampeonato']);
-			$rodada->cadastrarRodada($rodada,$quantidadeTimesCampeonato);				
+			$quantidadeRodadasCampeonato = ($quantidadeTimesCampeonato * 2) - 2;
+			
+			for($i=1; $i <= $quantidadeRodadasCampeonato; $i++){
 				
+				$rodada->setNumero(1);
+				$rodada->setCampeonato($_SESSION['IdCampeonato']);
+				$rodada->cadastrarRodada($rodada);				
+			}	
 		}
 		
 		public function cadastroJogo(){
 			
+			//Array com o times do campeonato original, não serão alterados
+			$arrayTimesCampeonatoOriginal = array();
+			//Array com o times do campeonato que serão mexidos
 			$arrayTimesCampeonato = array();
+			//Array que conterá os climas disponiveis no banco
 			$arrayClimas = array();
+			//Array que conterá o jogo formada
+			$jogoRodada = array();
+			//Array que armazenará todos jogos
+			$jogosFormados = array();
+			//Array times que ja jogaram a rodada
+			$timesJogosMarcados = array();
+			
 			
 			$clima = new modelClassClima();
 			$arrayClimas = $clima->recolheClimas();
-			
+			//echo "Climas";
+			//print_r($arrayClimas);
+			//echo "<p>";
 			$time = new modelClassTime();
-			$quantidadeTimesCampeonato = $time->recolheNumerodeTimesCampeonato($ultimoIdCampeonato);
-			$jogosRodada = $quantidadeTimesCampeonato /2;
-			
+			$quantidadeTimesCampeonato = $time->recolheNumerodeTimesCampeonato($_SESSION['IdCampeonato']);
+			//echo "quantidade de times : ".$quantidadeTimesCampeonato."<p>";
+			$jogosRodada = $quantidadeTimesCampeonato / 2;
+			//echo "jogos rodada : ".$jogosRodada."<p>";
 			$rodada = new modelClassRodada();
-			$numeroRodada = $rodada->recolheNumeroRodada($ultimoIdCampeonato);
+			$numeroRodada = $rodada->recolheNumeroRodada($_SESSION['IdCampeonato']);
+			//echo "numero rodada : ".$numeroRodada."<p>";
+			$arrayTimesCampeonatoOriginal = $time->recolheTimesCampeonato($_SESSION['IdCampeonato']);
+			//echo "times campeonato : ";
+			//print_r($arrayTimesCampeonatoOriginal);
+		//	echo "<p>";
 			
 			$i = 1;
 			
+			//Preencher todas rodadas
 			for($i=1; $i<=$numeroRodada;$i++){
 				
+				//preenche novamente o contador
 				$quantidadeTimesCampeonatoContador = $quantidadeTimesCampeonato;
 				
-				//$arrayTimesCampeonato = $time->recolheTimesCampeonato();
-					
+				//Array times do campeonato recebe todos os id dos times do campeonato
+				$arrayTimesCampeonato = $arrayTimesCampeonatoOriginal;
+				$timesJogosMarcados[] = null;
+				//$timesJogosMarcados[] = -1;
+				//$timesJogosMarcados[] = -2;
+				//Preencher todos jogos da rodada
 				while($quantidadeTimesCampeonatoContador != $jogosRodada){
 					
 					$jogo = new modelClassJogo();
-		
-					//$timeCasa = $jogo->sorteiaJogo($arrayTimesCampeonato);
-					//$jogo->removerTimeArray($arrayTimesCampeonato[$timeCasa]);
-					//$timeVisitante = $jogo->sorteiaJogo($arrayTimesCampeonato);
-					//$jogo->removerTimeArray($arrayTimesCampeonato[$timeVistante]);
 					
+					do{
+						
+						unset($jogoRodada);
+							
+						//Sorteio time do array até que seja um que não jogou
+						//do{
+				
+						$timeCasa = array_rand($arrayTimesCampeonato,1);
+						$key = array_search($arrayTimesCampeonato[$timeCasa], $arrayTimesCampeonato);
+						if($key!==false){
+							unset($arrayTimesCampeonato[$key]);
+						}
+						//}while(in_array($timeCasa,$timesJogosMarcados));
+						
+						//Sorteio time do array até que seja um que não jogou
+						//do{
+						//$timeVisitante = $time->sorteiaTime($arrayTimesCampeonato);
+						$timeVisitante = array_rand($arrayTimesCampeonato,1);
+						$key = array_search($arrayTimesCampeonato[$timeVisitante], $arrayTimesCampeonato);
+						if($key!==false){
+							unset($arrayTimesCampeonato[$key]);
+						}
+						//unset($arrayTimesCampeonato[$timeVisitante]);
+						//}while(in_array($timeVisitante,$timesJogosMarcados));
+						
+						$timesJogosMarcados[] = $arrayTimesCampeonatoOriginal[$timeCasa];
+						$timesJogosMarcados[] = $arrayTimesCampeonatoOriginal[$timeVisitante];
+						$jogoRodada[] = $arrayTimesCampeonatoOriginal[$timeCasa];
+						$jogoRodada[] = $arrayTimesCampeonatoOriginal[$timeVisitante];
+						
+						$consulta = $time->verificaArray($arrayTimesCampeonatoOriginal[$timeCasa],$arrayTimesCampeonatoOriginal[$timeVisitante],$jogosFormados,$i);
+					
+					}while($consulta);
+					
+					$jogosFormados[] = $jogoRodada;
+
+					//Dados do jogo
 					$jogo->setData('2014-01-01');
-					
 					$jogo->setCampeonato($_SESSION['IdCampeonato']);
-					$jogo->setRodada($i);	
-					$jogo->setTimeCasa(1);
-					$jogo->setTimeVisitante(2);
+					$jogo->setRodada($i);
+					
+					//Times do jogo
+					$jogo->setTimeCasa($arrayTimesCampeonatoOriginal[$timeCasa]);
+					$jogo->setTimeVisitante($arrayTimesCampeonatoOriginal[$timeVisitante]);
+					
+					//Definindo clima
 					$climaJogo = $clima->sorteioClima($arrayClimas);
 					$jogo->setClima($climaJogo);
+					
+					//Cadastrar jogo
 					$jogo->cadastrarJogo($jogo);
 					
 					$quantidadeTimesCampeonatoContador--;
@@ -260,17 +368,16 @@
 			}
 		}
 		
-
 	}
 	
 	$gerenciaInicio = new controllerGerenciaInicio();
-	$gerenciaInicio->verificaDados();
+	//$gerenciaInicio->verificaDados();
 	$gerenciaInicio->cadastroCampeonato();
 	$gerenciaInicio->cadastroTime();
 	$gerenciaInicio->cadastroRodada();
 	$gerenciaInicio->cadastroJogo();
+	$gerenciaInicio->direcionaTela();
 	
-	//Chamando o arquivo para iniciar um jogo
-	header("LOCATION: ../_view/viewNovoJogo.php");	
+
 
 ?>

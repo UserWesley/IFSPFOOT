@@ -34,21 +34,16 @@
 			$this->campeonato = $campeonato;
 		}
 		
-		public function cadastrarRodada($rodada,$quantidadeTimesCampeonato){
+		public function cadastrarRodada($rodada){
 			
 			$conn = Database::conexao();
 			
 			$numero = $this->getNumero();
 			$campeonato = $this->getCampeonato();
-			
-			$quantidadeRodadasCampeonato = ($quantidadeTimesCampeonato * 2) - 2;
-			
-			for($i=1; $i <= $quantidadeRodadasCampeonato; $i++){
 
-				$insercaoNovaRodada = "INSERT INTO Rodada VALUES (DEFAULT,'$numero','$campeonato');";
-				$conn->exec($insercaoNovaRodada);
+			$insercaoNovaRodada = "INSERT INTO Rodada VALUES (DEFAULT,'$numero','$campeonato');";
+			$conn->exec($insercaoNovaRodada);
 			
-			}
 		}
 		
 		public function recolheNumeroRodada($idCampeonato){

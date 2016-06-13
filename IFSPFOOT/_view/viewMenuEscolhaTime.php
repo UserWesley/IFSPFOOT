@@ -50,7 +50,7 @@
 					
 					echo "<select id = \"idSelectTime\" name = \"selectTime\">";
 					
-					for($i=0; $i < 8; $i++) {
+					for($i=0; $i < 20; $i++) {
 						
 						echo "<option value = ".current($times).">".next($times)."</option>";
 						next($times);
@@ -69,6 +69,7 @@
 						$_SESSION['time'] = $_POST['selectTime'];
 						
 					}
+
 					
 				?>
 				

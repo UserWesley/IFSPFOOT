@@ -121,7 +121,8 @@
 		public function setTabela($tabela){
 			$this->tabela = $tabela;
 		}
-	
+		
+		//Esta função irá cadastrar times do campeonato
 		public function cadastrarTime($time){
 				
 			$conn = Database::conexao();
@@ -143,86 +144,9 @@
 			$conn->exec($insercaoNovoTime);
 				
 		}
-	
-		public function consultaTabela($nomeTime){
-				
-			$timeTabela = array();
-				
-			$conn = Database::conexao();
-				
-			$consultaTime = 'SELECT id,vitoria,derrota,empate,pontos FROM Time WHERE nome = ?';
-			$preparaConsultaTime = $conn->prepare($consultaTime);
-			$preparaConsultaTime->bindValue(1, $nomeTime);
-			$preparaConsultaTime->execute();
-				
-			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
-			while ($row = $preparaConsultaTime->fetch()) {
-					
-				$timeTabela[] = $row[0];
-				$timeTabela[] = $row[1];
-				$timeTabela[] = $row[2];
-				$timeTabela[] = $row[3];
-				$timeTabela[] = $row[4];
-					
-			}
-				
-			return $timeTabela;
-				
-		}
-	
-		public function atualizaTimeVencedorTabela($time){
-				
-			$id = $time[0];
-			$vitoria = $time[1] + 1;
-			$pontos = $time[4]+3;
-				
-			$conn = Database::conexao();
-				
-			$atualizaTimeVencedor = 'UPDATE Time SET  vitoria = ?, pontos = ? WHERE id = ?';
-			$preparaAtualizaTimeVencedor = $conn->prepare($atualizaTimeVencedor);
-			$preparaAtualizaTimeVencedor->bindValue(1,$vitoria);
-			$preparaAtualizaTimeVencedor->bindValue(2,$pontos);
-			$preparaAtualizaTimeVencedor->bindValue(3,$id);
-			$preparaAtualizaTimeVencedor->execute();
-	
-		}
-	
-		public function removerTimeArray(){
-				
-			$key = array_search($timesCampeonato[$time], $timesCampeonato);
-			if($key!==false){
-				unset($timesCampeonato[$key]);
-			}
-		}
-	
-		public function atualizaTimePerdedorTabela($time){
-			$id = $time[0];
-			$derrota = $time[2]+1;
-				
-			$conn = Database::conexao();
-				
-			$atualizaTimePerdedor = 'UPDATE Time SET  derrota = ? WHERE id = ?';
-			$preparaAtualizaTimePerdedor = $conn->prepare($atualizaTimePerdedor);
-			$preparaAtualizaTimePerdedor->bindValue(1,$derrota);
-			$preparaAtualizaTimePerdedor->bindValue(2,$id);
-			$preparaAtualizaTimePerdedor->execute();
-		}
-	
-		public function empateTabela($time){
-				
-			$empate = $time[3]+1;
-			$pontos = $time[4]+1;
-			$id = $time[0];
-				
-			$conn = Database::conexao();
-			$atualizaTimeEmpate = 'UPDATE Time SET  empate = ?, pontos = ? WHERE id = ?';
-			$preparaAtualizaTimeEmpate = $conn->prepare($atualizaTimeEmpate);
-			$preparaAtualizaTimeEmpate->bindValue(1,$empate);
-			$preparaAtualizaTimeEmpate->bindValue(2,$pontos);
-			$preparaAtualizaTimeEmpate->bindValue(3,$id);
-			$preparaAtualizaTimeEmpate->execute();
-				
-		}
+		
+
+		
 	
 		public function consultaId($nomeTime){
 	
@@ -366,39 +290,7 @@
 			}
 		}
 	
-		public function consultaTabelaCampeonato(){
-				
-			$tabelaCampeonato = array();
-				
-			//Listando times ordenado por número de pontos
-			$conn = Database::conexao();
-				
-			$consultaTabela = 'SELECT nome, vitoria, derrota, empate, pontos FROM Time ORDER BY pontos DESC';
-			$preparaConsultaTabela = $conn->query($consultaTabela);
-			$preparaConsultaTabela->execute();
-				
-			$result = $preparaConsultaTabela->setFetchMode(PDO::FETCH_NUM);
-			while ($row = $preparaConsultaTabela->fetch()) {
-				$tabelaCampeonato[] = $row[0];
-				$tabelaCampeonato[] = $row[1];
-				$tabelaCampeonato[] = $row[2];
-				$tabelaCampeonato[] = $row[3];
-				$tabelaCampeonato[] = $row[4];
-			}
-			return $tabelaCampeonato;
-		}
-	
-		public function visualizaTabelaCampeonato($tabela){
-				
-			$colunas = 5;
-				
-			for($i=0; $i < count($tabela); $i++) {
-				echo "<td>".$tabela[$i]."</td>";
-				if((($i+1) % $colunas) == 0 )
-					echo "</tr><tr>";
-			}
-				
-		}
+		
 	
 		public function recolheUltimoIdTime(){
 				
@@ -416,7 +308,8 @@
 			return $id;
 				
 		}
-	
+		
+		//Esta função consulta no banco a quantidade de times participantes do campeonato
 		public function recolheNumerodeTimesCampeonato($idCampeonato){
 				
 			$conn = Database::conexao();
@@ -433,7 +326,8 @@
 	
 			return $quantidadeTimesCampeonato;
 		}
-	
+		
+		//Esta função recolhe o nome dos time participantes do campeonato
 		public function recolheTimesCampeonato($idCampeonato){
 				
 			$timesCampeonato = array();
@@ -452,7 +346,45 @@
 				
 			return $timesCampeonato;
 		}
-	
+
+//-----------------------------------------------------------------------------------------------------		
+		//Estas funções  abaixo iram tratar a geração de jogo
+		
+		//Sorteia valor
+		public function sorteiaTime($timesCampeonato){
+			
+			$time = array_rand($timesCampeonato,1);
+			
+			return $time;
+		}
+		
+		//Verifica array
+		public function verificaArray($timeCasa,$timeVisitante,$jogosFormados,$rodada){
+			
+			$jogo = array();
+			$jogoInvertido = array();
+
+			$jogo[] = $timeCasa;
+			$jogo[] = $timeVisitante;
+			
+			$jogoInvertido = $timeVisitante;
+			$jogoInvertido = $timeCasa;
+
+			//if($rodada > 19){
+
+				//if(in_array($jogo, $jogosFormados)){
+				//	return true;
+			//	}
+
+				//elseif(in_array($jogoInvertido, $jogosFormados)){
+				//	return true;
+				//}
+				
+				//else {
+				//	return false;
+			//	}
+			//}
+		}
 	
 	}
 ?>

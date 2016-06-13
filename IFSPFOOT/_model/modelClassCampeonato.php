@@ -131,15 +131,16 @@
 			
 		}
 		
-		public function consultaNomeCarregamento($nomeCarregamento){
+		public function consultaNomeCarregamento($nomeCarregamento,$idUsuario){
 			
 			$conn = Database::conexao();
 				
 			$resultado = NULL;
 				
-			$consultaNomeCarregamento = 'SELECT nomeCarregamento FROM Campeonato WHERE nomeCarregamento = ? ';
+			$consultaNomeCarregamento = 'SELECT nomeCarregamento FROM Campeonato WHERE nomeCarregamento = ? and usuario = ? ';
 			$preparaConsultaNomeCarregamento = $conn->prepare($consultaNomeCarregamento);
 			$preparaConsultaNomeCarregamento->bindValue(1, $nomeCarregamento);
+			$preparaConsultaNomeCarregamento->bindValue(2, $idUsuario);
 			$preparaConsultaNomeCarregamento->execute();
 			
 			$result = $preparaConsultaNomeCarregamento->setFetchMode(PDO::FETCH_NUM);

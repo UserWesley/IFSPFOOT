@@ -45,7 +45,7 @@ CREATE TABLE Campeonato (
 	nome VARCHAR(20) NOT NULL,
 	rodadaAtual INT NOT NULL,
 	temporada INT NOT NULL,
-	nomeCarregamento VARCHAR(20) NOT NULL,
+	nomeCarregamento VARCHAR(20)	 NOT NULL,
 	usuario INT,
 	
 	FOREIGN KEY (usuario) REFERENCES Usuario (id),

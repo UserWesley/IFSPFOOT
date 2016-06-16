@@ -2,7 +2,9 @@
 
 	include_once '../_model/modelClassTime.php';
 	include_once '../_model/modelClassJogador.php';
-
+	
+	//session_start();
+	
 	Class controllerClassVerificaTime{
 		
 		public function visualizaTime(){
@@ -10,8 +12,9 @@
 			$time = new modelClassTime();
 				
 			$todosTimes = array();
-				
-			$todosTimes = $time->consultaTodosTime();
+
+			$time->setCampeonato($_SESSION['IdCampeonato']);
+			$todosTimes = $time->consultaTodosTime($time);
 				
 			return $todosTimes;
 		

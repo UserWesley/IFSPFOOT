@@ -57,8 +57,6 @@
 			        <th>Cor</th>
 			        <th>Dinheiro</th>
 			        <th>Torcida</th>
-			        <th>Nome Estádio</th>
-			        <th>Capacidade</th>
         		</tr> 
       		</thead>
       		<tbody>

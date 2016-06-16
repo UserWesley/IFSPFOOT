@@ -78,7 +78,7 @@
 			                			echo "";
 			                			
 			                		}
-			                		elseif ($_SESSION['cadastroNomeCarregamento']){
+			                		else{
 			                			echo "Nome ja esta sendo utilizado";
 			                		}
 			                		

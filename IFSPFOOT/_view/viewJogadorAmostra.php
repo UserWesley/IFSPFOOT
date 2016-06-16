@@ -38,7 +38,7 @@
     	<table class="table">
       		<thead>
         		<tr class = "info">
-        			  <th>Titular</th>
+        			  
 			          <th>Nome</th>
 			          <th>Sobrenome</th>
 			          <th>Nacionalidade</th>
@@ -49,6 +49,8 @@
 		          	  <th>Passe</th>
 		          	  <th>Salário</th>
 		          	  <th>Posição</th>
+		          	  <th>Temperamento</th>
+		          	  <th>Estilo</th>
         		</tr> 
       		</thead>
       		<tbody>

@@ -17,6 +17,8 @@
 			
 			$time = new modelClassTime();
 			
+			$_SESSION['time'];
+			$_SESSION['idDono'];
 			$time->setId($_SESSION['time']);
 			$time->setDono($_SESSION['idDono']);
 			

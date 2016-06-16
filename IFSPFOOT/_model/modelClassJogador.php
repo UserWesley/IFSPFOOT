@@ -211,7 +211,7 @@
 		
 		public function visualizaJogador($jogadores){
 			
-			$colunas = 11;
+			$colunas = 12;
 			 
 			for($i=0; $i < count($jogadores); $i++) {
 				echo "<td>".$jogadores[$i]."</td>";
@@ -296,13 +296,17 @@
 		
 		//Esta função consulta jogadores do time selecionado e retorna em forma array
 		public function consultaJogadorTime($idTime){
-			
+						
 			$jogadorTime = array();
-			
+
 			$conn = Database::conexao();
 			
-			$consultaJogador = 'SELECT Jogador.titular, Jogador.nome, Jogador.sobrenome, Jogador.nacionalidade, Jogador.idade,
-			 Jogador.estamina, Jogador.nivel, Jogador.gol, Jogador.passe, Jogador.salario, posicao.nome FROM Jogador,posicao WHERE idTime = ? and  jogador.posicao = posicao.id ';
+			$consultaJogador = 'SELECT Jogador.nome, Jogador.sobrenome, Jogador.nacionalidade, Jogador.idade,
+			 Jogador.estamina, Jogador.nivel, Jogador.gol, Jogador.passe, Jogador.salario, posicao.nome, 
+			 temperamento.nome, estilo.nome 
+			FROM Jogador,posicao,temperamento,estilo
+			 WHERE jogador.idTime = ? and Jogador.posicao = posicao.id and Jogador.temperamento = temperamento.id and Jogador.estilo = estilo.id';
+			
 			$preparaConsultaJogador = $conn->prepare($consultaJogador);
 			$preparaConsultaJogador->bindValue(1, $idTime);
 			$preparaConsultaJogador->execute();
@@ -322,21 +326,13 @@
 				$jogadorTime[] = $row[8];
 				$jogadorTime[] = $row[9];
 				$jogadorTime[] = $row[10];
+				$jogadorTime[] = $row[11];
 				
+
 			}
 			
 			return $jogadorTime;
 		}
 		
-		public function visualizaJogadorTime($jogadoresTime){
-			
-			$colunas = 11;
-			 
-			for($i=0; $i < count($jogadoresTime); $i++) {
-				echo "<td>".$jogadoresTime[$i]."</td>";
-				if((($i+1) % $colunas) == 0 )
-					echo "</tr><tr>";
-			}
-		}
 	}
 ?>

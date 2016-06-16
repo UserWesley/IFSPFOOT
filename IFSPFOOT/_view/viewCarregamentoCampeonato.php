@@ -81,7 +81,7 @@
 											echo "<select id = \"idSelectCarregamento\" name = \"selectCarregamento\">";
 											
 											foreach($campeonatos as $key => $value):
-												echo '<option value="'.$key.'">'.$value.'</option>'; 
+												echo '<option value="'.$value.'">'.$value.'</option>'; 
 											endforeach;
 									
 											echo "</select>";

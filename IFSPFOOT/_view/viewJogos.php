@@ -2,7 +2,7 @@
 
 	/*Este arquivo mostrará todos jogos do Campeonato e seus atributos
 	 */
-
+	session_start();
 	include_once '../_controller/controllerClassMenu.php';
 	
 ?>
@@ -43,8 +43,6 @@
 	          <th>Gol</th>
 	          <th>Time Visitante</th>
 	          <th>Data</th>
-	          <th>Hora</th>
-	          <th>Clima</th>
 	        </tr> 
 	      </thead>
 	      <tbody>
@@ -52,7 +50,7 @@
 			<?php
 			 
 				$jogo = new controllerClassMenu();
-				$jogos = $jogo->buscaJogos();
+				$jogos = $jogo->buscaJogos($_SESSION['IdCampeonato']);
 		
 			?>
 			

@@ -27,7 +27,7 @@ function move() {
 			width++;
 			var i;
 			
-		    for(i=0;i<=1;i++){
+		    for(i=0;i<=9;i++){
 		    
 		    	var valor = Math.floor((Math.random() * 100) + 1);
 		

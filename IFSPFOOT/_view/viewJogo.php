@@ -7,7 +7,7 @@
 	session_start();
 
 	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
+	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
 
 ?>
 
@@ -68,10 +68,13 @@
 <body>
 	
 	<?php 
-		
+		echo $campeonato = $_SESSION['IdCampeonato'];
 		//Consulta e exibição da rodada atual do campeonato	
-		$consultaCampeonatoRodadaAtual = 'SELECT rodadaAtual FROM Campeonato;';
-		$preparaConsultaCampeonatoRodadaAtual = $conn->query($consultaCampeonatoRodadaAtual);
+		$conn = Database::conexao();
+		
+		$consultaCampeonatoRodadaAtual = 'SELECT rodadaAtual FROM Campeonato where id = ?';
+		$preparaConsultaCampeonatoRodadaAtual = $conn->prepare($consultaCampeonatoRodadaAtual);
+		$preparaConsultaCampeonatoRodadaAtual->bindValue(1, $campeonato);
 		$preparaConsultaCampeonatoRodadaAtual->execute();
 		
 		$result = $preparaConsultaCampeonatoRodadaAtual->setFetchMode(PDO::FETCH_NUM);
@@ -120,7 +123,7 @@
 		       $i=0;
 		       
 		       //Só possui dois jogos cada rodada
-		       while($i<2){
+		       while($i<10){
 		      	 echo"<div id=jogo".$i.">"; 
 				 echo "<tr class=\"active\">";
 

@@ -168,16 +168,17 @@
 	
 		}
 	
-		public function consultaIdTime($id){
+		public function consultaIdTime($time){
 				
-			$this->setId($id);
-			$idTime = $this->getId();
-				
+			$idDono = $this->getDono();
+			$idCampeonato = $this->getCampeonato();	
+			
 			$conn = Database::conexao();
-				
-			$consultaTime = 'SELECT id FROM Time WHERE dono = ?';
+			
+			$consultaTime = 'SELECT id FROM Time WHERE dono = ? and campeonato = ?';
 			$preparaConsultaTime = $conn->prepare($consultaTime);
-			$preparaConsultaTime->bindValue(1, $idTime);
+			$preparaConsultaTime->bindValue(1, $idDono);
+			$preparaConsultaTime->bindValue(2, $idCampeonato);
 			$preparaConsultaTime->execute();
 				
 			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
@@ -186,7 +187,7 @@
 				$id = $row[0];
 					
 			}
-				
+			
 			return $id;
 		}
 	
@@ -194,7 +195,7 @@
 				
 			$conn = Database::conexao();
 				
-			$idTime = $time->getId();
+		    $idTime = $time->getId();
 			$idDono = $time->getDono();
 				
 			$atualizaDefinirseuTime = 'UPDATE Time SET dono = ? WHERE id = ?';
@@ -205,12 +206,14 @@
 				
 		}
 	
-		public function consultaTodosTime(){
+		public function consultaTodosTime($campeonato){
 				
 			$times = array();
-				
+
+			$campeonato = $this->getCampeonato();
+			
 			$conn = Database::conexao();
-			$campeonato= 1;
+			
 			$consultaTime = 'SELECT id,nome FROM Time WHERE campeonato = ?';
 			$preparaConsultaTime = $conn->prepare($consultaTime);
 			$preparaConsultaTime->bindValue(1,$campeonato);
@@ -255,7 +258,7 @@
 				
 			$conn = Database::conexao();
 				
-			$consultaTimeDado = 'SELECT nome, mascote ,cor ,dinheiro ,torcida ,estadio FROM Time WHERE id = ? ';
+			$consultaTimeDado = 'SELECT nome, mascote ,cor ,dinheiro ,torcida FROM Time WHERE id = ? ';
 			$preparaConsultaDadoTime = $conn->prepare($consultaTimeDado);
 			$preparaConsultaDadoTime->bindValue(1,$id);
 			$preparaConsultaDadoTime->execute();
@@ -269,7 +272,6 @@
 				$timeEscolhido[] = $row[2];
 				$timeEscolhido[] = $row[3];
 				$timeEscolhido[] = $row[4];
-				$timeEscolhido[] = $row[5];
 	
 			}
 				

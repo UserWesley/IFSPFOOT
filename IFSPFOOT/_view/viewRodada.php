@@ -3,8 +3,8 @@
 	/*Este arquivo será responsável por mostrar a rodada que o usuário selecionar no select*/
 
 	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
-
+	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
+	session_start();
 ?>
 
 <!DOCTYPE html>
@@ -47,8 +47,6 @@
 	          <th>Gol</th>
 	          <th>Time Visitante</th>
 	          <th>Data</th>
-	          <th>Hora</th>
-	          <th>Clima</th>
 	        </tr> 
 	      </thead>
 	
@@ -62,12 +60,17 @@
 				
 				}
 				else { echo "Rodada :".$rodada = '1';}
-				
+				$campeonato = $_SESSION['IdCampeonato'];
+				$conn = Database::conexao();
 				//Consulta para visualizar jogos da rodada assim como o placar
-				$consultaRodada = 'SELECT Jogo.timeCasa, Jogo.golCasa, Jogo.golVisitante, Jogo.timeVisitante,
-								Jogo.data, Jogo.hora, Jogo.clima FROM Jogo,Rodada WHERE Jogo.rodada = Rodada.numero and Rodada.numero = ?';
+				$consultaRodada = 'SELECT timeCasa.nome, Jogo.placarCasa, Jogo.placarVisitante, timeVisitante.nome,
+								Jogo.data FROM Jogo,Rodada,time as timeCasa, time as timeVisitante WHERE rodada.campeonato = ? 
+								and Jogo.rodada = ? and jogo.timeCasa = timeCasa.id 
+								and jogo.timeVisitante = timeVisitante.id';
+			
 				$preparaConsultaRodada = $conn->prepare($consultaRodada);
-				$preparaConsultaRodada->bindValue(1,$rodada);
+				$preparaConsultaRodada->bindValue(1,$campeonato);
+				$preparaConsultaRodada->bindValue(2,$rodada);
 				$preparaConsultaRodada->execute();
 			
 				$result = $preparaConsultaRodada->setFetchMode(PDO::FETCH_NUM);
@@ -80,8 +83,6 @@
 		            echo "<td>{$row[2]}</td>";  
 		            echo "<td>{$row[3]}</td>";
 		            echo "<td>{$row[4]}</td>";
-		            echo "<td>{$row[5]}</td>";
-		            echo "<td>{$row[6]}</td>";
 		            echo '</tr>';
 				}
 				

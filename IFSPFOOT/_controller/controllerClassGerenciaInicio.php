@@ -29,27 +29,31 @@
 		}
 		public function direcionaTela(){
 			//Chamando o arquivo para iniciar um jogo
-			header("LOCATION: ../_view/viewTelaTime.php");
+			header("LOCATION: ../_view/viewNovoJogo.php");
 		}
 		
 		public function verificaDados(){
 				
 			$campeonato = new modelClassCampeonato();
 			
-			$nomeCampeonato = $_POST['nomeCarregamento'];
-			$idUsuario = $_SESSION['idDono']; 
+			$campeonato->setNomeCarregamento($_POST['nomeCarregamento']);
+			$campeonato->setUsuario($_SESSION['idDono']); 
 				
-			$verificaCampeonato = $campeonato->consultaNomeCarregamento($nomeCampeonato,$idUsuario);
-				
-			if($verificaCampeonato == NULL){
-				
-				$_SESSION['cadastroNomeCarregamento'] = "Login Sendo Utilizado !";
+			$verificaCampeonato = $campeonato->consultaNomeCarregamento($campeonato);
+
+			
+			if(empty($verificaCampeonato)){
 					
-		
+				$this->cadastroCampeonato();
+				$this->cadastroTime();
+				$this->cadastroRodada();
+				$this->cadastroJogo();
+				$this->direcionaTela();
+				
 			}else{
-				
-				
 				header("Location: ../_view/viewNomeCarregamento.php");
+				$_SESSION['cadastroNomeCarregamento'] = "Login Sendo Utilizado !";
+				
 			}
 			
 
@@ -371,13 +375,9 @@
 	}
 	
 	$gerenciaInicio = new controllerGerenciaInicio();
-	//$gerenciaInicio->verificaDados();
-	$gerenciaInicio->cadastroCampeonato();
-	$gerenciaInicio->cadastroTime();
-	$gerenciaInicio->cadastroRodada();
-	$gerenciaInicio->cadastroJogo();
-	$gerenciaInicio->direcionaTela();
-	
+	$gerenciaInicio->verificaDados();
+
+
 
 
 ?>

@@ -1,11 +1,19 @@
 <?php
-
+	
+	include_once '../_controller/controllerClassMenu.php';
+	
 	session_start();
 
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
-	
 	$donoTime = $_SESSION['idDono'];
-
+	
+	if(!isset($_SESSION['IdCampeonato'])){
+	
+	 	$nomeCarregamento = $_POST['selectCarregamento'];
+	 	$controllerMenu = new controllerClassMenu();
+	 	
+	 	$_SESSION['IdCampeonato'] = $controllerMenu->consultaIdCampeonato($donoTime,$nomeCarregamento);
+	}
+	
 ?>
 
 <!DOCTYPE html>

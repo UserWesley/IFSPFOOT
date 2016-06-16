@@ -16,11 +16,7 @@
 		private $clima;
         
 		//Getter e setters
-		
-		public function __destruct(){
-			
-		}
-		
+
 		public function getId(){
 			return $this->id;
 		}
@@ -140,15 +136,19 @@
 	   	
 	   }
 	   
-	   public function consultaJogoRodada($rodadaAtual){
-
+	   public function consultaJogoRodada($jogo){
+		
 	   		$conn = Database::conexao();
-	   			
+	   		$rodadaAtual = $this->getRodada();
+	   		$campeonato = $this->getCampeonato();
+	   		
+	   				
 	   		$times = array();
 	   	
-		   	$consultaRodada = 'SELECT timeCasa, timeVisitante FROM Jogo WHERE rodada = ?';
+		   	$consultaRodada = 'SELECT timeCasa, timeVisitante FROM Jogo WHERE rodada = ? and campeonato = ?';
 		   	$preparaConsultaRodada = $conn->prepare($consultaRodada);
 		   	$preparaConsultaRodada->bindValue(1,$rodadaAtual);
+		   	$preparaConsultaRodada->bindValue(2,$campeonato);
 		   	$preparaConsultaRodada->execute();
 		   	
 		   	$result = $preparaConsultaRodada->setFetchMode(PDO::FETCH_NUM);
@@ -181,15 +181,19 @@
 		   	}
 	   }
  
-	   public function consultaJogos(){
-
-	   		$conn = Database::conexao();
+	   public function consultaJogos($jogo){
+	   	
+			$campeonato = $this->getCampeonato();
+	   		
+			$conn = Database::conexao();
 	   		
 	   		$jogos = array();
 	   		
-	   		$consultaJogo = 'SELECT timeCasa, golCasa, golVisitante, timeVisitante,
-								 data, hora, clima FROM Jogo';
-			$preparaConsultaJogo = $conn->query($consultaJogo);
+	   		$consultaJogo = 'select time1.nome,jogo.placarCasa,jogo.placarVisitante, time2.nome, Jogo.data from jogo, time as time1 ,time as time2 where jogo.campeonato = ? and time1.id = jogo.timeCasa
+	   		and time2.id = jogo.timeVisitante';
+	   		
+	   		$preparaConsultaJogo = $conn->prepare($consultaJogo);
+			$preparaConsultaJogo->bindValue(1, $campeonato);
 			$preparaConsultaJogo->execute();
 			
 			$result = $preparaConsultaJogo->setFetchMode(PDO::FETCH_NUM);
@@ -200,8 +204,6 @@
 				$jogos[] = $row[2];
 				$jogos[] = $row[3];
 				$jogos[] = $row[4];
-				$jogos[] = $row[5];
-				$jogos[] = $row[6];
 
 			}
 	   	
@@ -210,7 +212,7 @@
 	   
 	   public function visualizaJogos($jogos){
 	   	
-	   		$colunas = 7;
+	   		$colunas = 5;
 	   		for($i=0; $i < count($jogos); $i++) {
 	   			
 	   		echo "<td>".$jogos[$i]."</td>";

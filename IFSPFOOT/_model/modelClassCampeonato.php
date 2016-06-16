@@ -101,12 +101,14 @@
 
 		}
 		
-		public function rodadaAtual(){
+		public function rodadaAtual($campeonato){
 			
+			$idCampeonato = $this->getId();
 			$conn = Database::conexao();
-			
-			$consultaCampeonatoRodadaAtual = 'SELECT rodadaAtual FROM Campeonato;';
-			$preparaConsultaCampeonatoRodadaAtual = $conn->query($consultaCampeonatoRodadaAtual);
+
+			$consultaCampeonatoRodadaAtual = ("SELECT rodadaAtual FROM Campeonato where id = ?;");
+			$preparaConsultaCampeonatoRodadaAtual = $conn->prepare($consultaCampeonatoRodadaAtual);
+			$preparaConsultaCampeonatoRodadaAtual->bindValue(1,$idCampeonato);
 			$preparaConsultaCampeonatoRodadaAtual->execute();
 			
 			$result = $preparaConsultaCampeonatoRodadaAtual->setFetchMode(PDO::FETCH_NUM);
@@ -131,7 +133,10 @@
 			
 		}
 		
-		public function consultaNomeCarregamento($nomeCarregamento,$idUsuario){
+		public function consultaNomeCarregamento($campeonato){
+			
+			$nomeCarregamento = $this->getNomeCarregamento();
+			$idUsuario = $this->getUsuario();
 			
 			$conn = Database::conexao();
 				
@@ -173,6 +178,30 @@
 			}
 			//Retorna null caso seja válido, e retorno o nomeCarregamento caso já tenha
 			return $resultado;
+			
+		}
+		
+		public function consultaIdCampeonato($campeonato){
+			
+			$nomeCarregamento = $this->getNomeCarregamento();
+			$usuario = $this->getUsuario();
+			
+			$conn = Database::conexao();
+			
+			$consultaIdCampeonato = 'SELECT id FROM Campeonato WHERE nomeCarregamento = ? and usuario = ?';
+			$preparaConsultaIdCampeonato = $conn->prepare($consultaIdCampeonato);
+			$preparaConsultaIdCampeonato->bindValue(1, $nomeCarregamento);
+			$preparaConsultaIdCampeonato->bindValue(2, $usuario);
+			$preparaConsultaIdCampeonato->execute();
+			
+			$result = $preparaConsultaIdCampeonato->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaIdCampeonato->fetch()) {
+					
+				$id = $row[0];
+					
+			}
+			
+			return $id;
 			
 		}
 	}

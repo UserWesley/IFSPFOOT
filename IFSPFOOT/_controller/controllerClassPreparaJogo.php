@@ -16,6 +16,11 @@
 		private $rodadaAtual;
 		private $jogosArray;
 		
+		public function __construct(){
+				
+			$this->verificaRodada();
+		}
+		
 		public function getRodadaAtual(){
 			return $this->rodadaAtual;
 		}
@@ -32,19 +37,11 @@
 			$this->jogosArray = $jogosArray;
 		}
 		
-		public function __construct(){
-			
-			$this->verificaRodada();
-		}
-		
-		public function __destruct(){
-			
-		}
-		
 		public function verificaRodada(){
 			
-			$rodada = new modelClassCampeonato();
-			$rodadaAtual = $rodada->rodadaAtual();
+			$campeonato = new modelClassCampeonato();
+			$campeonato->setId($_SESSION['IdCampeonato']);
+			$rodadaAtual = $campeonato->rodadaAtual($campeonato);
 			$this->setRodadaAtual($rodadaAtual);
 		
 		}
@@ -52,7 +49,9 @@
 		public function preparaJogosRodada($rodadaAtual){
 			
 			$jogo = new modelClassJogo();
-			$jogos = $jogo->consultaJogoRodada($rodadaAtual);
+			$jogo->setRodada($rodadaAtual);
+			$jogo->setCampeonato($_SESSION['IdCampeonato']);
+			$jogos = $jogo->consultaJogoRodada($jogo);
 			
 			return $jogos;
 		}

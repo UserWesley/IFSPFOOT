@@ -2,9 +2,8 @@
 	
 	/*Este arquivo mostrará todos os dados dos jogadores do time do usuário*/
 
-	session_start();
 	include_once '../_controller/controllerClassMenu.php';
-
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -38,17 +37,20 @@
     	<table class="table">
       		<thead>
         		<tr class = "info">
-        			  <th>Titular</th>
+        			  
 			          <th>Nome</th>
 			          <th>Sobrenome</th>
-			          <th>Posição</th>
 			          <th>Nacionalidade</th>
-			          <th>Habilidade</th>
 			          <th>Idade</th>
-			          <th>Forca</th>
 			          <th>Estamina</th>
-		          	  <th>Nivel</th>
-		          	  <th>Gol</th>
+			          <th>Nivel</th>
+			          <th>Gol</th>
+			          <th>Passe</th>	
+			          <th>Salario</th>
+			          <th>Posicao</th>
+			          <th>Temperamento</th>
+			          <th>Estilo</th>
+		          	 
         		</tr> 
       		</thead>
       		
@@ -58,7 +60,9 @@
 		      	
 		      	$jogador = new controllerClassMenu();   	
 		      	$idDono = $_SESSION['idDono'];
-		      	$jogador->buscaJogador($idDono);
+		      	$idCampeonato = $_SESSION['IdCampeonato'];
+	
+		      	$jogador->buscaJogador($idDono,$idCampeonato);
 		      	
 		      ?>
 		      

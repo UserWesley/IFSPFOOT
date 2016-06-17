@@ -250,6 +250,21 @@
 				
 			return $nome;
 		}
+
+        public function atualizaDinheiroTime($Time){
+			$id = $this->getId();
+			$dinheiro = $this->getDinheiro();
+
+			$conn = Database::conexao();
+
+	        $atualizaTime = 'UPDATE TIME SET DINHEIRO = ? WHERE ID = ? ';
+	     	$preparaAtualizacaoTime = $conn->prepare($atualizaTime);
+	     	$preparaAtualizacaoTime->bindValue(1,$dinheiro);
+	     	$preparaAtualizacaoTime->bindValue(2,$id);	     	
+	     	$preparaAtualizacaoTime->execute();
+
+
+			}		
 		
 		//Esta função irá consultar os dados do time selecionado e retorna em array
 		public function consultaDadoTime($id){

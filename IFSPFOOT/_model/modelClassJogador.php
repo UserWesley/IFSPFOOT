@@ -208,6 +208,21 @@
 			return $jogadoresTime;
 			
 		}
+
+		public function compraJogador($Jogador){
+			$time = $this->getIdtime();
+			$id = $this->getId();
+
+			$conn = Database::conexao();
+     
+	        $compraJogador = 'UPDATE JOGADOR SET IDTIME = ? WHERE ID = ? ';
+	     	$preparaConsultaTime = $conn->prepare($compraJogador);
+	     	$preparaConsultaTime->bindValue(1,$time);
+	     	$preparaConsultaTime->bindValue(2,$id);	     	
+	     	$preparaConsultaTime->execute();
+
+
+			}		
 		
 		public function visualizaJogador($jogadores){
 			

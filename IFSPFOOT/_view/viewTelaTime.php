@@ -56,6 +56,8 @@
 				<li><a href="viewJogador.php" target="janela">Jogadores</a></li>
 			
 				<li><a href="viewJogos.php" target="janela">Jogos</a></li>
+
+               <li><a href="viewMercado.php" target="janela">Mercado</a></li>                
 			
 				<li><a href="viewRodada.php" target="janela">Rodadas</a></li>
 						

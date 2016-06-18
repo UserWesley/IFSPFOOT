@@ -7,6 +7,7 @@
 
 	include_once '../_model/modelClassCampeonato.php';
 	include_once '../_model/modelClassJogo.php';
+	include_once '../_model/modelClassRodada.php';
 	
 	Class controllerPreparaJogo{
 		
@@ -33,6 +34,22 @@
 		public function setJogosArray($jogosArray){
 			$this->jogosArray = $jogosArray;
 		}
+		public function verificaFimCampeonato(){
+				
+			$rodada = new modelClassRodada();
+			$rodada->setCampeonato($_SESSION['IdCampeonato']);
+			$ultimaRodada = $rodada->consultaQuantidadeRodadas($rodada);
+				
+			$campeonato = new modelClassCampeonato();
+			$campeonato->setId($_SESSION['IdCampeonato']);
+			$rodadaAtual = $campeonato->rodadaAtual($campeonato);
+				
+			if($rodadaAtual == $ultimaRodada){
+		
+				header("Location: ../_view/viewTelaFimCampeonato.php");
+			}
+				
+		}
 		
 		public function verificaRodada(){
 			
@@ -56,6 +73,7 @@
 	}
 	
 	$preparacaoJogo = new controllerPreparaJogo();
+	$preparacaoJogo->verificaFimCampeonato();
 	$preparacaoJogo->verificaRodada();
 	$rodadaAtual =  $preparacaoJogo->getRodadaAtual();
 

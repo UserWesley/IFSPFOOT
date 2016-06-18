@@ -58,9 +58,8 @@
 		}
 		public function sortearSobrenome($sobrenomes){
 			
-			do{	
-				$nome = array_rand($sobrenomes,1);
-			}while ($nome == 0);
+			$valorMaximo = count($sobrenomes);
+			$nome = rand(1,$valorMaximo);
 			
 			return $nome;
 		}

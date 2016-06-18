@@ -19,10 +19,6 @@
 		function __construct(){
 			$this->consultaAcesso();
 		}
-		
-		function __destruct(){
-			
-		}
 
 		function consultaAcesso(){
 			

@@ -14,10 +14,6 @@
 			$this->atualizarPlacar();
 		}
 		
-		public function __destruct(){
-			
-		}
-		
 		public function atualizarPlacar(){
 	
 			//Obtendo os dados enviados pelo ajax

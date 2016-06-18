@@ -1,9 +1,13 @@
 <?php
  
+	//Esta classe controla a consulta de verificação de nome de jogos salvos
+	
+	session_start();
 	//Inclusão dos arquivos model
 	include_once '../_model/modelClassCampeonato.php';
-	session_start();
-
+	
+	
+	
 	Class controllerClassCarregamento{
 
 		public function carregamentoJogo(){

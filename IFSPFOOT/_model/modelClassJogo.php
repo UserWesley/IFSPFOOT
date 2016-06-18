@@ -88,23 +88,22 @@
 			$this->clima = $clima;
 		}
 		
-		public function insirirJogo(){
-			
-			$conn = Database::conexao();
-			$atualizaPlacarJogo = 'UPDATE Jogo SET golCasa = ?, golVisitante = ? WHERE timeCasa = ? and timeVisitante= ? ';
-			
-		}
-		
+		//Atualiza Placar do jogo
 		public function atualizaPlacar($jogo){
 			
+			$placarCasa = $this->getGolCasa();
+			$placarVisitante = $this->getGolVisitante();
+			$timeCasa = $this->getTimeCasa();
+			$timeVisitante = $this->getTimeVisitante();
+			
 			$conn = Database::conexao();
 			
-			$atualizaPlacarJogo = 'UPDATE Jogo SET golCasa = ?, golVisitante = ? WHERE timeCasa = ? and timeVisitante= ? ';
+			$atualizaPlacarJogo = 'UPDATE Jogo SET placarCasa = ?, placarVisitante = ? WHERE timeCasa = ? and timeVisitante= ? ';
 			$preparaAtualizaPlacarJogo = $conn->prepare($atualizaPlacarJogo);
-			$preparaAtualizaPlacarJogo->bindValue(1,$jogo->getGolCasa());
-			$preparaAtualizaPlacarJogo->bindValue(2,$jogo->getGolVisitante());
-			$preparaAtualizaPlacarJogo->bindValue(3,$jogo->getTimeCasa());
-			$preparaAtualizaPlacarJogo->bindValue(4,$jogo->getTimeVisitante());
+			$preparaAtualizaPlacarJogo->bindValue(1,$placarCasa);
+			$preparaAtualizaPlacarJogo->bindValue(2,$placarVisitante);
+			$preparaAtualizaPlacarJogo->bindValue(3,$timeCasa);
+			$preparaAtualizaPlacarJogo->bindValue(4,$timeVisitante);
 			$preparaAtualizaPlacarJogo->execute();
 			
 	   }
@@ -118,6 +117,7 @@
 	   		
 	   }
 	   
+	   //Cadastra Jogo
 	   public function cadastrarJogo($jogo){
 	   	
 	   		$conn = Database::conexao();
@@ -136,16 +136,18 @@
 	   	
 	   }
 	   
+	   //Consulta jogos da rodada
 	   public function consultaJogoRodada($jogo){
 		
-	   		$conn = Database::conexao();
+	   	    $conn = Database::conexao();
 	   		$rodadaAtual = $this->getRodada();
 	   		$campeonato = $this->getCampeonato();
 	   		
 	   				
 	   		$times = array();
 	   	
-		   	$consultaRodada = 'SELECT timeCasa, timeVisitante FROM Jogo WHERE rodada = ? and campeonato = ?';
+		   	$consultaRodada = 'SELECT TimeCasa.nome, TimeVisitante.nome FROM Jogo,Time as TimeCasa, Time as TimeVisitante 
+		   	WHERE Jogo.rodada = ? and Jogo.campeonato = ? and Jogo.timeCasa = TimeCasa.id and Jogo.TimeVisitante = TimeVisitante.id';
 		   	$preparaConsultaRodada = $conn->prepare($consultaRodada);
 		   	$preparaConsultaRodada->bindValue(1,$rodadaAtual);
 		   	$preparaConsultaRodada->bindValue(2,$campeonato);
@@ -161,6 +163,7 @@
 		   	return $times;
 	   }
 	   
+	   //Verificar Vencedor do jogo
 	   public function verificaPlacar($golCasa,$golVisitante){
 	   		
 		   	if($golCasa > $golVisitante){
@@ -179,6 +182,7 @@
 		   		
 		   		return 3;
 		   	}
+		   	
 	   }
  
 	   public function consultaJogos($jogo){

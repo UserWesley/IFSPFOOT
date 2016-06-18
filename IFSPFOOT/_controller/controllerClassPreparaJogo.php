@@ -5,9 +5,6 @@
 	 */
 	session_start();
 
-	//Inclusão do arquivo para recolher dados do jogos da rodada
-	//include_once '../_model/modelRecolherDadosJogosRodada.php';
-	
 	include_once '../_model/modelClassCampeonato.php';
 	include_once '../_model/modelClassJogo.php';
 	

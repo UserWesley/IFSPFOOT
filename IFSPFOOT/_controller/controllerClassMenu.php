@@ -1,5 +1,7 @@
 <?php 
 
+	//Esta classe controla as opçoes do menu do jogo
+
 	include_once '../_model/modelClassJogador.php';
 	include_once '../_model/modelClassJogo.php';
 	include_once '../_model/modelClassTime.php';
@@ -14,6 +16,7 @@
 
 	Class controllerClassMenu{	
 		
+		//controla a consulta do idcampeonato caso o usuario carrega um novo jogo
 		public function consultaIdCampeonato($usuario,$nomeCarregamento){
 			
 			$campeonato = new modelClassCampeonato();
@@ -24,6 +27,7 @@
 			return $idCampeonato;
 		}
 		
+		//controla a artilharia do campeonato
 		public function buscaArtilharia(){
 			
 			$jogador = new modelClassJogador();
@@ -33,7 +37,8 @@
 			
 			return $jogador->visualizaArtilharia($artilheiros);
 		}
-
+		
+		//controla os jogos do campeonato
 		public function buscaJogos($idCampeonato){
 			
 			$jogo = new modelClassJogo();
@@ -46,6 +51,7 @@
 			
 		}
 		
+		//Controla a busca de jogadores do seu time
 		public function buscaJogador($idDono,$idCampeonato){
 			
 			$jogador = new modelClassJogador();
@@ -63,6 +69,7 @@
 			return $jogador->visualizaJogador($jogadoresTime);
 		}
 		
+		//controla a busca de time
 		public function buscarTime($id){
 			
 			$time = new modelClassTime();
@@ -76,6 +83,7 @@
 			
 		}
 		
+		//controle a busca de dados de time
 		public function buscarDadoTime($id){
 			
 			$time = new modelClassTime();
@@ -109,6 +117,7 @@
 			return $estadio->exibeEstadio($dadosEstadio);
 		}
 		
+		//controla a busca de rodada
 		public function buscaRodada($idRodada,$idCampeonato){
 				
 			$rodadaSelecionada = array();
@@ -123,6 +132,7 @@
 			return $rodada->exibeRodada($rodadaSelecionada);
 		}
 		
+		//controla a cabecalho Rodada do campeonato
 		public function cabecalhoRodada($idCampeonato){
 		
 			$rodada = new modelClassRodada();
@@ -133,6 +143,7 @@
 			return $quantidadeRodada;
 		}
 		
+		//controla a tabela do campeonato
 		public function buscarTabela($idCampeonato){
 			
 			$tabela = new modelClassTabela();
@@ -146,6 +157,7 @@
 			
 		}
 		
+		//controla a consulta de estrategias
 		public function buscaEstrategia(){
 			
 			$estrategias = array();
@@ -157,6 +169,7 @@
 			
 		}
 		
+		//controla a busca de formacao no banco
 		public function buscaFormacao(){
 			
 			$formacoes = array();
@@ -167,6 +180,7 @@
 			return $formacoes;
 		}
 		
+		//controla a busca de agressivadade disponiveis no banco
 		public function buscaAgressividade(){
 			
 			$agressividades = array();
@@ -177,7 +191,7 @@
 			return $agressividades;
 			
 		}
-
+		//controla a busca da rodadade inicial do campeonato
 		public function buscaRodadaAtual($idCampeonato){
 				
 			$campeonato = new modelClassCampeonato();

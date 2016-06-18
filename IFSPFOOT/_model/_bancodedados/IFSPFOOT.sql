@@ -45,8 +45,8 @@ CREATE TABLE Campeonato (
 	nome VARCHAR(20) NOT NULL,
 	rodadaAtual INT NOT NULL,
 	temporada INT NOT NULL,
-	nomeCarregamento VARCHAR(20)	 NOT NULL,
-	usuario INT,
+	nomeCarregamento VARCHAR(20),
+	usuario INT NOT NULL,
 	
 	FOREIGN KEY (usuario) REFERENCES Usuario (id),
 	PRIMARY KEY (id)
@@ -59,7 +59,10 @@ CREATE TABLE Estadio(
 	id SERIAL,
 	nome VARCHAR(20) NOT NULL,
 	capacidade INT NOT NULL,
+	campeonato INT NOT NULL,
 
+	
+	FOREIGN KEY(campeonato) REFERENCES Campeonato (id),
 	PRIMARY KEY(id)	
 
 );

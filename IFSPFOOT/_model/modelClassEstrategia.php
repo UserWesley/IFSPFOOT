@@ -35,7 +35,30 @@
 			$conn->exec($insercaoNovaEstrategia);
 				
 		}
-
+		
+		public function consultaEstrategia(){
+			
+			$estrategiasDisponiveis = array();
+			
+			$conn = Database::conexao();
+			
+			$consultaEstrategia = 'SELECT id,nome FROM Estrategia;';
+			$preparaConsultaEstrategia= $conn->query($consultaEstrategia);
+			$preparaConsultaEstrategia->execute();
+			
+			$result = $preparaConsultaEstrategia->setFetchMode(PDO::FETCH_NUM);
+				
+			while ($row = $preparaConsultaEstrategia->fetch()) {
+				
+				$estrategiasDisponiveis[] = $row[0];
+				$estrategiasDisponiveis[] = $row[1];
+				
+			}
+			
+			return $estrategiasDisponiveis;
+			
+		}
+		
 	}
 
 ?>

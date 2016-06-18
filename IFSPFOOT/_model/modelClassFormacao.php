@@ -35,6 +35,29 @@
 			$conn->exec($insercaoNovaFormacao);
 		
 		}
+		
+		public function consultaFormacao(){
+				
+			$formacoesDisponiveis = array();
+				
+			$conn = Database::conexao();
+				
+			$consultaformacao = 'SELECT id,nome FROM Formacao;';
+			$preparaConsultaformacao= $conn->query($consultaformacao);
+			$preparaConsultaformacao->execute();
+				
+			$result = $preparaConsultaformacao->setFetchMode(PDO::FETCH_NUM);
+		
+			while ($row = $preparaConsultaformacao->fetch()) {
+		
+				$formacoesDisponiveis[] = $row[0];
+				$formacoesDisponiveis[] = $row[1];
+		
+			}
+				
+			return $formacoesDisponiveis;
+				
+		}
 	}
 
 ?>

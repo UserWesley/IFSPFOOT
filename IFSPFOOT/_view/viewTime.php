@@ -2,14 +2,9 @@
 	
 	/*Este arquivo serve como um cabeçalho para utilizar o select e verificar 
 	 como esta o time selecionado no decorrer do campeonato campeonato */
-	
+
 	session_start();
-
-	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
-
-	
-	$donoTime = $_SESSION['idDono'];
+	include_once '../_controller/controllerClassVerificaTime.php';
 
 ?>
 
@@ -43,31 +38,33 @@
 		<form action= "#" method="POST">
 		<label for="idSelectTime">Times</label>
 		
-		<?php 
+		<?php  
 			
-			//Consulta para resgatar no banco o id e nome do time, assim disponibilizando seus nomes no select
-			$consultaTime = 'SELECT id,nome FROM Time';
-			$preparaConsultaTime = $conn->query($consultaTime);
-			$preparaConsultaTime->execute();
-		
+			$time = new controllerClassVerificaTime();
+					
+			$times = array();
+			$times = $time->visualizaTime();
+					
 			echo "<select id = \"idSelectTime\" name = \"selectTime\">";
-		
-			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
-			while ($row = $preparaConsultaTime->fetch()) {
-	
-				echo "<option value =".$row[0].">".$row[1]."</option>";
-		
+					
+			for($i=0; $i < 20; $i++) {
+						
+				echo "<option value = ".current($times).">".next($times)."</option>";
+				next($times);
 			}
 					
 			echo "</select>";
-			
-			// Caso a variável esteja vazia, define o time fixo na visualização 
+
+			// Caso a variavel esteja vazia, define o time fixo na visualização
 			if(empty($_POST['selectTime'])){
-				
+						
 				$_SESSION['time'] = $_POST['selectTime'] = 1;
+						
 			}
 			else {
+						
 				$_SESSION['time'] = $_POST['selectTime'];
+						
 			}
 			
 		?>

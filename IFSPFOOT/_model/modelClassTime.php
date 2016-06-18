@@ -144,9 +144,6 @@
 			$conn->exec($insercaoNovoTime);
 				
 		}
-		
-
-		
 	
 		public function consultaId($nomeTime){
 	
@@ -249,6 +246,30 @@
 			}
 				
 			return $nome;
+		}
+		
+		public function consultaIdEstadioTime($time){
+				
+			$usuario = $this->getDono();
+			$campeonato = $this->getCampeonato();
+				
+			$conn = Database::conexao();
+		
+			$consultaTimeEstadio = 'SELECT estadio FROM Time WHERE dono = ? and campeonato = ? ';
+			$preparaConsultaTimeEstadio = $conn->prepare($consultaTimeEstadio);
+			$preparaConsultaTimeEstadio->bindValue(1,$usuario);
+			$preparaConsultaTimeEstadio->bindValue(2,$campeonato);
+			$preparaConsultaTimeEstadio->execute();
+		
+			$result = $preparaConsultaTimeEstadio->setFetchMode(PDO::FETCH_NUM);
+		
+			while ($row = $preparaConsultaTimeEstadio->fetch()) {
+					
+				$idEstadio = $row[0];
+					
+			}
+		
+			return $idEstadio;
 		}
 
         public function atualizaDinheiroTime($Time){

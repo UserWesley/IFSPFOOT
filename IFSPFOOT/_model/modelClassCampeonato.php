@@ -62,6 +62,7 @@
 			$this->usuario = $usuario;
 		}
 		
+		//Cadastro do campeonato inicial
 		public function cadastrarCampeonato($campeonato){
 			
 			$conn = Database::conexao();
@@ -70,9 +71,8 @@
 			$rodadaAtual = $this->getRodadaAtual();
 			$temporada = $this->getTemporada();
 			$nomeCarregamento= $this->getNomeCarregamento();
-			$usuario= $this->getUsuario();
+			$usuario= $this->getUsuario();	
 			
-			//Cadastro do campeonato inicial
 			$insercaoNovoCampeonato = "INSERT INTO Campeonato VALUES (DEFAULT,'$nome','$rodadaAtual'
 			, '$temporada','$nomeCarregamento','$usuario')";
 			$conn->exec($insercaoNovoCampeonato);
@@ -83,12 +83,14 @@
 		public function recolherUltimoIdCampeonato($campeonato){
 			
 			$usuario = $this->getUsuario();
+			$nomeCarregamento = $this->getNomeCarregamento();
 		
 			$conn = Database::conexao();
 			
-			$consultaUltimoId = ("SELECT MAX(id) FROM Campeonato WHERE usuario = ?;");
+			$consultaUltimoId = ("SELECT MAX(id) FROM Campeonato WHERE usuario = ? and nomeCarregamento = ?;");
 			$preparaConsultaUltimoId = $conn->prepare($consultaUltimoId);
 			$preparaConsultaUltimoId->bindValue(1, $usuario);
+			$preparaConsultaUltimoId->bindValue(2, $nomeCarregamento);
 			$preparaConsultaUltimoId->execute();
 			
 			$result = $preparaConsultaUltimoId->setFetchMode(PDO::FETCH_NUM);

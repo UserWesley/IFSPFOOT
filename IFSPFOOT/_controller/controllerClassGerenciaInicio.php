@@ -13,8 +13,6 @@
 	include_once '../_model/modelClassJogo.php';
 	include_once '../_model/modelClassClima.php';
 	
-	//Zerar tabelas novo jogo
-	//include_once '../_model/modelZerarTabela.php';
 	session_start();
 	
 	Class controllerGerenciaInicio{
@@ -79,9 +77,10 @@
 			$estadio = new modelClassEstadio();
 			$estadio->setNome("estadio");
 			$estadio->setCapacidade(10);
+			$estadio->setCampeonato($_SESSION['IdCampeonato']);
 			$estadio->cadastrarEstadio($estadio);
 			
-			$ultimoIdEstadio = $estadio->recolheUltimoIdEstadio();
+			$ultimoIdEstadio = $estadio->recolheUltimoIdEstadio($estadio);
 			
 			return $ultimoIdEstadio;
 
@@ -97,7 +96,7 @@
 			$tabela->setCampeonato($_SESSION['IdCampeonato']);
 			$tabela->cadastrarTabela($tabela);
 			
-			$ultimoIdTabela = $tabela->recolherUltimoIdTabela();
+			$ultimoIdTabela = $tabela->recolherUltimoIdTabela($tabela);
 			
 			return $ultimoIdTabela;
 		}

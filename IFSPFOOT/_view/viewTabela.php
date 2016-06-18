@@ -1,7 +1,7 @@
 <?php
 	/* Este arquivo será responsável por mostrar todos os dados da tabela */
 
-	//Inclusão do arquivo para conexão com o banco de dados PDO
+	session_start();
 	include_once ('../_controller/controllerClassMenu.php');
 
 ?>
@@ -49,9 +49,10 @@
 	      <tbody>
 	
 			<?php
-			 	
+			
+				$idCampeonato = $_SESSION['IdCampeonato'];
 				$tabela = new controllerClassMenu();
-				$tabela->buscarTabela();
+				$tabela->buscarTabela($idCampeonato);
 				
 			?>
 			

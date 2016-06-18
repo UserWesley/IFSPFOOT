@@ -1,13 +1,9 @@
 <?php 
 	
 	/*Este arquivo mostrar informações básica sobre seu estádio*/
-
+	include_once '../_controller/controllerClassMenu.php';
 	session_start();
-	
-	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDados.php';
-	
-	$donoTime = $_SESSION['idDono'];
+
 	
 ?>
 
@@ -47,22 +43,14 @@
 	      		</tr>
       		</thead>
       		<tbody>
-      		
-				<?php
-			
-					//Consulta para visualizar estádio do time do usuário
-					$consultaEstadio = 'SELECT nomeEstadio,capacidade FROM Time WHERE dono = ? ';
-					$preparaConsultaEstadio = $conn->prepare($consultaEstadio);
-					$preparaConsultaEstadio->bindValue(1, $donoTime);
-					$preparaConsultaEstadio->execute();
 				
-					$result = $preparaConsultaEstadio->setFetchMode(PDO::FETCH_NUM);
-					while ($row = $preparaConsultaEstadio->fetch()) {
-						echo '<tr  class = "active">';
-						echo "<td>{$row[0]}</td>";
-						echo "<td>{$row[1]}</td>";
-						echo "</tr>";
-					}
+				<?php
+				
+					$usuario = $_SESSION['idDono'];
+					$campeonato = $_SESSION['IdCampeonato'];
+					
+					$controllerMenu = new controllerClassMenu();
+					$controllerMenu->buscarEstadio($usuario, $campeonato);					
 					
 				?>
 				

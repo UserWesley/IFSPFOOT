@@ -62,6 +62,7 @@
 			$this->campeonato = $campeonato;
 		}
 		
+		//Função que cadastra campeonato
 		public function cadastrarTabela($tabela){
 		
 			$conn = Database::conexao();
@@ -78,12 +79,16 @@
 		
 		}
 		
-		public function recolherUltimoIdTabela(){
+		//Recolhe ultimo id de tabela do campeonato
+		public function recolherUltimoIdTabela($campeonato){
+			
+			$idCampeonato = $this->getCampeonato();
 			
 			$conn = Database::conexao();
 				
-			$consultaUltimoId = 'SELECT MAX(id) FROM Tabela;';
-			$preparaConsultaUltimoId = $conn->query($consultaUltimoId);
+			$consultaUltimoId = 'SELECT MAX(id) FROM Tabela WHERE campeonato = ?;';
+			$preparaConsultaUltimoId = $conn->prepare($consultaUltimoId);
+			$preparaConsultaUltimoId->bindValue(1, $idCampeonato);
 			$preparaConsultaUltimoId->execute();
 				
 			$result = $preparaConsultaUltimoId->setFetchMode(PDO::FETCH_NUM);
@@ -93,19 +98,21 @@
 			}
 				
 			return $id;
-			
-			
+				
 		}
 		
-		public function consultaTabelaCampeonato(){
-		
+		//Consulta a tabela do campeonato
+		public function consultaTabelaCampeonato($tabela){
+			$idCampeonato = $this->getCampeonato();
 			$tabelaCampeonato = array();
 		
 			//Listando times ordenado por número de pontos
 			$conn = Database::conexao();
 		
-			$consultaTabela = 'SELECT nome, vitoria, derrota, empate, pontos FROM Time ORDER BY pontos DESC';
-			$preparaConsultaTabela = $conn->query($consultaTabela);
+			$consultaTabela = 'SELECT Time.nome, Tabela.vitoria, Tabela.derrota, Tabela.empate, Tabela.pontos FROM Tabela,Time 
+			WHERE Tabela.campeonato = ? and Time.tabela = tabela.id ORDER BY pontos DESC';
+			$preparaConsultaTabela = $conn->prepare($consultaTabela);
+			$preparaConsultaTabela->bindValue(1, $idCampeonato);
 			$preparaConsultaTabela->execute();
 		
 			$result = $preparaConsultaTabela->setFetchMode(PDO::FETCH_NUM);
@@ -119,6 +126,7 @@
 			return $tabelaCampeonato;
 		}
 		
+		//Exibi tabela do array passado
 		public function visualizaTabelaCampeonato($tabela){
 		
 			$colunas = 5;

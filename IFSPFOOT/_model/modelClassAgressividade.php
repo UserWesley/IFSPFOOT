@@ -36,6 +36,29 @@
 		
 		}
 		
+		public function consultaAgressividade(){
+		
+			$agressividadesDisponiveis = array();
+		
+			$conn = Database::conexao();
+		
+			$consultaAgressividade = 'SELECT id,nome FROM Agressividade;';
+			$preparaConsultaAgressividade= $conn->query($consultaAgressividade);
+			$preparaConsultaAgressividade->execute();
+		
+			$result = $preparaConsultaAgressividade->setFetchMode(PDO::FETCH_NUM);
+		
+			while ($row = $preparaConsultaAgressividade->fetch()) {
+		
+				$agressividadesDisponiveis[] = $row[0];
+				$agressividadesDisponiveis[] = $row[1];
+		
+			}
+		
+			return $agressividadesDisponiveis;
+		
+		}
+		
 	}
 
 

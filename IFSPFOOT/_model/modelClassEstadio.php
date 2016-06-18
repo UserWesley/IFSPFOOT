@@ -42,14 +42,16 @@
 			$this->campeonato = $campeonato;
 		}
 		
+		//Cadastra Novo estadio
 		public function cadastrarEstadio($estadio){
 		
 			$conn = Database::conexao();
 		
-			$nome = $this->getNome();
-			$capacidade = $this->getCapacidade();
-		
-			$insercaoNovoEstadio = "INSERT INTO Estadio VALUES (DEFAULT,'$nome','$capacidade');";
+			echo $nome = $this->getNome();
+			echo $capacidade = $this->getCapacidade();
+			echo $campeonato = $this->getCampeonato();	
+			
+			$insercaoNovoEstadio = "INSERT INTO Estadio VALUES (DEFAULT,'$nome','$capacidade','$campeonato');";
 			$conn->exec($insercaoNovoEstadio);
 		
 		}
@@ -78,25 +80,39 @@
 		
 		//Esta consulta irá obter e retorna os dados do estádio do time
 		public function consultaEstadio($estadio){
-
-			$dadosEstadio = array();
-			
-			$id = $this->getId();
+				
+			$estadioDado = array();
+				
+			$idEstadio = $this->getId();
+				
 			$conn = Database::conexao();
-		
-			$consultaEstadio = 'SELECT nome,capacidade FROM Estadio WHERE id = ? ';
-			$preparaConsultaEstadio = $conn->prepare($consultaEstadio);
-			$preparaConsultaEstadio->bindValue(1, $id);
-			$preparaConsultaEstadio->execute();
 			
+			$consultaEstadio = 'SELECT nome, capacidade FROM Estadio WHERE id = ? ';
+			$preparaConsultaEstadio = $conn->prepare($consultaEstadio);
+			$preparaConsultaEstadio->bindValue(1, $idEstadio);
+			$preparaConsultaEstadio->execute();
+				
 			$result = $preparaConsultaEstadio->setFetchMode(PDO::FETCH_NUM);
 			while ($row = $preparaConsultaEstadio->fetch()) {
-				
-				$dadosEstadio = $row[0];
-				$dadosEstadio = $row[1];
-				
+		
+				$estadioDado[] = $row[0];
+				$estadioDado[] = $row[1];
 			}
-			return $dadosEstadio;
+				
+			return $estadioDado;
+		}
+		
+		//Recebi array com os dados do estadio e os exibe  
+		public function exibeEstadio($dadosEstadio){
+				
+			$colunas = 2;
+				
+			for($i=0; $i < count($dadosEstadio); $i++) {
+				echo "<td>".$dadosEstadio[$i]."</td>";
+				if((($i+1) % $colunas) == 0 )
+						
+					echo "</tr><tr>";
+			}
 				
 		}
 		

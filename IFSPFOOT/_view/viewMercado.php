@@ -29,8 +29,8 @@
 	<table class="table" id="tbMercado">
 	 <thead>
         <tr>          
-        <td><input type=image src="../imagens/compraJogador.jpg" width="200" height="200" title="Comprar Jogador" onclick="location.href='viewArtilhariaCompra.php'"> </td>
-        <td><input type=image src="../imagens/compraProdutos.jpg" width="200" height="200" title="Comprar Jogador" onclick="location.href='viewArtilhariaCompra.php'"> </td>       
+        <td><input type=image src="_imagens/compraJogador.jpg" width="200" height="200" title="Comprar Jogador" onclick="location.href='viewArtilhariaCompra.php'"> </td>
+        <td><input type=image src="_imagens/compraProdutos.jpg" width="200" height="200" title="Comprar Jogador" onclick="location.href='viewArtilhariaCompra.php'"> </td>       
         </tr> 
      </thead>		
 	</table>

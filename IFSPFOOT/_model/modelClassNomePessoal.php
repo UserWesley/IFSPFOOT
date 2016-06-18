@@ -58,9 +58,8 @@
 		}
 		public function sortearNomePessoal($nomesPessoais){
 
-			do{
-				$nome = array_rand($nomesPessoais,1);
-			}while ($nome ==0);
+			$valorMaximo = count($nomesPessoais);
+			$nome = rand(1,$valorMaximo);
 				
 			return $nome;
 		}

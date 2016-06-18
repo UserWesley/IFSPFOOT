@@ -282,7 +282,10 @@
 			
 			$conn = Database::conexao();
 			
-			$consultaJogador = 'SELECT Jogador.nome, Jogador.sobrenome,Time.nome,Jogador.gol FROM Jogador,Time WHERE Jogador.idTime = Time.id ORDER BY Jogador.gol DESC';
+			$consultaJogador = 'SELECT NomePessoal.nome, Sobrenome.nome ,Time.nome,Jogador.gol 
+			FROM Jogador,Time, NomePessoal, Sobrenome 
+			WHERE Jogador.idTime = Time.id and Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id 
+			ORDER BY Jogador.gol DESC';
 			$preparaConsultaJogador = $conn->query($consultaJogador);
 			$preparaConsultaJogador->execute();	
 				
@@ -316,11 +319,12 @@
 
 			$conn = Database::conexao();
 			
-			$consultaJogador = 'SELECT Jogador.nome, Jogador.sobrenome, Jogador.nacionalidade, Jogador.idade,
+			$consultaJogador = 'SELECT NomePessoal.nome, Sobrenome.nome, Jogador.nacionalidade, Jogador.idade,
 			 Jogador.estamina, Jogador.nivel, Jogador.gol, Jogador.passe, Jogador.salario, posicao.nome, 
 			 temperamento.nome, estilo.nome 
-			FROM Jogador,posicao,temperamento,estilo
-			 WHERE jogador.idTime = ? and Jogador.posicao = posicao.id and Jogador.temperamento = temperamento.id and Jogador.estilo = estilo.id';
+			FROM Jogador,posicao,temperamento,estilo,NomePessoal, Sobrenome
+			 WHERE jogador.idTime = ? and  Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id
+			and Jogador.posicao = posicao.id and Jogador.temperamento = temperamento.id and Jogador.estilo = estilo.id';
 			
 			$preparaConsultaJogador = $conn->prepare($consultaJogador);
 			$preparaConsultaJogador->bindValue(1, $idTime);

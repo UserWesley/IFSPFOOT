@@ -14,6 +14,12 @@
 	include_once '../_model/modelClassClima.php';
 	include_once '../_model/modelClassNomePessoal.php';
 	include_once '../_model/modelClassSobrenome.php';
+	include_once '../_model/modelClassPosicao.php';
+	include_once '../_model/modelClassTemperamento.php';
+	include_once '../_model/modelClassEstilo.php';
+	include_once '../_model/modelClassNacionalidade.php';
+	include_once '../_model/modelClassNivel.php';
+	
 	session_start();
 	
 	Class controllerGerenciaInicio{
@@ -128,33 +134,64 @@
 			$nomePessoais = array();
 			$sobrenome = new modelClassSobrenome;
 			$sobrenomes = array();
+			$posicao = new modelClassPosicao;
+			$posicoes = array();
+			$temperamento = new modelClassTemperamento;
+			$temperamentos = array();
+			$estilo = new modelClassEstilo;
+			$estilos = array();
+			$nacionalidade = new modelClassNacionalidade();
+			$nacionalidades = array();
+			$nivel = new modelClassNivel();
+			$niveis = array();
 			 
 			$nomePessoais = $nomePessoal->consultaNomePessoal();
 			$sobrenomes = $sobrenome->consultaSobrenome();
+			$posicoes = $posicao->consultaPosicao();
+			$temperamentos = $temperamento->consultaTemperamento();
+			$estilos = $estilo->consultaEstilo();
+			$niveis = $nivel->consultaNivel();
+			$nacionalidades = $nacionalidade->consultaNacionalidade();
+			
 			for($i=1;$i<=22;$i++){
-				
-				
-				$nomeJogador = $nomePessoal->sortearNomePessoal($nomePessoais);
-				$sobrenomeJogador = $sobrenome->sortearSobrenome($sobrenomes);	
-				
+								
 				$jogador = new modelClassJogador();
 		
 				$jogador->setTitular(TRUE);
+				
+				$nomeJogador = $nomePessoal->sortearNomePessoal($nomePessoais);
 				$jogador->setNome($nomeJogador);
+				
+				$sobrenomeJogador = $sobrenome->sortearSobrenome($sobrenomes);
 				$jogador->setSobrenome($sobrenomeJogador);
-				$jogador->setNacionalidade("Nacionalidade");
+				
+				$nacionalidadeJogador = $nacionalidade->sortearNacionalidade($nacionalidades);
+				$jogador->setNacionalidade($nacionalidadeJogador);
+				
 				$jogador->setIdade(20);
 				$jogador->setEstamina(100);
-				$jogador->setNivel("Nivel");
+				
+				$nivelJogador = $nivel->sortearNivel($niveis);
+				$jogador->setNivel($nivelJogador);
+				
 				$jogador->setGol(0);
 				$jogador->setPasse(10);
 				$jogador->setSalario(10);
-				$ultimoIdHabilidade = $this->cadastroHabilidade();
+				
 				$jogador->setIdtime($idTime);
-				$jogador->setPosicao(1);
+				
+				$posicaoJogador = $posicao->sortearPosicao($posicoes);
+				$jogador->setPosicao($posicaoJogador);
+				
+				$ultimoIdHabilidade = $this->cadastroHabilidade();
 				$jogador->setHabilidade($ultimoIdHabilidade);
-				$jogador->setTemperamento(1);
-				$jogador->setEstilo(1);
+				
+				$temperamentoJogador = $temperamento->sortearTemperamento($temperamentos);
+				$jogador->setTemperamento($temperamentoJogador);
+				
+				$estiloJogador = $estilo->sortearEstilo($estilos);
+				$jogador->setEstilo($estiloJogador);
+				
 				$jogador->setCampeonato($_SESSION['IdCampeonato']);
 								
 				$jogador->cadastrarJogador($jogador);

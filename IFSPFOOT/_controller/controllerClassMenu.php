@@ -177,6 +177,15 @@
 			return $agressividades;
 			
 		}
+
+		public function buscaRodadaAtual($idCampeonato){
+				
+			$campeonato = new modelClassCampeonato();
+			$campeonato->setId($idCampeonato);
+			$rodadaAtual = $campeonato->rodadaAtual($campeonato);
+			return $rodadaAtual;
+				
+		}
 			
 		
 	}

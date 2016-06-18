@@ -22,6 +22,8 @@ DROP TABLE IF EXISTS Temperamento CASCADE;
 DROP TABLE IF EXISTS Estilo CASCADE;
 DROP TABLE IF EXISTS NomePessoal CASCADE;
 DROP TABLE IF EXISTS Sobrenome CASCADE;
+DROP TABLE IF EXISTS Nacionalidade CASCADE;
+DROP TABLE IF EXISTS Nivel CASCADE;
 DROP TABLE IF EXISTS Jogador CASCADE;
 
 -- Tabelas do Banco de dados
@@ -112,7 +114,13 @@ CREATE TABLE Agressividade (
 
 );
 
+CREATE TABLE NomeTime(
+	
+	id SERIAL,
+	nome VARCHAR(25) NOT NULL,
 
+	PRIMARY KEY(id)
+);
 
 CREATE TABLE Time (
 	
@@ -225,6 +233,7 @@ CREATE TABLE Estilo(
 
 --Tabela contendo varios nomes que serão sorteados na hora de montar o jogador
 CREATE TABLE NomePessoal (
+
 	id SERIAL,
 	nome VARCHAR(20) UNIQUE NOT NULL,
 
@@ -233,10 +242,29 @@ CREATE TABLE NomePessoal (
 
 --Tabela contendo varios sobrenomes que serão sorteados na hora de montar o jogador
 CREATE TABLE Sobrenome (
+
 	id SERIAL,
 	nome VARCHAR(40) UNIQUE NOT NULL,
 
 	PRIMARY KEY (id)
+);
+
+CREATE TABLE Nacionalidade(
+
+	id SERIAL,
+	nome VARCHAR(40) UNIQUE NOT NULL,
+
+	PRIMARY KEY (id)
+
+);
+
+CREATE TABLE Nivel(
+
+	id SERIAL,
+	nome VARCHAR(40) UNIQUE NOT NULL,
+
+	PRIMARY KEY (id)
+
 );
 
 CREATE TABLE Jogador (
@@ -245,10 +273,10 @@ CREATE TABLE Jogador (
 	titular BOOLEAN,
 	nome INT NOT NULL,
 	sobrenome INT NOT NULL,
-	nacionalidade VARCHAR(40) NOT NULL,
+	nacionalidade INT NOT NULL,
 	idade INT NOT NULL,
 	estamina INT NOT NULL,
- 	nivel VARCHAR NOT NULL,
+ 	nivel INT NOT NULL,
 	gol INT NOT NULL,
 	passe VARCHAR(20) NOT NULL,
 	salario VARCHAR(20) NOT NULL,
@@ -261,6 +289,8 @@ CREATE TABLE Jogador (
 	
 	FOREIGN KEY (nome) REFERENCES NomePessoal (id),
 	FOREIGN KEY (sobrenome) REFERENCES Sobrenome (id),
+	FOREIGN KEY (nacionalidade) REFERENCES Nacionalidade (id),
+	FOREIGN KEY (nivel) REFERENCES Nivel (id),
 	FOREIGN KEY (idTime) REFERENCES Time (id),
 	FOREIGN KEY (posicao) REFERENCES Posicao (id),
 	FOREIGN KEY (habilidade) REFERENCES Habilidade (id), 
@@ -325,10 +355,32 @@ INSERT INTO Posicao VALUES (DEFAULT, 'Atacante Esquerdo');
 INSERT INTO Temperamento VALUES (DEFAULT, 'Calmo');
 INSERT INTO Temperamento VALUES (DEFAULT, 'Nervoso');
 INSERT INTO Temperamento VALUES (DEFAULT, 'Calmo-Nervoso');
+INSERT INTO Temperamento VALUES (DEFAULT, 'Comum');
 
 -- Inserção de Estilo
 INSERT INTO Estilo VALUES (DEFAULT,'Esforçado');
 INSERT INTO Estilo VALUES (DEFAULT,'Preguiçoso');
+INSERT INTO Estilo VALUES (DEFAULT,'Estrela');
+INSERT INTO Estilo VALUES (DEFAULT,'Normal');
+
+--Inserção de Niveis
+INSERT INTO Nivel VALUES (DEFAULT,'Especial');
+INSERT INTO Nivel VALUES (DEFAULT,'Alto');
+INSERT INTO Nivel VALUES (DEFAULT,'Médio-Alto');
+INSERT INTO Nivel VALUES (DEFAULT,'Médio-Equilibrado');
+INSERT INTO Nivel VALUES (DEFAULT,'Médio-Baixo');
+INSERT INTO Nivel VALUES (DEFAULT,'Baixo');
+
+
+--Inserção de Nacionalidades
+INSERT INTO Nacionalidade VALUES (DEFAULT,'Argentino');
+INSERT INTO Nacionalidade VALUES (DEFAULT,'Brasileiro');
+INSERT INTO Nacionalidade VALUES (DEFAULT,'Cubano');
+INSERT INTO Nacionalidade VALUES (DEFAULT,'Americano');
+INSERT INTO Nacionalidade VALUES (DEFAULT,'Inglês');
+INSERT INTO Nacionalidade VALUES (DEFAULT,'Italiano');
+INSERT INTO Nacionalidade VALUES (DEFAULT,'Português');
+
 
 --Nomes pessoais
 INSERT INTO NomePessoal VALUES (DEFAULT, 'João');
@@ -516,7 +568,6 @@ INSERT INTO Sobrenome VALUES (DEFAULT,'Teixeira da Silva');
 INSERT INTO Sobrenome VALUES (DEFAULT,'Teixeira da Costa');
 INSERT INTO Sobrenome VALUES (DEFAULT,'Teixeira Gomes');
 INSERT INTO Sobrenome VALUES (DEFAULT,'Teixeira Mendes');
-INSERT INTO Sobrenome VALUES (DEFAULT,'Mendes');
 INSERT INTO Sobrenome VALUES (DEFAULT,'Mendes Pitta');
 INSERT INTO Sobrenome VALUES (DEFAULT,'Pitta');
 INSERT INTO Sobrenome VALUES (DEFAULT,'Alvarez');
@@ -544,4 +595,27 @@ INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalves da Silva ');
 INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalves Neto');
 INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalves Pereira ');
 
+
+-- Nomes dos times
+INSERT INTO NomeTime VALUES (DEFAULT,"Comunistas FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"Socialistas FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"Republicanos FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"Capitalistas FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"Quartel de Medelin FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"Quartel de Kali FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"Illuminatis FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"Democratas FC");
+INSERT INTO NomeTime VALUES (DEFAULT,”PT FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"PSDB FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"Boinas Vermelhas FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"Os Extraditaveis FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"ABIN FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"PF FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"ASFARC FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"MST FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"M15 FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"La Mafia FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"CIA FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"FBI FC");
+INSERT INTO NomeTime VALUES (DEFAULT,"NSA FC");
 

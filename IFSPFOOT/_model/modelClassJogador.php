@@ -319,12 +319,13 @@
 
 			$conn = Database::conexao();
 			
-			$consultaJogador = 'SELECT NomePessoal.nome, Sobrenome.nome, Jogador.nacionalidade, Jogador.idade,
-			 Jogador.estamina, Jogador.nivel, Jogador.gol, Jogador.passe, Jogador.salario, posicao.nome, 
+			$consultaJogador = 'SELECT NomePessoal.nome, Sobrenome.nome, Nacionalidade.nome, Jogador.idade,
+			 Jogador.estamina, Nivel.nome, Jogador.gol, Jogador.passe, Jogador.salario, posicao.nome, 
 			 temperamento.nome, estilo.nome 
-			FROM Jogador,posicao,temperamento,estilo,NomePessoal, Sobrenome
+			FROM Jogador, Posicao, Temperamento, Estilo, NomePessoal ,Sobrenome, Nacionalidade, Nivel
 			 WHERE jogador.idTime = ? and  Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id
-			and Jogador.posicao = posicao.id and Jogador.temperamento = temperamento.id and Jogador.estilo = estilo.id';
+			and Jogador.posicao = posicao.id and Jogador.temperamento = temperamento.id and Jogador.estilo = estilo.id
+			and Jogador.nivel = Nivel.id and Jogador.nacionalidade = Nacionalidade.id ORDER BY Posicao.nome DESC';
 			
 			$preparaConsultaJogador = $conn->prepare($consultaJogador);
 			$preparaConsultaJogador->bindValue(1, $idTime);

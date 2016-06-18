@@ -5,9 +5,7 @@
 	 */ 
 
 	session_start();
-
-	//Inclusão do arquivo para conexão com o banco de dados PDO
-	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
+	include_once '../_controller/controllerClassMenu.php';
 
 ?>
 
@@ -67,23 +65,14 @@
 
 <body>
 	
-	<?php 
-		echo $campeonato = $_SESSION['IdCampeonato'];
-		//Consulta e exibição da rodada atual do campeonato	
-		$conn = Database::conexao();
-		
-		$consultaCampeonatoRodadaAtual = 'SELECT rodadaAtual FROM Campeonato where id = ?';
-		$preparaConsultaCampeonatoRodadaAtual = $conn->prepare($consultaCampeonatoRodadaAtual);
-		$preparaConsultaCampeonatoRodadaAtual->bindValue(1, $campeonato);
-		$preparaConsultaCampeonatoRodadaAtual->execute();
-		
-		$result = $preparaConsultaCampeonatoRodadaAtual->setFetchMode(PDO::FETCH_NUM);
-		while ($row = $preparaConsultaCampeonatoRodadaAtual->fetch()) {
+	<?php
+	 
+		$idCampeonato = $_SESSION['IdCampeonato'];
+		$controllerMenu = new controllerClassMenu();
+		$rodadaAtual = $controllerMenu->buscaRodadaAtual($idCampeonato);
 	
-			$_SESSION['rodadaAtual'] = $row[0];
-			echo "<h1 class=\"text-center\">Rodada {$row[0]}</h1>";
+		echo "<h1 class=\"text-center\">Rodada {$rodadaAtual}</h1>";
 		
-		}
 	?>
 
 	<div >
@@ -141,7 +130,7 @@
 				echo "<td id=\"golVisitante".$i."\">0</td>";
 				echo "<td>".next($times)."</td>";
 				echo "<td id=\"lance".$i."\"></td>";
-				echo"</tr>";
+				echo "</tr>";
 				echo "</div>";
 		        $i++;
 	       		

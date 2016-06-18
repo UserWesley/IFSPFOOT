@@ -12,7 +12,8 @@
 	include_once '../_model/modelClassRodada.php';
 	include_once '../_model/modelClassJogo.php';
 	include_once '../_model/modelClassClima.php';
-	
+	include_once '../_model/modelClassNomePessoal.php';
+	include_once '../_model/modelClassSobrenome.php';
 	session_start();
 	
 	Class controllerGerenciaInicio{
@@ -123,13 +124,24 @@
 		
 		public function cadastroJogador($idTime){
 			
+			$nomePessoal = new modelClassNomePessoal;
+			$nomePessoais = array();
+			$sobrenome = new modelClassSobrenome;
+			$sobrenomes = array();
+			 
+			$nomePessoais = $nomePessoal->consultaNomePessoal();
+			$sobrenomes = $sobrenome->consultaSobrenome();
 			for($i=1;$i<=22;$i++){
-		
+				
+				
+				$nomeJogador = $nomePessoal->sortearNomePessoal($nomePessoais);
+				$sobrenomeJogador = $sobrenome->sortearSobrenome($sobrenomes);	
+				
 				$jogador = new modelClassJogador();
 		
 				$jogador->setTitular(TRUE);
-				$jogador->setNome("Nome");
-				$jogador->setSobrenome("Sobrenome");
+				$jogador->setNome($nomeJogador);
+				$jogador->setSobrenome($sobrenomeJogador);
 				$jogador->setNacionalidade("Nacionalidade");
 				$jogador->setIdade(20);
 				$jogador->setEstamina(100);
@@ -290,9 +302,7 @@
 			$numeroRodada = $rodada->recolheNumeroRodada($_SESSION['IdCampeonato']);
 			//echo "numero rodada : ".$numeroRodada."<p>";
 			$arrayTimesCampeonatoOriginal = $time->recolheTimesCampeonato($_SESSION['IdCampeonato']);
-			//echo "times campeonato : ";
-			//print_r($arrayTimesCampeonatoOriginal);
-		//	echo "<p>";
+
 			
 			$i = 1;
 			
@@ -305,8 +315,7 @@
 				//Array times do campeonato recebe todos os id dos times do campeonato
 				$arrayTimesCampeonato = $arrayTimesCampeonatoOriginal;
 				$timesJogosMarcados[] = null;
-				//$timesJogosMarcados[] = -1;
-				//$timesJogosMarcados[] = -2;
+
 				//Preencher todos jogos da rodada
 				while($quantidadeTimesCampeonatoContador != $jogosRodada){
 					

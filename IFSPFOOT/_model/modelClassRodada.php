@@ -6,10 +6,6 @@
 		private $numero;
 		private $campeonato;
 		
-		public function __destruct(){
-			
-		}
-		
 		public function getId(){
 			return $this->id;
 		}

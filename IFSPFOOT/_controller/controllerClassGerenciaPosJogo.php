@@ -7,11 +7,31 @@
 	include_once('../_model/modelClassTime.php');
 	include_once('../_model/modelClassJogador.php');
 	include_once('../_model/modelClassCampeonato.php');
+	include_once('../_model/modelClassRodada.php');
+	
+	session_start();
 	
 	class GerenciaPosJogo{
 		
 		public function __construct(){
 			$this->atualizarPlacar();
+		}
+		//Verifica se o campeonato acabou
+		public function verificaFimCampeonato(){
+			
+			$rodada = new modelClassRodada();
+			$rodada->setCampeonato($_SESSION['IdCampeonato']);
+			$ultimaRodada = $rodada->consultaQuantidadeRodadas($rodada);
+			
+			$campeonato = new modelClassCampeonato();
+			$campeonato->setId($_SESSION['IdCampeonato']);
+			$rodadaAtual = $campeonato->rodadaAtual($campeonato);
+			
+			if($rodadaAtual == $ultimaRodada){
+				
+				header("Location: ../_view/viewTelaFimCampeonato.php");	
+			}
+			
 		}
 		
 		public function atualizarPlacar(){
@@ -133,6 +153,7 @@
 	}
 	
 	$gerenciaPosJogo = new GerenciaPosJogo();
+	$gerenciaPosJogo->verificaFimCampeonato();
 	$gerenciaPosJogo->avancaRodada();
 	
 

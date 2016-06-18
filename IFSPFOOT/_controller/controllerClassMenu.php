@@ -163,7 +163,7 @@
 			$estrategias = array();
 			
 			$estrategia = new modelClassEstrategia();
-			$estrategias = $estrategia->consultaEstrategia();
+			$estrategias = $estrategia->consultaEstrategiaMenu();
 			
 			return $estrategias;
 			
@@ -175,7 +175,7 @@
 			$formacoes = array();
 			
 			$formacao = new modelClassFormacao();
-			$formacoes = $formacao->consultaFormacao();
+			$formacoes = $formacao->consultaFormacaoMenu();
 			
 			return $formacoes;
 		}
@@ -186,7 +186,7 @@
 			$agressividades = array();
 			
 			$agressividade = new modelClassAgressividade();
-			$agressividades = $agressividade->consultaAgressividade();
+			$agressividades = $agressividade->consultaAgressividadeMenu();
 			
 			return $agressividades;
 			

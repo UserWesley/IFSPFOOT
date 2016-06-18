@@ -140,7 +140,7 @@
 			$tabela = $this->getTabela();
 				
 			$insercaoNovoTime = "INSERT INTO Time VALUES (DEFAULT,'$nome','$mascote','$cor','$dinheiro'
-			,'$torcida',NULL,'$campeonato','$estadio','$estrategia','$formacao','$agressividade','$tabela')";
+			,'$torcida',NULL,'$campeonato','$estadio','$formacao','$estrategia','$agressividade','$tabela')";
 			$conn->exec($insercaoNovoTime);
 				
 		}

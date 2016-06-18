@@ -36,7 +36,30 @@
 		
 		}
 		
+		//Consulta todos nome de formacao disponiveis para cadastro time
 		public function consultaFormacao(){
+		
+			$formacoesDisponiveis = array();
+		
+			$conn = Database::conexao();
+		
+			$consultaformacao = 'SELECT id FROM Formacao;';
+			$preparaConsultaformacao= $conn->query($consultaformacao);
+			$preparaConsultaformacao->execute();
+		
+			$result = $preparaConsultaformacao->setFetchMode(PDO::FETCH_NUM);
+		
+			while ($row = $preparaConsultaformacao->fetch()) {
+		
+				$formacoesDisponiveis[] = $row[0];
+		
+			}
+		
+			return $formacoesDisponiveis;
+		
+		}
+		//Consulta todas formações disponiveis para menu
+		public function consultaFormacaoMenu(){
 				
 			$formacoesDisponiveis = array();
 				
@@ -57,6 +80,15 @@
 				
 			return $formacoesDisponiveis;
 				
+		}
+		
+		public function sortearFormacao($formacoesDisponiveis){
+			
+			$valorMaximo = count($formacoesDisponiveis);
+			$formacao = rand(1,$valorMaximo);
+				
+			return $formacao;
+			
 		}
 	}
 

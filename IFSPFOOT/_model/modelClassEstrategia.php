@@ -36,7 +36,31 @@
 				
 		}
 		
+		//Consulta todos nome de estrategias disponiveis para cadastro time
 		public function consultaEstrategia(){
+				
+			$estrategiasDisponiveis = array();
+				
+			$conn = Database::conexao();
+				
+			$consultaEstrategia = 'SELECT id FROM Estrategia;';
+			$preparaConsultaEstrategia= $conn->query($consultaEstrategia);
+			$preparaConsultaEstrategia->execute();
+				
+			$result = $preparaConsultaEstrategia->setFetchMode(PDO::FETCH_NUM);
+		
+			while ($row = $preparaConsultaEstrategia->fetch()) {
+		
+				$estrategiasDisponiveis[] = $row[0];
+
+		
+			}
+			
+			return $estrategiasDisponiveis;
+		}
+		
+		//Consulta todas estrategia disponiveis para menu
+		public function consultaEstrategiaMenu(){
 			
 			$estrategiasDisponiveis = array();
 			
@@ -56,6 +80,16 @@
 			}
 			
 			return $estrategiasDisponiveis;
+			
+		}
+		
+		//Sorteia estrategia disponivel para cadastro de time
+		public function sortearEstrategia($estrategiasDisponiveis){
+			
+			$valorMaximo = count($estrategiasDisponiveis);
+			$estrategia = rand(1,$valorMaximo);
+			echo "Estrategias : ".$valorMaximo;	
+			return $estrategia;
 			
 		}
 		

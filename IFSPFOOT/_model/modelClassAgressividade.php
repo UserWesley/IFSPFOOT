@@ -36,7 +36,31 @@
 		
 		}
 		
+		//Consulta todos nome de agressividades disponiveis para cadastro time
 		public function consultaAgressividade(){
+		
+			$agressividadesDisponiveis = array();
+		
+			$conn = Database::conexao();
+		
+			$consultaAgressividade = 'SELECT id FROM Agressividade;';
+			$preparaConsultaAgressividade= $conn->query($consultaAgressividade);
+			$preparaConsultaAgressividade->execute();
+		
+			$result = $preparaConsultaAgressividade->setFetchMode(PDO::FETCH_NUM);
+		
+			while ($row = $preparaConsultaAgressividade->fetch()) {
+		
+				$agressividadesDisponiveis[] = $row[0];
+		
+			}
+		
+			return $agressividadesDisponiveis;
+		
+		}
+		
+		//consulta todas agressividades para o menu
+		public function consultaAgressividadeMenu(){
 		
 			$agressividadesDisponiveis = array();
 		
@@ -57,6 +81,14 @@
 		
 			return $agressividadesDisponiveis;
 		
+		}
+		
+		public function sortearAgressividade($agressividadesDisponiveis){
+			
+			$valorMaximo = count($agressividadesDisponiveis);
+			$agressividade = rand(1,$valorMaximo);
+			
+			return $agressividade;
 		}
 		
 	}

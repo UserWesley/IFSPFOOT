@@ -19,6 +19,9 @@
 	include_once '../_model/modelClassEstilo.php';
 	include_once '../_model/modelClassNacionalidade.php';
 	include_once '../_model/modelClassNivel.php';
+	include_once '../_model/modelClassEstrategia.php';
+	include_once '../_model/modelClassFormacao.php';
+	include_once '../_model/modelClassAgressividade.php';
 	
 	session_start();
 	
@@ -202,6 +205,21 @@
 		
 		public function cadastroTime(){
 			
+			$time = new modelClassTime();
+			$times = array();
+			$agressividade = new modelClassAgressividade();
+			$agressividades = array();
+			$formacao = new modelClassFormacao();
+			$formacoes = array();
+			$estrategia = new modelClassEstrategia();
+			$estrategias = array();
+			
+			$formacoes = $formacao->consultaFormacao();
+			$estrategias = $estrategia->consultaEstrategia();
+			$agressividades = $agressividade->consultaAgressividade();
+			//$times = $time->consultaNomeTime();
+
+			
 			for($i=1;$i<=20;$i++){
 				
 				switch ($i){
@@ -281,9 +299,16 @@
 				//Dono será cadastro como nulo
 				$time->setCampeonato($_SESSION['IdCampeonato']);
 				$time->setEstadio($ultimoIdEstadio);
-				$time->setFormacao(1);
-				$time->setEstrategia(1);
-				$time->setAgressividade(1);
+				
+				$formacaoTime = $formacao->sortearFormacao($formacoes);
+				$time->setFormacao($formacaoTime);
+				
+				$estrategiaTime = $estrategia->sortearEstrategia($estrategias);
+				$time->setEstrategia($estrategiaTime);
+				
+				$agressividadeTime = $agressividade->sortearAgressividade($agressividades);
+				$time->setAgressividade($agressividadeTime);
+				
 				$time->setTabela($ultimoIdTabela);
 				$time->cadastrarTime($time);
 				

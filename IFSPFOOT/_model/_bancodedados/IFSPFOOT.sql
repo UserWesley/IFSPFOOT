@@ -4,6 +4,7 @@
 
 --Apagando as tabelas se já existirem
 
+
 DROP TABLE IF EXISTS Usuario CASCADE;
 DROP TABLE IF EXISTS Campeonato CASCADE;
 DROP TABLE IF EXISTS Estadio CASCADE;
@@ -19,6 +20,8 @@ DROP TABLE IF EXISTS Posicao CASCADE;
 DROP TABLE IF EXISTS Habilidade CASCADE;
 DROP TABLE IF EXISTS Temperamento CASCADE;
 DROP TABLE IF EXISTS Estilo CASCADE;
+DROP TABLE IF EXISTS NomePessoal CASCADE;
+DROP TABLE IF EXISTS Sobrenome CASCADE;
 DROP TABLE IF EXISTS Jogador CASCADE;
 
 -- Tabelas do Banco de dados
@@ -220,12 +223,28 @@ CREATE TABLE Estilo(
 	PRIMARY KEY(id)
 );
 
+--Tabela contendo varios nomes que serão sorteados na hora de montar o jogador
+CREATE TABLE NomePessoal (
+	id SERIAL,
+	nome VARCHAR(20) UNIQUE NOT NULL,
+
+	PRIMARY KEY (id)
+);
+
+--Tabela contendo varios sobrenomes que serão sorteados na hora de montar o jogador
+CREATE TABLE Sobrenome (
+	id SERIAL,
+	nome VARCHAR(40) UNIQUE NOT NULL,
+
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE Jogador (
 
 	id SERIAL,
 	titular BOOLEAN,
-	nome VARCHAR(20) NOT NULL,
-	sobrenome VARCHAR(60) NOT NULL,
+	nome INT NOT NULL,
+	sobrenome INT NOT NULL,
 	nacionalidade VARCHAR(40) NOT NULL,
 	idade INT NOT NULL,
 	estamina INT NOT NULL,
@@ -239,7 +258,9 @@ CREATE TABLE Jogador (
 	temperamento INT,
 	estilo INT,
 	campeonato INT,	
-
+	
+	FOREIGN KEY (nome) REFERENCES NomePessoal (id),
+	FOREIGN KEY (sobrenome) REFERENCES Sobrenome (id),
 	FOREIGN KEY (idTime) REFERENCES Time (id),
 	FOREIGN KEY (posicao) REFERENCES Posicao (id),
 	FOREIGN KEY (habilidade) REFERENCES Habilidade (id), 
@@ -308,4 +329,219 @@ INSERT INTO Temperamento VALUES (DEFAULT, 'Calmo-Nervoso');
 -- Inserção de Estilo
 INSERT INTO Estilo VALUES (DEFAULT,'Esforçado');
 INSERT INTO Estilo VALUES (DEFAULT,'Preguiçoso');
+
+--Nomes pessoais
+INSERT INTO NomePessoal VALUES (DEFAULT, 'João');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'José');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Caetano');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Wesley');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Jefferson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Jeferson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Cristaldo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Ubaldo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Romario');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Cafu');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Pablo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Rivelino');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Sandro'); 
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Marcio');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Riquelme');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Jeremias');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Gomes');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Silas');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Evandro');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Leandro');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Thobias');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Tobias');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Temer');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Michel');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Tadeu');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Marcos');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Marcus');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Sandoval');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Celson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Anselmo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Juvenal');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Pietro');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Aristoteles');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Platão');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Sergio');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Antonio');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Samuel');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Justh');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Wescley');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Willian');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Nivaldo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Ricardo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Paulo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Pedro');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Eduardo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Virgilio');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Lucas');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Luccas');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Ari');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Gervasio');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Fernando');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Flavio');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Fabio');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Claudio');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Claudinei');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Carlos');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Manuel');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Manoel');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Oliver');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Medeiros');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Roberto');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Douglas');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Alex');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Frederico');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Guilherme');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Gustavo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Lenilson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Denilson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Eder');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Ederson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Bruno');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Leo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Leonardo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Ronilson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Rener');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Richard');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Davi');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'David');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Doni');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Dorivaldo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Ivan');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Ivanildo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Robson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Denis');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Dênis');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Alberto');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Gilmar');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Gilberto');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Hilbert');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Romualdo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Adriano');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Adrian');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Ademir');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Adalberto');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Allan');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Alan');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Bryan');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Rodrigo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Tony');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Toni');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Valdir');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Valderez');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Valmir');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Walmir');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Washington');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Vanderson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Wanderson');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Felipe');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Filipe');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Filipi');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Miguel');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Luis');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Luiz');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Toledo');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Henrique');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Helder');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Icaro');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Zé');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Zetti');
+INSERT INTO NomePessoal VALUES (DEFAULT, 'Zacarias');
+
+
+--Sobrenomes
+INSERT INTO Sobrenome VALUES (DEFAULT,'de Almeida');
+INSERT INTO Sobrenome VALUES (DEFAULT,'da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'da Pena');
+INSERT INTO Sobrenome VALUES (DEFAULT,'da Costa');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Pereira');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Tosta');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Figueiredo');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Figueiredo da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'da Silva Figueiredo');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Escobar');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Escobar Neto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Escobar Filho');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Escobar Junior');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Filho Escobar');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Filho');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Neto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Junior');
+INSERT INTO Sobrenome VALUES (DEFAULT,'da Costa Neto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Siqueira');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Alves');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Averedo');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Averedo Neto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Averedo Filho');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Averedo Junior');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Junior Averedo');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Filho Averedo');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Neto Averedo');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Pedro');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Coutinho');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Pinto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Guimarães Lima');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Guimarães');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Lima');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Coelho');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Coelho Filho');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Pedro Coutinho');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Alves Siqueira');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Siqueira Alves');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Coutinho da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'da Silva Coutinho');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Perez');
+INSERT INTO Sobrenome VALUES (DEFAULT,'da Silva Perez');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Fernandes da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Fernandes');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Manoel');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Medeiros');
+INSERT INTO Sobrenome VALUES (DEFAULT,'da Silva Medeiros');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Medeiros da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Sousa');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Sousa da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Sousa da Costa');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Sousa Pereira');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Pereira Souza');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Oliveira');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Oliveira da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Oliveira da Costa');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Oliveira da Couto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Oliveira Teixeira');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Teixeira da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Teixeira da Costa');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Teixeira Gomes');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Teixeira Mendes');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Mendes');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Mendes Pitta');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Pitta');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Alvarez');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Alvarez Pitta');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Alvarez Couto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Alveres Pereira');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Pereira Alveres ');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Cardoso');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Cardoso Filho');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Cardoso da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Cardoso Neto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Teixeira Cardoso');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Alvares Cardoso ');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Mendes');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Mendes da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Mendes da Costa');
+INSERT INTO Sobrenome VALUES (DEFAULT,'da Costa Mendes');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Silveira');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Silveira da Silva');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Silveira Neto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Silveira Couto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalves');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalvez');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalves da Silva ');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalves Neto');
+INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalves Pereira ');
+
 

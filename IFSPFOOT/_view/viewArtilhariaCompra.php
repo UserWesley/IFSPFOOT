@@ -135,17 +135,17 @@
 
 		   $_SESSION['idTimeJogador'] = $idTimeJogador;
 			//Listando alguns dados dos jogadores e ordena de forma crescente
-	        $consultaJogador = "SELECT Jogador.nome, 
-	                                   Jogador.sobrenome,
+	        $consultaJogador = "SELECT NomePessoal.nome, 
+	                                   Sobrenome.nome,
 	                                   Time.nome,
 	                                   (select agilidade+ataque+chute+defesa+forca+passe+resistencia from habilidade where id = Jogador.habilidade) as habilidade,
 	                                   Jogador.gol,
 	                                   Jogador.passe,
 	                                   jogador.id,
 	                                   cast(jogador.passe as int) * (select agilidade+ataque+chute+defesa+forca+passe+resistencia from habilidade where id = Jogador.habilidade) as vlCompra	
-	                            FROM Jogador,Time 
+	                            FROM Jogador,Time,NomePessoal,Sobrenome 
 	                            WHERE Jogador.idTime = Time.id 
-	                            and Time.id <> ? 
+	                            and Time.id <> ? and Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id 
 	                            ORDER BY Jogador.passe, Time.nome asc";
 
 			$preparaConsultaJogador = $conn->prepare($consultaJogador);

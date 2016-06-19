@@ -187,8 +187,9 @@
 			
 		}
 		
-		
+		//Consulta todos jogadores de um determinado time e retorna por um array
 		public function consultaJogador($idTime){
+			
 			$jogadoresTime = array();
 			
 			$conn = Database::conexao();
@@ -276,7 +277,9 @@
 			
 		}
 		
-		public function consultaArtilheiria(){
+		public function consultaArtilheiria($jogador){
+			
+			$idCampeonato = $this->getCampeonato();
 			
 			$jogadoresArtilharia = array();
 			
@@ -284,9 +287,10 @@
 			
 			$consultaJogador = 'SELECT NomePessoal.nome, Sobrenome.nome ,Time.nome,Jogador.gol 
 			FROM Jogador,Time, NomePessoal, Sobrenome 
-			WHERE Jogador.idTime = Time.id and Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id 
+			WHERE Jogador.campeonato = ? and Jogador.idTime = Time.id and Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id 
 			ORDER BY Jogador.gol DESC';
-			$preparaConsultaJogador = $conn->query($consultaJogador);
+			$preparaConsultaJogador = $conn->prepare($consultaJogador);
+			$preparaConsultaJogador->bindValue(1, $idCampeonato);
 			$preparaConsultaJogador->execute();	
 				
 			while ($row = $preparaConsultaJogador->fetch()) {
@@ -352,6 +356,59 @@
 			}
 			
 			return $jogadorTime;
+		}
+		
+		//COnsulta jogador Artilheiro do campeonato
+		public function consultaJogadorArtilheiro($jogador){
+				
+			$jogadorArtilheiro = array();
+			$idCampeonato = $this->getCampeonato();
+				
+			$conn = Database::conexao();
+		
+			$consultaJogadorArtilheiro = 'SELECT id,MAX(gol) WHERE campeonato = ?';
+			$preparaConsultaJogadorArtilheiro = $conn->query($consultaJogadorArtilheiro);
+			$preparaConsultaJogadorArtilheiro->execute();
+				
+			while ($row = $preparaConsultaJogador->fetch()) {
+					
+				$jogadorArtilheiro[] = $row[0];
+				$jogadorArtilheiro[] = $row[1];
+			}
+				
+			return $jogadorArtilheiro;
+				
+				
+		}
+		
+		
+		
+		//Consulta pelo idCampeonato os dados do jogador artilheiro
+		public function consultaArtilheiroCampeonato($jogador){
+			
+			$jogadorArtilheiro = array();
+			$idCampeonato = $this->getCampeonato();
+			
+			$conn = Database::conexao();
+				
+			$consultaJogadorArtilheiro = 'SELECT NomePessoal.nome, Sobrenome.nome ,Time.nome,Jogador.gol
+			FROM Jogador,Time, NomePessoal, Sobrenome
+			WHERE Jogador.campeonato = ? and Jogador.idTime = Time.id and Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id';
+			$preparaConsultaJogadorArtilheiro = $conn->prepare($consultaJogadorArtilheiro);
+			$preparaConsultaJogadorArtilheiro->bindValue(1, $idCampeonato);
+			$preparaConsultaJogadorArtilheiro->execute();
+			
+			while ($row = $preparaConsultaJogador->fetch()) {
+					
+				$jogadorArtilheiro[] = $row[0];
+				$jogadorArtilheiro[] = $row[1];
+				$jogadorArtilheiro[] = $row[2];
+				$jogadorArtilheiro[] = $row[3];
+			}
+			
+			return $jogadorArtilheiro;
+			
+			
 		}
 		
 	}

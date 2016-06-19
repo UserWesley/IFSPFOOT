@@ -294,7 +294,7 @@
 				$time->setNome($timeTeste);
 				$time->setMascote($timeTeste);
 				$time->setCor($timeTeste);
-				$time->setDinheiro(100);
+				$time->setDinheiro(10000);
 				$time->setTorcida(100);
 				//Dono será cadastro como nulo
 				$time->setCampeonato($_SESSION['IdCampeonato']);

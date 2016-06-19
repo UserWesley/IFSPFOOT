@@ -103,6 +103,7 @@
 
 		}
 		
+		//Recolhe rodada atual do campeonato
 		public function rodadaAtual($campeonato){
 			
 			$idCampeonato = $this->getId();
@@ -124,13 +125,17 @@
 		
 		public function avancaRodada($rodada){
 			
+			$campeonato = $this->getId();
+			$rodada = $this->getRodadaAtual();
+			
 			$rodada++;
 			
 			$conn = Database::conexao();
 			
-			$atualizaCampeonatoRodadaAtual = 'UPDATE Campeonato SET rodadaAtual = ? WHERE id = 1';
+			$atualizaCampeonatoRodadaAtual = 'UPDATE Campeonato SET rodadaAtual = ? WHERE id = ?';
 			$preparaAtualizaCampeonatoRodadaAtual = $conn->prepare($atualizaCampeonatoRodadaAtual);
 			$preparaAtualizaCampeonatoRodadaAtual->bindValue(1,$rodada);
+			$preparaAtualizaCampeonatoRodadaAtual->bindValue(2,$campeonato);
 			$preparaAtualizaCampeonatoRodadaAtual->execute();
 			
 		}

@@ -95,15 +95,19 @@
 			$placarVisitante = $this->getGolVisitante();
 			$timeCasa = $this->getTimeCasa();
 			$timeVisitante = $this->getTimeVisitante();
+			$idCampeonato = $this->getCampeonato();
+			$rodada = $this->getRodada();
 			
 			$conn = Database::conexao();
 			
-			$atualizaPlacarJogo = 'UPDATE Jogo SET placarCasa = ?, placarVisitante = ? WHERE timeCasa = ? and timeVisitante= ? ';
+			$atualizaPlacarJogo = 'UPDATE Jogo SET placarCasa = ?, placarVisitante = ? WHERE timeCasa = ? and timeVisitante= ? and campeonato = ? and rodada = ?';
 			$preparaAtualizaPlacarJogo = $conn->prepare($atualizaPlacarJogo);
 			$preparaAtualizaPlacarJogo->bindValue(1,$placarCasa);
 			$preparaAtualizaPlacarJogo->bindValue(2,$placarVisitante);
 			$preparaAtualizaPlacarJogo->bindValue(3,$timeCasa);
 			$preparaAtualizaPlacarJogo->bindValue(4,$timeVisitante);
+			$preparaAtualizaPlacarJogo->bindValue(5,$idCampeonato);
+			$preparaAtualizaPlacarJogo->bindValue(6,$rodada);
 			$preparaAtualizaPlacarJogo->execute();
 			
 	   }

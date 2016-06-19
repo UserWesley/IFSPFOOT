@@ -139,6 +139,7 @@
 		
 		}
 		
+		//Atualiza dados do time vencedor
 		public function atualizaTimeVencedorTabela($time){
 		
 			$id = $time[0];
@@ -147,7 +148,7 @@
 		
 			$conn = Database::conexao();
 		
-			$atualizaTimeVencedor = 'UPDATE Time SET  vitoria = ?, pontos = ? WHERE id = ?';
+			$atualizaTimeVencedor = 'UPDATE Tabela SET  vitoria = ?, pontos = ? WHERE id = ?';
 			$preparaAtualizaTimeVencedor = $conn->prepare($atualizaTimeVencedor);
 			$preparaAtualizaTimeVencedor->bindValue(1,$vitoria);
 			$preparaAtualizaTimeVencedor->bindValue(2,$pontos);
@@ -156,19 +157,21 @@
 		
 		}
 		
+		//Atualiza os dados do time perdedor
 		public function atualizaTimePerdedorTabela($time){
 			$id = $time[0];
 			$derrota = $time[2]+1;
 		
 			$conn = Database::conexao();
 		
-			$atualizaTimePerdedor = 'UPDATE Time SET  derrota = ? WHERE id = ?';
+			$atualizaTimePerdedor = 'UPDATE Tabela SET  derrota = ? WHERE id = ?';
 			$preparaAtualizaTimePerdedor = $conn->prepare($atualizaTimePerdedor);
 			$preparaAtualizaTimePerdedor->bindValue(1,$derrota);
 			$preparaAtualizaTimePerdedor->bindValue(2,$id);
 			$preparaAtualizaTimePerdedor->execute();
 		}
 		
+		//Atualiza os daod dos times que empatarem
 		public function empateTabela($time){
 		
 			$empate = $time[3]+1;
@@ -176,7 +179,7 @@
 			$id = $time[0];
 		
 			$conn = Database::conexao();
-			$atualizaTimeEmpate = 'UPDATE Time SET  empate = ?, pontos = ? WHERE id = ?';
+			$atualizaTimeEmpate = 'UPDATE Tabela SET  empate = ?, pontos = ? WHERE id = ?';
 			$preparaAtualizaTimeEmpate = $conn->prepare($atualizaTimeEmpate);
 			$preparaAtualizaTimeEmpate->bindValue(1,$empate);
 			$preparaAtualizaTimeEmpate->bindValue(2,$pontos);
@@ -185,19 +188,21 @@
 		
 		}
 		
-		public function consultaTabela($nomeTime){
-		
+		//Consulta dados da tabela do time selecionado
+		public function consultaTabela($tabelaTime){
+			
 			$timeTabela = array();
-		
+
+			
 			$conn = Database::conexao();
 		
-			$consultaTime = 'SELECT id,vitoria,derrota,empate,pontos FROM Time WHERE nome = ?';
-			$preparaConsultaTime = $conn->prepare($consultaTime);
-			$preparaConsultaTime->bindValue(1, $nomeTime);
-			$preparaConsultaTime->execute();
+			$consultaTabelaTime = 'SELECT id,vitoria,derrota,empate,pontos FROM Tabela WHERE id = ?';
+			$preparaConsultaTabelaTime = $conn->prepare($consultaTabelaTime);
+			$preparaConsultaTabelaTime->bindValue(1, $tabelaTime);
+			$preparaConsultaTabelaTime->execute();
 		
-			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
-			while ($row = $preparaConsultaTime->fetch()) {
+			$result = $preparaConsultaTabelaTime->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaTabelaTime->fetch()) {
 					
 				$timeTabela[] = $row[0];
 				$timeTabela[] = $row[1];
@@ -208,6 +213,28 @@
 			}
 		
 			return $timeTabela;
+		
+		}
+		
+		//COnsulta para obter o time que mais tem pontos em determinado campeonato
+		public function consultaTimeCampeao($tabela){
+		
+			$idCampeonato = $this->getCampeonato();
+			
+			$conn = Database::conexao();
+		
+			$consultaTabelaCampeao = 'SELECT MAX(pontos) FROM Tabela WHERE campeonato = ?';
+			$preparaConsultaTabelaCampeao = $conn->prepare($consultaTabelaCampeao);
+			$preparaConsultaTabelaCampeao->bindValue(1, $idCampeonato);
+			$preparaConsultaTabelaCampeao->execute();
+		
+			$result = $preparaConsultaTabelaCampeao->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaTabelaCampeao->fetch()) {
+					
+				$idTabelaTimeCampeao = $row[0];		
+			}
+		
+			return $idTabelaTimeCampeao;
 		
 		}
 		

@@ -3,8 +3,9 @@
 	/* Este arquivo mostra a artilharia do campeonato e ordena por número de gols 
 	 */
 	
+	session_start();
 	include_once '../_controller/controllerClassMenu.php';
-
+	
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +50,7 @@
 		<?php 
 			
 			$artilharia = new controllerClassMenu();
-			$artilharia->buscaArtilharia();
+			$artilharia->buscaArtilharia($_SESSION['IdCampeonato']);
 		
 		?>
 		

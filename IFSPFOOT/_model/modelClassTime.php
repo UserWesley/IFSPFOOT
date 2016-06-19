@@ -144,7 +144,31 @@
 			$conn->exec($insercaoNovoTime);
 				
 		}
-	
+		//Consulta id do time pelo nome e campeonato, no controller pós jogo
+		public function consultaId($time){
+			
+			$time = $this->getNome();
+			$campeonato = $this->getCampeonato();
+			
+			$conn = Database::conexao();
+		
+			$consultaTime = 'SELECT id FROM Time WHERE nome = ? and campeonato = ?';
+			$preparaConsultaTime = $conn->prepare($consultaTime);
+			$preparaConsultaTime->bindValue(1, $time);
+			$preparaConsultaTime->bindValue(2, $campeonato);
+			$preparaConsultaTime->execute();
+		
+			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
+			while ($row = $preparaConsultaTime->fetch()) {
+					
+				$id = $row[0];
+					
+			}
+		
+			return $id;
+		
+		}
+		/*
 		public function consultaId($nomeTime){
 	
 			$conn = Database::conexao();
@@ -164,7 +188,7 @@
 			return $id;
 	
 		}
-	
+		 */
 		public function consultaIdTime($time){
 				
 			$idDono = $this->getDono();
@@ -383,6 +407,50 @@
 			}
 				
 			return $timesCampeonato;
+		}
+		
+		//Consulta id da tabela do time passado
+		public function consultaIdTabelaTime($time){
+			
+			$idTime = $this->getId();
+		
+			$conn = Database::conexao();
+		
+			$consultaTabelaTime = 'SELECT tabela FROM Time WHERE id = ?';
+			$preparaConsultaTabelaTime = $conn->prepare($consultaTabelaTime);
+			$preparaConsultaTabelaTime->bindValue(1, $idTime);
+			$preparaConsultaTabelaTime->execute();
+			$result = $preparaConsultaTabelaTime->setFetchMode(PDO::FETCH_NUM);
+		
+			while ($row = $preparaConsultaTabelaTime->fetch()) {
+				$tabela = $row[0];
+			}
+		
+			return $tabela;
+		}
+		
+		
+		//consulta o dados do timeCampeao pelo id da tabela
+		public function consultaTimeCampeao($time){
+			
+			$idTabela = $this->getTabela();
+			
+			$conn = Database::conexao();
+			
+			$consultaDadoTimeCampeao = 'SELECT nome FROM Time WHERE tabela = ?';
+			$preparaConsultaDadoTimeCampeao = $conn->prepare(consultaDadoTimeCampeao);
+			$preparaConsultaDadoTimeCampeao->bindValue(1, $idTabela);
+			$preparaConsultaDadoTimeCampeao->execute();
+			$result = $preparaConsultaDadoTimeCampeao->setFetchMode(PDO::FETCH_NUM);
+			
+			while ($row = $preparaConsultaDadoTimeCampeao->fetch()) {
+				
+				$nomeTimeCampeao = $row[0];
+			}
+			
+			return $nomeTimeCampeao;
+			
+			
 		}
 
 //-----------------------------------------------------------------------------------------------------		

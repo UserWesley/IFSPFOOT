@@ -2,6 +2,7 @@
 
 	//Esta classe controla as opçoes do menu do jogo
 
+
 	include_once '../_model/modelClassJogador.php';
 	include_once '../_model/modelClassJogo.php';
 	include_once '../_model/modelClassTime.php';
@@ -28,12 +29,14 @@
 		}
 		
 		//controla a artilharia do campeonato
-		public function buscaArtilharia(){
+		public function buscaArtilharia($idCampeonato){
 			
-			$jogador = new modelClassJogador();
 			$artilheiros = array();
+				
+			$jogador = new modelClassJogador();
+			$jogador->setCampeonato($idCampeonato);
 			
-			$artilheiros = $jogador->consultaArtilheiria();
+			$artilheiros = $jogador->consultaArtilheiria($jogador);
 			
 			return $jogador->visualizaArtilharia($artilheiros);
 		}

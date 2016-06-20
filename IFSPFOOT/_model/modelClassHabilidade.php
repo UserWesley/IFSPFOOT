@@ -114,6 +114,62 @@
 			return $id;
 				
 		}
+		
+		//Sorteia passe do jogador
+		public function sorteiaResistencia(){
+				
+			$resistencia = rand(1,10);
+				
+			return $resistencia;
+		}
+		
+		//Sorteia passe do forca
+		public function sorteiaForca(){
+				
+			$forca = rand(1,10);
+				
+			return $forca;
+		}
+		
+		//SOrteia passe do jogador
+		public function sorteiaPasse(){
+				
+			$passe = rand(1,10);
+				
+			return $passe;
+		}
+		
+		//Sorteia Agilidade
+		public function sorteiaAgilidade(){
+				
+			$agilidade = rand(1,10);
+				
+			return $agilidade;
+		}
+		
+		//Sorteia ataque
+		public function sorteiaAtaque(){
+		
+			$ataque = rand(1,10);
+				
+			return $ataque;
+		}
+		
+		//Sorteia defesa
+		public function sorteiaDefesa(){
+		
+			$defesa = rand(1,10);
+				
+			return $defesa;
+		}
+		
+		//Sorteia chute
+		public function sorteiaChute(){
+		
+			$chute = rand(1,10);
+				
+			return $chute;
+		}
 	}
 
 ?>

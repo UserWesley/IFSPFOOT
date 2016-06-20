@@ -47,9 +47,9 @@
 		
 			$conn = Database::conexao();
 		
-			echo $nome = $this->getNome();
-			echo $capacidade = $this->getCapacidade();
-			echo $campeonato = $this->getCampeonato();	
+			$nome = $this->getNome();
+			$capacidade = $this->getCapacidade();
+		    $campeonato = $this->getCampeonato();	
 			
 			$insercaoNovoEstadio = "INSERT INTO Estadio VALUES (DEFAULT,'$nome','$capacidade','$campeonato');";
 			$conn->exec($insercaoNovoEstadio);

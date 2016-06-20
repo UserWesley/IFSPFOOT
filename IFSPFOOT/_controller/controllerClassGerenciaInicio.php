@@ -119,13 +119,20 @@
 				
 			$habilidade = new modelClassHabilidade();
 			
-			$habilidade->setAgilidade(10);
-			$habilidade->setAtaque(10);
-			$habilidade->setChute(10);
-			$habilidade->setDefesa(10);
-			$habilidade->setForca(10);
-			$habilidade->setPasse(10);
-			$habilidade->setResistencia(10);
+			$agilidade = $habilidade->sorteiaAgilidade();
+			$habilidade->setAgilidade($agilidade);
+			$ataque = $habilidade->sorteiaAtaque();
+			$habilidade->setAtaque($ataque);
+			$chute = $habilidade->sorteiaChute();
+			$habilidade->setChute($chute);
+			$defesa = $habilidade->sorteiaDefesa();
+			$habilidade->setDefesa($defesa);
+			$forca = $habilidade->sorteiaForca();
+			$habilidade->setForca($forca);
+			$passe = $habilidade->sorteiaPasse();
+			$habilidade->setPasse($passe);
+			$resistencia = $habilidade->sorteiaResistencia();
+			$habilidade->setResistencia($resistencia);
 			
 			$habilidade->cadastrarHabilidade();
 			

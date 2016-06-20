@@ -88,7 +88,6 @@
 			
 			$valorMaximo = count($estrategiasDisponiveis);
 			$estrategia = rand(1,$valorMaximo);
-			echo "Estrategias : ".$valorMaximo;	
 			return $estrategia;
 			
 		}

@@ -424,7 +424,8 @@
 					$jogosFormados[] = $jogoRodada;
 
 					//Dados do jogo
-					$jogo->setData('2014-01-01');
+					$dataJogo = $jogo->verificarDataJogo($i);
+					$jogo->setData($dataJogo);
 					$jogo->setCampeonato($_SESSION['IdCampeonato']);
 					$jogo->setRodada($i);
 					

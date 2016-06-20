@@ -188,7 +188,8 @@
 		   	}
 		   	
 	   }
- 
+ 		
+	   //Consulta jogos do campeonato
 	   public function consultaJogos($jogo){
 	   	
 			$campeonato = $this->getCampeonato();
@@ -218,6 +219,7 @@
 			return $jogos;
 	   }
 	   
+	   //Visualização dos jogos do campeonato
 	   public function visualizaJogos($jogos){
 	   	
 	   		$colunas = 5;
@@ -227,6 +229,129 @@
 	   		if((($i+1) % $colunas) == 0 )
 	   			echo "</tr><tr>";
 	   		}
+	   }
+	   
+	   public function verificarDataJogo($rodada){
+	   	
+	    switch ($rodada){
+	    	
+	    	case 1: $data = '2016-01-01'; return $data; 
+		    	break;
+
+		    case 2: $data = '2016-01-10'; return $data;
+		    	break;
+		    
+		    case 3: $data = '2016-01-20'; return $data;
+		    	break;
+		    
+		    case 4: $data = '2016-01-30'; return $data;
+		    	break;
+		   	
+		    case 5: $data = '2016-02-01'; return $data;
+		    	break;
+		   	
+		    case 6: $data = '2016-02-10'; return $data;
+		    	break;
+		   	
+		    case 7: $data = '2016-02-20'; return $data;
+		    	break;
+		   	
+		    case 8: $data = '2016-02-28'; return $data;
+		    	break;
+	    	
+		    case 9: $data = '2016-03-01'; return $data;
+		    	break;
+		    	
+		    case 10: $data = '2016-03-10'; return $data;
+		    	break;	
+		    	
+		    case 11: $data = '2016-03-20'; return $data;
+		    	break;
+		    	
+		    case 12: $data = '2016-03-30'; return $data;
+		    	break;
+		    	
+		   	case 13: $data = '2016-04-01'; return $data;
+		    	break;
+		    	
+		   	case 14: $data = '2016-04-10'; return $data;
+		    	break;
+		    	
+		    case 15: $data = '2016-04-20'; return $data;
+		    	break;
+		    
+		    case 16: $data = '2016-04-30'; return $data;
+		    	break;
+		    
+		    case 17: $data = '2016-05-01'; return $data;
+		    	break;
+		    	
+		    case 18: $data = '2016-05-10'; return $data;
+		    	break;
+		    	
+		    case 19: $data = '2016-05-20'; return $data;
+		    	break;
+		    	
+		    case 20: $data = '2016-05-30'; return $data;
+		    	break;
+		    	
+		    case 21: $data = '2016-06-10'; return $data;
+		   		break;
+		    
+		    case 22: $data = '2016-06-20'; return $data;
+		    	break;
+		    
+		    case 23: $data = '2016-06-30'; return $data;
+		    	break;
+		    
+		    case 24: $data = '2016-07-10'; return $data;
+		    	break;
+		    
+		    case 25: $data = '2016-07-20'; return $data;
+		    	break;
+		    
+		    case 26: $data = '2016-07-30'; return $data;
+		    	break;
+		    
+		    case 27: $data = '2016-08-01'; return $data;
+		    	break;
+		    
+		    case 28: $data = '2016-08-10'; return $data;
+		    	break;
+		    
+		    case 29: $data = '2016-08-20'; return $data;
+		    	break;
+		     
+		    case 30: $data = '2016-08-30'; return $data;
+		    	break;
+		     
+		    case 31: $data = '2016-09-01'; return $data;
+		    	break;
+		     
+		    case 32: $data = '2016-09-10'; return $data;
+		    	break;
+		     
+		    case 33: $data = '2016-09-20'; return $data;
+		    	break;
+		     
+		    case 34: $data = '2016-09-30'; return $data;
+		    	break;
+		     
+		    case 35: $data = '2016-10-01'; return $data;
+		    	break;
+		     
+		    case 36: $data = '2016-10-10'; return $data;
+		    	break;
+		     
+		    case 37: $data = '2016-10-20'; return $data;
+		    	break;
+		     
+		    case 38: $data = '2016-10-30'; return $data;
+		    	break;
+		    	
+		    	
+	    }
+	    
 	   }
 	   
 	}

@@ -8,7 +8,8 @@
 	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';	
 
 	$idTime = $_SESSION['idDono'];
-
+	$idCampeonato = $_SESSION['IdCampeonato'];
+	
 ?>
 
 <!DOCTYPE html>
@@ -83,9 +84,10 @@
                 $conn = Database::conexao();
 
 		   		//Consulta na tabela time, para recolher o id do time
-		     	$consultaTime = 'SELECT cast(dinheiro as float) FROM Time WHERE dono = ? ';
+		     	$consultaTime = 'SELECT cast(dinheiro as float) FROM Time WHERE dono = ? and campeonato = ? ';
 		     	$preparaConsultaTime = $conn->prepare($consultaTime);
 		     	$preparaConsultaTime->bindValue(1,$idTime);
+		     	$preparaConsultaTime->bindValue(2,$idCampeonato);
 		     	$preparaConsultaTime->execute();		   
 		      
 		     	$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
@@ -121,9 +123,10 @@
       <tbody>
 		<?php 
 		      	//Consulta na tabela time, para recolher o id do time
-		     $consultaTime = 'SELECT id FROM Time WHERE dono = ? ';
+		     $consultaTime = 'SELECT id FROM Time WHERE dono = ? and campeonato = ? ';
 		     $preparaConsultaTime = $conn->prepare($consultaTime);
 		     $preparaConsultaTime->bindValue(1,$idTime);
+		     $preparaConsultaTime->bindValue(2,$idCampeonato);
 		     $preparaConsultaTime->execute();
 		      
 		     $result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
@@ -144,12 +147,13 @@
 	                                   jogador.id,
 	                                   cast(jogador.passe as int) * (select agilidade+ataque+chute+defesa+forca+passe+resistencia from habilidade where id = Jogador.habilidade) as vlCompra	
 	                            FROM Jogador,Time,NomePessoal,Sobrenome 
-	                            WHERE Jogador.idTime = Time.id 
+	                            WHERE Jogador.campeonato = ? and Jogador.idTime = Time.id 
 	                            and Time.id <> ? and Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id 
 	                            ORDER BY Jogador.passe, Time.nome asc";
 
 			$preparaConsultaJogador = $conn->prepare($consultaJogador);
-			$preparaConsultaJogador->bindValue(1, $idTimeJogador);
+			$preparaConsultaJogador->bindValue(1,$idCampeonato);
+			$preparaConsultaJogador->bindValue(2,$idTimeJogador);
      		$preparaConsultaJogador->execute();	
 
      		

@@ -125,18 +125,37 @@
 				$tabela->atualizaTimeVencedorTabela($timeCasaArray);
 				$tabela->atualizaTimePerdedorTabela($timeVisitanteArray);
 				
+				//Atualiza dinheiro do time vencedor
 				$saldo = $time->consultaDinheiroTime($timeCasa);
 				$time->atribuirSaldoTimeVencedor($timeCasa, $saldo);
+				
+				//Atualiza torcida do time casa
+				$torcida = $time->consultaTorcida($timeCasa);
+				$time->atribuirTorcidaTime($timeCasa, $torcida);
+				
+				//Atualiza torcida do time casa perdedor
+				$torcida = $time->consultaTorcida($timeVisitante);
+				$time->retiraTorcidaTime($timeVisitante, $torcida);
+				
 			
 			}
 			elseif ($resultado == 2){
 				
+				//Atualiza tabela do time Vencedor
 				$tabela->atualizaTimeVencedorTabela($timeVisitanteArray);
 				$tabela->atualizaTimePerdedorTabela($timeCasaArray);
 				
+				//Atualiza Saldo do time Vencedor
 				$saldo = $time->consultaDinheiroTime($timeVisitante);
 				$time->atribuirSaldoTimeVencedor($timeVisitante, $saldo);
+				
+				//Atualiza torcida do time vencedor
+				$torcida = $time->consultaTorcida($timeVisitante);
+				$time->atribuirTorcidaTime($timeVisitante, $torcida);
 			
+				//Atualiza torcida do time Perdedor
+				$torcida = $time->consultaTorcida($timeCasa);
+				$time->atribuirTorcidaTime($timeCasa, $torcida);
 			}
 			
 			else {
@@ -144,9 +163,11 @@
 				$tabela->empateTabela($timeCasaArray);
 				$tabela->empateTabela($timeVisitanteArray);
 				
+				//Consulta de saldo
 				$saldoTimeCasa = $time->consultaDinheiroTime($timeCasa);
 				$saldoTimeVisitante = $time->consultaDinheiroTime($timeVisitante);
 				
+				//Atribui saldo time por empate
 				$time->atribuirSaldoTimeEmpate($saldoTimeCasa, $saldoTimeCasa);
 				$time->atribuirSaldoTimeEmpate($saldoTimeVisitante, $saldoTimeVisitante);
 				

@@ -4,6 +4,8 @@
 	include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';
 	
 	Class modelClassTime {
+		
+		//Variaveis 
 		private $id;
 		private $nome;
 		private $mascote;
@@ -18,6 +20,7 @@
 		private $agressividade;
 		private $tabela;
 	
+		//Getters and setters
 		public function getId(){
 			return $this->id;
 		}
@@ -490,6 +493,56 @@
 			$preparaAtualizaSaldoTimeEmpate->execute();
 				
 			
+		}
+		
+		//Consulta da torcida do time
+		public function consultaTorcida($idTime){
+			
+			$conn = Database::conexao();
+			
+			$consultaTorcidaTime = 'SELECT torcida FROM Time WHERE id = ?';
+			$preparaConsultaTorcidaTime = $conn->prepare($consultaTorcidaTime);
+			$preparaConsultaTorcidaTime->bindValue(1, $idTime);
+			$preparaConsultaTorcidaTime->execute();
+			$result = $preparaConsultaTorcidaTime->setFetchMode(PDO::FETCH_NUM);
+			
+			while ($row = $preparaConsultaTorcidaTime->fetch()) {
+					
+				$torcida = $row[0];
+			}
+			
+			return $torcida;
+			
+		}
+		
+		//Atribui torcida para o time
+		public function atribuirTorcidaTime($idTime, $torcida){
+			
+			$torcida = $torcida + 100;
+				
+			$conn = Database::conexao();
+				
+			$atualizaTorcidaTime = 'UPDATE Time SET torcida = ? WHERE id = ? ';
+			$preparaAtualizaTorcidaTime = $conn->prepare($atualizaTorcidaTime);
+			$preparaAtualizaTorcidaTime->bindValue(1,$torcida);
+			$preparaAtualizaTorcidaTime->bindValue(2,$idTime);
+			$preparaAtualizaTorcidaTime->execute();
+			
+		}
+		
+		//Retira torcida do time
+		public function retiraTorcidaTime($idTime,$torcida){
+				
+			$torcida = $torcida - 100;
+			
+			$conn = Database::conexao();
+		
+			$atualizaTorcidaTime = 'UPDATE Time SET torcida = ? WHERE id = ? ';
+			$preparaAtualizaTorcidaTime = $conn->prepare($atualizaTorcidaTime);
+			$preparaAtualizaTorcidaTime->bindValue(1,$torcida);
+			$preparaAtualizaTorcidaTime->bindValue(2,$idTime);
+			$preparaAtualizaTorcidaTime->execute();
+				
 		}
 //-----------------------------------------------------------------------------------------------------		
 		//Estas funções  abaixo iram tratar a geração de jogo

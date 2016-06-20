@@ -359,17 +359,14 @@
 			
 			$clima = new modelClassClima();
 			$arrayClimas = $clima->recolheClimas();
-			//echo "Climas";
-			//print_r($arrayClimas);
-			//echo "<p>";
 			$time = new modelClassTime();
 			$quantidadeTimesCampeonato = $time->recolheNumerodeTimesCampeonato($_SESSION['IdCampeonato']);
-			//echo "quantidade de times : ".$quantidadeTimesCampeonato."<p>";
+
 			$jogosRodada = $quantidadeTimesCampeonato / 2;
-			//echo "jogos rodada : ".$jogosRodada."<p>";
+
 			$rodada = new modelClassRodada();
 			$numeroRodada = $rodada->recolheNumeroRodada($_SESSION['IdCampeonato']);
-			//echo "numero rodada : ".$numeroRodada."<p>";
+
 			$arrayTimesCampeonatoOriginal = $time->recolheTimesCampeonato($_SESSION['IdCampeonato']);
 
 			

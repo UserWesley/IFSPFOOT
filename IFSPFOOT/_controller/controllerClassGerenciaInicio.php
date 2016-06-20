@@ -40,6 +40,7 @@
 			header("LOCATION: ../_view/viewNovoJogo.php");
 		}
 		
+		//Verificar se existe nome carregamento salvo no bancod
 		public function verificaDados(){
 				
 			$campeonato = new modelClassCampeonato();
@@ -67,6 +68,7 @@
 
 		}
 		
+		//cadastro de campeonato
 		public function cadastroCampeonato(){
 			
 			$campeonato = new modelClassCampeonato();
@@ -81,7 +83,7 @@
 		    $_SESSION['IdCampeonato']= $campeonato->recolherUltimoIdCampeonato($campeonato);
 
 		}
-		
+		//Cadastro de estadio
 		public function cadastroEstadio(){
 			
 			$estadio = new modelClassEstadio();
@@ -96,6 +98,7 @@
 
 		}
 		
+		//Cadastro de tabela
 		public function cadastroTabela(){
 			
 			$tabela = new modelClassTabela();
@@ -111,6 +114,7 @@
 			return $ultimoIdTabela;
 		}
 		
+		//Cadastro de habilidade
 		public function cadastroHabilidade(){
 				
 			$habilidade = new modelClassHabilidade();
@@ -131,6 +135,7 @@
 			
 		}
 		
+		//Cadastro de jogador
 		public function cadastroJogador($idTime){
 			
 			$nomePessoal = new modelClassNomePessoal;
@@ -171,7 +176,8 @@
 				$nacionalidadeJogador = $nacionalidade->sortearNacionalidade($nacionalidades);
 				$jogador->setNacionalidade($nacionalidadeJogador);
 				
-				$jogador->setIdade(20);
+				$idadeJogador = $jogador->sorteiaIdadeJogador();
+				$jogador->setIdade($idadeJogador);
 				$jogador->setEstamina(100);
 				
 				$nivelJogador = $nivel->sortearNivel($niveis);
@@ -203,6 +209,7 @@
 				
 		}
 		
+		//Cadastro de times
 		public function cadastroTime(){
 			
 			$time = new modelClassTime();
@@ -224,64 +231,64 @@
 				
 				switch ($i){
 					
-					case 1 : $timeTeste = "Time1";
+					case 1 : $timeTeste = "Americana";
 						break;
 					
-					case 2 : $timeTeste = "Time2";
+					case 2 : $timeTeste = "Hortolândia";
 						break;
 
-					case 3 : $timeTeste = "Time3";	
+					case 3 : $timeTeste = "Sumaré";	
 						break;
 					
-					case 4 : $timeTeste = "Time4";
+					case 4 : $timeTeste = "Campinas";
 						break;
 					
-					case 5 : $timeTeste = "Time5";
+					case 5 : $timeTeste = "Nova Odessa";
 						break;
 							
-					case 6 : $timeTeste = "Time6";
+					case 6 : $timeTeste = "São Paulo";
 						break;
 						
-					case 7 : $timeTeste = "Time7";
+					case 7 : $timeTeste = "Piracicaba";
 						break;
 							
-					case 8 : $timeTeste = "Time8";
+					case 8 : $timeTeste = "Holambra";
 						break;
 						
-					case 9 : $timeTeste = "Time9";
+					case 9 : $timeTeste = "Poços de Caldas";
 						break;
 							
-					case 10 : $timeTeste = "Time10";
+					case 10 : $timeTeste = "Belo Horizonte";
 						break;
 						
-					case 11 : $timeTeste = "Time11";
+					case 11 : $timeTeste = "Curitiba";
 						break;
 							
-					case 12 : $timeTeste = "Time12";
+					case 12 : $timeTeste = "Jundiai";
 						break;
 							
-					case 13 : $timeTeste = "Time13";
+					case 13 : $timeTeste = "Monte Mor";
 						break;
 							
-					case 14 : $timeTeste = "Time14";
+					case 14 : $timeTeste = "Capivari";
 						break;
 						
-					case 15 : $timeTeste = "Time15";
+					case 15 : $timeTeste = "Rafard";
 						break;
 							
-					case 16 : $timeTeste = "Time16";
+					case 16 : $timeTeste = "Cuiaba";
 						break;
 
-					case 17 : $timeTeste = "Time17";
+					case 17 : $timeTeste = "Bragança";
 						break;
 							
-					case 18 : $timeTeste = "Time18";
+					case 18 : $timeTeste = "Barueri";
 						break;
 							
-					case 19 : $timeTeste = "Time19";
+					case 19 : $timeTeste = "Carapicuiba";
 						break;
 						
-					case 20 : $timeTeste = "Time20";
+					case 20 : $timeTeste = "Visconde";
 						break;
 						
 				}

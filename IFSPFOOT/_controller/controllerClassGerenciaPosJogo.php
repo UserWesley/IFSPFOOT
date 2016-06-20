@@ -32,6 +32,7 @@
 			
 		}
 		
+		//Atualiza placares dos jogos
 		public function atualizarPlacar(){
 			
 			//Rodada Atual
@@ -115,18 +116,26 @@
 			$timeCasaArray = $tabela->consultaTabela($idTabelaTimeCasa);
 			$timeVisitanteArray = $tabela->consultaTabela($idTabelaTimeVisitante);
 			
+			$time = new modelClassTime();
+			
 			$resultado = $jogo->verificaPlacar($golCasa,$golVisitante);
 			
 			if($resultado == 1){
-				
+
 				$tabela->atualizaTimeVencedorTabela($timeCasaArray);
 				$tabela->atualizaTimePerdedorTabela($timeVisitanteArray);
+				
+				$saldo = $time->consultaDinheiroTime($timeCasa);
+				$time->atribuirSaldoTimeVencedor($timeCasa, $saldo);
 			
 			}
 			elseif ($resultado == 2){
 				
 				$tabela->atualizaTimeVencedorTabela($timeVisitanteArray);
 				$tabela->atualizaTimePerdedorTabela($timeCasaArray);
+				
+				$saldo = $time->consultaDinheiroTime($timeVisitante);
+				$time->atribuirSaldoTimeVencedor($timeVisitante, $saldo);
 			
 			}
 			
@@ -134,6 +143,13 @@
 				
 				$tabela->empateTabela($timeCasaArray);
 				$tabela->empateTabela($timeVisitanteArray);
+				
+				$saldoTimeCasa = $time->consultaDinheiroTime($timeCasa);
+				$saldoTimeVisitante = $time->consultaDinheiroTime($timeVisitante);
+				
+				$time->atribuirSaldoTimeEmpate($saldoTimeCasa, $saldoTimeCasa);
+				$time->atribuirSaldoTimeEmpate($saldoTimeVisitante, $saldoTimeVisitante);
+				
 			}
 			
 		}
@@ -182,6 +198,7 @@
 			$campeonato->setId($_SESSION['IdCampeonato']);
 			$campeonato->setRodadaAtual($rodada);
 			$campeonato->avancaRodada($campeonato);
+			echo "Fim de rodada !";
 		}
 	}
 	

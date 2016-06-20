@@ -5,6 +5,7 @@
 	
 	Class modelClassJogador{
 		
+		//Variaveis
 		private $id;
 		private $titular;
 		private $nome;
@@ -23,6 +24,7 @@
 		private $estilo;
 		private $campeonato;
 		
+		//Getters and Setters
 		public function getId(){
 			return $this->id;
 		}
@@ -159,6 +161,7 @@
 			$this->campeonato = $campeonato;
 		}
 		
+		//Cadastro de jogador
 		public function cadastrarJogador($jogador){
 			
 			$titular = $this->getTitular();
@@ -209,7 +212,8 @@
 			return $jogadoresTime;
 			
 		}
-
+		
+		//Função para efetuar a compra de jogadores
 		public function compraJogador($Jogador){
 			$time = $this->getIdtime();
 			$id = $this->getId();
@@ -223,8 +227,9 @@
 	     	$preparaConsultaTime->execute();
 
 
-			}		
+		}		
 		
+		//Visualização dos jogadores	
 		public function visualizaJogador($jogadores){
 			
 			$colunas = 12;
@@ -236,6 +241,7 @@
 			}
 		}
 		
+		//Sorteo de nome dos jogadores
 		public function sorteiaJogador($jogadores){
 			
 			$recebeIndexArrayJogadorTime = array_rand($jogadores, 1);
@@ -243,6 +249,8 @@
 			return $quemFezGolTime;
 			
 		}
+		
+		//COnsulta de quantidade de gols
 		public function consultaGol($jogador){
 			
 			$conn = Database::conexao();
@@ -263,6 +271,7 @@
 			
 		}
 		
+		//Inserindo gol para o jogador
 		public function inseriGol($quantidadeGolJogador,$jogadorTime){
 			
 			$quantidadeGolJogador++;
@@ -277,6 +286,7 @@
 			
 		}
 		
+		//COnsulta artilharia do campeonato
 		public function consultaArtilheiria($jogador){
 			
 			$idCampeonato = $this->getCampeonato();
@@ -305,6 +315,7 @@
 				
 		}
 		
+		//Visualiza artilharia do campeonato
 		public function visualizaArtilharia($jogadoresArtilharia){
 			
 			$colunas = 4;
@@ -379,9 +390,7 @@
 			return $jogadorArtilheiro;
 				
 				
-		}
-		
-		
+		}		
 		
 		//Consulta pelo idCampeonato os dados do jogador artilheiro
 		public function consultaArtilheiroCampeonato($jogador){
@@ -408,7 +417,14 @@
 			
 			return $jogadorArtilheiro;
 			
+		}
+		
+		//Sorteia um idade para o jogador
+		public function sorteiaIdadeJogador(){
 			
+			$idade = rand(17,38);
+			
+			return $idade;
 		}
 		
 	}

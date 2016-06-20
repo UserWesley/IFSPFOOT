@@ -53,8 +53,6 @@
       		<thead>
         		<tr class = "info">
 			    	<th>Nome</th>
-			        <th>Mascote</th>
-			        <th>Cor</th>
 			        <th>Dinheiro</th>
 			        <th>Torcida</th>
         		</tr> 

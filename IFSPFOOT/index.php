@@ -96,20 +96,7 @@
 			                    		 Cadastrar Novo Usuário
 			                    	</a></div>
 		                		
-		                    	<div class="form-group" >
-		                    		<!-- Link para página de documentação -->
-			                		<a class="btn btn-info btn-block" href="_view/_doc/viewDocMenu.php">
-			                    		 Documentação
-			                    	</a>
-		                    	</div>
-		                    	
-		                    	<div class="form-group">
-			                    	<!-- Link para página de testes -->
-			                    	<a class="btn btn-danger btn-block" href="_teste/indexCrud.php">
-			                    		 Teste
-			                    	</a>
-			                    </div>
-			                    
+
 	                    	</div>
 	                    </div>
 	                </div>

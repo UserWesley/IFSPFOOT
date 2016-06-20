@@ -168,27 +168,8 @@
 			return $id;
 		
 		}
-		/*
-		public function consultaId($nomeTime){
-	
-			$conn = Database::conexao();
-	
-			$consultaTime = 'SELECT id FROM Time WHERE nome = ?';
-			$preparaConsultaTime = $conn->prepare($consultaTime);
-			$preparaConsultaTime->bindValue(1, $nomeTime);
-			$preparaConsultaTime->execute();
-	
-			$result = $preparaConsultaTime->setFetchMode(PDO::FETCH_NUM);
-			while ($row = $preparaConsultaTime->fetch()) {
-					
-				$id = $row[0];
-					
-			}
-	
-			return $id;
-	
-		}
-		 */
+		
+		//COnsulta id do time
 		public function consultaIdTime($time){
 				
 			$idDono = $this->getDono();
@@ -211,7 +192,8 @@
 			
 			return $id;
 		}
-	
+		
+		//Selecionar seu time durante o campeonato
 		public function selecionarTime($time){
 				
 			$conn = Database::conexao();
@@ -226,7 +208,8 @@
 			$preparaAtualizaDefinirseuTime->execute();
 				
 		}
-	
+		
+		//Consulta para obter todos times do campeonato
 		public function consultaTodosTime($campeonato){
 				
 			$times = array();
@@ -251,7 +234,8 @@
 				
 			return $times;
 		}
-	
+		
+		//COnsulta nome dos times
 		public function consultaNomeTime($id){
 				
 			$conn = Database::conexao();
@@ -272,6 +256,7 @@
 			return $nome;
 		}
 		
+		//COnsulta id do estadio do time
 		public function consultaIdEstadioTime($time){
 				
 			$usuario = $this->getDono();
@@ -296,6 +281,7 @@
 			return $idEstadio;
 		}
 
+		//Atualiza dinheiro do time
         public function atualizaDinheiroTime($Time){
 			$id = $this->getId();
 			$dinheiro = $this->getDinheiro();
@@ -309,7 +295,7 @@
 	     	$preparaAtualizacaoTime->execute();
 
 
-			}		
+		}		
 		
 		//Esta função irá consultar os dados do time selecionado e retorna em array
 		public function consultaDadoTime($id){
@@ -318,7 +304,7 @@
 				
 			$conn = Database::conexao();
 				
-			$consultaTimeDado = 'SELECT nome, mascote ,cor ,dinheiro ,torcida FROM Time WHERE id = ? ';
+			$consultaTimeDado = 'SELECT nome,dinheiro ,torcida FROM Time WHERE id = ? ';
 			$preparaConsultaDadoTime = $conn->prepare($consultaTimeDado);
 			$preparaConsultaDadoTime->bindValue(1,$id);
 			$preparaConsultaDadoTime->execute();
@@ -330,18 +316,17 @@
 				$timeEscolhido[] = $row[0];
 				$timeEscolhido[] = $row[1];
 				$timeEscolhido[] = $row[2];
-				$timeEscolhido[] = $row[3];
-				$timeEscolhido[] = $row[4];
 	
 			}
 				
 			return $timeEscolhido;
 				
 		}
-	
+		
+		//Visualização do dados do time
 		public function visualizaDadoTime($time){
 				
-			$colunas = 7;
+			$colunas = 5;
 				
 			//Listando Jogadores do time
 			for($i=0; $i < count($time); $i++) {
@@ -353,7 +338,7 @@
 		}
 	
 		
-	
+		//recolhe ultimo id de time cadastro no campeonato
 		public function recolheUltimoIdTime(){
 				
 			$conn = Database::conexao();
@@ -452,7 +437,60 @@
 			
 			
 		}
-
+		
+		//COnsulta saldo atual do time
+		public function consultaDinheiroTime($idTime){
+				
+			$conn = Database::conexao();
+				
+			$consultaDinheiroTime = 'SELECT dinheiro FROM Time WHERE id = ?';
+			$preparaConsultaDinheiroTime = $conn->prepare($consultaDinheiroTime);
+			$preparaConsultaDinheiroTime->bindValue(1, $idTime);
+			$preparaConsultaDinheiroTime->execute();
+			$result = $preparaConsultaDinheiroTime->setFetchMode(PDO::FETCH_NUM);
+				
+			while ($row = $preparaConsultaDinheiroTime->fetch()) {
+			
+				$dinheiro = $row[0];
+			}
+				
+			return $dinheiro;
+				
+			
+		}
+	
+		//Atribui dinheiro ao time vencedor
+		public function atribuirSaldoTimeVencedor($idTime,$saldo){
+			
+			$saldo = $saldo + 300;
+			
+			$conn = Database::conexao();
+			
+			$atualizaTime = 'UPDATE Time SET dinheiro = ? WHERE id = ? ';
+			$preparaAtualizacaoTime = $conn->prepare($atualizaTime);
+			$preparaAtualizacaoTime->bindValue(1,$saldo);
+			$preparaAtualizacaoTime->bindValue(2,$idTime);
+			$preparaAtualizacaoTime->execute();
+				
+			
+			
+		}
+		
+		//Atribui dinheiro ao jogo de empate
+		public function atribuirSaldoTimeEmpate($idTime,$saldo){
+			
+			$saldo = $saldo + 100;
+			
+			$conn = Database::conexao();
+			
+			$atualizaSaldoTimeEmpate = 'UPDATE Time SET dinheiro = ? WHERE id = ? ';
+			$preparaAtualizaSaldoTimeEmpate = $conn->prepare($atualizaSaldoTimeEmpate);
+			$preparaAtualizaSaldoTimeEmpate->bindValue(1,$saldo);
+			$preparaAtualizaSaldoTimeEmpate->bindValue(2,$idTime);
+			$preparaAtualizaSaldoTimeEmpate->execute();
+				
+			
+		}
 //-----------------------------------------------------------------------------------------------------		
 		//Estas funções  abaixo iram tratar a geração de jogo
 		

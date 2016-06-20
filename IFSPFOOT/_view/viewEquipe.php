@@ -99,7 +99,7 @@
       	<tr class="active">
 			<td>XAMPP 5.6.15-1</td>
 			<td>Ambiente Integrado</td>
-			<td>PHP 5.6.15(Linguagem Web - Servidor), Mysql 5.0.11 (SGBD),phpMyAdmin 4.5.2(SGBD Gráfico), Apache 2.4.17 (Servidor Web Local)</td>
+			<td>PHP 5.6.15(Linguagem Web - Servidor), Postgresql 9.4 (SGBD), Apache 2.4.17 (Servidor Web Local)</td>
 			<td></td>
 		</tr>
 		

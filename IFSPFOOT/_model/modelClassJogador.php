@@ -232,7 +232,7 @@
 		//Visualização dos jogadores	
 		public function visualizaJogador($jogadores){
 			
-			$colunas = 12;
+			$colunas = 10;
 			 
 			for($i=0; $i < count($jogadores); $i++) {
 				echo "<td>".$jogadores[$i]."</td>";
@@ -335,7 +335,7 @@
 			$conn = Database::conexao();
 			
 			$consultaJogador = 'SELECT NomePessoal.nome, Sobrenome.nome, Nacionalidade.nome, Jogador.idade,
-			 Jogador.estamina, Nivel.nome, Jogador.gol, Jogador.passe, Jogador.salario, posicao.nome, 
+			 Jogador.estamina, Nivel.nome, Jogador.gol, posicao.nome, 
 			 temperamento.nome, estilo.nome 
 			FROM Jogador, Posicao, Temperamento, Estilo, NomePessoal ,Sobrenome, Nacionalidade, Nivel
 			 WHERE jogador.idTime = ? and  Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id
@@ -360,9 +360,6 @@
 				$jogadorTime[] = $row[7];
 				$jogadorTime[] = $row[8];
 				$jogadorTime[] = $row[9];
-				$jogadorTime[] = $row[10];
-				$jogadorTime[] = $row[11];
-				
 
 			}
 			

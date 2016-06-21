@@ -46,8 +46,6 @@
 			          <th>Estamina</th>
 		          	  <th>Nivel</th>
 		          	  <th>Gol</th>
-		          	  <th>Passe</th>
-		          	  <th>Salário</th>
 		          	  <th>Posição</th>
 		          	  <th>Temperamento</th>
 		          	  <th>Estilo</th>

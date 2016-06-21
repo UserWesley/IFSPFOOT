@@ -194,6 +194,7 @@
 			return $agressividades;
 			
 		}
+		
 		//controla a busca da rodadade inicial do campeonato
 		public function buscaRodadaAtual($idCampeonato){
 				
@@ -203,7 +204,16 @@
 			return $rodadaAtual;
 				
 		}
+		
+		//Realiza busca dos dados do time do usuário
+		public function buscaTimeUsuario($campeonato,$dono){
 			
+			$time = new modelClassTime();
+			$time->setCampeonato($campeonato);
+			$time->setDono($dono);
+			return $time->consultaDadoTimePrincipal($time);
+			
+		}
 		
 	}
 

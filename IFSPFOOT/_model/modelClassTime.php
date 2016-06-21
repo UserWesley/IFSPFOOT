@@ -495,6 +495,38 @@
 			
 		}
 		
+		//Consulta dados do time principal
+		public function consultaDadoTimePrincipal($time){
+			
+			$idTime = $this->getDono();
+			$idCampeonato = $this->getCampeonato();
+
+			$dadosTime = array();
+			
+			$conn = Database::conexao();
+				
+			$consultaDadosTime = 'SELECT nome, dinheiro,torcida,formacao,estrategia,agressividade FROM Time WHERE dono = ? and campeonato = ?';
+			$preparaConsultaDadosTime = $conn->prepare($consultaDadosTime);
+			$preparaConsultaDadosTime->bindValue(1, $idTime);
+			$preparaConsultaDadosTime->bindValue(2, $idCampeonato);
+			$preparaConsultaDadosTime->execute();
+			$result = $preparaConsultaDadosTime->setFetchMode(PDO::FETCH_NUM);
+			
+			while ($row = $preparaConsultaDadosTime->fetch()) {
+					
+				$dadosTime[] = $row[0];
+				$dadosTime[] = $row[1];
+				$dadosTime[] = $row[2];
+				$dadosTime[] = $row[3];
+				$dadosTime[] = $row[4];
+				$dadosTime[] = $row[5];
+				
+			}
+			
+			return $dadosTime;
+				
+		}
+		
 		//Consulta da torcida do time
 		public function consultaTorcida($idTime){
 			
@@ -532,8 +564,10 @@
 		
 		//Retira torcida do time
 		public function retiraTorcidaTime($idTime,$torcida){
-				
-			$torcida = $torcida - 100;
+			
+			if($torcida > 100){
+				$torcida = $torcida - 100;
+			}
 			
 			$conn = Database::conexao();
 		

@@ -57,7 +57,9 @@
 			
 				<li><a href="viewJogos.php" target="janela">Jogos</a></li>
 
-               <li><a href="viewMercado.php" target="janela">Mercado</a></li>                
+                <li><a href="viewTelaPrincipal.php" target="janela">Meu Time</a></li>                
+			
+                <li><a href="viewMercado.php" target="janela">Mercado</a></li>                
 			
 				<li><a href="viewRodada.php" target="janela">Rodadas</a></li>
 						
@@ -82,7 +84,7 @@
    							<div class="embed-responsive embed-responsive-16by9">
    							
    							<!--  Iframe responsável por mostrar o conteúdo do arquivo selecionado -->
-							<iframe class="embed-responsive-item" src="viewJogador.php" name="janela" id="framePrincipal"></iframe>	
+							<iframe class="embed-responsive-item" src="viewTelaPrincipal.php" name="janela" id="framePrincipal"></iframe>	
                         
                         </div>
                     </div>

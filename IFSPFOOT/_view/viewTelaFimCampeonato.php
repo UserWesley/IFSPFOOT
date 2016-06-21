@@ -4,7 +4,6 @@
 	
 	include_once '../_controller/controllerClassFimCampeonato.php';
 	
-	
 	$controllerFimCampeonato = new controllerClassFimCampeonato();
 
 	$timeCampeao = array();
@@ -82,6 +81,10 @@
 	 </table>
 	</div>
 	
+    <div class="form-group">
+			<a class="btn btn-danger btn-block" href="../_controller/controllerLogout.php">
+                    		 Sair</a>
+    </div>
 </body>
 
 </html>

@@ -8,6 +8,8 @@
 DROP TABLE IF EXISTS Usuario CASCADE;
 DROP TABLE IF EXISTS Campeonato CASCADE;
 DROP TABLE IF EXISTS Estadio CASCADE;
+DROP TABLE IF EXISTS Produtos CASCADE;
+DROP TABLE IF EXISTS Estadio_Produto CASCADE;
 DROP TABLE IF EXISTS Formacao CASCADE;
 DROP TABLE IF EXISTS Estrategia CASCADE;
 DROP TABLE IF EXISTS NomeTime CASCADE;
@@ -37,7 +39,7 @@ CREATE TABLE Usuario(
 	senha VARCHAR(32) NOT NULL,
 	nome VARCHAR(30) NOT NULL,
 	sobrenome VARCHAR(60) NOT NULL,
-	email VARCHAR(40) UNIQUE,
+	email VARCHAR(40) NOT NULL,
 	celular VARCHAR(11) NOT NULL,
 
 	PRIMARY KEY(id)
@@ -51,7 +53,7 @@ CREATE TABLE Campeonato (
 	nome VARCHAR(20) NOT NULL,
 	rodadaAtual INT NOT NULL,
 	temporada INT NOT NULL,
-	nomeCarregamento VARCHAR(20),
+	nomeCarregamento VARCHAR(20) NOT NULL,
 	usuario INT NOT NULL,
 	
 	FOREIGN KEY (usuario) REFERENCES Usuario (id),
@@ -70,6 +72,29 @@ CREATE TABLE Estadio(
 	
 	FOREIGN KEY(campeonato) REFERENCES Campeonato (id),
 	PRIMARY KEY(id)	
+
+);
+
+CREATE TABLE Produtos(
+    id SERIAL,
+    nome VARCHAR(20) NOT NULL,
+    preco FLOAT,
+    
+    
+    PRIMARY KEY(id)
+);
+
+
+CREATE TABLE Estadio_Produto(
+    
+    id SERIAL,
+    idEstadio INT,
+    idProduto INT,
+    
+    FOREIGN KEY (idEstadio) REFERENCES Estadio (id),
+    FOREIGN KEY (idProduto) REFERENCES Produtos (id),
+    PRIMARY KEY(id)
+    
 
 );
 
@@ -597,3 +622,33 @@ INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalves Neto');
 INSERT INTO Sobrenome VALUES (DEFAULT,'Gonçalves Pereira ');
 
 
+-- Nomes dos times
+INSERT INTO NomeTime VALUES (DEFAULT,'Comunistas FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'Socialistas FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'Republicanos FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'Capitalistas FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'Quartel de Medelin FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'Quartel de Kali FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'Illuminatis FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'Democratas FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'PT FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'PSDB FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'Boinas Vermelhas FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'Os Extraditaveis FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'ABIN FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'PF FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'ASFARC FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'MST FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'M15 FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'La Mafia FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'CIA FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'FBI FC');
+INSERT INTO NomeTime VALUES (DEFAULT,'NSA FC');
+
+
+-- Inserção de Produtos
+INSERT INTO Produtos VALUES (DEFAULT,'Arquibancada', 100);
+INSERT INTO Produtos VALUES (DEFAULT,'Numeradas', 300);
+INSERT INTO Produtos VALUES (DEFAULT,'Camarote', 1000);
+INSERT INTO Produtos VALUES (DEFAULT,'Camarote Premium', 10000);
+INSERT INTO Produtos VALUES (DEFAULT,'Camarote Daimond', 100000);

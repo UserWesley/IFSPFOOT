@@ -82,7 +82,7 @@
 				
 			echo "</select>";
 		?>
-
+	</form>
 </body>
 
 </html>

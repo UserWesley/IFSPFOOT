@@ -168,8 +168,8 @@
 				$saldoTimeVisitante = $time->consultaDinheiroTime($timeVisitante);
 				
 				//Atribui saldo time por empate
-				$time->atribuirSaldoTimeEmpate($saldoTimeCasa, $saldoTimeCasa);
-				$time->atribuirSaldoTimeEmpate($saldoTimeVisitante, $saldoTimeVisitante);
+				$time->atribuirSaldoTimeEmpate($timeCasa, $saldoTimeCasa);
+				$time->atribuirSaldoTimeEmpate($timeVisitante, $saldoTimeVisitante);
 				
 			}
 			

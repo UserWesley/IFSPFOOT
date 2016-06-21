@@ -2,10 +2,8 @@
     session_start();
 	include_once('../_model/modelClassjogador.php'); 
 	include_once('../_model/modelClassTime.php'); 
-    include_once '../_model/_bancodedados/modelBancodeDadosConexao.php';	
 
     $dadosResposta = $_POST;
-
 
 	$_SESSION['idJogador'] = $_POST["idJogador"];
 	$_SESSION['vlAtualizar'] = $_POST["vlAtualizar"];
@@ -17,10 +15,6 @@
 			$this->comprarJogador();
 			$this->atualizaDinheiroTime();
 		}
-		
-		function __destruct(){
-			
-		}	
 
 	
 		public function comprarJogador(){

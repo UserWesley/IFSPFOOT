@@ -5,7 +5,7 @@ function move() {
 	document.getElementById("idBotaoIniciar").style.visibility= "hidden";
 	var elem = document.getElementById("myBar");
 	var width = 1;
-	var id = setInterval(frame, 1);
+	var id = setInterval(frame, 200);
 	var golCasa=0;
 	var golVisitante=0;
 	var placar = [0,0,0,0];
@@ -31,7 +31,7 @@ function move() {
 		    
 		    	var valor = Math.floor((Math.random() * 100) + 1);
 		
-		    	if(valor<=25){
+		    	if(valor<=10){
 					
 		    		var chanceGol = Math.floor((Math.random() * 10) + 1);
 				
@@ -52,7 +52,7 @@ function move() {
 						}
 					}
 				}
-				else if(valor<=50){
+				else if(valor<=20){
 					
 					var chanceGol = Math.floor((Math.random() * 10) + 1);
 					
@@ -74,21 +74,37 @@ function move() {
 				}
 				else{
 				
-					if(valor<=70){
+					if(valor<=30){
 						
 						document.getElementById("lance"+i).innerHTML = "Troca de Passes entre time da Casa";
 					}
-					else if(valor<=80){
+					else if(valor<=40){
 					
-						document.getElementById("lance"+i).innerHTML = "Troca de Passes entre time VIsitante";
+						document.getElementById("lance"+i).innerHTML = "Troca de Passes entre time Visitante";
+					}
+					else if(valor<=50){
+						
+						document.getElementById("lance"+i).innerHTML = "Cobrança de Lateral para time Visitante";
+					}
+					else if(valor<=60){
+						
+						document.getElementById("lance"+i).innerHTML = "Cobrança de lateral para time Casa";
+					}
+					else if(valor<=70){
+						
+						document.getElementById("lance"+i).innerHTML = "Falta no meio de campo para time visitante";
+					}
+					else if(valor<=80){
+						
+						document.getElementById("lance"+i).innerHTML = "Falta no meio de campo para time Casa";
 					}
 					else if(valor<=90){
 						
-						document.getElementById("lance"+i).innerHTML = "Lateral para time Casa";
+						document.getElementById("lance"+i).innerHTML = "Torcida da Casa Inflama o jogo";
 					}
 					else{
 						
-						document.getElementById("lance"+i).innerHTML = "Lateral para time VIsitante";
+						document.getElementById("lance"+i).innerHTML = "Torcida Visitante tenta incentivar o time";
 					}
 				}
 

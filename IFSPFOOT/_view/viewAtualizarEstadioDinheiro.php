@@ -11,7 +11,7 @@
         $caixa                     = $_SESSION['caixa'];
         $quantidade                = $_SESSION['quantidade'];
         $idDono                    = $_SESSION['idDono'];
-
+        $idCampeonato              = $_SESSION['IdCampeonato'];
 
             if($caixa >= $total_gastos){
                  $conn = Database::conexao();
@@ -36,9 +36,7 @@
                   
                   $atualizarDinheiro = "UPDATE time
                                         SET dinheiro = '$desconto' 
-                                        WHERE dono = (SELECT time.id
-                                                        FROM time as time
-                                                        WHERE time.id = time.campeonato);"; 
+                                        WHERE dono = '$idDono' and campeonato = '$idCampeonato';"; 
                 $preparaAtualizarDinheiroDoClub = $conn->prepare($atualizarDinheiro);
                 $preparaAtualizarDinheiroDoClub->execute();
                 

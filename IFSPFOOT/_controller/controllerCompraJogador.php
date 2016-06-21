@@ -7,7 +7,7 @@
 
 	$_SESSION['idJogador'] = $_POST["idJogador"];
 	$_SESSION['vlAtualizar'] = $_POST["vlAtualizar"];
-
+	
 	Class controllerClassCompraJogador{
 		
 		function __construct(){

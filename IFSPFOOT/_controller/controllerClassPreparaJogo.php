@@ -15,7 +15,6 @@
 		private $jogosArray;
 		
 		public function __construct(){
-				
 			$this->verificaRodada();
 		}
 		
@@ -34,31 +33,28 @@
 		public function setJogosArray($jogosArray){
 			$this->jogosArray = $jogosArray;
 		}
-		public function verificaFimCampeonato(){
-				
-			$rodada = new modelClassRodada();
-			$rodada->setCampeonato($_SESSION['IdCampeonato']);
-			$ultimaRodada = $rodada->consultaQuantidadeRodadas($rodada);
-				
-			$campeonato = new modelClassCampeonato();
-			$campeonato->setId($_SESSION['IdCampeonato']);
-			$rodadaAtual = $campeonato->rodadaAtual($campeonato);
-				
-			if($rodadaAtual == $ultimaRodada){
-		
-				header("Location: ../_view/viewTelaFimCampeonato.php");
-			}
-				
-		}
+
 		
 		public function verificaRodada(){
 			
 			$campeonato = new modelClassCampeonato();
 			$campeonato->setId($_SESSION['IdCampeonato']);
 			$rodadaAtual = $campeonato->rodadaAtual($campeonato);
-			$this->setRodadaAtual($rodadaAtual);
-		
+			
+			if($rodadaAtual > 38){
+				header("Location: ../_view/viewTelaFimCampeonato.php");
+			}
+			else{
+								
+				$this->preparaJogosRodada($rodadaAtual);
+
+				$_SESSION['times'] = $this->preparaJogosRodada($rodadaAtual);
+				
+				header("Location: ../_view/viewJogo.php");
+				
+			}
 		}
+		
 		
 		public function preparaJogosRodada($rodadaAtual){
 			
@@ -73,13 +69,6 @@
 	}
 	
 	$preparacaoJogo = new controllerPreparaJogo();
-	$preparacaoJogo->verificaFimCampeonato();
-	$preparacaoJogo->verificaRodada();
-	$rodadaAtual =  $preparacaoJogo->getRodadaAtual();
 
-	$_SESSION['times'] = $preparacaoJogo->preparaJogosRodada($rodadaAtual);
-
-
-	header("Location: ../_view/viewJogo.php");
 	
 ?>

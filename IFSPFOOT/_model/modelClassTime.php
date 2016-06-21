@@ -426,7 +426,7 @@
 			$conn = Database::conexao();
 			
 			$consultaDadoTimeCampeao = 'SELECT nome FROM Time WHERE tabela = ?';
-			$preparaConsultaDadoTimeCampeao = $conn->prepare(consultaDadoTimeCampeao);
+			$preparaConsultaDadoTimeCampeao = $conn->prepare($consultaDadoTimeCampeao);
 			$preparaConsultaDadoTimeCampeao->bindValue(1, $idTabela);
 			$preparaConsultaDadoTimeCampeao->execute();
 			$result = $preparaConsultaDadoTimeCampeao->setFetchMode(PDO::FETCH_NUM);

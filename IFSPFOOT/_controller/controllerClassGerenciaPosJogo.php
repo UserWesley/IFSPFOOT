@@ -14,24 +14,6 @@
 	
 	class GerenciaPosJogo{
 		
-		//Verifica se o campeonato acabou
-		public function verificaFimCampeonato(){
-			
-			$rodada = new modelClassRodada();
-			$rodada->setCampeonato($_SESSION['IdCampeonato']);
-			$ultimaRodada = $rodada->consultaQuantidadeRodadas($rodada);
-			
-			$campeonato = new modelClassCampeonato();
-			$campeonato->setId($_SESSION['IdCampeonato']);
-			$rodadaAtual = $campeonato->rodadaAtual($campeonato);
-			
-			if($rodadaAtual == $ultimaRodada){
-				
-				header("Location: ../_view/viewTelaFimCampeonato.php");	
-			}
-			
-		}
-		
 		//Atualiza placares dos jogos
 		public function atualizarPlacar(){
 			
@@ -224,7 +206,6 @@
 	}
 	
 	$gerenciaPosJogo = new GerenciaPosJogo();
-	$gerenciaPosJogo->verificaFimCampeonato();
 	$gerenciaPosJogo->atualizarPlacar();
 	$gerenciaPosJogo->avancaRodada();
 	

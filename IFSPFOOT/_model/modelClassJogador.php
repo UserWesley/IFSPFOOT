@@ -220,7 +220,7 @@
 
 			$conn = Database::conexao();
      
-	        $compraJogador = 'UPDATE JOGADOR SET IDTIME = ? WHERE ID = ? ';
+	        $compraJogador = 'UPDATE Jogador SET idTime = ? WHERE id = ? ';
 	     	$preparaConsultaTime = $conn->prepare($compraJogador);
 	     	$preparaConsultaTime->bindValue(1,$time);
 	     	$preparaConsultaTime->bindValue(2,$id);	     	
@@ -402,12 +402,14 @@
 				
 			$consultaJogadorArtilheiro = 'SELECT NomePessoal.nome, Sobrenome.nome ,Time.nome,Jogador.gol
 			FROM Jogador,Time, NomePessoal, Sobrenome
-			WHERE Jogador.campeonato = ? and Jogador.idTime = Time.id and Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id';
+			WHERE Jogador.campeonato = ? and Jogador.idTime = Time.id and Jogador.nome = NomePessoal.id and Jogador.sobrenome = Sobrenome.id
+					and jogador.gol = (select max(gol) from jogador where campeonato = ?)';
 			$preparaConsultaJogadorArtilheiro = $conn->prepare($consultaJogadorArtilheiro);
 			$preparaConsultaJogadorArtilheiro->bindValue(1, $idCampeonato);
+			$preparaConsultaJogadorArtilheiro->bindValue(2, $idCampeonato);
 			$preparaConsultaJogadorArtilheiro->execute();
 			
-			while ($row = $preparaConsultaJogador->fetch()) {
+			while ($row = $preparaConsultaJogadorArtilheiro->fetch()) {
 					
 				$jogadorArtilheiro[] = $row[0];
 				$jogadorArtilheiro[] = $row[1];

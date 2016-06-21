@@ -6,7 +6,8 @@
 
       $donoTime = $_SESSION['idDono'];
       $_SESSION['donoTime'] = $donoTime;
-       
+      $idCampeonato = $_SESSION['IdCampeonato'];
+      
       if(!isset($_SESSION['carrinho'])){
          $_SESSION['carrinho'] = array();
       }
@@ -109,7 +110,7 @@
     </tfoot> 
     <tbody>
                <?php
-                
+                	
                      if(count($_SESSION['carrinho']) == 0){
                         echo '<tr><td colspan="5">Não há produto no carrinho</td></tr>';
                      }else{
@@ -122,7 +123,8 @@
                                                           FROM produtos as p
                                                               ,time as t 
                                                           WHERE p.id = '$id'
-                                                          AND   t.dono = '$donoTime'";
+                                                          AND   t.dono = '$donoTime'
+                              								AND t.campeonato = $idCampeonato";
                               $preparaBuscarProdutoCarrinho = $conn->prepare($buscarProdutoCarrinho);
                               $preparaBuscarProdutoCarrinho->execute();
 

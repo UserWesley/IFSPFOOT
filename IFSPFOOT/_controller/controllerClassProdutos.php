@@ -96,6 +96,7 @@
 		public function buscarDinheiroDoClub(){
 
 			$idTime = $_SESSION['idDono'];
+			$idCampeonato = $_SESSION['IdCampeonato'];
 
 			$conn = Database::conexao();
 
@@ -103,10 +104,11 @@
 
 			$buscarDinheiroDoClub = "SELECT cast(time.dinheiro as float)
 									 FROM time
-									 WHERE id = ?";
+									 WHERE id = ? and campeonato = ?";
 
 			$preparaBuscarDinheiro = $conn->prepare($buscarDinheiroDoClub);
 			$preparaBuscarDinheiro->bindValue(1,$idTime); 
+			$preparaBuscarDinheiro->bindValue(2,$idCampeonato);
 			$preparaBuscarDinheiro->execute();
 
 
@@ -124,6 +126,8 @@
 			$conn = Database::conexao();
 			
 			$idTime = $_SESSION['idDono'];
+			$idCampeonato = $_SESSION['IdCampeonato'];
+				
 			
 			$buscarEstadioCampeonato = "SELECT estadio.id
 										FROM estadio as estadio
@@ -132,7 +136,7 @@
 										AND time.id = ( SELECT time.id 
 														FROM time as time, 
 															 campeonato as campeonato 
-													    WHERE dono = '$idTime' 
+													    WHERE time.dono = '$idTime' and time.campeonato = '$idCampeonato'
 													    AND time.campeonato = campeonato.id)";
 			$preparaBuscarEstadioCampeonato = $conn->prepare($buscarEstadioCampeonato);
 			//$preparaBuscarEstadioCampeonato->bindValue(1,$idTime);
@@ -156,11 +160,12 @@
 			$conn = Database::conexao();
 
 			$idTime = $_SESSION['idDono'];
+			$idCampeonato = $_SESSION['IdCampeonato'];
 
 			$buscarIdtimePorCampeonato = "SELECT id
 							 			  FROM time 
 							 			  WHERE dono = '$idTime'
-							 			  AND time.campeonato = campeonato.id;";
+							 			  AND time.campeonato = '$idCampeonato';";
 			$preparaBuscarIdTime = $conn->prepare($buscarIdtimePorCampeonato);
 			$preparaBuscarIdTime->execute();
 

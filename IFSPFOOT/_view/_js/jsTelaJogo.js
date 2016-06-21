@@ -31,7 +31,7 @@ function move() {
 		    
 		    	var valor = Math.floor((Math.random() * 100) + 1);
 		
-		    	if(valor<=10){
+		    	if(valor<=3){
 					
 		    		var chanceGol = Math.floor((Math.random() * 10) + 1);
 				
@@ -52,7 +52,7 @@ function move() {
 						}
 					}
 				}
-				else if(valor<=20){
+				else if(valor<=6){
 					
 					var chanceGol = Math.floor((Math.random() * 10) + 1);
 					
@@ -74,6 +74,11 @@ function move() {
 				}
 				else{
 				
+					if(valor<=20){
+						
+						document.getElementById("lance"+i).innerHTML = "Trombada entre jogadores";
+					}
+					
 					if(valor<=30){
 						
 						document.getElementById("lance"+i).innerHTML = "Troca de Passes entre time da Casa";
